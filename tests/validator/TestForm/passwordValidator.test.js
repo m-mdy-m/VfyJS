@@ -2,12 +2,22 @@ const passwordValidator = require('../../../src/validator/validate_form/password
 
 describe('validates a password with at least 8 characters', () => {
   test('should return true for a valid password', () => {
-    const validPassword = 'Mdy_mmshly1383';
-    expect(passwordValidator(validPassword)).toBe(true);
+    const validPassword = 'mahdi_';  // You can set your desired password
+    const isValid = passwordValidator(validPassword, {
+      minLength: 4,
+      LowerCase: true,
+      UpperCase: false,
+      Number: false,
+      SpecialCharacter: true,
+    });
+
+    expect(isValid).toBe(true);
   });
 
   test('should return false for an invalid password', () => {
     const invalidPassword = 'Pwd';
-    expect(passwordValidator(invalidPassword)).toBe(false);
+    const isValid = passwordValidator(invalidPassword);
+
+    expect(isValid).toBe(false);
   });
 });

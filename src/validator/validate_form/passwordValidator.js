@@ -1,5 +1,5 @@
 const hasValidate = require("../../utils/hasUtilsFunction");
-const { MIN_LENGTH } = require("../../common/validationConstants");
+const { MIN_LENGTH , MAX_LENGTH } = require("../../common/validationConstants");
 /**
  * Validates a password based on specified options.
  * @param {string} password - The password to validate.
@@ -14,7 +14,7 @@ const { MIN_LENGTH } = require("../../common/validationConstants");
  */
 function validatePassword(password, options = {}) {
   const min = options.minLength || MIN_LENGTH;
-  const max = options.maxLength || 100;
+  const max = options.maxLength || MAX_LENGTH;
   if (typeof min !== 'number' || typeof max !== 'number') {
     throw new Error('Invalid min or max length provided.');
   }

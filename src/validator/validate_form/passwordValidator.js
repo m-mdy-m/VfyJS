@@ -1,9 +1,9 @@
 const hasValidate = require("../../utils/hasUtilsFunction");
+const { MIN_lENGTH } = require("../../common/validationConstants");
 function validatePassword(password) {
-  const minLength = 8;
-  const has = hasValidate(password)
+  const has = hasValidate(password);
   return (
-    password.length >= minLength &&
+    password.length >= MIN_lENGTH &&
     has.hasLowerCase() &&
     has.hasUppercase() &&
     has.hasNumber() &&

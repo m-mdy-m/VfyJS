@@ -1,0 +1,23 @@
+# Ignore development and build files
+node_modules/
+*.log
+*.md
+
+# Ignore test files
+tests/
+test/
+*.test.js
+
+# Ignore source control files
+.git/
+.svn/
+.hg/
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore configuration files
+tsconfig.json
+babel.config.js

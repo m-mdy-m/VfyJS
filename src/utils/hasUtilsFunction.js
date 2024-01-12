@@ -1,8 +1,8 @@
-const hasValidate = {
-    hasUppercase : input => /(?=.*[A-Z])/.test(input),
-    hasLowerCase : input => /(?=.*[a-z])/.test(input),
-    hasNumber : input => /(?=.*[\d])/.test(input),
-    hasSpecialCharacter : input => /(?=.*[@$!%*?&#^|])/.test(input),
-    hasString : input => /(?=.*[\w])/.test(input)
-}
+const hasValidate = (input)=>({
+    hasUppercase : () => /(?=.*[A-Z])/.test(input),
+    hasLowerCase : () => /(?=.*[a-z])/.test(input),
+    hasNumber : () => /(?=.*[\d])/.test(input),
+    hasSpecialCharacter : () => /(?=.*[@$!%*?&#^|])/.test(input),
+    hasString : () => /(?=.*[\w])/.test(input)
+})
 module.exports = hasValidate

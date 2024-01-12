@@ -1,12 +1,8 @@
-exports.hasUppercase = (input)=>{
-    return /(?=.*[A-Z])/.test(input)
+const hasValidate = {
+    hasUppercase : input => /(?=.*[A-Z])/.test(input),
+    hasLowerCase : input => /(?=.*[a-z])/.test(input),
+    hasNumber : input => /(?=.*[\d])/.test(input),
+    hasSpecialCharacter : input => /(?=.*[@$!%*?&#^|])/.test(input),
+    hasString : input => /(?=.*[\w])/.test(input)
 }
-exports.hasLowerCase = (input)=>{
-    return /(?=.*[a-z])/.test(input)
-}
-exports.hasNumber = (input)=>{
-    return /(?=.*[\d])/.test(input)
-}
-exports.hasSpecialCharacter = (input)=>{
-    return  /(?=.*[@$!%*?&])/.test(input)
-}
+module.exports = hasValidate

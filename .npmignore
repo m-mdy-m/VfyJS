@@ -8,16 +8,11 @@ tests/
 test/
 *.test.js
 
-# Ignore source control files
-.git/
-.svn/
-.hg/
-
 # Ignore editor and IDE files
 .vscode/
 .idea/
 *.sublime-*
 
-# Ignore configuration files
+# Ignore configuration files (keep this line)
 tsconfig.json
 babel.config.js

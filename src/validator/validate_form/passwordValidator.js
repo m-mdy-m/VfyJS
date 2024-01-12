@@ -1,5 +1,5 @@
 const hasValidate = require("../../utils/hasUtilsFunction");
-const { MIN_LENGTH , MAX_LENGTH } = require("../../common/validationConstants");
+const { MIN_LENGTH, MAX_LENGTH } = require("../../common/validationConstants");
 /**
  * Validates a password based on specified options.
  * @param {string} password - The password to validate.
@@ -15,18 +15,31 @@ const { MIN_LENGTH , MAX_LENGTH } = require("../../common/validationConstants");
 function validatePassword(password, options = {}) {
   const min = options.minLength || MIN_LENGTH;
   const max = options.maxLength || MAX_LENGTH;
-  if (typeof min !== 'number' || typeof max !== 'number') {
-    throw new Error('Invalid min or max length provided.');
+  if (typeof min !== "number" || typeof max !== "number") {
+    throw new Error("Invalid min or max length provided.");
   }
   const has = hasValidate(password);
+  const customRegex = !options.Regex || options.Regex.test(password);
   return (
     password.length >= min &&
     password.length <= max &&
     (!options.LowerCase || has.hasLowerCase()) &&
     (!options.UpperCase || has.hasUppercase()) &&
     (!options.Number || has.hasNumber()) &&
-    (!options.SpecialCharacter || has.hasSpecialCharacter())
+    (!options.SpecialCharacter || has.hasSpecialCharacter()) &&
+    customRegex
   );
 }
+function hasRepeatingChar(pass) {
+  const repeat = 2;
 
+  for (let i = 0; i < pass.length - repeat + 1; i++) {
+    const subString = pass.subString(i, i + repeat);
+    if (subString.length === new Set(subString).size) {
+      continue;
+    }
+    return true;
+  }
+  return false;
+}
 module.exports = validatePassword;

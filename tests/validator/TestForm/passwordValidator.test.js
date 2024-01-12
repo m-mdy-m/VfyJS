@@ -2,7 +2,7 @@ const passwordValidator = require('../../../src/validator/validate_form/password
 
 describe('validates a password with at least 8 characters', () => {
   test('should return true for a valid password', () => {
-    const validPassword = 'SecurePwd123!';
+    const validPassword = 'Mdy_mmshly1383';
     expect(passwordValidator(validPassword)).toBe(true);
   });
 

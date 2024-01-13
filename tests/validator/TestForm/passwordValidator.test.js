@@ -2,10 +2,11 @@ const passwordValidator = require("../../../src/validator/validate_form/password
 
 describe("validates a password with at least 8 characters", () => {
   test("should return true for a valid password", () => {
-    const validPassword = "Mahdi2@4";
+    const validPassword = "MAHDI23!@4";
     const isValid = passwordValidator(validPassword,{
       minLength : 5,
-      maxLength : 10,
+      maxLength : 20,
+      lowerCase : false,
   });
 
     expect(isValid).toBe(true);

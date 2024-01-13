@@ -1,13 +1,5 @@
 const hasValidate = require("../../utils/hasUtilsFunction");
 const { MIN_LENGTH, MAX_LENGTH } = require("../../common/validationConstants");
-
-/**
- * Validates a password based on specified options.
- * @param {string} password - The password to validate.
- * @param {Object} options - Validation options.
- * @param {number} [options.minLength] - Minimum length requirement.
- * @returns {number} [options.maxLength] - Maximum length requirement.
- */
 function hasRepeatingChar(pass, options) {
   const repeat = options && options.repeatChar ? options.repeatChar : 2;
 
@@ -22,13 +14,15 @@ function hasRepeatingChar(pass, options) {
 }
 
 function validatePassword(password, options = {}) {
-  const min = options.minLength ? options.minLength : MIN_LENGTH;
-  const max = options.minLength ? options.maxLength : MAX_LENGTH;
+  const min = options.minLength || MIN_LENGTH;
+  const max = options.maxLength ||  MAX_LENGTH;
   if (typeof min !== "number" || typeof max !== "number") {
     throw new Error(
       "Sorry, you must enter a number for the min or max length entry!"
     );
   }
+  const hasVal = hasValidate(password);
+  const lowerCase = !options.lowerCase || hasVal.hasLowerCase();
   //   if (typeof min !== "number" || typeof max !== "number") {
   //     throw new Error("Invalid min or max length provided.");
   //   }
@@ -39,7 +33,6 @@ function validatePassword(password, options = {}) {
 
   // const customRegex = !options.Regex || options.Regex.test(password);
   // const hasRepeatChar = options.repeatChar !== undefined ? options.repeatChar : hasRepeatingChar(password, options);
-  const hasVal = hasValidate(password);
   // return (
   //   password.length >= min &&
   //   password.length <= max &&
@@ -53,7 +46,7 @@ function validatePassword(password, options = {}) {
   return (
     password.length >= min &&
     password.length <= max &&
-    hasVal.hasLowerCase() &&
+    lowerCase &&
     hasVal.hasNumber() &&
     hasVal.hasSpecialCharacter() &&
     hasVal.hasString() &&

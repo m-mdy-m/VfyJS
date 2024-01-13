@@ -9,6 +9,7 @@ describe('validates a password with at least 8 characters', () => {
       UpperCase: false,
       Number: false,
       SpecialCharacter: true,
+      repeatChar : 2,
     });
 
     expect(isValid).toBe(true);

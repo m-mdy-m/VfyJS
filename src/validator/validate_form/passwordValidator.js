@@ -29,21 +29,25 @@ function hasRepeatingChar(pass, options) {
  * @returns {boolean} - True if the password is valid, false otherwise.
  */
 function validatePassword(password, options = {}) {
-  const min = options.minLength || MIN_LENGTH;
-  const max = options.maxLength || MAX_LENGTH;
+  const min = options && options.minLength? options.minLength :MIN_LENGTH;
+  const max = options && options.maxLength?options.maxLength : MAX_LENGTH;
   if (typeof min !== "number" || typeof max !== "number") {
     throw new Error("Invalid min or max length provided.");
   }
   const has = hasValidate(password);
   const customRegex = !options.Regex || options.Regex.test(password);
   const hasRepeatChar = !options.repeatChar || hasRepeatingChar(password, options);
+  const lowercase = !options.LowerCase || has.hasLowerCase()
+  const UpperCase = !options.UpperCase || has.hasUppercase()
+  const Number = !options.Number || has.hasNumber()
+  const SpecialCharacter = !options.SpecialCharacter || has.hasSpecialCharacter()
   return (
     password.length >= min &&
     password.length <= max &&
-    (!options.LowerCase || has.hasLowerCase()) &&
-    (!options.UpperCase || has.hasUppercase()) &&
-    (!options.Number || has.hasNumber()) &&
-    (!options.SpecialCharacter || has.hasSpecialCharacter()) &&
+    lowercase &&
+    UpperCase &&
+    Number &&
+    SpecialCharacter &&
     hasRepeatChar &&
     customRegex
   );

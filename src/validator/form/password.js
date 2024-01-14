@@ -19,11 +19,11 @@ function hasRepeatingChar(pass, options) {
  * @param {object} options - The validation options.
  * @param {number} options.minLength - The minimum length of the password.
  * @param {number} options.maxLength - The maximum length of the password.
- * @param {boolean|number} [options.lowerCase=<hasLowerCase>] - Whether the password should contain lowercase characters.
- * @param {boolean|number} [options.upperCase=<hasUppercase>] - Whether the password should contain uppercase characters.
- * @param {boolean|number} [options.number=<hasNumber>] - Whether the password should contain numbers.
- * @param {boolean|number} [options.specialCharacter=<hasSpecialCharacter>] - Whether the password should contain special characters.
- * @param {boolean|number} [options.String=<hasString>] - Whether the password should contain only strings.
+ * @param {boolean|number} [options.lowerCase] - Whether the password should contain lowercase characters.
+ * @param {boolean|number} [options.upperCase] - Whether the password should contain uppercase characters.
+ * @param {boolean|number} [options.number] - Whether the password should contain numbers.
+ * @param {boolean|number} [options.specialCharacter] - Whether the password should contain special characters.
+ * @param {boolean|number} [options.String] - Whether the password should contain only strings.
  * @param {RegExp} [options.customRegex] - A custom regular expression to validate the password.
  * @returns {boolean} True if the password is valid, false otherwise.
  */

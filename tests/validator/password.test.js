@@ -3,17 +3,22 @@ function sum(a, b) {
   return a + b;
 }
 test("valid password", () => {
-  const isValid = password("12342421", {
+  const isValid = password("MAHD2", {
+    minLength: 2,
     lowerCase: false,
-    String: true,
-    upperCase: false,
+    maxLength: 64,
     number: true,
+    String: true,
     specialCharacter: false,
-    minLength :3,
+    upperCase: true,
   });
+  
+
+  console.log("isValid:", isValid);
 
   expect(isValid).toBe(true);
 });
+
 test("no valid Password", () => {
   const inValid = password("Ma23%");
 

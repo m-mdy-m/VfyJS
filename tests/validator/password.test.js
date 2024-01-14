@@ -3,7 +3,7 @@ function sum(a, b) {
   return a + b;
 }
 test('valid password',()=>{
-  const isValid = password('Mahdi139%@!$%((sm')
+  const isValid = password('mahdi1392@M')
 
   expect(isValid).toBe(true);
 } )

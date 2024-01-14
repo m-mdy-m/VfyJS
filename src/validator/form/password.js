@@ -28,8 +28,8 @@ function validatePassword(password, options = {}) {
   const number = hasOption(options, "upperCase") || hasVal.hasNumber();
   const SpecialCharacter = hasOption(options, "specialCharacter") || hasVal.hasSpecialCharacter();
   const String = hasOption(options, "String") || hasVal.hasString();
-  const customRegex = hasOption(options, "Regex")? options.Regex.test(password): false;
-  const repeat = hasRepeatingChar(password, options) 
+  // const customRegex = hasOption(options, "Regex");
+  // const repeat = hasRepeatingChar(password, options) 
   return (
     password.length >= min &&
     password.length <= max &&
@@ -37,9 +37,9 @@ function validatePassword(password, options = {}) {
     upperCase &&
     number &&
     SpecialCharacter &&
-    String &&
-    customRegex && 
-    repeat
+    String 
+    // customRegex 
+    // repeat
   );
 }
 

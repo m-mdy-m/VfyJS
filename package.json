@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/m-mdy-m/VfyJS#readme",
   "dependencies": {
-    "chai": "^5.0.0",
+    "chai": "^5.0.0"
+  },
+  "devDependencies": {
     "mocha": "^10.2.0"
   }
 }

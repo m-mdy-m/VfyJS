@@ -1,6 +1,14 @@
+const password = require('../../src/validator/form/password')
 function sum(a, b) {
   return a + b;
 }
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
-});
+test('valid password',()=>{
+  const isValid = password('Mahdo@14')
+
+  expect(isValid).toBe(true);
+} )
+test('no valid Password',()=>{
+  const inValid = password("pass")
+
+  expect(inValid).toBe(false)
+} )

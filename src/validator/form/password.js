@@ -36,26 +36,14 @@ function validatePassword(password, options = {}) {
     );
   }
   const hasVal = hasValidate(password);
-  const lowerCase = hasOption(options, "lowerCase") || hasVal.hasLowerCase();
-  const upperCase = hasOption(options, "upperCase") || hasVal.hasUppercase();
-  const number = hasOption(options, "number") || hasVal.hasNumber();
-  const SpecialCharacter = hasOption(options, "specialCharacter") || hasVal.hasSpecialCharacter();
-  const String = hasOption(options, "String") || hasVal.hasString();
+  console.log('Options:', options); // Add this line
+  const lowerCase = hasOption(options, "lowerCase")?options.lowerCase : hasVal.hasLowerCase();
+  console.log('Condition 3:', lowerCase);
+  const upperCase = hasOption(options, "upperCase")?options.upperCase : hasVal.hasUppercase();
+  const number = hasOption(options, "number")?options.number :hasVal.hasNumber();
+  const SpecialCharacter = hasOption(options, "specialCharacter")?options.specialCharacter : hasVal.hasSpecialCharacter();
+  const String = hasOption(options, "String")?options.String : hasVal.hasString();
   const customRegex = hasOption(options, "customRegex") && options.customRegex.test(password);
-    // ... (existing code)
-  
-    console.log('Condition 1:', password.length >= min);
-    console.log('Condition 2:', password.length <= max);
-    console.log('Condition 3:', lowerCase);
-    console.log('Condition 4:', upperCase);
-    console.log('Condition 5:', number);
-    console.log('Condition 6:', SpecialCharacter);
-    console.log('Condition 7:', String);
-    console.log('Condition 8:', customRegex);
-  
-    // ... (existing code)
-  
-
   if (customRegex) {
     return (
       password.length >= min &&

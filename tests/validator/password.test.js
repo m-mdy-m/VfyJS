@@ -12,8 +12,6 @@ test("valid password", () => {
     specialCharacter: false,
     upperCase: true,
   });
-  
-
   console.log("isValid:", isValid);
 
   expect(isValid).toBe(true);

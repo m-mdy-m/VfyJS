@@ -1,4 +1,4 @@
-const hasValidate = require("../../utils/hasUtilsFunction");
+const hasValidate = require("../../utils/hasFunction");
 const { MIN_LENGTH, MAX_LENGTH } = require("../../common/validationConstants");
 function hasRepeatingChar(pass, options) {
   const repeat = options && options.repeatChar ? options.repeatChar : 2;

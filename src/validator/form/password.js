@@ -12,7 +12,13 @@ function hasRepeatingChar(pass, options) {
   }
   return false;
 }
-
+function hasOption (option , name){
+  if(option[name]){
+    return option[name]
+  }else{
+    return false
+  }
+}
 function validatePassword(password, options = {}) {
   const min = options.minLength || MIN_LENGTH;
   const max = options.maxLength ||  MAX_LENGTH;
@@ -22,35 +28,16 @@ function validatePassword(password, options = {}) {
     );
   }
   const hasVal = hasValidate(password);
-  const lowerCase = !options.lowerCase || hasVal.hasLowerCase();
-  //   if (typeof min !== "number" || typeof max !== "number") {
-  //     throw new Error("Invalid min or max length provided.");
-  //   }
-  // const lowercase = options.lowerCase !== undefined ? options.lowerCase : has.hasLowerCase();
-  // const uppercase = options.upperCase !== undefined ? options.upperCase : has.hasUppercase();
-  // const number = options.number !== undefined ? options.number : has.hasNumber();
-  // const specialCharacter = options.specialCharacter !== undefined ? options.specialCharacter : has.hasSpecialCharacter();
-
-  // const customRegex = !options.Regex || options.Regex.test(password);
-  // const hasRepeatChar = options.repeatChar !== undefined ? options.repeatChar : hasRepeatingChar(password, options);
-  // return (
-  //   password.length >= min &&
-  //   password.length <= max &&
-  //   lowercase &&
-  //   uppercase &&
-  //   number &&
-  //   specialCharacter &&
-  //   hasRepeatChar &&
-  //   customRegex
-  // );
+  const lowerCase = hasOption(options,"lowerCase") || hasVal.hasLowerCase();
+  const upperCase = hasOption(options,"lowerCase") || hasVal.hasUppercase()
+  const number = hasOption(options,"upperCase")|| hasVal.hasNumber()
+  const SpecialCharacter = hasOption(options,"specialCharacter") || hasVal.hasSpecialCharacter()
+  const String = hasOption(options,"String")|| hasVal.hasString()
+  const customRegex = hasOption(options,"Regex").test(password) || false;
   return (
     password.length >= min &&
     password.length <= max &&
-    lowerCase &&
-    hasVal.hasNumber() &&
-    hasVal.hasSpecialCharacter() &&
-    hasVal.hasString() &&
-    hasVal.hasUppercase()
+    lowerCase 
   );
 }
 

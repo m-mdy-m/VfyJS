@@ -1,5 +1,5 @@
-const passwordValidate = require('./validator/form/password');
-const emailValidate = require('./validator/form/email')
+const passwordValidate = require('./src/validator/form/password');
+const emailValidate = require('./src/validator/form/email')
 /**
  * Validates a password based on specified criteria.
  *

@@ -25,8 +25,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://npm.pkg.github.com/
+
+      - name: Login to GitHub Packages Registry
+        run: npm login --registry=https://npm.pkg.github.com/ --scope=@m-mdy-m --always-auth
+        env:
+          NODE_AUTH_TOKEN: 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
+
       - name: Publish to GitHub Packages Registry
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: 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

@@ -127,9 +127,10 @@ function validatePassword(value, options = {}) {
   handleValidationError(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage)
   handleValidationError(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
   // Check and trim whitespace if necessary
-  const whitespaceCheck = whitespace.required ? validator.hasWhitespace() : !validator.hasWhitespace();
+  let whitespaceCheck = whitespace.required ? validator.hasWhitespace() : !validator.hasWhitespace();
   if (!whitespaceCheck) {
-    return value = trimmedValue(value);
+    value = trimmedValue(value);
+    whitespaceCheck = true;
   } 
   // Convert string values to numbers for minLength and maxLength
 
@@ -158,14 +159,14 @@ function validatePassword(value, options = {}) {
   }
   // Final validation check
   const isValid =
-    minLength &&
-    maxLength &&
-    (uppercase.required ? validator.hasUppercase() : true) &&
-    (lowercase.required ? validator.hasLowerCase() : true) &&
-    (number.required ? validator.hasNumber() : true) &&
-    (specialCharacter.required ? validator.hasSpecialCharacter() : true) &&
-    (alphabetic.required ? validator.hasAlphabetic() : true) &&
-    whitespaceCheck
+  minLength &&
+  maxLength &&
+  (uppercase.required ? validator.hasUppercase() : true) &&
+  (lowercase.required ? validator.hasLowerCase() : true) &&
+  (number.required ? validator.hasNumber() : true) &&
+  (specialCharacter.required ? validator.hasSpecialCharacter() : true) &&
+  (alphabetic.required ? validator.hasAlphabetic() : true) &&
+  whitespaceCheck;
 
   return isValid;
 }

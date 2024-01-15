@@ -73,7 +73,7 @@ const {handleValidationError} = require('../../errors/HandleError')
  * @throws {Error} - Throws an error if validation fails.
  * @example
  * const { password } = require("vfyjs");
- * const isValid = password("StrongPwd123", { minLength: 8, uppercase: true, number: true });
+ * const isValid = password("StrongPwd@123", { minLength: 8, uppercase: true, number: true });
  * console.log(isValid); // true
  */
 function validatePassword(value, options = {}) {

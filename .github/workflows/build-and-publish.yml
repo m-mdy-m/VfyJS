@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: 'https://registry.npmjs.org/'
+          registry-url: 'https://npm.pkg.github.com/'
           scope: '@m-mdy-m'
       - name: Print the GITHUB_TOKEN
         run: echo ${{ secrets.GITHUB_TOKEN }}

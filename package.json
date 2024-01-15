@@ -29,5 +29,8 @@
       "name": "Mahdi",
       "email": "mahdimamashli1383@gmail.com"
     }
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }

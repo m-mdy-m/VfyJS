@@ -7,7 +7,11 @@ on:
   pull_request:
     branches:
       - main
-
+permissions:
+    contents : write
+    packages : read
+    pull-requests : write
+  
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -28,3 +32,8 @@ jobs:
 
     - name: Run tests
       run: npm test
+
+    - name: Print the GITHUB_TOKEN
+      run: echo ${{ secrets.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN : ${{github.token}}

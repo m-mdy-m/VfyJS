@@ -67,7 +67,6 @@
  * @param {options} options - Options for customizing validation criteria.
  * @returns {boolean} - True if the password is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
- *
  * @example
  * const { password } = require("vfyjs");
  * const isValid = password("sdaa@@#asd354A3%#!w", {

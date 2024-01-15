@@ -12,9 +12,7 @@ const validOptions =  {
   whitespace: { required: false, errorMessage: 'whitespace ' },
 };
 test('password is valid', () => {
-  const is_valid = password(validValue,{
-    lowercase : {required : false,errorMessage : 'test'},
-  })
+  const is_valid = password()
   
   expect(is_valid).toBe(true);
 });

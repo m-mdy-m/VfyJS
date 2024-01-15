@@ -28,6 +28,20 @@
  * @property {Object} options.whitespace - Whitespace requirements for the password.
  * @property {boolean} options.whitespace.required - Whether whitespace is not allowed.
  * @property {string} options.whitespace.errorMessage - Error message for whitespace validation failure.
+ * @example
+ * const { password } = require("vfyjs");
+ * const isValid = password("sdaa@@#asd354A3%#!w", {
+ *   minLength: { value: 10, errorMessage: 'Password must be at least 10 characters long.' },
+ *   maxLength: { value: 20, errorMessage: 'Password cannot exceed 30 characters.' },
+ *   uppercase: { required: false, errorMessage: 'Uppercase letter is required.' },
+ *   lowercase: { required: true, errorMessage: 'Lowercase letter is required.' },
+ *   number: { required: false, errorMessage: 'Numeric digit is required.' },
+ *   specialCharacter: { required: false, errorMessage: 'Special character is required.' },
+ *   alphabetic: { required: true, errorMessage: 'Alphabetic character is required.' },
+ *   whitespace: { required: false, errorMessage: 'Whitespace is not allowed.' },
+ * });
+ * 
+ * console.log(isValid); // true
  */
 
 

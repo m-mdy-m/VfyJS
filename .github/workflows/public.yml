@@ -33,7 +33,7 @@ jobs:
       contents: read
     steps:
       - name: Set up npm
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -42,6 +42,3 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-
-      - name: Publish to GitHub Package Registry
-        run: npm publish --access public

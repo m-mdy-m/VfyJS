@@ -9,20 +9,12 @@ function validatePassword(value, options = {}) {
   const number = has.hasNumber();
   const specialCharacter = has.hasSpecialCharacter();
   const Alphabetic = has.hasAlphabetic();
-  const whitespace = !has.hasWhitespace();
+  const whitespace = !has.hasWhitespace(); 
   const minLength = has.hasMinLength(MIN_LENGTH);
   const maxLength = has.hasMaxLength(MAX_LENGTH);
-  console.log("upperCase:", upperCase);
-  console.log("lowerCase:", lowerCase);
-  console.log("number:", number);
-  console.log("specialCharacter:", specialCharacter);
-  console.log("Alphabetic:", Alphabetic);
-  console.log("whitespace:", whitespace);
-  console.log("minLength:", minLength);
-  console.log("maxLength:", maxLength);
   const isValid =
-    value.length >= minLength &&
-    value.length <= maxLength &&
+    minLength &&
+    maxLength &&
     upperCase &&
     lowerCase &&
     number &&
@@ -31,8 +23,4 @@ function validatePassword(value, options = {}) {
     whitespace;
   return isValid;
 }
-
-const result = validatePassword("MAhdia@242@#@#$%");
-console.log("Validation Result:", result);
-
 module.exports = validatePassword;

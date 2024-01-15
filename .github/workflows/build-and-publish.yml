@@ -1,4 +1,4 @@
-name: VfyJS Test
+name: VfyJS
 
 on:
   push:

@@ -23,5 +23,11 @@
   "homepage": "https://github.com/m-mdy-m/VfyJS#readme",
   "devDependencies": {
     "jest": "^29.7.0"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Mahdi",
+      "email": "mahdimamashli1383@gmail.com"
+    }
+  ]
 }

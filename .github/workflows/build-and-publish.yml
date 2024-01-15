@@ -8,9 +8,10 @@ on:
     branches:
       - main
 permissions:
-    contents: write
-    packages: read
-    pull-requests: write
+  contents: write
+  packages: read
+  pull-requests: write
+
 
 jobs:
   test:
@@ -26,9 +27,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@m-mdy-m'
+
+      - name: Update npm
+        run: npm install -g npm@latest
+        
+      - name: Print npm debug information
+        run: npm --version && npm config list
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         run: npm test

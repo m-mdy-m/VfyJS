@@ -24,7 +24,6 @@ const validOptions =  {
 
 test('password is valid', () => {
   const is_valid = password(validValue,{
-    options : validOptions
   });
   
   expect(is_valid).toBe(true);

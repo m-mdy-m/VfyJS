@@ -5,14 +5,32 @@
  * @typedef {Object} PasswordOptions
  * @property {Object} options - Options for customizing validation criteria.
  * @property {Object} options.minLength - Minimum length requirements for the password.
+ * @property {number} options.minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
+ * @property {string} options.minLength.errorMessage - Error message for minimum length validation failure.
  * @property {Object} options.maxLength - Maximum length requirements for the password.
+ * @property {number} options.maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
+ * @property {string} options.maxLength.errorMessage - Error message for maximum length validation failure.
  * @property {Object} options.uppercase - Uppercase letter requirements for the password.
+ * @property {boolean} options.uppercase.required - Whether uppercase letters are required.
+ * @property {string} options.uppercase.errorMessage - Error message for uppercase letter validation failure.
  * @property {Object} options.lowercase - Lowercase letter requirements for the password.
+ * @property {boolean} options.lowercase.required - Whether lowercase letters are required.
+ * @property {string} options.lowercase.errorMessage - Error message for lowercase letter validation failure.
  * @property {Object} options.number - Numeric digit requirements for the password.
+ * @property {boolean} options.number.required - Whether numeric digits are required.
+ * @property {string} options.number.errorMessage - Error message for numeric digit validation failure.
  * @property {Object} options.specialCharacter - Special character requirements for the password.
+ * @property {boolean} options.specialCharacter.required - Whether special characters are required.
+ * @property {string} options.specialCharacter.errorMessage - Error message for special character validation failure.
  * @property {Object} options.alphabetic - Alphabetic character requirements for the password.
+ * @property {boolean} options.alphabetic.required - Whether alphabetic characters are required.
+ * @property {string} options.alphabetic.errorMessage - Error message for alphabetic character validation failure.
  * @property {Object} options.whitespace - Whitespace requirements for the password.
+ * @property {boolean} options.whitespace.required - Whether whitespace is not allowed.
+ * @property {string} options.whitespace.errorMessage - Error message for whitespace validation failure.
  */
+
+
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const {handleValidationError} = require('../../errors/HandleError')
@@ -20,7 +38,7 @@ const {handleValidationError} = require('../../errors/HandleError')
  * Validates a password based on the provided options.
  *
  * @param {string} value - The password string to be validated.
- * @param {PasswordOptions} options - Options for customizing validation criteria.
+ * @param {options} options - Options for customizing validation criteria.
  * @returns {boolean} - True if the password is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  */
@@ -41,12 +59,12 @@ function validatePassword(value, options = {}) {
 /**
  * Options for customizing password validation criteria.
  *
- * @typedef {Object} PasswordValidationOptions
+ * @typedef {Object} options
  * @property {Object} minLength - Minimum length requirements for the password.
- * @property {number} minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
+ * @property {(number|string)} minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
  * @property {string} minLength.errorMessage - Error message for minimum length validation failure.
  * @property {Object} maxLength - Maximum length requirements for the password.
- * @property {number} maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
+ * @property {(number|string)} maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
  * @property {string} maxLength.errorMessage - Error message for maximum length validation failure.
  * @property {Object} uppercase - Uppercase letter requirements for the password.
  * @property {boolean} uppercase.required - Whether uppercase letters are required.
@@ -67,6 +85,7 @@ function validatePassword(value, options = {}) {
  * @property {boolean} whitespace.required - Whether whitespace is not allowed.
  * @property {string} whitespace.errorMessage - Error message for whitespace validation failure.
  */
+
   // Additional validation checks
   handleValidationError(uppercase.required ? has.hasUppercase() : true, uppercase.errorMessage);
   handleValidationError(lowercase.required ? has.hasLowerCase() : true , lowercase.errorMessage)
@@ -116,18 +135,4 @@ function validatePassword(value, options = {}) {
 
   return isValid;
 }
-const result = validatePassword('@DMAOSd23123i!',{
-  options:{
-    minLength: { value: 2, errorMessage: 'Password must be at least 10 characters long.' },
-    maxLength: { value: 20, errorMessage: 'Password cannot exceed 30 characters.' },
-    uppercase: { required: false, errorMessage: 'uppercase .' },
-    lowercase: { required: true, errorMessage: 'lowercase r.' },
-    number: { required: false, errorMessage: 'number .' },
-    specialCharacter: { required: false, errorMessage: 'specialCharacter' },
-    alphabetic: { required: true, errorMessage: 'alphabetic ' },
-    whitespace: { required: false, errorMessage: 'whitespace ' },
-  }
-})
-console.log("Validation Result:", result);
-
 module.exports = validatePassword;

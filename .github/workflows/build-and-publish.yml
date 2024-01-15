@@ -37,7 +37,8 @@ jobs:
         run: npm --version && npm config list
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+      
 
       - name: Run tests
         run: npm test

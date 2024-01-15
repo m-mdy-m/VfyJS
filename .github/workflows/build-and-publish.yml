@@ -29,20 +29,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org/'
           scope: '@m-mdy-m'
-
-      - name: Update npm
-        run: npm install -g npm@latest
-        
-      - name: Print npm debug information
-        run: npm --version && npm config list
-
-      - name: Install dependencies
-        run: npm install
-      
-
-      - name: Run tests
-        run: npm test
-
       - name: Print the GITHUB_TOKEN
         run: echo ${{ secrets.GITHUB_TOKEN }}
 

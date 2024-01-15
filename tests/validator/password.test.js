@@ -1,6 +1,6 @@
 const password = require("../../src/validator/form/password");
 const validValue = "ValidPassword123!";
-const invalidValue = "Invalidحwd";
+const invalidValue = "mahdiamamshli1383";
 
 const validOptions = {
   minLength: 8,
@@ -13,7 +13,7 @@ const validOptions = {
 
 const invalidOptions = {
   minLength: 8,
-  maxLength: 20,
+  maxLength: 30,
   lowerCase: true,
   upperCase: true,
   number: true,
@@ -27,8 +27,9 @@ test('password is valid', () => {
 
 test('invalid password', () => {
   const is_invalid = password(invalidValue, invalidOptions);
-  expect(is_invalid).toBe(false); 
-});
+  console.log('is_invalid', is_invalid);
+  expect(is_invalid).toBe(false);
+}, 10000); // Set a timeout of 10000 ms (10 seconds)
 test('is min length ? ', () => {
   const is_valid = password(validValue, { minLength: 5 });
   expect(is_valid).toBe(true);

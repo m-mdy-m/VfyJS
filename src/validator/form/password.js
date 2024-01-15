@@ -12,8 +12,8 @@ function validatePassword(value, options= {}) {
   const specialCharacter = hasOption(options, 'specialCharacter') ||has.hasSpecialCharacter();
   const string = hasOption(options, 'string') || has.hasString();
   return (
-    value.length > minLength &&
-    value.length < maxLength &&
+    value.length >= minLength &&
+    value.length <= maxLength &&
     upperCase &&
     lowerCase &&
     number &&

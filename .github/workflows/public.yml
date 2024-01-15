@@ -21,9 +21,12 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
+      - name: Publish to GitHub Packages Registry
+        run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

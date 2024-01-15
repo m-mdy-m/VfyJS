@@ -1,11 +1,30 @@
 const inputValidator = require("../../utils/inputValidator");
+const { handleValidationError } = require("../../errors/HandleError");
 function validateEmail(value) {
-  const has = inputValidator(value);
-  const a = has.matchesEmailFormat(value);
-  console.log(a);
-
-  return a;
+  const validator = inputValidator(value);
+  const isValid = validator.matchesEmailFormat(value);
+  if(typeof isValid !== 'string'){
+    handleValidationError(isValid , `${isValid} The input should only be of string type `)
+  }
+  if (!isValid) {
+    handleValidationError(
+      isValid,
+      `${value} is invalid. Please enter a valid email`
+    );
+  }
+  return isValid
 }
-const result = validateEmail("Mahdimamashli1383@gmail.com");
-console.log("result =>", result);
+
+validateEmail("meddishn312as!dsccc@yahoo.ir");
+try {
+  if(validateEmail){
+    console.log('success');
+}  
+} catch (error) {
+    console.log('error');
+    console.log('error.message');
+    
+}
+
+// console.log("result =>", result);
 module.exports = validateEmail;

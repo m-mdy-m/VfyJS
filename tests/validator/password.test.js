@@ -1,5 +1,5 @@
 const password = require("../../src/validator/form/password");
-const validValue = "sdaaw"
+const validValue = "sdaa@@#asd354A3%#!w"
 const invalidValue = "Mahd223@#Asd$";
 
 const validOptions =  {
@@ -23,7 +23,7 @@ const validOptions =  {
 // };
 
 test('password is valid', () => {
-  const is_valid = password(validValue,validOptions);
+  const is_valid = password(validValue);
   expect(is_valid).toBe(true);
 });
 

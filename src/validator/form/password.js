@@ -1,4 +1,5 @@
 "use strict";
+
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue } = require("../../common/validationConstants");
 const hasOption = require("../../common/hasOption");
 const inputValidator = require("../../utils/inputValidator");
@@ -26,16 +27,35 @@ function validatePassword(value, options = {}) {
   if (!whitespaceCheck) {
     return value = trimmedValue(value);
   } 
-  if (typeof minLength.value !== 'number' || typeof maxLength.value !== 'number') {
-    if(minLength.errorMessage){
-      throw new Error(minLength.errorMessage)
-    }else{
-      throw new Error(maxLength.errorMessage)
-    }
+  console.log('value =>', value);
+  console.log('typeof value =>',typeof value);
+  console.log('value.length =>', value.length);
+  console.log('minLength =>',typeof minLength);
+  console.log('typeof minLength.value =>',typeof minLength.value);
+  console.log(' maxLength.value =>', maxLength.value);
+  console.log(' minLength.value =>', minLength.value);
+  if (typeof minLength.value === 'string' || typeof minLength.value === 'string') {
+    minLength.value = +minLength.value;
+    maxLength.value =+maxLength.value
+}
+  if (
+    typeof minLength.value !== 'undefined' &&
+    typeof maxLength.value !== 'undefined' &&
+    (typeof minLength.value !== 'boolean') &&
+    (typeof maxLength.value !== 'boolean') &&
+    (typeof minLength.value !== 'number' || typeof maxLength.value !== 'number')
+  ) {
+    throw new Error("min or max Length just for true or false");
   }
-  if(value.length <= minLength.value || value.length >= maxLength.value){
+  
+  if (
+    typeof minLength.value === 'number' &&
+    typeof maxLength.value === 'number' &&
+    (value.length < minLength.value || value.length > maxLength.value)
+  ) {
     throw new Error(`Password length must be between ${minLength.value} and ${maxLength.value} characters.`);
   }
+  
   const isValid =
     minLength &&
     maxLength &&
@@ -48,8 +68,8 @@ function validatePassword(value, options = {}) {
 
   return isValid;
 }
-const result = validatePassword("sdaaw", {
-  minLength: { value: 2, errorMessage: 'Password must be at least 10 characters long.' },
+const result = validatePassword("Mahd223@#Asd$",{
+  minLength: { value: "3", errorMessage: 'Password must be at least 10 characters long.' },
   maxLength: { value: 20, errorMessage: 'Password cannot exceed 30 characters.' },
   uppercase: { required: false, errorMessage: 'uppercase .' },
   lowercase: { required: true, errorMessage: 'lowercase r.' },

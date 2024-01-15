@@ -1,24 +1,17 @@
 "use strict";
 const { MAX_LENGTH, MIN_LENGTH } = require("../../common/validationConstants");
-const hasOption = require("../../utils/inputValidator");
+const hasOption = require("../../common/hasOption");
 const inputValidator = require("../../utils/inputValidator");
 function validatePassword(value, options= {}) {
-  const minLength =  MIN_LENGTH;
-  const maxLength =  MAX_LENGTH;
+  const minLength = hasOption(options,'minLength') ||  MIN_LENGTH;
+  const maxLength = hasOption(options,'maxLength') ||   MAX_LENGTH;
   const has = inputValidator(value);
-  const upperCase = has.hasUppercase();
-  const lowerCase = has.hasLowerCase();
-  const number = has.hasNumber();
-  const specialCharacter = has.hasSpecialCharacter();
-  const string = has.hasString();
-  console.log("upperCase =>", upperCase);
-  console.log("lowerCase =>", lowerCase);
-  console.log("number =>", number);
-  console.log("specialCharacter =>", specialCharacter);
-  console.log("string =>", string);
-  console.log("value =>", value);
-  console.log("options =>", options);
-  return { 
+  const upperCase = hasOption(options, 'upperCase') || has.hasUppercase();
+  const lowerCase = hasOption(options, 'lowerCase') ||has.hasLowerCase();
+  const number = hasOption(options, 'number') ||has.hasNumber();
+  const specialCharacter = hasOption(options, 'specialCharacter') ||has.hasSpecialCharacter();
+  const string = hasOption(options, 'string') ||has.hasString();
+  return (
     value.length > minLength &&
     value.length < maxLength &&
     upperCase &&
@@ -26,8 +19,9 @@ function validatePassword(value, options= {}) {
     number &&
     specialCharacter &&
     string
-  }
+  );
 }
-validatePassword("MAhdia@242@#@#$%")
+const result = validatePassword("MAhdia@242@#@#$%");
+console.log("Validation Result:", result);
 
 module.exports = validatePassword

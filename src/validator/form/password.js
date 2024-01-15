@@ -60,28 +60,6 @@
  * @property {string} whitespace.errorMessage - Error message for whitespace validation failure.
  */
 
-/**
- * Validates a password based on the provided options.
- *
- * @param {string} value - The password string to be validated.
- * @param {options} options - Options for customizing validation criteria.
- * @returns {boolean} - True if the password is valid, otherwise false.
- * @throws {Error} - Throws an error if validation fails.
- * @example
- * const { password } = require("vfyjs");
- * const isValid = password("sdaa@@#asd354A3%#!w", {
- *   minLength: { value: 10, errorMessage: 'Password must be at least 10 characters long.' },
- *   maxLength: { value: 20, errorMessage: 'Password cannot exceed 20 characters.' },
- *   uppercase: { required: false, errorMessage: 'Uppercase letter is required.' },
- *   lowercase: { required: true, errorMessage: 'Lowercase letter is required.' },
- *   number: { required: false, errorMessage: 'Numeric digit is required.' },
- *   specialCharacter: { required: false, errorMessage: 'Special character is required.' },
- *   alphabetic: { required: true, errorMessage: 'Alphabetic character is required.' },
- *   whitespace: { required: false, errorMessage: 'Whitespace is not allowed.' },
- * });
- * 
- * console.log(isValid); // true
- */
 
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
@@ -93,6 +71,10 @@ const {handleValidationError} = require('../../errors/HandleError')
  * @param {options} options - Options for customizing validation criteria.
  * @returns {boolean} - True if the password is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
+ * @example
+ * const { password } = require("vfyjs");
+ * const isValid = password("StrongPwd123", { minLength: 8, uppercase: true, number: true });
+ * console.log(isValid); // true
  */
 function validatePassword(value, options = {}) {
   // Input validation functions

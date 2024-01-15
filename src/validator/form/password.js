@@ -24,6 +24,9 @@ function validatePassword(value, options = {}) {
   if (typeof MIN_LENGTH !== 'number' || typeof MAX_LENGTH !== 'number') {
     throw new Error('MIN_LENGTH and MAX_LENGTH must be of type number');
   }
+  if (value.length < MIN_LENGTH || value.length > MAX_LENGTH) {
+    throw new Error(`Password length must be between ${MIN_LENGTH} and ${MAX_LENGTH} characters.`);
+  }
   const isValid =
     minLength &&
     maxLength &&

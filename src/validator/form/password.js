@@ -1,5 +1,5 @@
 "use strict";
-const { MAX_LENGTH, MIN_LENGTH } = require("../../common/validationConstants");
+const { MAX_LENGTH, MIN_LENGTH, trimmedValue } = require("../../common/validationConstants");
 const hasOption = require("../../common/hasOption");
 const inputValidator = require("../../utils/inputValidator");
 const {handleValidationError} = require('../../errors/HandleError')
@@ -10,21 +10,20 @@ function validatePassword(value, options = {}) {
   const lowerCase = has.hasLowerCase();
   handleValidationError(lowerCase ,'Password must contain at least one lowerCase letter.')
   const number = has.hasNumber();
+  handleValidationError(number ,'Password must have at least one number.')
   const specialCharacter = has.hasSpecialCharacter();
+  handleValidationError(specialCharacter ,'The password must contain at least one special character such as (@#$%^&*).')
   const Alphabetic = has.hasAlphabetic();
+  handleValidationError(specialCharacter ,'Input must contain at least one alphabetic character.')
   const whitespace = !has.hasWhitespace(); 
+  if (!whitespace) {
+    return value = trimmedValue(value);
+  }
   const minLength = has.hasMinLength(MIN_LENGTH);
   const maxLength = has.hasMaxLength(MAX_LENGTH);
-  console.log("upperCase:", upperCase);
-  console.log("lowerCase:", lowerCase);
-  console.log("number:", number);
-  console.log("specialCharacter:", specialCharacter);
-  console.log("Alphabetic:", Alphabetic);
-  console.log("whitespace:", whitespace);
-  console.log("minLength:", minLength);
-  console.log("maxLength:", maxLength);
-  console.log("Password Length:", value.length);
-  console.log("Whitespace Check:", whitespace);
+  if (typeof MIN_LENGTH !== 'number' || typeof MAX_LENGTH !== 'number') {
+    throw new Error('MIN_LENGTH and MAX_LENGTH must be of type number');
+  }
   const isValid =
     minLength &&
     maxLength &&
@@ -36,10 +35,7 @@ function validatePassword(value, options = {}) {
     whitespace;
   return isValid;
 }
-const a = 'adwadaw sa as'
-const v = a.toUpperCase(a)
-console.log('v =>', v);
-const result = validatePassword("NASDHJsSDA@242@#@#$%")
+const result = validatePassword("    NASDHJsSDA231@#!@#asdsadsad   asdsa    SADS@#@asda      ")
 console.log("Validation Result:", result);
 
 module.exports = validatePassword;

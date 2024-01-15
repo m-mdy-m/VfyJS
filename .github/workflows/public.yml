@@ -29,4 +29,4 @@ jobs:
       - name: Publish to GitHub Packages Registry
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: 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

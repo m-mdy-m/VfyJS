@@ -44,11 +44,11 @@ const {handleValidationError} = require('../../errors/HandleError')
  */
 function validatePassword(value, options = {}) {
   // Input validation functions
-  const has = inputValidator(value);
+  const validator = inputValidator(value);
   // Destructuring options with default values and error messages
   const {
-    minLength = { value : has.hasMinLength(MIN_LENGTH), errorMessage: 'Password must be at least 8 characters long.' },
-    maxLength = { value : has.hasMaxLength(MAX_LENGTH), errorMessage: 'Password cannot exceed 20 characters.' },
+    minLength = { value : validator.hasMinLength(MIN_LENGTH), errorMessage: 'Password must be at least 8 characters long.' },
+    maxLength = { value : validator.hasMaxLength(MAX_LENGTH), errorMessage: 'Password cannot exceed 20 characters.' },
     uppercase = { required: true, errorMessage: 'Password must contain at least one uppercase letter.' },
     lowercase = { required: true, errorMessage: 'Password must contain at least one lowercase letter.' },
     number = { required: true, errorMessage: 'Password must have at least one number.' },
@@ -87,13 +87,13 @@ function validatePassword(value, options = {}) {
  */
 
   // Additional validation checks
-  handleValidationError(uppercase.required ? has.hasUppercase() : true, uppercase.errorMessage);
-  handleValidationError(lowercase.required ? has.hasLowerCase() : true , lowercase.errorMessage)
-  handleValidationError(number.required ? has.hasNumber() : true , number.errorMessage)
-  handleValidationError(specialCharacter.required ? has.hasSpecialCharacter() : true , specialCharacter.errorMessage)
-  handleValidationError(alphabetic.required ? has.hasAlphabetic() : true , alphabetic.errorMessage)
+  handleValidationError(uppercase.required ? validator.hasUppercase() : true, uppercase.errorMessage);
+  handleValidationError(lowercase.required ? validator.hasLowerCase() : true , lowercase.errorMessage)
+  handleValidationError(number.required ? validator.hasNumber() : true , number.errorMessage)
+  handleValidationError(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage)
+  handleValidationError(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
   // Check and trim whitespace if necessary
-  const whitespaceCheck = whitespace.required ? has.hasWhitespace() : !has.hasWhitespace();
+  const whitespaceCheck = whitespace.required ? validator.hasWhitespace() : !validator.hasWhitespace();
   if (!whitespaceCheck) {
     return value = trimmedValue(value);
   } 
@@ -126,11 +126,11 @@ function validatePassword(value, options = {}) {
   const isValid =
     minLength &&
     maxLength &&
-    (uppercase.required ? has.hasUppercase() : true) &&
-    (lowercase.required ? has.hasLowerCase() : true) &&
-    (number.required ? has.hasNumber() : true) &&
-    (specialCharacter.required ? has.hasSpecialCharacter() : true) &&
-    (alphabetic.required ? has.hasAlphabetic() : true) &&
+    (uppercase.required ? validator.hasUppercase() : true) &&
+    (lowercase.required ? validator.hasLowerCase() : true) &&
+    (number.required ? validator.hasNumber() : true) &&
+    (specialCharacter.required ? validator.hasSpecialCharacter() : true) &&
+    (alphabetic.required ? validator.hasAlphabetic() : true) &&
     whitespaceCheck
 
   return isValid;

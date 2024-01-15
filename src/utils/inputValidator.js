@@ -12,14 +12,20 @@
  * @property {(minLength: number) => boolean} hasMinLength - Checks if the input has a minimum length.
  * @property {(maxLength: number) => boolean} hasMaxLength - Checks if the input has a maximum length.
  * @property {(pattern: RegExp) => boolean} matchesCustomPattern - Checks if the input matches a custom regex pattern.
+ * @property {() => boolean} matchesEmailFormat - Checks if the input matches the standard email format.
  */
 
 
 /**
  * Input validator function.
  *
+ * @function
  * @param {string} input - The input string to be validated.
  * @returns {ValidationFunctions} - An object with validation functions.
+ * @example
+ * const validator = inputValidator("Sample123");
+ * const isValid = validator.hasUppercase() && validator.hasNumber();
+ * console.log(isValid); // true
  */
 const inputValidator = (input) => ({
   /**
@@ -98,6 +104,13 @@ const inputValidator = (input) => ({
    * @returns {boolean} - True if the input matches the custom pattern, otherwise false.
    */
   matchesCustomPattern: (pattern) => pattern.test(input),
+
+  /**
+   * Checks if the input matches the standard email format.
+   * @returns {boolean} - True if the input is a valid email, otherwise false.
+   */
+  matchesEmailFormat: () => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(input),
+
 });
 
 module.exports = inputValidator;

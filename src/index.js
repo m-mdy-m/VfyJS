@@ -1,5 +1,5 @@
 const passwordValidate = require('./validator/form/password');
-
+const emailValidate = require('./validator/form/email')
 /**
  * Validates a password based on specified criteria.
  *
@@ -9,6 +9,5 @@ const passwordValidate = require('./validator/form/password');
  * @returns {boolean} - True if the password is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  */
-const vfyjs = passwordValidate;
-
-module.exports = vfyjs;
+exports.password = passwordValidate
+exports.email = emailValidate

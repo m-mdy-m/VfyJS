@@ -1,4 +1,4 @@
-const password = require("../../src/validator/form/password");
+const {password} = require("../../src/index");
 const validValue = "sdaa@@#asd354A3%#!w"
 
 const validOptions =  {

@@ -1,17 +1,49 @@
+"use strict";
+
 const inputValidator = require("../../utils/inputValidator");
 const { handleValidationError } = require("../../errors/HandleError");
+
+/**
+ * Validates whether the provided value is a valid email.
+ *
+ * @param {string} value - The input string to be validated as an email.
+ * @returns {boolean} - True if the input is a valid email, otherwise false.
+ * @example
+ * const { email } = require('vfyjs')
+ * const isValid = email('mahdimamashli1383@gmail.com')
+ * console.log(isValid); //true
+ */
 function validateEmail(value) {
-  const validator = inputValidator(value);
-  const isValid = validator.matchesEmailFormat(value);
-  if(typeof isValid !== 'string'){
-    handleValidationError(isValid , `${isValid} The input should only be of string type `)
-  }
-  if (!isValid) {
+  // Check if the input is a string
+  if (typeof value !== "string") {
     handleValidationError(
-      isValid,
-      `${value} is invalid. Please enter a valid email`
+      value,
+      `Invalid input type. Please enter a valid email as a string.`
     );
+    return false;
   }
-  return isValid
+
+  const validator = inputValidator(value);
+
+  // Check if the email format is valid
+  const isValidFormat = validator.matchesEmailFormat(value);
+  if (typeof isValidFormat !== "boolean") {
+    handleValidationError(
+      isValidFormat,
+      `Unexpected validation result. The email validation should return a boolean.`
+    );
+    return false;
+  }
+
+  if (!isValidFormat) {
+    handleValidationError(
+      isValidFormat,
+      `${value} is not a valid email address. Please enter a valid email.`
+    );
+    return false;
+  }
+
+  // If the input is a string and has a valid email format, return true
+  return true;
 }
 module.exports = validateEmail;

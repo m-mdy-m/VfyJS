@@ -1,6 +1,10 @@
-function hasOption(options, name) {
-  return options.hasOwnProperty(name) ? options[name] : true;
+function hasOption(option, name) {
+  if (option[name]) {
+    return option[name];
+  
+  } else {
+    return true;  
+  
+  }
 }
-
-
 module.exports = hasOption;

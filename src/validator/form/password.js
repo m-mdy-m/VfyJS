@@ -28,11 +28,51 @@
  * @property {Object} options.whitespace - Whitespace requirements for the password.
  * @property {boolean} options.whitespace.required - Whether whitespace is not allowed.
  * @property {string} options.whitespace.errorMessage - Error message for whitespace validation failure.
+ */
+
+/**
+ * Options for customizing password validation criteria.
+ *
+ * @typedef {Object} options
+ * @property {Object} minLength - Minimum length requirements for the password.
+ * @property {(number|string)} minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
+ * @property {string} minLength.errorMessage - Error message for minimum length validation failure.
+ * @property {Object} maxLength - Maximum length requirements for the password.
+ * @property {(number|string)} maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
+ * @property {string} maxLength.errorMessage - Error message for maximum length validation failure.
+ * @property {Object} uppercase - Uppercase letter requirements for the password.
+ * @property {boolean} uppercase.required - Whether uppercase letters are required.
+ * @property {string} uppercase.errorMessage - Error message for uppercase letter validation failure.
+ * @property {Object} lowercase - Lowercase letter requirements for the password.
+ * @property {boolean} lowercase.required - Whether lowercase letters are required.
+ * @property {string} lowercase.errorMessage - Error message for lowercase letter validation failure.
+ * @property {Object} number - Numeric digit requirements for the password.
+ * @property {boolean} number.required - Whether numeric digits are required.
+ * @property {string} number.errorMessage - Error message for numeric digit validation failure.
+ * @property {Object} specialCharacter - Special character requirements for the password.
+ * @property {boolean} specialCharacter.required - Whether special characters are required.
+ * @property {string} specialCharacter.errorMessage - Error message for special character validation failure.
+ * @property {Object} alphabetic - Alphabetic character requirements for the password.
+ * @property {boolean} alphabetic.required - Whether alphabetic characters are required.
+ * @property {string} alphabetic.errorMessage - Error message for alphabetic character validation failure.
+ * @property {Object} whitespace - Whitespace requirements for the password.
+ * @property {boolean} whitespace.required - Whether whitespace is not allowed.
+ * @property {string} whitespace.errorMessage - Error message for whitespace validation failure.
+ */
+
+/**
+ * Validates a password based on the provided options.
+ *
+ * @param {string} value - The password string to be validated.
+ * @param {options} options - Options for customizing validation criteria.
+ * @returns {boolean} - True if the password is valid, otherwise false.
+ * @throws {Error} - Throws an error if validation fails.
+ *
  * @example
  * const { password } = require("vfyjs");
  * const isValid = password("sdaa@@#asd354A3%#!w", {
  *   minLength: { value: 10, errorMessage: 'Password must be at least 10 characters long.' },
- *   maxLength: { value: 20, errorMessage: 'Password cannot exceed 30 characters.' },
+ *   maxLength: { value: 20, errorMessage: 'Password cannot exceed 20 characters.' },
  *   uppercase: { required: false, errorMessage: 'Uppercase letter is required.' },
  *   lowercase: { required: true, errorMessage: 'Lowercase letter is required.' },
  *   number: { required: false, errorMessage: 'Numeric digit is required.' },
@@ -43,7 +83,6 @@
  * 
  * console.log(isValid); // true
  */
-
 
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");

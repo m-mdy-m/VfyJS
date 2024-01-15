@@ -14,7 +14,7 @@
  * @property {boolean} hasNonAlphanumeric - Checks if the input contains any non-alphanumeric character.
  * @property {function} hasMinLength - Checks if the input has a minimum length.
  * @property {function} hasMaxLength - Checks if the input has a maximum length.
- * @property {function} hasCustomPattern - Checks if the input matches a custom regex pattern.
+ * @property {function} matchesCustomPattern - Checks if the input matches a custom regex pattern.
  */
 const inputValidator = (input) => ({
   hasUppercase: () => /(?=.*[A-Z])/.test(input),
@@ -28,7 +28,7 @@ const inputValidator = (input) => ({
   hasNonAlphanumeric: () => /[^a-zA-Z0-9]/.test(input),
   hasMinLength: (minLength) => input.length >= minLength,
   hasMaxLength: (maxLength) => input.length <= maxLength,
-  hasCustomPattern: (pattern) => new RegExp(pattern).test(input),
+  matchesCustomPattern: (pattern) => new RegExp(pattern).test(input),
 });
 
 module.exports = inputValidator;

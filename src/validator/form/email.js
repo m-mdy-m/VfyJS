@@ -14,17 +14,4 @@ function validateEmail(value) {
   }
   return isValid
 }
-
-validateEmail("meddishn312as!dsccc@yahoo.ir");
-try {
-  if(validateEmail){
-    console.log('success');
-}  
-} catch (error) {
-    console.log('error');
-    console.log('error.message');
-    
-}
-
-// console.log("result =>", result);
 module.exports = validateEmail;

@@ -31,7 +31,6 @@ jobs:
           scope: '@m-mdy-m'
       - name: Print the GITHUB_TOKEN
         run: echo ${{ secrets.GITHUB_TOKEN }}
-
       - name: Use GITHUB_TOKEN to create a GitHub issue
         run: |
           curl \

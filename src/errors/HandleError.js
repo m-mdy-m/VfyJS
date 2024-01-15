@@ -13,7 +13,7 @@ class ErrorMessage extends Error {
 
 exports.handleValidationError = (property, message) => {
   if (!property) {
-    throw new ErrorMessage(property, "Custom error message");
+    throw new ErrorMessage(property, message);
   }
   // Optionally, return something indicating success or additional information.
   // For example, you might return the validated property.

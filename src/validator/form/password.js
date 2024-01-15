@@ -15,20 +15,22 @@ function hasRepeatingChar(pass, options) {
   return false;
 }
 function validatePassword(password, options = {}) {
-  const min = options.minLength || MIN_LENGTH;
-  const max = options.maxLength || MAX_LENGTH;
+  const min = options.minLength? options.minLength :  MIN_LENGTH;
+  const max = options.maxLength? options.maxLength :  MAX_LENGTH;
+  console.log(min)
+  console.log(max)
   if (typeof min !== "number" || typeof max !== "number") {
     throw new Error(
       "Sorry, you must enter a number for the min or max length entry!"
     );
   }
   const hasVal = hasValidate(password);
-  const lowerCase = hasOption(options, "lowerCase")|| hasVal.hasLowerCase();
-  const upperCase = hasOption(options, "upperCase")|| hasVal.hasUppercase();
-  const number = hasOption(options, "number")||hasVal.hasNumber();
-  const SpecialCharacter = hasOption(options, "specialCharacter")|| hasVal.hasSpecialCharacter();
-  const String = hasOption(options, "String")|| hasVal.hasString();
-  const customRegex = hasOption(options, "customRegex") && options.customRegex.test(password);
+  const lowerCase = options.lowerCase? options.lowerCase :  hasVal.hasLowerCase();
+  const upperCase = options.upperCase? options.upperCase : hasVal.hasUppercase();
+  const number = options.number? options.number :hasVal.hasNumber();
+  const SpecialCharacter = options.specialCharacter? options.specialCharacter : hasVal.hasSpecialCharacter();
+  const String = options.String? options.String : hasVal.hasString();
+  const customRegex = options.customRegex? options.customRegex.test(password) : undefined;
   if (customRegex !== undefined) {
     return (
       password.length >= min &&
@@ -38,13 +40,13 @@ function validatePassword(password, options = {}) {
   }else{
     return (
       password.length >= min &&
-      password.length <= max &&
-      lowerCase &&
-      upperCase &&
-      number &&
-      SpecialCharacter &&
-      String 
-      // repeat
+    password.length <= max &&
+    lowerCase &&
+    upperCase &&
+    number &&
+    SpecialCharacter &&
+    String 
+    // repeat
     );
   }
   

@@ -190,8 +190,4 @@ const msgError = [
 
   return isValid;
 }
-
-
-const result = validatePassword("Pwd Wi2$th Spaces", { whitespace: false })
-console.log('result =>', result);
 module.exports = validatePassword;

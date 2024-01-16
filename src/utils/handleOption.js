@@ -30,28 +30,22 @@
  * console.log(option3.errorMessage); // "Input must be at least 6 characters long"
  * console.log(option3.validation); // The provided validation function
  */
-function handleOption(defaultValue, validation, errorMessage) {
+function handleOption(defaultValue, errorMessage) {
     const option = {
-        value: defaultValue instanceof Function ? defaultValue() : defaultValue,
+        required: defaultValue  ? defaultValue : defaultValue,
         errorMessage: errorMessage,
-        validation: validation || true
     }
-    console.log('defaultValue =>', defaultValue);
-    console.log('validation =>', validation);
-    console.log('errorMessage =>', errorMessage);
-    console.log('option =>', option);
     return option
 }
 
 
-const createValidationOptions = (name=Array , methods=[] , validations =[], errorMessage=[])=>{
+const createValidationOptions = (name = [], validations = [], errorMessages = []) => {
     let options={}; 
     for (let i = 0; i < name.length; i++) {
         const option_name = name[i];
-        const method = methods[i]
         const validation = validations[i]
-        const msgError = errorMessage[i]
-        options[option_name] = handleOption(method,validation,msgError)
+        const msgError = errorMessages[i]
+        options[option_name] = handleOption(validation,msgError)
     }
     return options
 }

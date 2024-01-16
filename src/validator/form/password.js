@@ -61,7 +61,7 @@
  */
 
 
-const { MAX_LENGTH, MIN_LENGTH, trimmedValue } = require("../../common/validationConstants");
+const { MAX_LENGTH, MIN_LENGTH, trimmedValue,getValidValue , isValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const {handleValidationError} = require('../../errors/HandleError')
 const createValidationOptions = require('../../utils/handleOption')
@@ -77,6 +77,9 @@ const createValidationOptions = require('../../utils/handleOption')
  * const isValid = password("StrongPwd@123", { minLength: 8, uppercase: true, number: true });
  * console.log(isValid); // true
  */
+
+
+
 function validatePassword(value, options = {}) {
   // Input validation functions
   if(typeof value !=='string'){
@@ -137,40 +140,47 @@ const msgError = [
   handleValidationError(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage)
   handleValidationError(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
   // Check and trim whitespace if necessary
-  let whitespaceCheck = whitespace.required ? validator.hasWhitespace() : !validator.hasWhitespace();
-    if (!whitespaceCheck) {
+  let whitespaceCheck = getValidValue(whitespace,whitespace)
+  if (whitespaceCheck) {
     value = trimmedValue(value);
     whitespaceCheck = true;
-  } 
+  } else {
+    throw new Error("Whitespace is not allowed. Please remove any leading or trailing spaces.");
+  }
+  const minValidLength  = getValidValue(minLength,MIN_LENGTH)
+  const maxValidLength  = getValidValue(maxLength,MAX_LENGTH)
+  let min = isValue(minLength,minValidLength)
+  let max = isValue(maxLength , maxValidLength)
     // Convert string values to numbers for minLength and maxLength
 
-  if (typeof minLength.value === 'string' || typeof minLength.value === 'string') {
-    minLength.value = +minLength.value;
-    maxLength.value =+maxLength.value
+  if (typeof min === 'string' || typeof min === 'string') {
+    min = +min;
+    max =+max
   }
   // Check if minLength and maxLength are valid numbers
   if (
-    typeof minLength.value !== 'undefined' &&
-    typeof maxLength.value !== 'undefined' &&
-    (typeof minLength.value !== 'boolean') &&
-    (typeof maxLength.value !== 'boolean') &&
-    (typeof minLength.value !== 'number' || typeof maxLength.value !== 'number')
+    typeof min !== 'undefined' &&
+    typeof max !== 'undefined' &&
+    (typeof min !== 'boolean') &&
+    (typeof max !== 'boolean') &&
+    (typeof min !== 'number' || typeof max !== 'number')
   ) {
     throw new Error("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
   }
   
   // Check if the password length is within the specified range
+  
   if (
-    typeof minLength.value === 'number' &&
-    typeof maxLength.value === 'number' &&
-    (value.length < minLength.value || value.length > maxLength.value)
+    typeof min === 'number' &&
+    typeof max === 'number' &&
+    (value.length < min || value.length > max)
   ) {
-    throw new Error(`Password length must be between ${minLength.value} and ${maxLength.value} characters.`);
+    throw new Error(`Password length must be between ${min} and ${max} characters.`);
   }
   // Final validation check
   const isValid =
-  minLength &&
-  maxLength &&
+  min &&
+  max &&
   (uppercase.required ? validator.hasUppercase() : true) &&
   (lowercase.required ? validator.hasLowerCase() : true) &&
   (number.required ? validator.hasNumber() : true) &&
@@ -180,4 +190,8 @@ const msgError = [
 
   return isValid;
 }
+
+
+const result = validatePassword("Pwd Wi2$th Spaces", { whitespace: false })
+console.log('result =>', result);
 module.exports = validatePassword;

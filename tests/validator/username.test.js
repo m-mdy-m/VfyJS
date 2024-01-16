@@ -17,7 +17,7 @@ const validOptions = {
     repeat: { required: true, errorMessage: "repeat " },
   };
 test("password is valid", () => {
-  const is_valid = username(validValue,validOptions)
-
+  const is_valid = username("Str i ngU se  rname123",{minLength : {value : 5, errorMessage: "must be at least 5 characters long"},trim:true})
+ 
   expect(is_valid).toBe(true);
 });

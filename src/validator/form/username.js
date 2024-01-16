@@ -82,6 +82,16 @@ function validateUsername(username, options = {}) {
         handleValidationError(NonAlphanumeric && !isNonAlphanumeric, 'Value must be alphanumeric. Example: ABC123');
     }
 
+    const isNumber = getRequired(number,validator.hasNumber())
+    if (isNumber) {
+        if (!validator.hasNumeric() && !validator.hasNumber()) {
+            throw new Error('Invalid input. The password must contain at least one number.');
+        }
+    }
+    const isRepeat = getRequired(!repeat, validator.hasRepeat())
+    console.log('repeat =>',repeat);
+    console.log('isRepeat =>',isRepeat);
+    console.log('validator.hasRepeat() =>',validator.hasRepeat());
     if (repeat.required) {
         handleValidationError(!repeat.required ? validator.hasRepeat() : true, repeat.errorMessage)
     }
@@ -100,8 +110,6 @@ function validateUsername(username, options = {}) {
         minValue = +minValue;
         maxValue =+maxValue
     }
-    console.log('min =>',min);
-    console.log('min =>',max);
     if (typeof min === 'number' && typeof max === 'number' && (username.length < min || username.length > max)) {
         throw new Error(`Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`);
     }
@@ -119,10 +127,10 @@ function validateUsername(username, options = {}) {
     throw new Error("min or max Length just for true or false");
     }
     
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && (number.required ? validator.hasNumber() : true)  && isNonAlphanumeric &&checkWhiteSpace && repeat.required ? validator.hasRepeat() : true
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && isNonAlphanumeric &&checkWhiteSpace && isRepeat
     return isValid;
 }
 
-const result = validateUsername("NoNumbersHere", { number: { required: true, errorMessage: "must have at least one number" } })
+const result = validateUsername("RepeatedChar1mmmmmmm23")
 console.log('result =>', result);
 module.exports = validateUsername;

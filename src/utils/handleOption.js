@@ -31,9 +31,17 @@
  * console.log(option3.validation); // The provided validation function
  */
 function handleOption(defaultValue, errorMessage) {
-    const option = {
-        required: defaultValue  ? defaultValue : defaultValue,
-        errorMessage: errorMessage,
+    let option;
+    if (typeof defaultValue ==='number') {
+        option= {
+            value: defaultValue  ? defaultValue : defaultValue,
+            errorMessage: errorMessage,
+        };
+    }else{
+        option = {
+            required: defaultValue  ? defaultValue : defaultValue,
+            errorMessage: errorMessage,
+        }
     }
     return option
 }

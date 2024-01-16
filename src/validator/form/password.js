@@ -85,7 +85,7 @@ function validatePassword(value, options = {}) {
   const validator = inputValidator(value);
   // Destructuring options with default values and error messages
   const optionName = ['minlength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
-const optionValidations = [validator.hasMinLength(MIN_LENGTH), validator.hasMaxLength(MAX_LENGTH), true, true, true, true, true, false];
+const optionValidations = [8, 64, true, true, true, true, true, false];
 const msgError = [
   'Password must be at least 8 characters long.',
   'Password cannot exceed 20 characters.',

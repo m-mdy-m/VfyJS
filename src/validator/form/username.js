@@ -34,11 +34,14 @@ function validateUsername(username, options = {}) {
         NonAlphanumeric,
         trim,
         repeat } = objectOption
-    handleValidationError(uppercase.required  , uppercase.errorMessage)
+    handleValidationError(uppercase.required ? validator.hasUppercase() : true  , uppercase.errorMessage)
     handleValidationError(number.required , number.errorMessage)
-    handleValidationError(NonAlphanumeric.required ? validator.hasNonAlphanumeric() : true, NonAlphanumeric.errorMessage)
-    handleValidationError(repeat.required ? validator.hasRepeat() : true, repeat.errorMessage)
-    
+    if(NonAlphanumeric.required){
+        handleValidationError(!NonAlphanumeric.required, NonAlphanumeric.errorMessage)
+    }
+    if (repeat.required) {
+        handleValidationError(!repeat.required ? validator.hasRepeat() : true, repeat.errorMessage)
+    }
     let checkWhiteSpace = !trim.required
     if(!checkWhiteSpace){
         username = trimmedValue(username)
@@ -62,17 +65,7 @@ function validateUsername(username, options = {}) {
     if (typeof min === 'number' &&typeof max === 'number' &&(username.length < min || username.length > max)){
         throw new Error("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
     }
-    console.log(minLength);
-    console.log(maxLength);
-    console.log(uppercase);
-    console.log(number);
-    console.log(NonAlphanumeric);
-    console.log(trim);
-    console.log(repeat);
-    const isValid = minLength && maxLength && uppercase &&number && NonAlphanumeric && trim && repeat
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && (number.required ? validator.hasNumber() : true)  && (NonAlphanumeric ? validator.hasAlphanumeric() : true) && checkWhiteSpace && repeat.required ? validator.hasRepeat() : true
     return isValid;
 }
-
-const result = validateUsername("Mahdimamashli13832");
-console.log("result=>", result);
 module.exports = validateUsername;

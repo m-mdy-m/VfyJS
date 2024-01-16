@@ -18,7 +18,6 @@ const MAX_LENGTH = 64;
  * @returns {string} - The input string with leading and trailing whitespaces removed.
  */
 const trimmedValue = (value) => value.replace(/\s/g, '').trim();
-
 /**
  * Module exports containing constants and functions related to password validation.
  * @module validationConstants

@@ -13,6 +13,7 @@
  * @property {(maxLength: number) => boolean} hasMaxLength - Checks if the input has a maximum length.
  * @property {(pattern: RegExp) => boolean} matchesCustomPattern - Checks if the input matches a custom regex pattern.
  * @property {() => boolean} matchesEmailFormat - Checks if the input matches the standard email format.
+ * @property {(repeatCount?: number) => boolean} hasRepeat - Checks if the input contains consecutive repeated characters.
  */
 
 
@@ -110,7 +111,12 @@ const inputValidator = (input) => ({
    * @returns {boolean} - True if the input is a valid email, otherwise false.
    */
   matchesEmailFormat: () => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(input),
-
-});
+  
+  /**
+   * Checks if the input contains consecutive repeated characters.
+   * @param {number} [repeatCount=3] - The number of consecutive repeated characters to check for. Defaults to 3 if not specified.
+   * @returns {boolean} - True if the input contains at least the specified number of consecutive repeated characters, otherwise false.
+   */
+  hasRepeat: (repeatCount = 3) => new RegExp(`(.)\\1{${repeatCount - 1},}`).test(input)});
 
 module.exports = inputValidator;

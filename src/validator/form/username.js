@@ -1,48 +1,59 @@
 const {MAX_LENGTH,MIN_LENGTH,trimmedValue,} = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const handleOption = require('../../utils/handleOption')
+const createValidationOptions = require('../../utils/handleOption')
 const { handleValidationError } = require("../../errors/HandleError");
 function validateUsername(username, options = {}) {
     const validator = inputValidator(username);
-    // const {
-    //     minLength = handleOption(validator.hasMinLength(MIN_LENGTH), null , 'username must be at least 8 characters long.'),
-    //     maxLength = handleOption(validator.hasMinLength(MIN_LENGTH), null , 'username must be at least 8 characters long.'),
-    //     uppercase = handleOption( , )
-    // } = options
-
-  const minLength = MIN_LENGTH;
-  const maxLength = MAX_LENGTH;
-  const allow = validator.hasAlphanumeric();
-  let whitespace = !validator.hasWhitespace();
-  const number = validator.hasNumber()
-  const lowercase = validator.hasLowerCase()
-  const uppercase = validator.hasUppercase()
-  console.log("whitespace 1=>", whitespace);
-  if (!whitespace) {
-    username = trimmedValue(username);
-    whitespace = true;
-  }
-  let hasNonAlphanumeric = validator.hasNonAlphanumeric();
-  console.log("hasNonAlphanumeric 1=>", hasNonAlphanumeric);
-  if(hasNonAlphanumeric){
-    throw new Error("Sorry, username cannot contain special characters")
-  }
-  hasNonAlphanumeric = true;
-  
-  if (typeof minLength !== "number" || typeof maxLength !== "number") {
-    throw new Error("type length just number");
-  }
-  const length =
-    validator.hasMinLength(minLength) && validator.hasMaxLength(maxLength);
-  console.log("allow =>", allow);
-  console.log("whitespace => 2", whitespace);
-  console.log("hasNonAlphanumeric 2=>", hasNonAlphanumeric);
-  console.log("length =>", length);
-
-  const isValid = allow && hasNonAlphanumeric && length && whitespace;
-  return isValid;
+    const optionName = ['minLength', 'maxLength', 'uppercase','number','NonAlphanumeric','trim','repeat']
+    const validation = 
+    [
+        validator.hasMinLength(MIN_LENGTH),
+        validator.hasMaxLength(MAX_LENGTH),
+        validator.hasUppercase(),
+        validator.hasNumber(),
+        validator.hasNonAlphanumeric(),
+        validator.hasWhitespace(),
+        validator.hasRepeat()
+    ]
+    const messageError = 
+    [
+        'Username must be at least 8 characters long.',
+        'Username cannot exceed 64 characters.',
+        'Username must contain at least one uppercase letter.',
+        'Username must have at least one number.',
+        'Username must not contain non-alphanumeric characters.',
+        'Username cannot contain whitespace.',
+        'Username must not have consecutive repeated characters.'
+    ]
+    let objectOption = createValidationOptions(optionName,validation,messageError)
+    objectOption = {...objectOption, ...options}
+    const {minLength,
+        maxLength,
+        uppercase,
+        number,
+        NonAlphanumeric,
+        trim,
+        repeat } = objectOption
+    // console.log('minLength =>', minLength);
+    // console.log('maxLength =>', maxLength);
+    // console.log('uppercase =>', uppercase);
+    // console.log('number =>', number);
+    // console.log('NonAlphanumeric =>', NonAlphanumeric);
+    // console.log('trim =>', trim);
+    console.log(repeat.required);
+    handleValidationError(uppercase.required  , uppercase.errorMessage)
+    handleValidationError(number.required , number.errorMessage)
+    handleValidationError(!NonAlphanumeruseic.required, NonAlphanumeric.errorMessage)
+    let checkWhiteSpace = !trim.required
+    if(!checkWhiteSpace){
+        username = trimmedValue(username)
+        checkWhiteSpace = true
+    }
+    // const isValid = minLength && maxLength && uppercase &&number && NonAlphanumeric && trim && repeat
+    // const isValid = minLength && maxLength && uppercase &&number && NonAlphanumeric && trim && repeat
+    // return isValid;
 }
 
-const result = validateUsername("mahdi");
+const result = validateUsername("Mdymmmmshly1383");
 console.log("result=>", result);
 module.exports = validateUsername;

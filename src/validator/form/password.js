@@ -101,34 +101,34 @@ const msgError = [
   objectOPtion = { ...objectOPtion, ...options };
   const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength } = objectOPtion;
   /**
- * Options for customizing password validation criteria.
- *
- * @typedef {Object} options
- * @property {Object} minLength - Minimum length requirements for the password.
- * @property {(number|string)} minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
- * @property {string} minLength.errorMessage - Error message for minimum length validation failure.
- * @property {Object} maxLength - Maximum length requirements for the password.
- * @property {(number|string)} maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
- * @property {string} maxLength.errorMessage - Error message for maximum length validation failure.
- * @property {Object} uppercase - Uppercase letter requirements for the password.
- * @property {boolean} uppercase.required - Whether uppercase letters are required.
- * @property {string} uppercase.errorMessage - Error message for uppercase letter validation failure.
- * @property {Object} lowercase - Lowercase letter requirements for the password.
- * @property {boolean} lowercase.required - Whether lowercase letters are required.
- * @property {string} lowercase.errorMessage - Error message for lowercase letter validation failure.
- * @property {Object} number - Numeric digit requirements for the password.
- * @property {boolean} number.required - Whether numeric digits are required.
- * @property {string} number.errorMessage - Error message for numeric digit validation failure.
- * @property {Object} specialCharacter - Special character requirements for the password.
- * @property {boolean} specialCharacter.required - Whether special characters are required.
- * @property {string} specialCharacter.errorMessage - Error message for special character validation failure.
- * @property {Object} alphabetic - Alphabetic character requirements for the password.
- * @property {boolean} alphabetic.required - Whether alphabetic characters are required.
- * @property {string} alphabetic.errorMessage - Error message for alphabetic character validation failure.
- * @property {Object} whitespace - Whitespace requirements for the password.
- * @property {boolean} whitespace.required - Whether whitespace is not allowed.
- * @property {string} whitespace.errorMessage - Error message for whitespace validation failure.
- */
+   * Options for customizing password validation criteria.
+   *
+   * @typedef {Object} ValidationOptions
+   * @property {Object} minLength - Minimum length requirements for the password.
+   * @property {(number|string)} minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
+   * @property {string} minLength.errorMessage - Error message for minimum length validation failure.
+   * @property {Object} maxLength - Maximum length requirements for the password.
+   * @property {(number|string)} maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
+   * @property {string} maxLength.errorMessage - Error message for maximum length validation failure.
+   * @property {Object} uppercase - Uppercase letter requirements for the password.
+   * @property {boolean} uppercase.required - Whether uppercase letters are required.
+   * @property {string} uppercase.errorMessage - Error message for uppercase letter validation failure.
+   * @property {Object} lowercase - Lowercase letter requirements for the password.
+   * @property {boolean} lowercase.required - Whether lowercase letters are required.
+   * @property {string} lowercase.errorMessage - Error message for lowercase letter validation failure.
+   * @property {Object} number - Numeric digit requirements for the password.
+   * @property {boolean} number.required - Whether numeric digits are required.
+   * @property {string} number.errorMessage - Error message for numeric digit validation failure.
+   * @property {Object} specialCharacter - Special character requirements for the password.
+   * @property {boolean} specialCharacter.required - Whether special characters are required.
+   * @property {string} specialCharacter.errorMessage - Error message for special character validation failure.
+   * @property {Object} alphabetic - Alphabetic character requirements for the password.
+   * @property {boolean} alphabetic.required - Whether alphabetic characters are required.
+   * @property {string} alphabetic.errorMessage - Error message for alphabetic character validation failure.
+   * @property {Object} whitespace - Whitespace requirements for the password.
+   * @property {boolean} whitespace.required - Whether whitespace is not allowed.
+   * @property {string} whitespace.errorMessage - Error message for whitespace validation failure.
+   */
 
   // Additional validation checks
   handleValidationError(uppercase.required ? validator.hasUppercase() : true, uppercase.errorMessage);
@@ -142,7 +142,6 @@ const msgError = [
     value = trimmedValue(value);
     whitespaceCheck = true;
   } 
-    console.log('value =>',value);
     // Convert string values to numbers for minLength and maxLength
 
   if (typeof minLength.value === 'string' || typeof minLength.value === 'string') {

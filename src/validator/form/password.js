@@ -64,6 +64,7 @@
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const {handleValidationError} = require('../../errors/HandleError')
+const handleOption = require('../../utils/handleOption')
 /**
  * Validates a password based on the provided options.
  *
@@ -78,17 +79,20 @@ const {handleValidationError} = require('../../errors/HandleError')
  */
 function validatePassword(value, options = {}) {
   // Input validation functions
+  if(typeof value !=='string'){
+    throw new Error("The first input should only be a string!!")
+  }
   const validator = inputValidator(value);
   // Destructuring options with default values and error messages
   const {
-    minLength = { value : validator.hasMinLength(MIN_LENGTH), errorMessage: 'Password must be at least 8 characters long.' },
-    maxLength = { value : validator.hasMaxLength(MAX_LENGTH), errorMessage: 'Password cannot exceed 20 characters.' },
-    uppercase = { required: true, errorMessage: 'Password must contain at least one uppercase letter.' },
-    lowercase = { required: true, errorMessage: 'Password must contain at least one lowercase letter.' },
-    number = { required: true, errorMessage: 'Password must have at least one number.' },
-    specialCharacter = { required: true, errorMessage: 'Password must contain at least one special character such as (@#$%^&*).' },
-    alphabetic = { required: true, errorMessage: 'Input must contain at least one alphabetic character.' },
-    whitespace = { required: false, errorMessage: 'Password cannot contain whitespace.' },
+    minLength = handleOption(validator.hasMinLength(MIN_LENGTH), null, 'Password must be at least 8 characters long.'),
+    maxLength = handleOption(validator.hasMaxLength(MAX_LENGTH), null, 'Password cannot exceed 20 characters.'),
+    uppercase = handleOption(true, validator.hasUppercase(), 'Password must contain at least one uppercase letter.'),
+    lowercase = handleOption(true, validator.hasLowerCase(), 'Password must contain at least one lowercase letter.'),
+    number = handleOption(true, validator.hasNumber(), 'Password must have at least one number.'),
+    specialCharacter = handleOption(true, validator.hasSpecialCharacter(), 'Password must contain at least one special character such as (@#$%^&*).'),
+    alphabetic = handleOption(true, validator.hasAlphabetic(), 'Input must contain at least one alphabetic character.'),
+    whitespace = handleOption(false, null, 'Password cannot contain whitespace.'),
   } = options;
 /**
  * Options for customizing password validation criteria.
@@ -128,11 +132,12 @@ function validatePassword(value, options = {}) {
   handleValidationError(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
   // Check and trim whitespace if necessary
   let whitespaceCheck = whitespace.required ? validator.hasWhitespace() : !validator.hasWhitespace();
-  if (!whitespaceCheck) {
+    if (!whitespaceCheck) {
     value = trimmedValue(value);
     whitespaceCheck = true;
   } 
-  // Convert string values to numbers for minLength and maxLength
+    console.log('value =>',value);
+    // Convert string values to numbers for minLength and maxLength
 
   if (typeof minLength.value === 'string' || typeof minLength.value === 'string') {
     minLength.value = +minLength.value;

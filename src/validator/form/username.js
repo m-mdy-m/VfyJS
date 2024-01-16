@@ -100,8 +100,10 @@ function validateUsername(username, options = {}) {
         minValue = +minValue;
         maxValue =+maxValue
     }
-    if (typeof min === 'number' &&typeof max === 'number' &&(username.length < min || username.length > max)){
-        throw new Error("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
+    console.log('min =>',min);
+    console.log('min =>',max);
+    if (typeof min === 'number' && typeof max === 'number' && (username.length < min || username.length > max)) {
+        throw new Error(`Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`);
     }
     if(typeof max === 'number' && username.length > max){
         throw new Error('Username length exceeds the maximum allowed length.');
@@ -121,6 +123,6 @@ function validateUsername(username, options = {}) {
     return isValid;
 }
 
-const result = validateUsername("StringUsername123")
+const result = validateUsername("NoNumbersHere", { number: { required: true, errorMessage: "must have at least one number" } })
 console.log('result =>', result);
 module.exports = validateUsername;

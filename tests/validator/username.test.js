@@ -33,7 +33,7 @@ describe("validateUsername function", () => {
   // Test case for an invalid username with insufficient length
   test("invalid username - insufficient length", () => {
     try {
-      const isValid = username("Short", { minLength: { value: 10, errorMessage: "must be at least 10 characters long" } });
+      const isValid = username("Shor2t", { minLength: { value: 10, errorMessage: "must be at least 10 characters long" } });
       expect(isValid).toBe(false);
     } catch (error) {
       console.log(error.message);

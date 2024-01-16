@@ -22,4 +22,13 @@ const trimmedValue = (value) => value.replace(/\s/g, '').trim();
  * Module exports containing constants and functions related to password validation.
  * @module validationConstants
  */
-module.exports = { MIN_LENGTH, MAX_LENGTH, trimmedValue };
+function getValidValue(value, defaultValue ){
+    return value && value.value ? value.value : defaultValue;
+  }
+  function isValue(value, defaultValue){
+    if(typeof value === 'object'){
+        return defaultValue
+    }
+    return value ? value : defaultValue
+  }
+module.exports = { MIN_LENGTH, MAX_LENGTH, trimmedValue,getValidValue,isValue };

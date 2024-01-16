@@ -156,7 +156,7 @@ const msgError = [
     (typeof maxLength.value !== 'boolean') &&
     (typeof minLength.value !== 'number' || typeof maxLength.value !== 'number')
   ) {
-    throw new Error("min or max Length just for true or false");
+    throw new Error("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
   }
   
   // Check if the password length is within the specified range

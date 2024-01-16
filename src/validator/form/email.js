@@ -14,6 +14,7 @@ const { handleValidationError } = require("../../errors/HandleError");
  * console.log(isValid); //true
  */
 function validateEmail(value) {
+  console.log('value =>', value);
   // Check if the input is a string
   if (typeof value !== "string") {
     handleValidationError(
@@ -34,7 +35,7 @@ function validateEmail(value) {
     );
     return false;
   }
-
+  console.log(`isValid Format ${value} =>`, isValidFormat);
   if (!isValidFormat) {
     handleValidationError(
       isValidFormat,

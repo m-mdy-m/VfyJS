@@ -27,7 +27,7 @@
  * @property {string} repeat.errorMessage - Error message for alphabetic character validation failure.
  */
 
-const {MAX_LENGTH,MIN_LENGTH,trimmedValue,} = require("../../common/validationConstants");
+const {MAX_LENGTH,MIN_LENGTH,trimmedValue,getValidValue,isValue,getRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const createValidationOptions = require('../../utils/handleOption')
 const { handleValidationError } = require("../../errors/HandleError");
@@ -77,9 +77,13 @@ function validateUsername(username, options = {}) {
         repeat } = objectOption
     handleValidationError(uppercase.required ? validator.hasUppercase() : true  , uppercase.errorMessage)
     handleValidationError(number.required , number.errorMessage)
-    if(NonAlphanumeric.required && (!trim.required && !trim)){
-        handleValidationError(!NonAlphanumeric.required, NonAlphanumeric.errorMessage)
+        console.log('NonAlphanumeric =>',NonAlphanumeric);
+    const isNonAlphanumeric = getRequired(NonAlphanumeric,false)
+    console.log('isNonAlphanumeric =>',isNonAlphanumeric);
+    if(isNonAlphanumeric){
+        handleValidationError(NonAlphanumeric && !isNonAlphanumeric, 'Value must be alphanumeric. Example: ABC123');
     }
+
     if (repeat.required) {
         handleValidationError(!repeat.required ? validator.hasRepeat() : true, repeat.errorMessage)
     }
@@ -88,15 +92,26 @@ function validateUsername(username, options = {}) {
     if(!checkWhiteSpace){
         username = trimmedValue(username)
         checkWhiteSpace = true
-    }
-    let minValue = typeof minLength.value == 'number' ? minLength.value : minLength;
-    let maxValue = typeof maxLength.value == 'number' ? maxLength.value : maxLength;
-    const min = minValue ? minValue : MIN_LENGTH
-    const max = maxValue ? maxValue : MAX_LENGTH
+    }               
+    let minValue = getValidValue(minLength , minLength);
+    let maxValue = getValidValue(maxLength , maxLength);
+        
+    const min = isValue(minValue,MIN_LENGTH)
+    const max = isValue(maxValue,MAX_LENGTH)
+    // console.log('min =>',min);
+    // console.log('max =>',max);
+    // console.log('checkWhiteSpace =>', checkWhiteSpace);
+    // console.log('NonAlphanumeric =>',NonAlphanumeric);
+    // console.log('repeat =>',repeat);
+    // console.log('uppercase =>',uppercase);
+    // console.log('repeat =>',repeat);
+    // console.log('trim =>',trim);
     if (typeof minValue === 'string' || typeof maxValue === 'string') {
         minValue = +minValue;
         maxValue =+maxValue
     }
+    // console.log(`username.length-${username.length} <`,min);
+    // console.log(`username.length-${username.length} >`,max);
     if (typeof min === 'number' &&typeof max === 'number' &&(username.length < min || username.length > max)){
         throw new Error("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
     }
@@ -114,14 +129,18 @@ function validateUsername(username, options = {}) {
     throw new Error("min or max Length just for true or false");
     }
     
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && (number.required ? validator.hasNumber() : true)  && (NonAlphanumeric ? validator.hasAlphanumeric() : true) && checkWhiteSpace && repeat.required ? validator.hasRepeat() : true
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && (number.required ? validator.hasNumber() : true)  && isNonAlphanumeric &&checkWhiteSpace && repeat.required ? validator.hasRepeat() : true
     return isValid;
 }
 
-const result = validateUsername('stringsername123',{
-    minLength : 20, trim : false, repeat: false
-})
-
-
+const result = validateUsername("St!#@!#%%serna@me123", {
+    minLength: { value: 5, errorMessage: "must be at least 5 characters long" },
+    maxLength: { value: 20, errorMessage: "cannot exceed 15 characters" },
+    uppercase: { required: true, errorMessage: "must have at least one uppercase letter" },
+    number: { required: true, errorMessage: "must have at least one number" },
+    NonAlphanumeric: { required: false, errorMessage: "should not contain non-alphanumeric characters" },
+    trim: { required: true, errorMessage: "cannot contain leading or trailing whitespaces" },
+    repeat: { required: true, errorMessage: "cannot have consecutive repeated characters" },
+  })
 console.log('result =>', result);
 module.exports = validateUsername;

@@ -77,36 +77,51 @@ function validateUsername(username, options = {}) {
         repeat } = objectOption
     handleValidationError(uppercase.required ? validator.hasUppercase() : true  , uppercase.errorMessage)
     handleValidationError(number.required , number.errorMessage)
-    if(NonAlphanumeric.required){
+    if(NonAlphanumeric.required && (!trim.required && !trim)){
         handleValidationError(!NonAlphanumeric.required, NonAlphanumeric.errorMessage)
     }
     if (repeat.required) {
         handleValidationError(!repeat.required ? validator.hasRepeat() : true, repeat.errorMessage)
     }
-    let checkWhiteSpace = !trim.required
+    let checkWhiteSpace = !trim.required || trim
+    
     if(!checkWhiteSpace){
         username = trimmedValue(username)
         checkWhiteSpace = true
     }
-    const min = (minLength.value || MIN_LENGTH)
-    const max = (maxLength.value || MAX_LENGTH)
-    if (typeof minLength.value === 'string' || typeof minLength.value === 'string') {
-        minLength.value = +minLength.value;
-        maxLength.value =+maxLength.value
-    }
-    if (
-    typeof minLength.value !== 'undefined' &&
-    typeof maxLength.value !== 'undefined' &&
-    (typeof minLength.value !== 'boolean') &&
-    (typeof maxLength.value !== 'boolean') &&
-    (typeof minLength.value !== 'number' || typeof maxLength.value !== 'number')
-    ) {
-    throw new Error("min or max Length just for true or false");
+    let minValue = typeof minLength.value == 'number' ? minLength.value : minLength;
+    let maxValue = typeof maxLength.value == 'number' ? maxLength.value : maxLength;
+    const min = minValue ? minValue : MIN_LENGTH
+    const max = maxValue ? maxValue : MAX_LENGTH
+    if (typeof minValue === 'string' || typeof maxValue === 'string') {
+        minValue = +minValue;
+        maxValue =+maxValue
     }
     if (typeof min === 'number' &&typeof max === 'number' &&(username.length < min || username.length > max)){
         throw new Error("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
     }
+    if(typeof max === 'number' && username.length > max){
+        throw new Error('Username length exceeds the maximum allowed length.');
+    }
+    
+    if (
+    typeof minValue !== 'undefined' &&
+    typeof maxValue !== 'undefined' &&
+    (typeof minValue !== 'boolean') &&
+    (typeof maxValue !== 'boolean') &&
+    (typeof minValue !== 'number' && typeof max !== 'number')
+    ) {
+    throw new Error("min or max Length just for true or false");
+    }
+    
     const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && (number.required ? validator.hasNumber() : true)  && (NonAlphanumeric ? validator.hasAlphanumeric() : true) && checkWhiteSpace && repeat.required ? validator.hasRepeat() : true
     return isValid;
 }
+
+const result = validateUsername('stringsername123',{
+    minLength : 20, trim : false, repeat: false
+})
+
+
+console.log('result =>', result);
 module.exports = validateUsername;

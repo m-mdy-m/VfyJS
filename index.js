@@ -1,5 +1,6 @@
 const passwordValidate = require('./src/validator/form/password');
 const emailValidate = require('./src/validator/form/email')
+const userValidate = require('./src/validator/form/username')
 /**
  * Validates a password based on specified criteria.
  *
@@ -11,3 +12,4 @@ const emailValidate = require('./src/validator/form/email')
  */
 exports.password = passwordValidate
 exports.email = emailValidate
+exports.username = userValidate

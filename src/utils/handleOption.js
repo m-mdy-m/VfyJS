@@ -31,11 +31,28 @@
  * console.log(option3.validation); // The provided validation function
  */
 function handleOption(defaultValue, validation, errorMessage) {
-    return {
+    const option = {
         value: defaultValue instanceof Function ? defaultValue() : defaultValue,
         errorMessage: errorMessage,
         validation: validation || true
-    };
+    }
+    console.log('defaultValue =>', defaultValue);
+    console.log('validation =>', validation);
+    console.log('errorMessage =>', errorMessage);
+    console.log('option =>', option);
+    return option
 }
-console.log('hiiiiiiiiiiiiiiiiiiii');
-module.exports = handleOption;
+
+
+const createValidationOptions = (name=Array , methods=[] , validations =[], errorMessage=[])=>{
+    let options={}; 
+    for (let i = 0; i < name.length; i++) {
+        const option_name = name[i];
+        const method = methods[i]
+        const validation = validations[i]
+        const msgError = errorMessage[i]
+        options[option_name] = handleOption(method,validation,msgError)
+    }
+    return options
+}
+module.exports = createValidationOptions;

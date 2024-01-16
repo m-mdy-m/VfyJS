@@ -1,16 +1,15 @@
-const {
-  MAX_LENGTH,
-  MIN_LENGTH,
-  trimmedValue,
-} = require("../../common/validationConstants");
+const {MAX_LENGTH,MIN_LENGTH,trimmedValue,} = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const { handleValidationError } = require("../../errors/HandleError");
 const handleOption = require('../../utils/handleOption')
+const { handleValidationError } = require("../../errors/HandleError");
 function validateUsername(username, options = {}) {
-  console.log(username);
+    const validator = inputValidator(username);
+    // const {
+    //     minLength = handleOption(validator.hasMinLength(MIN_LENGTH), null , 'username must be at least 8 characters long.'),
+    //     maxLength = handleOption(validator.hasMinLength(MIN_LENGTH), null , 'username must be at least 8 characters long.'),
+    //     uppercase = handleOption( , )
+    // } = options
 
-  
-  const validator = inputValidator(username);
   const minLength = MIN_LENGTH;
   const maxLength = MAX_LENGTH;
   const allow = validator.hasAlphanumeric();

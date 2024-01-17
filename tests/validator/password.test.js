@@ -28,7 +28,8 @@ describe("validatePassword function", () => {
       const isValid = password("Weak@P", { minLength: { value: 10, errorMessage: "Password must be at least 10 characters long." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
+      console.log(error.property);
     }
       // Handle the error and assert that it has the expected error message
   });
@@ -39,7 +40,7 @@ describe("validatePassword function", () => {
       const isValid = password("VeryLongPassword123456789", { maxLength: { value: 15, errorMessage: "Password cannot exceed 15 characters." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -49,7 +50,7 @@ describe("validatePassword function", () => {
       const isValid = password("UPPERCASEONLY123", { lowercase: { required: true, errorMessage: "Password must contain at least one lowercase letter." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -59,7 +60,7 @@ describe("validatePassword function", () => {
       const isValid = password("1234567890!@#", { alphabetic: { required: true, errorMessage: "Input must contain at least one alphabetic character." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -69,7 +70,7 @@ describe("validatePassword function", () => {
       const isValid = password("Password With Spaces", { whitespace: { required: false, errorMessage: "Password cannot contain whitespace." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -79,7 +80,7 @@ describe("validatePassword function", () => {
       const isValid = password("PasswordWithoutSpecialCharacters", { specialCharacter: { required: true, errorMessage: "Password must contain at least one special character." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -89,7 +90,7 @@ describe("validatePassword function", () => {
       const isValid = password("NoNumbersHere", { number: { required: true, errorMessage: "Password must have at least one number." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
   // True Examples
@@ -98,7 +99,7 @@ describe("validatePassword function", () => {
       const isValid = password("Strong@Password", { minLength: 10, number: { required: false, errorMessage: "Password must not have numbers." } });
       expect(isValid).toBe(true);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -107,7 +108,7 @@ describe("validatePassword function", () => {
       const isValid = password("PwdWith123!@#", { minLength: 5, number: true, specialCharacter: true });
       expect(isValid).toBe(true);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -116,7 +117,7 @@ describe("validatePassword function", () => {
       const isValid = password("Alphabeti$cPwd", { number: { required: false, errorMessage: "Password must not have numbers." } });
       expect(isValid).toBe(true);
     } catch (error) {
-      console.log('false');
+      expect(error.property).toBe(false);
     }
   });
 
@@ -125,7 +126,7 @@ describe("validatePassword function", () => {
       const isValid = password("MixedPwd@123", { uppercase: true, lowercase: true, specialCharacter: true });
       expect(isValid).toBe(true);
     } catch (error) {
-      console.log(error);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -135,7 +136,7 @@ describe("validatePassword function", () => {
       const isValid = password("Sho@rtPwd", { minLength: 10, number: { required: false, errorMessage: "Password must not have numbers." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -144,7 +145,7 @@ describe("validatePassword function", () => {
       const isValid = password("1234567890!@#$%^&*", { maxLength: 15, alphabetic: { required: true, errorMessage: "Input must contain at least one alphabetic character." } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error);
+      expect(error.property).toBe(false);
     }
     });
 
@@ -153,7 +154,7 @@ describe("validatePassword function", () => {
       const isValid = password("123456789", { number: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -162,7 +163,7 @@ describe("validatePassword function", () => {
       const isValid = password("Pwd Wi2$th Spaces", { whitespace: false });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error);
+      expect(error.property).toBe(false);
     }
   });
 });

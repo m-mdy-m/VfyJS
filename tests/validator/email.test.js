@@ -32,7 +32,7 @@ test("invalid email - missing @ symbol", () => {
     const isValid = email("userexample.com");
     expect(isValid).toBe(false);
   } catch (error) {
-    console.log(false);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -41,7 +41,7 @@ test("invalid email - missing local part", () => {
     const isValid = email("@example.com");
     expect(isValid).toBe(false);
   } catch (error) {
-    console.log(false);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -50,7 +50,7 @@ test("invalid email - missing domain", () => {
     const isValid = email("user@.com");
     expect(isValid).toBe(false);
   } catch (error) {
-    console.log(false);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -59,7 +59,7 @@ test("invalid email - consecutive dots in domain", () => {
     const isValid = email("user@example..com");
     expect(isValid).toBe(false);
   } catch (error) {
-    console.log(false);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -68,7 +68,7 @@ test("invalid email - spaces in email", () => {
     const isValid = email(" user@example.com");
     expect(isValid).toBe(false);
   } catch (error) {
-    console.log(false);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -77,7 +77,7 @@ test("invalid email - special characters in domain", () => {
     const isValid = email("user@ex#ample.com");
     expect(isValid).toBe(false);
   } catch (error) {
-    console.log(false);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -86,6 +86,6 @@ test("invalid email - no top-level domain", () => {
     const isValid = email("user@example");
     expect(isValid).toBe(false);
   } catch (error) {
-    console.log(false);
+    expect(error.property).toBe(false);
   }
 });

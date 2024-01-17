@@ -63,7 +63,7 @@
 
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue,getValidValue , isValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {handleValidationError} = require('../../errors/HandleError')
+const {ifFalsyValue , ifTruthyValue, ifWrongType} = require('../../errors/HandleError')
 const createValidationOptions = require('../../utils/handleOption')
 /**
  * Validates a password based on the provided options.
@@ -134,19 +134,14 @@ const msgError = [
    */
 
   // Additional validation checks
-  handleValidationError(uppercase.required ? validator.hasUppercase() : true, uppercase.errorMessage);
-  handleValidationError(lowercase.required ? validator.hasLowerCase() : true , lowercase.errorMessage)
-  handleValidationError(number.required ? validator.hasNumber() : true , number.errorMessage)
-  handleValidationError(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage)
-  handleValidationError(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
+  ifFalsyValue(uppercase.required ? validator.hasUppercase() : true, uppercase.errorMessage);
+  ifFalsyValue(lowercase.required ? validator.hasLowerCase() : true , lowercase.errorMessage)
+  ifFalsyValue(number.required ? validator.hasNumber() : true , number.errorMessage)
+  ifFalsyValue(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage)
+  ifFalsyValue(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
   // Check and trim whitespace if necessary
   let whitespaceCheck = getValidValue(whitespace,whitespace)
-  if (whitespaceCheck) {
-    value = trimmedValue(value);
-    whitespaceCheck = true;
-  } else {
-    throw new Error("Whitespace is not allowed. Please remove any leading or trailing spaces.");
-  }
+  ifTruthyValue(whitespaceCheck, '"Whitespace is not allowed. Please remove any leading or trailing spaces."')
   const minValidLength  = getValidValue(minLength,MIN_LENGTH)
   const maxValidLength  = getValidValue(maxLength,MAX_LENGTH)
   let min = isValue(minLength,minValidLength)
@@ -158,15 +153,12 @@ const msgError = [
     max =+max
   }
   // Check if minLength and maxLength are valid numbers
-  if (
-    typeof min !== 'undefined' &&
-    typeof max !== 'undefined' &&
-    (typeof min !== 'boolean') &&
-    (typeof max !== 'boolean') &&
-    (typeof min !== 'number' || typeof max !== 'number')
-  ) {
-    throw new Error("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
-  }
+  ifWrongType('undefined', min, 'minLength must be a defined value')
+  ifWrongType('undefined',max,'maxLength must be a defined value')
+  ifWrongType('boolean',min,'minLength must be a number')
+  ifWrongType('boolean',max,'maxLength must be a number')
+  ifWrongType('number',min,'minLength must be a boolean')
+  ifWrongType('number',max,'maxLength must be a boolean')
   
   // Check if the password length is within the specified range
   
@@ -186,7 +178,7 @@ const msgError = [
   (number.required ? validator.hasNumber() : true) &&
   (specialCharacter.required ? validator.hasSpecialCharacter() : true) &&
   (alphabetic.required ? validator.hasAlphabetic() : true) &&
-  whitespaceCheck;
+  !whitespaceCheck;
 
   return isValid;
 }

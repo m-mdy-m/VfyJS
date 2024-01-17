@@ -30,7 +30,7 @@
 const {MAX_LENGTH,MIN_LENGTH,trimmedValue,getValidValue,isValue,getRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const createValidationOptions = require('../../utils/handleOption')
-const { handleValidationError } = require("../../errors/HandleError");
+const { ifFalsyValue , ifTruthyValue,ifWrongType } = require("../../errors/HandleError");
 /**
  * Validates a password based on the provided options.
  *
@@ -75,12 +75,15 @@ function validateUsername(username, options = {}) {
         NonAlphanumeric,
         trim,
         repeat } = objectOption
-    handleValidationError(uppercase.required ? validator.hasUppercase() : true  , uppercase.errorMessage)
-    handleValidationError(number.required , number.errorMessage)
+    ifFalsyValue(uppercase.required ? validator.hasUppercase() : true  , uppercase.errorMessage)
+    ifFalsyValue(number.required , number.errorMessage)
+    let checkWhiteSpace = getRequired(trim, false)
+    if(checkWhiteSpace){
+        ifFalsyValue(!checkWhiteSpace, 'Invalid input. Value cannot contain leading or trailing whitespaces.');
+    }  
+    username = trimmedValue(username)
     const isNonAlphanumeric = getRequired(NonAlphanumeric,false)
-    if(isNonAlphanumeric){
-        handleValidationError(NonAlphanumeric && !isNonAlphanumeric, 'Value must be alphanumeric. Example: ABC123');
-    }
+    ifTruthyValue(isNonAlphanumeric, 'Value must be alphanumeric. Example: ABC123');
 
     const isNumber = getRequired(number,validator.hasNumber())
     if (isNumber) {
@@ -88,19 +91,9 @@ function validateUsername(username, options = {}) {
             throw new Error('Invalid input. The password must contain at least one number.');
         }
     }
-    const isRepeat = getRequired(!repeat, validator.hasRepeat())
-    console.log('repeat =>',repeat);
-    console.log('isRepeat =>',isRepeat);
-    console.log('validator.hasRepeat() =>',validator.hasRepeat());
-    if (repeat.required) {
-        handleValidationError(!repeat.required ? validator.hasRepeat() : true, repeat.errorMessage)
-    }
-    let checkWhiteSpace = !trim.required || trim
-    
-    if(!checkWhiteSpace){
-        username = trimmedValue(username)
-        checkWhiteSpace = true
-    }               
+    let isRepeat = getRequired(repeat, false)
+    ifTruthyValue(isRepeat, 'Invalid input. Password cannot have consecutive repeated characters.');
+                 
     let minValue = getValidValue(minLength , minLength);
     let maxValue = getValidValue(maxLength , maxLength);
         
@@ -117,20 +110,16 @@ function validateUsername(username, options = {}) {
         throw new Error('Username length exceeds the maximum allowed length.');
     }
     
-    if (
-    typeof minValue !== 'undefined' &&
-    typeof maxValue !== 'undefined' &&
-    (typeof minValue !== 'boolean') &&
-    (typeof maxValue !== 'boolean') &&
-    (typeof minValue !== 'number' && typeof max !== 'number')
-    ) {
-    throw new Error("min or max Length just for true or false");
-    }
-    
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && isNonAlphanumeric &&checkWhiteSpace && isRepeat
+    ifWrongType('undefined', minValue,"min or max Length just for true or false") 
+    ifWrongType('undefined', maxValue,"min or max Length just for true or false")
+    ifWrongType('boolean', minValue,"min or max Length just for true or false") 
+    ifWrongType('undefined', maxValue,"min or max Length just for true or false")
+    ifWrongType('number', min,"min or max Length just for true or false") 
+    ifWrongType('number', max,"min or max Length just for true or false")
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && !checkWhiteSpace && !isRepeat
     return isValid;
 }
 
-const result = validateUsername("RepeatedChar1mmmmmmm23")
+const result = validateUsername("mahd1iMad")
 console.log('result =>', result);
 module.exports = validateUsername;

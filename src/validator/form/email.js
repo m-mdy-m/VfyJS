@@ -1,7 +1,7 @@
 "use strict";
 
 const inputValidator = require("../../utils/inputValidator");
-const { handleValidationError } = require("../../errors/HandleError");
+const { ifFalsyValue } = require("../../errors/HandleError");
 
 /**
  * Validates whether the provided value is a valid email.
@@ -14,10 +14,9 @@ const { handleValidationError } = require("../../errors/HandleError");
  * console.log(isValid); //true
  */
 function validateEmail(value) {
-  console.log('value =>', value);
   // Check if the input is a string
   if (typeof value !== "string") {
-    handleValidationError(
+    ifFalsyValue(
       value,
       `Invalid input type. Please enter a valid email as a string.`
     );
@@ -29,7 +28,7 @@ function validateEmail(value) {
   // Check if the email format is valid
   const isValidFormat = validator.matchesEmailFormat(value);
   if (typeof isValidFormat !== "boolean") {
-    handleValidationError(
+    ifFalsyValue(
       isValidFormat,
       `Unexpected validation result. The email validation should return a boolean.`
     );
@@ -37,7 +36,7 @@ function validateEmail(value) {
   }
   console.log(`isValid Format ${value} =>`, isValidFormat);
   if (!isValidFormat) {
-    handleValidationError(
+    ifFalsyValue(
       isValidFormat,
       `${value} is not a valid email address. Please enter a valid email.`
     );

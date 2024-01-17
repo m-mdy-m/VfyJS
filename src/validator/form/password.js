@@ -177,4 +177,5 @@ const msgError = [
 
   return isValid;
 }
+
 module.exports = validatePassword;

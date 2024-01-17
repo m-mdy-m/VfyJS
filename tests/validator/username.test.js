@@ -8,7 +8,7 @@ describe("validateUsername function", () => {
       expect(isValid).toBe(true);
     });
   } catch (error) {
-    console.log(error.message);
+      expect(error.property).toBe(false);
   }
 
   // Test case for a valid username with custom options
@@ -26,7 +26,7 @@ describe("validateUsername function", () => {
   
       expect(isValid).toBe(true);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -36,7 +36,7 @@ describe("validateUsername function", () => {
       const isValid = username("Shor2t", { minLength: { value: 10, errorMessage: "must be at least 10 characters long" } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -46,7 +46,7 @@ describe("validateUsername function", () => {
       const isValid = username("VeryLongUsername123456789", { maxLength: { value: 15, errorMessage: "cannot exceed 15 characters" } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -56,7 +56,7 @@ describe("validateUsername function", () => {
       const isValid = username("lowercaseonly123", { uppercase: { required: true, errorMessage: "must have at least one uppercase letter" } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -66,7 +66,7 @@ describe("validateUsername function", () => {
       const isValid = username("NoNumbersHere", { number: { required: true, errorMessage: "must have at least one number" } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -76,17 +76,17 @@ describe("validateUsername function", () => {
       const isValid = username("Username!123", { NonAlphanumeric: { required: true, errorMessage: "should not contain non-alphanumeric characters" } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
   // Test case for an invalid username with consecutive repeated characters
   test("invalid username - consecutive repeated characters", () => {
     try {
-      const isValid = username("RepeatedChar123", { repeat: { required: true, errorMessage: "cannot have consecutive repeated characters" } });
+      const isValid = username("RepeatedmmmmChar123", { repeat: { required: true, errorMessage: "cannot have consecutive repeated characters" } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -96,7 +96,7 @@ describe("validateUsername function", () => {
       const isValid = username("  UsernameWithSpaces  ", { trim: { required: true, errorMessage: "cannot contain leading or trailing whitespaces" } });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
   // Test case for a valid username
@@ -105,7 +105,7 @@ describe("validateUsername function", () => {
       const isValid = username("ValidUser123", { minLength: 5, trim: true, repeat: true });
       expect(isValid).toBe(true);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -115,7 +115,7 @@ describe("validateUsername function", () => {
       const isValid = username("Short", { minLength: 10, trim: true, repeat: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -125,7 +125,7 @@ describe("validateUsername function", () => {
       const isValid = username("VeryLongUsername123456789", { maxLength: 15, trim: true, repeat: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -135,7 +135,7 @@ describe("validateUsername function", () => {
       const isValid = username("lowercaseonly123", { uppercase: { required: true, errorMessage: "must have at least one uppercase letter" }, trim: true, repeat: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -145,7 +145,7 @@ describe("validateUsername function", () => {
       const isValid = username("NoNumbersHere", { number: { required: true, errorMessage: "must have at least one number" }, trim: true, repeat: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -155,7 +155,7 @@ describe("validateUsername function", () => {
       const isValid = username("Username!123", { NonAlphanumeric: { required: true, errorMessage: "should not contain non-alphanumeric characters" }, trim: true, repeat: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -165,7 +165,7 @@ describe("validateUsername function", () => {
       const isValid = username("RepeatedChar123", { repeat: { required: true, errorMessage: "cannot have consecutive repeated characters" }, trim: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 
@@ -175,7 +175,7 @@ describe("validateUsername function", () => {
       const isValid = username("  UsernameWithSpaces  ", { trim: { required: true, errorMessage: "cannot contain leading or trailing whitespaces" }, repeat: true });
       expect(isValid).toBe(false);
     } catch (error) {
-      console.log(error.message);
+      expect(error.property).toBe(false);
     }
   });
 });

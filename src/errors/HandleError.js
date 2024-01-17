@@ -109,7 +109,6 @@ exports.validateIfBothTruthy  = (property, method , message)=>{
       this.ifTruthyValue(property, message);
     }
   }
-  return true
 }
 /**
  * Throws a type error if the type of the specified property is not as expected.

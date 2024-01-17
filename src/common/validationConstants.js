@@ -23,7 +23,10 @@ const trimmedValue = (value) => value.replace(/\s/g, '').trim();
  * @module validationConstants
  */ 
 function getRequired(value, defaultValue) {
-  return value.required || defaultValue;
+    return value && value.required ? value.required : defaultValue;
+}
+function getFalseRequired(value,defaultValue){
+    return value && !value.required ? value.required : defaultValue;
 }
 function getValidValue(value, defaultValue ){
     return value && value.value ? value.value : defaultValue;
@@ -34,4 +37,4 @@ function isValue(value, defaultValue){
     }
     return value ? value : defaultValue
 }
-module.exports = { MIN_LENGTH, MAX_LENGTH, trimmedValue,getValidValue,isValue,getRequired };
+module.exports = { MIN_LENGTH, MAX_LENGTH,getFalseRequired, trimmedValue,getValidValue,isValue,getRequired };

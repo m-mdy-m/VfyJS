@@ -16,7 +16,6 @@
  * @property {(repeatCount?: number) => boolean} hasRepeat - Checks if the input contains consecutive repeated characters.
  */
 
-
 /**
  * Input validator function.
  *
@@ -51,7 +50,8 @@ const inputValidator = (input) => ({
    * Checks if the input has at least one special character.
    * @returns {boolean} - True if the input has at least one special character, otherwise false.
    */
-  hasSpecialCharacter: () => /(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(input),
+  hasSpecialCharacter: () =>
+    /(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(input),
 
   /**
    * Checks if the input contains at least one alphabetic character.
@@ -110,13 +110,20 @@ const inputValidator = (input) => ({
    * Checks if the input matches the standard email format.
    * @returns {boolean} - True if the input is a valid email, otherwise false.
    */
-  matchesEmailFormat: () =>/^[\w.+-]+@[a-zA-Z\d.-]+.[a-zAZ]{2,}$/.test(input),
-  
+  matchesEmailFormat: () => /^[\w.+-]+@[a-zA-Z\d.-]+.[a-zAZ]{2,}$/.test(input),
+
   /**
    * Checks if the input contains consecutive repeated characters.
    * @param {number} [repeatCount=3] - The number of consecutive repeated characters to check for. Defaults to 3 if not specified.
    * @returns {boolean} - True if the input contains at least the specified number of consecutive repeated characters, otherwise false.
    */
-  hasRepeat: (repeatCount = 3) => new RegExp(`(.)\\1{${repeatCount - 1},}`).test(input)});
+  hasRepeat: (repeatCount = 3) =>
+    new RegExp(`(.)\\1{${repeatCount - 1},}`).test(input),
+});
 
+/**
+ * Exports the inputValidator function and getValidationErrors function.
+ * @module inputValidator
+ * @type {Object}
+ */
 module.exports = inputValidator;

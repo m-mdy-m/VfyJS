@@ -61,9 +61,9 @@
  */
 
 
-const { MAX_LENGTH, MIN_LENGTH, trimmedValue,getValidValue , isValue } = require("../../common/validationConstants");
+const { MAX_LENGTH, MIN_LENGTH, trimmedValue,getValidValue,getRequired , isValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {ifFalsyValue , ifTruthyValue, validatePropertyLengthAndType, isTypeMismatch} = require('../../errors/HandleError')
+const {ifFalsyValue,validateIfBothTruthy , ifTruthyValue, validatePropertyLengthAndType, isTypeMismatch} = require('../../errors/HandleError')
 const createValidationOptions = require('../../utils/handleOption')
 /**
  * Validates a password based on the provided options.
@@ -140,8 +140,8 @@ const msgError = [
   ifFalsyValue(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage)
   ifFalsyValue(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
   // Check and trim whitespace if necessary
-  let whitespaceCheck = getValidValue(whitespace,whitespace)
-  ifTruthyValue(whitespaceCheck, '"Whitespace is not allowed. Please remove any leading or trailing spaces."')
+  let whitespaceCheck = getRequired(whitespace,false)
+  validateIfBothTruthy(whitespaceCheck , validator.hasWhitespace("Whitespace is not allowed. Please remove any leading or trailing spaces."),)
   const minValidLength  = getValidValue(minLength,MIN_LENGTH)
   const maxValidLength  = getValidValue(maxLength,MAX_LENGTH)
   let min = isValue(minLength,minValidLength)
@@ -177,5 +177,4 @@ const msgError = [
 
   return isValid;
 }
-
 module.exports = validatePassword;

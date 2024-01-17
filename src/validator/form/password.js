@@ -63,7 +63,7 @@
 
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue,getValidValue , isValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {ifFalsyValue , ifTruthyValue,throwErrorMinMatch, validatePropertyLengthAndType, isTypeMismatch} = require('../../errors/HandleError')
+const {ifFalsyValue , ifTruthyValue, validatePropertyLengthAndType, isTypeMismatch} = require('../../errors/HandleError')
 const createValidationOptions = require('../../utils/handleOption')
 /**
  * Validates a password based on the provided options.
@@ -159,7 +159,7 @@ const msgError = [
   isTypeMismatch('boolean',max) &&
   isTypeMismatch('number',min) &&
   isTypeMismatch('number',max)) {
-    throwErrorMinMatch("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.")
+    throw new TypeError("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.")
   }
   
   // Check if the password length is within the specified range

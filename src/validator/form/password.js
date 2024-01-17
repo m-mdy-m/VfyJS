@@ -63,7 +63,7 @@
 
 const { MAX_LENGTH, MIN_LENGTH, trimmedValue,getValidValue , isValue } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {ifFalsyValue , ifTruthyValue, ifWrongType} = require('../../errors/HandleError')
+const {ifFalsyValue , ifTruthyValue,throwErrorMinMatch, validatePropertyLengthAndType, isTypeMismatch} = require('../../errors/HandleError')
 const createValidationOptions = require('../../utils/handleOption')
 /**
  * Validates a password based on the provided options.
@@ -153,22 +153,17 @@ const msgError = [
     max =+max
   }
   // Check if minLength and maxLength are valid numbers
-  ifWrongType('undefined', min, 'minLength must be a defined value')
-  ifWrongType('undefined',max,'maxLength must be a defined value')
-  ifWrongType('boolean',min,'minLength must be a number')
-  ifWrongType('boolean',max,'maxLength must be a number')
-  ifWrongType('number',min,'minLength must be a boolean')
-  ifWrongType('number',max,'maxLength must be a boolean')
+  if (isTypeMismatch('undefined',min) &&
+  isTypeMismatch('undefined',max) &&
+  isTypeMismatch('boolean',min) &&
+  isTypeMismatch('boolean',max) &&
+  isTypeMismatch('number',min) &&
+  isTypeMismatch('number',max)) {
+    throwErrorMinMatch("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.")
+  }
   
   // Check if the password length is within the specified range
-  
-  if (
-    typeof min === 'number' &&
-    typeof max === 'number' &&
-    (value.length < min || value.length > max)
-  ) {
-    throw new Error(`Password length must be between ${min} and ${max} characters.`);
-  }
+  validatePropertyLengthAndType(min , max , 'number ', 'number', value,`Password length must be between ${min} and ${max} characters.`)
   // Final validation check
   const isValid =
   min &&

@@ -27,10 +27,10 @@
  * @property {string} repeat.errorMessage - Error message for alphabetic character validation failure.
  */
 
-const {MAX_LENGTH,MIN_LENGTH,trimmedValue,getValidValue,isValue,getRequired } = require("../../common/validationConstants");
+const {MAX_LENGTH,MIN_LENGTH,getFalseRequired,trimmedValue,getValidValue,isValue,getRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const createValidationOptions = require('../../utils/handleOption')
-const { ifFalsyValue , ifTruthyValue,ifWrongType } = require("../../errors/HandleError");
+const { ifFalsyValue , ifTruthyValue,isTypeMismatch ,validatePropertyLengthAndType} = require("../../errors/HandleError");
 /**
  * Validates a password based on the provided options.
  *
@@ -79,7 +79,7 @@ function validateUsername(username, options = {}) {
     ifFalsyValue(number.required , number.errorMessage)
     let checkWhiteSpace = getRequired(trim, false)
     if(checkWhiteSpace){
-        ifFalsyValue(!checkWhiteSpace, 'Invalid input. Value cannot contain leading or trailing whitespaces.');
+        ifFalsyValue(!checkWhiteSpace ? validator.hasWhitespace() : true, 'Invalid input. Value cannot contain leading or trailing whitespaces.');
     }  
     username = trimmedValue(username)
     const isNonAlphanumeric = getRequired(NonAlphanumeric,false)
@@ -91,8 +91,15 @@ function validateUsername(username, options = {}) {
             throw new Error('Invalid input. The password must contain at least one number.');
         }
     }
-    let isRepeat = getRequired(repeat, false)
-    ifTruthyValue(isRepeat, 'Invalid input. Password cannot have consecutive repeated characters.');
+    
+    let isRepeat = getFalseRequired(repeat , validator.hasRepeat())
+    if(isRepeat){
+        if(validator.hasRepeat()){
+            ifTruthyValue(isRepeat, 'Invalid input. Password cannot have consecutive repeated characters.');
+        }
+    }else{
+        isRepeat = true
+    }
                  
     let minValue = getValidValue(minLength , minLength);
     let maxValue = getValidValue(maxLength , maxLength);
@@ -103,23 +110,19 @@ function validateUsername(username, options = {}) {
         minValue = +minValue;
         maxValue =+maxValue
     }
-    if (typeof min === 'number' && typeof max === 'number' && (username.length < min || username.length > max)) {
-        throw new Error(`Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`);
-    }
+    
+    validatePropertyLengthAndType(min,max,'number','number', username,`Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`)
     if(typeof max === 'number' && username.length > max){
         throw new Error('Username length exceeds the maximum allowed length.');
     }
     
-    ifWrongType('undefined', minValue,"min or max Length just for true or false") 
-    ifWrongType('undefined', maxValue,"min or max Length just for true or false")
-    ifWrongType('boolean', minValue,"min or max Length just for true or false") 
-    ifWrongType('undefined', maxValue,"min or max Length just for true or false")
-    ifWrongType('number', min,"min or max Length just for true or false") 
-    ifWrongType('number', max,"min or max Length just for true or false")
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && !checkWhiteSpace && !isRepeat
+    isTypeMismatch('undefined', minValue,"undefined 1") 
+    isTypeMismatch('undefined', maxValue,"undefined 2")
+    isTypeMismatch('boolean', minValue,"boolean 1") 
+    isTypeMismatch('boolean', maxValue,"boolean 2")
+    isTypeMismatch('number', min,"number 1") 
+    isTypeMismatch('number', max,"number 2")
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && !checkWhiteSpace && isRepeat
     return isValid;
 }
-
-const result = validateUsername("mahd1iMad")
-console.log('result =>', result);
 module.exports = validateUsername;

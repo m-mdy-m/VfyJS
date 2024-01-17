@@ -25,8 +25,8 @@ const trimmedValue = (value) => value.replace(/\s/g, '').trim();
 function getRequired(value, defaultValue) {
     return value && value.required ? value.required : defaultValue;
 }
-function getFalseRequired(value,defaultValue){
-    return value && !value.required ? value.required : defaultValue;
+function getFalseRequired(value){
+    return value && !value.required ? value.required : value;
 }
 function getValidValue(value, defaultValue ){
     return value && value.value ? value.value : defaultValue;

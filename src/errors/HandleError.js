@@ -188,12 +188,12 @@ exports.IfTypeMatches = (type, property, message) => {
  *   console.error(error.message); // 'Length should be between 2 and 5 characters.'
  * }
  */
-exports.validateLength = (value, minLength, maxLength, message) => {
+exports.validateLength = (value, minLength, maxLength=null, message) => {
   const length = value.length;
   if (length < minLength || length > maxLength) {
     throw new LengthError(
       message ||
-        `Length must be between ${minLength} and ${maxLength} characters.`
+        `Length must be between ${minLength} and ${maxLength || value} characters.`
     );
   }
 };

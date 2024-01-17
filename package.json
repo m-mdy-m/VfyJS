@@ -1,12 +1,12 @@
 {
   "name": "vfyjs",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "\"VfyJS is a sophisticated JavaScript library crafted to fortify projects. Its lightweight design offers a comprehensive solution for seamless value validation, ensuring data integrity and empowering developers with an advanced platform to effortlessly address diverse validation tasks in their projects.\"",
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose",
-    "email" : "jest email.test.js",
-    "password" : "jest password.test.js",
+    "email": "jest email.test.js",
+    "password": "jest password.test.js",
     "stop": " exit 0"
   },
   "repository": {

@@ -27,11 +27,11 @@ function getRequired(value, defaultValue) {
 }
 function getValidValue(value, defaultValue ){
     return value && value.value ? value.value : defaultValue;
-  }
-  function isValue(value, defaultValue){
+}
+function isValue(value, defaultValue){
     if(typeof value === 'object'){
         return defaultValue
     }
     return value ? value : defaultValue
-  }
+}
 module.exports = { MIN_LENGTH, MAX_LENGTH, trimmedValue,getValidValue,isValue,getRequired };

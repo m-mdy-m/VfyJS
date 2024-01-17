@@ -30,7 +30,7 @@
 const {MAX_LENGTH,MIN_LENGTH,getFalseRequired,trimmedValue,getValidValue,isValue,getRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const createValidationOptions = require('../../utils/handleOption')
-const { ifFalsyValue , ifTruthyValue,isTypeMismatch ,validatePropertyLengthAndType} = require("../../errors/HandleError");
+const { ifFalsyValue,validateIfBothTruthy , ifTruthyValue,isTypeMismatch ,validatePropertyLengthAndType} = require("../../errors/HandleError");
 /**
  * Validates a password based on the provided options.
  *
@@ -86,21 +86,9 @@ function validateUsername(username, options = {}) {
     ifTruthyValue(isNonAlphanumeric, 'Value must be alphanumeric. Example: ABC123');
 
     const isNumber = getRequired(number,validator.hasNumber())
-    if (isNumber) {
-        if (!validator.hasNumeric() && !validator.hasNumber()) {
-            throw new Error('Invalid input. The password must contain at least one number.');
-        }
-    }
-    
+    validateIfBothTruthy(isNumber , !validator.hasNumber() && !validator.hasNumeric(),'Invalid input. The password must contain at least one number.')
     let isRepeat = getFalseRequired(repeat , validator.hasRepeat())
-    if(isRepeat){
-        if(validator.hasRepeat()){
-            ifTruthyValue(isRepeat, 'Invalid input. Password cannot have consecutive repeated characters.');
-        }
-    }else{
-        isRepeat = true
-    }
-                 
+    validateIfBothTruthy(isRepeat,validator.hasRepeat() , 'Invalid input. Password cannot have consecutive repeated characters.')
     let minValue = getValidValue(minLength , minLength);
     let maxValue = getValidValue(maxLength , maxLength);
         
@@ -122,7 +110,7 @@ function validateUsername(username, options = {}) {
     isTypeMismatch('boolean', maxValue,"boolean 2")
     isTypeMismatch('number', min,"number 1") 
     isTypeMismatch('number', max,"number 2")
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && !checkWhiteSpace && isRepeat
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && !checkWhiteSpace && !isRepeat
     return isValid;
 }
 module.exports = validateUsername;

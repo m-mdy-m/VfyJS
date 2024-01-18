@@ -47,6 +47,8 @@ jobs:
         run: npm cache clean -f
 
       - name: Set registry to GitHub Package Registry
-        run: npm config set registry https://npm.pkg.github.com/m-mdy-m
+        run: npm config set registry https://npm.pkg.github.com/m-mdy-
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      - name: Publish To GitHub Package Registry
+        run: npm publish --access public

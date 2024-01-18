@@ -27,7 +27,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x]
 
     steps:
       - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Set up .npmrc
+      - name: Set up .npmrc for GitHub Package Registry
         run: echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" > ~/.npmrc
 
       - name: Publish To GitHub Package Registry

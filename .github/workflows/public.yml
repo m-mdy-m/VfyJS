@@ -46,8 +46,6 @@ jobs:
 
       - name: Fix package.json issues
         run: npm pkg fix
-      - name: path vesion 
-        run : npm version patch
       - name: Publish To GitHub Package Registry
         run: npm publish --access public
         env:

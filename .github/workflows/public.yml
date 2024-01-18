@@ -49,6 +49,6 @@ jobs:
       - name: Set registry to GitHub Package Registry
         run: npm config set registry https://npm.pkg.github.com/m-mdy-
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.VFY }}
       - name: Publish To GitHub Package Registry
         run: npm publish --access public

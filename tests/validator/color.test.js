@@ -1,4 +1,6 @@
 const {isColor} = require('../../index')
+
+const a = isColor('#fff')
 describe('isColor function tests', () => {
   // Valid Hex Color Tests
   test('Valid Hex Color - Short format', () => {

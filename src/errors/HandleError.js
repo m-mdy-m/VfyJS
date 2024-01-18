@@ -168,6 +168,14 @@ exports.IfTypeMatches = (type, property, message) => {
     throw new TypeError(property, message);
   }
 };
+
+exports.IfIsNaN = (property,message)=>{
+  if(isNaN(property)){
+    throw TypeError(property,message)
+  }
+}
+
+
 /**
  * Validates the length of a value within the specified range.
  *

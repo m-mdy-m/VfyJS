@@ -43,80 +43,46 @@ const isColor = (color) => {
   const colorValidationFunctions = {
     /**
      * Validates if the input represents a valid Hex color.
-     * @example
-     * const { color, HEX } = colorValidationFunctions('#ff6600');
-     * console.log(color); // '#ff6600'
-     * console.log(HEX()); // true
      * @returns {boolean} - True if the input is a valid Hex color, otherwise false.
      */
     HEX: () => /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/.test(color),
   
     /**
      * Validates if the input represents a valid named color.
-     *  @example
-     * const { color, NameColor } = colorValidationFunctions('red');
-     * console.log(color); // 'red'
-     * console.log(NameColor()); // true
      * @returns {boolean} - True if the input is a valid named color, otherwise false.
      */
     NameColor: () => /^[a-zA-Z]+$/.test(color),
   
     /**
      * Validates if the input represents a valid RGB color.
-     * @example
-     * // Validating an RGB color
-     * const { color, RGB } = colorValidationFunctions('rgb(255, 0, 0)');
-     * console.log(color); // 'rgb(255, 0, 0)'
-     * console.log(RGB()); // true
      * @returns {boolean} - True if the input is a valid RGB color, otherwise false.
      */
     RGB: () => /^rgb\((\d{1,3}\s*,\s*){2}\d{1,3}\)$/.test(color),
   
     /**
      * Validates if the input represents a valid RGBA color.
-     * @example
-     * // Validating an RGBA color
-     * const { color, RGBA } = colorValidationFunctions('rgba(0, 128, 255, 0.5)');
-     * console.log(color); // 'rgba(0, 128, 255, 0.5)'
-     * console.log(RGBA()); // true
      * @returns {boolean} - True if the input is a valid RGBA color, otherwise false.
      */
     RGBA: () => /^rgba?\((\d{1,3}\s*,\s*){2}\d{1,3}(\s*,\s*\d*\.?\d+)?\)$/.test(color),
   
     /**
      * Validates if the input represents a valid HSL color.
-     * @example
-     * // Validating an HSL color
-     * const { color, HSL } = colorValidationFunctions('hsl(120, 100%, 50%)');
-     * console.log(color); // 'hsl(120, 100%, 50%)'
-     * console.log(HSL()); // true
      * @returns {boolean} - True if the input is a valid HSL color, otherwise false.
      */
     HSL: () => /^hsla?\(\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(\s*,\s*\d*\.?\d+)?\)$/.test(color),
   
     /**
      * Validates if the input represents a valid CSS variable.
-     * @example
-     * // Validating a CSS variable
-     * const { color, CssVar } = colorValidationFunctions('var(--main-color)');
-     * console.log(color); // 'var(--main-color)'
-     * console.log(CssVar()); // true
      * @returns {boolean} - True if the input is a valid CSS variable, otherwise false.
      */
     CssVar: () => /^var\(--[a-zA-Z][a-zA-Z0-9_-]*\)$/.test(color),
   
     /**
      * Validates if the input represents a valid HWB color.
-     * @example
-     * // Validating an HWB color
-     * const { color, HWB } = colorValidationFunctions('hwb(240, 0%, 0%)');
-     * console.log(color); // 'hwb(240, 0%, 0%)'
-     * console.log(HWB()); // true
      * @returns {boolean} - True if the input is a valid HWB color, otherwise false.
      */
     HWB: () => /^hwb\(\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(\s*,\s*\d*\.?\d+)?\)$/.test(color),
   };
-
   return colorValidationFunctions;
 };
 

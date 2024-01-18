@@ -171,7 +171,6 @@ test("invalid password - missing special character with custom error message", (
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
-    console.log(error.property);
   }
 });
 
@@ -181,7 +180,6 @@ test("invalid password - missing alphabetic character with custom error message"
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
-    console.log(error.property);
   }
 });
 
@@ -191,7 +189,6 @@ test("invalid password - contains whitespace with custom error message", () => {
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
-    console.log(error.property);
   }
 });
 

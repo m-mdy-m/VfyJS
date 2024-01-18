@@ -1,6 +1,6 @@
 {
-  "name": "vfyjs",
-  "version": "1.0.8",
+  "name": "@m__mdy__m/vfyjs",
+  "version": "0.0.0-development",
   "description": "VfyJS is a sophisticated JavaScript library crafted to fortify projects. Its lightweight design offers a comprehensive solution for seamless value validation, ensuring data integrity and empowering developers with an advanced platform to effortlessly address diverse validation tasks in their projects.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m-mdy-m/VfyJS.git"
+    "url": "https://github.com/m-mdy-m/VfyJS.git"
   },
   "keywords": [
     "Verify",
@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/m-mdy-m/VfyJS#readme",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "semantic-releasfige": "^23.0.0"
   },
   "contributors": [
     {

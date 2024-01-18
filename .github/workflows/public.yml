@@ -21,32 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-  publish:
-    runs-on: ubuntu-latest
-    needs: build
-    strategy:
-      matrix:
-        node-version: [18.x]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Set up .npmrc for GitHub Package Registry
-        run: echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" > ~/.npmrc
-      - name: Fix package.json issues
-        run: npm pkg fix
-
-      - name: Clean npm cache
-        run: npm cache clean -f
-
-      - name: Set registry to GitHub Package Registry
-        run: npm config set registry https://npm.pkg.github.com/m-mdy-
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.VFY }}
+      - name: test 
+        run: |
+          npm install 
+          npm test

@@ -188,7 +188,7 @@ exports.IfTypeMatches = (type, property, message) => {
  * }
  */
 exports.IfIsNaN = (property, message) => {
-  if (isNaN(property)) {
+  if (!isNaN(property)) {
     throw new TypeError(property, message);
   }
 };

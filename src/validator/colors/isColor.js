@@ -97,13 +97,10 @@ const isColor = (color) => {
  */
 function checkValueColor(color) {
     IfNotType('string', color, "The variable is not a string");
-    const isColorNum = +color
-    IfIsNaN(isColorNum,'The variable is not a valid color representation as a number.')
+    IfIsNaN(color,'The variable is not a valid color representation as a number.')
     color = trimmedValue(color);
     validateLength(color, 3, 255, 'The color value must be between 3 and 255 characters.');
     return isColor(color);
 }
 
-const a = checkValueColor('#abc')
-console.log('a=>',a.HEX());
 module.exports = checkValueColor;

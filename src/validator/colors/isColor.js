@@ -1,4 +1,4 @@
-const { IfNotType, validateLength } = require("../../errors/HandleError");
+const { IfNotType, validateLength, IfTypeMatches, IfIsNaN } = require("../../errors/HandleError");
 const { trimmedValue } = require('../../common/validationConstants');
 
 /**
@@ -96,9 +96,14 @@ const isColor = (color) => {
  * @throws {Error} Throws an error if the length of the input is less than 3 or greater than 255.
  */
 function checkValueColor(color) {
-  IfNotType('string', color, "The variable is not a string");
-  trimmedValue(color);
-  validateLength(color, 3, 255, 'The color value must be between 3 and 255 characters.');
-  return isColor(color);
+    IfNotType('string', color, "The variable is not a string");
+    const isColorNum = +color
+    IfIsNaN(isColorNum,'The variable is not a valid color representation as a number.')
+    color = trimmedValue(color);
+    validateLength(color, 3, 255, 'The color value must be between 3 and 255 characters.');
+    return isColor(color);
 }
+
+const a = checkValueColor('#abc')
+console.log('a=>',a.HEX());
 module.exports = checkValueColor;

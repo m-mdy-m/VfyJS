@@ -1,6 +1,6 @@
 {
   "name": "@m-mdy-m/vfyjs",
-  "version": "1.0.8",
+  "version": "2.0.0",
   "description": "VfyJS is a sophisticated JavaScript library crafted to fortify projects. Its lightweight design offers a comprehensive solution for seamless value validation, ensuring data integrity and empowering developers with an advanced platform to effortlessly address diverse validation tasks in their projects.",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,6 @@
     }
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry":"https://registry.npmjs.org/"
   }
 }

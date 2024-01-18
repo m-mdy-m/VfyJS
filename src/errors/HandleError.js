@@ -169,11 +169,29 @@ exports.IfTypeMatches = (type, property, message) => {
   }
 };
 
-exports.IfIsNaN = (property,message)=>{
-  if(isNaN(property)){
-    throw TypeError(property,message)
+/**
+ * Throws a type error if the specified property is not a valid number (isNaN).
+ *
+ * This function checks if the provided property is a valid number using the isNaN function,
+ * and if not, it throws a type error with the specified property and message.
+ *
+ * @param {any} property - The property to be validated for being a valid number.
+ * @param {string} message - The error message to be associated with the type validation failure.
+ * @throws {TypeError} - Throws a type error with the specified property and message if the property is not a valid number.
+ *
+ * @example
+ * try {
+ *   IfIsNaN('abc', 'Value should be a number');
+ * } catch (error) {
+ *   console.error(error.name); // 'TypeError'
+ *   console.error(error.message); // 'Value should be a number'
+ * }
+ */
+exports.IfIsNaN = (property, message) => {
+  if (isNaN(property)) {
+    throw new TypeError(property, message);
   }
-}
+};
 
 
 /**

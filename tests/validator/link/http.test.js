@@ -12,34 +12,34 @@ describe('isHttpUrl', () => {
 
     // Test invalid protocols
     test('Invalid Protocol - HTTPS', () => {
-        expect(() => isHttp('https://www.example.com')).toThrowError('Only HTTP URLs are allowed.');
+        expect(() => isHttp('https://www.example.com')).toBe(false);
     });
 
     test('Invalid Protocol - FTP', () => {
-        expect(() => isHttp('ftp://www.example.com')).toThrowError('Only HTTP URLs are allowed.');
+        expect(() => isHttp('ftp://www.example.com')).toBe(false);
     });
 
     // Test invalid formats
     test('Invalid Format - Missing Protocol', () => {
-        expect(() => isHttp('www.example.com')).toThrowError('Invalid URL format.');
+        expect(() => isHttp('www.example.com')).toBe(false);
     });
 
     test('Invalid Format - Missing Domain', () => {
-        expect(() => isHttp('http://')).toThrowError('Invalid URL format.');
+        expect(() => isHttp('http://')).toBe(false);
     });
 
     // Test numeric input
     test('Numeric Input', () => {
-        expect(() => isHttp(123)).toThrowError('URL must be a string.');
+        expect(() => isHttp(123)).toBe(false);
     });
 
     // Test various invalid URL formats
     test('Invalid Format - No Dot in Domain', () => {
-        expect(() => isHttp('http://example')).toThrowError('Invalid URL format.');
+        expect(() => isHttp('http://example')).toBe(false);
     });
 
     test('Invalid Format - Invalid Characters', () => {
-        expect(() => isHttp('http://www.!invalid#.com')).toThrowError('Invalid URL format.');
+        expect(() => isHttp('http://www.!invalid#.com')).toBe(false);
     });
 
     // Test mixed case protocol

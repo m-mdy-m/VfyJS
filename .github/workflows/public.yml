@@ -42,9 +42,7 @@ jobs:
         run: echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" > ~/.npmrc
 
       - name: Install npm dependencies
-        run: |
-          npm install -g npm
-          npm install
+        run: npm install
 
       - name: Fix package.json issues
         run: npm pkg fix
@@ -52,7 +50,10 @@ jobs:
       - name: Clean npm cache
         run: npm cache clean -f
 
+      - name: Set registry to GitHub Package Registry
+        run: npm config set registry https://npm.pkg.github.com/m-mdy-m
+
       - name: Publish To GitHub Package Registry
-        run: npm publish 
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

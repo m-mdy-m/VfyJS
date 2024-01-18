@@ -23,9 +23,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: http://registry/npmjs.org
 
-      - name: Install dependencies
-        run: npm install
-
   publish:
     runs-on: ubuntu-latest
     needs: build
@@ -42,10 +39,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: http://registry/npmjs.org
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Publish To NPM
         run: npm publish --access public
         env:

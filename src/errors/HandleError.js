@@ -187,7 +187,7 @@ exports.IfTypeMatches = (type, property, message) => {
  *   console.error(error.message); // 'Value should be a number'
  * }
  */
-exports.IfIsNaN = (property, message) => {
+exports.IfIsNumber = (property, message) => {
   if (!isNaN(property)) {
     throw new TypeError(property, message);
   }

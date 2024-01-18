@@ -1,4 +1,4 @@
-const { IfNotType, validateLength, IfTypeMatches, IfIsNaN } = require("../../errors/HandleError");
+const { IfNotType, validateLength, IfIsNumber } = require("../../errors/HandleError");
 const { trimmedValue } = require('../../common/validationConstants');
 
 /**
@@ -97,7 +97,7 @@ const isColor = (color) => {
  */
 function checkValueColor(color) {
     IfNotType('string', color, "The variable is not a string");
-    IfIsNaN(color,'The variable is not a valid color representation as a number.')
+    IfIsNumber(color,'The variable is not a valid color representation as a number.')
     color = trimmedValue(color);
     validateLength(color, 3, 255, 'The color value must be between 3 and 255 characters.');
     return isColor(color);

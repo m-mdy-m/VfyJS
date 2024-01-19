@@ -25,11 +25,6 @@ jobs:
         run: |
           npm i 
           npm test
-      - name: Push changes to organization repository
+      - name: Push  organization repository
         run: |
-          git remote add organization https://github.com/VfyJS/VfyJS.git
           git push organization HEAD:main
-  
-      - name: Push changes to personal repository
-        run: |
-          git push origin HEAD:main

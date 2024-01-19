@@ -26,11 +26,5 @@
   "homepage": "https://github.com/VfyJs/VfyJS/blob/main/README.md",
   "dependencies": {
     "jest": "^29.7.0"
-  },
-  "maintainers": [
-    "medishn <mediishn@gmail.com>"
-  ],
-  "publishConfig": {
-    "access": "public"
   }
 }

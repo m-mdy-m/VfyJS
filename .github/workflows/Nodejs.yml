@@ -2,7 +2,7 @@ name: Publish Workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
     branches: '*'
 
@@ -26,5 +26,4 @@ jobs:
           npm i 
           npm test
       - name: Push  organization repository
-        run: |
-          git push -u organization HEAD:main
+        run: git push -u organization main

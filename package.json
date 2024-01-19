@@ -27,7 +27,8 @@
   "dependencies": {
     "jest": "^29.7.0"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "maintainers": [
+    "medishn <mediishn@gmail.com>"
+  ],
+  "devDependencies": {}
 }

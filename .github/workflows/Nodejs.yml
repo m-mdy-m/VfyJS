@@ -25,3 +25,8 @@ jobs:
         run: |
           npm i 
           npm test
+      - name: Publish to npm
+        if: success() && github.event_name == 'push'
+        run: npm publish
+        env:
+          NODE_AUTH: ${{ secrets.NODE_AUTH }}

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [14.x]
 
     steps:
       - name: Checkout code
@@ -22,7 +22,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org
-      - name: test 
+
+      - name: Install Dependencies and Run Tests
         run: |
-          npm i 
+          npm install
           npm test
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -27,4 +27,4 @@ jobs:
           npm test
       - name: Push  organization repository
         run: |
-          git push organization HEAD:main
+          git push -u organization HEAD:main

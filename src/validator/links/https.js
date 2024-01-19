@@ -12,13 +12,13 @@ const inputValidation = require('../../utils/inputValidator');
  *
  * @example
  * // Example 1: Valid HTTPS URL
- * const result1 = isHttpsUrl("https://www.example.com");
+ * const result1 = isHttps("https://www.example.com");
  * console.log(result1); // Output: true
  *
  * @example
  * // Example 2: Handling an invalid HTTP URL with try-catch
  * try {
- *   const result2 = isHttpsUrl("http://www.example.com");
+ *   const result2 = isHttps("http://www.example.com");
  *   console.log(result2);
  * } catch (error) {
  *   console.error(error.message); // Output: "Only HTTPS URLs are allowed."
@@ -50,8 +50,10 @@ function isHttpsUrl(url) {
     // Convert protocol to lowercase and trim
     protocol = protocol.toLowerCase();
     protocol = trimmedValue(protocol);
+
     // Check HTTPS format
     const hasHttps = /(HTTPS:|https:)\/\/[^\/]/i.test(url);
+
     // Validate special characters in the hostname
     const host = hostname.split('.')[1];
     const validator = inputValidation(host);

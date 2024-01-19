@@ -25,7 +25,12 @@ jobs:
         run: |
           npm i 
           npm test
-      - name: Push  organization repository
+      - name: Push to organization repository
         run: |
           git remote add organization https://github.com/VfyJs/VfyJS.git
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           git push -u organization HEAD:main
+          git push --all
+        env:
+          GITHUB_TOKEN: "${{ secrets.NODE_AUTH}}"

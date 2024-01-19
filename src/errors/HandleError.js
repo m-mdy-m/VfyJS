@@ -212,7 +212,7 @@ exports.IfIsNumber = (property, message) => {
  *   console.error(error.message); // 'Length should be between 2 and 5 characters.'
  * }
  */
-exports.validateLength = (value, minLength, maxLength=null, message) => {
+exports.validateLength = (value, minLength, maxLength, message) => {
   const length = value.length;
   if (length < minLength || length > maxLength) {
     throw new LengthError(

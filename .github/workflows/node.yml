@@ -27,3 +27,12 @@ jobs:
           npm test
         env : 
             NODE_AUTH : ${{ secrets.NODE_AUTH }}
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH }}

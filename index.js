@@ -2,6 +2,7 @@ const passwordValidate = require('./src/validator/form/password');
 const emailValidate = require('./src/validator/form/email')
 const userValidate = require('./src/validator/form/username')
 const isHttp = require('./src/validator/links/http')
+const isHttps = require('./src/validator/links/https')
 const colorValidate = require('./src/validator/colors/isColor')
 /**
  * Validates a password based on specified criteria.
@@ -17,3 +18,4 @@ exports.email = emailValidate
 exports.username = userValidate
 exports.isColor = colorValidate
 exports.isHttp = isHttp
+exports.isHttps = isHttps

@@ -268,3 +268,85 @@ const europeanFormatObject = createPhoneNumberFormats(
 );
 
 writeToJsonFile(europeanFormatObject);
+// Information for North America
+const northAmericaContinent = 'North America';
+const northAmericanCountries = ['Canada', 'United States', 'Mexico'];
+const northAmericanCountryCodes = ['1', '1', '52'];
+
+// Patterns for Canada
+const northAmericaFixedLinePatternsCanada = ['^\\(\\d{3}\\) \\d{3}-\\d{4}$', '^[2-9]\\d{2}-\\d{3}-\\d{4}$', '^\\(\\d{2}\\) \\d{4}-\\d{4}$'];
+const northAmericaFixedLinePatternNameCanada = 'landline';
+const northAmericaLocalPatternsCanada = ['^\\(\\d{3}\\) \\d{3}-\\d{4}$', '^[2-9]\\d{2}-\\d{3}-\\d{4}$', '^\\(\\d{2}\\) \\d{4}-\\d{4}$'];
+const northAmericaLocalPatternNameCanada = 'mobile';
+const northAmericaLandLinePatternsCanada = ['^1-800-\\d{2}-\\d{4}$', null, '^1-888-\\d{3}-\\d{4}$'];
+const northAmericaLandLinePatternNameCanada = 'toll-free';
+const northAmericaInternationalPatternsCanada = ['^\\+1 \\d{10}$', '^1-800-\\d{2}-\\d{4}$', '^\\+1 \\d{1,3} \\d{3} \\d{4}$'];
+const northAmericaInternationalPatternNameCanada = 'service';
+const northAmericaFormatObjectCanada = createPhoneNumberFormats(
+  northAmericaContinent,
+  ['Canada'],
+  ['1'],
+  northAmericaFixedLinePatternsCanada,
+  northAmericaFixedLinePatternNameCanada,
+  northAmericaLandLinePatternsCanada,
+  northAmericaLandLinePatternNameCanada,
+  northAmericaLocalPatternsCanada,
+  northAmericaLocalPatternNameCanada,
+  northAmericaInternationalPatternsCanada,
+  northAmericaInternationalPatternNameCanada
+);
+
+// Patterns for United States
+const northAmericaFixedLinePatternsUS = ['^\\(\\d{3}\\) \\d{3}-\\d{4}$', '^[2-9]\\d{2}-\\d{3}-\\d{4}$', '^1 \\d{3}-\\d{3}-\\d{4}$'];
+const northAmericaFixedLinePatternNameUS = 'landline';
+const northAmericaLocalPatternsUS = ['^\\(\\d{3}\\) \\d{3}-\\d{4}$', '^[2-9]\\d{2}-\\d{3}-\\d{4}$', '^1 \\d{3}-\\d{3}-\\d{4}$'];
+const northAmericaLocalPatternNameUS = 'mobile';
+const northAmericaLandLinePatternsUS = ['^1-800-\\d{2}-\\d{4}$', null, '^1-888-\\d{3}-\\d{4}$'];
+const northAmericaLandLinePatternNameUS = 'toll-free';
+const northAmericaInternationalPatternsUS = ['^\\+1 \\d{10}$', '^1-800-\\d{2}-\\d{4}$', '^\\+1 \\d{1,3} \\d{3} \\d{4}$'];
+const northAmericaInternationalPatternNameUS = 'service';
+const northAmericaFormatObjectUS = createPhoneNumberFormats(
+  northAmericaContinent,
+  ['United States'],
+  ['1'],
+  northAmericaFixedLinePatternsUS,
+  northAmericaFixedLinePatternNameUS,
+  northAmericaLandLinePatternsUS,
+  northAmericaLandLinePatternNameUS,
+  northAmericaLocalPatternsUS,
+  northAmericaLocalPatternNameUS,
+  northAmericaInternationalPatternsUS,
+  northAmericaInternationalPatternNameUS
+);
+
+// Patterns for Mexico
+const northAmericaFixedLinePatternsMexico = ['^\\d{2} \\d{4} \\d{4}$', '^[2-9]\\d{2}-\\d{3}-\\d{4}$', '^\\d{3} \\d{3} \\d{4}$'];
+const northAmericaFixedLinePatternNameMexico = 'landline';
+const northAmericaLocalPatternsMexico = ['^\\d{2} \\d{4} \\d{4}$', '^[2-9]\\d{2}-\\d{3}-\\d{4}$', '^\\d{3} \\d{3} \\d{4}$'];
+const northAmericaLocalPatternNameMexico = 'mobile';
+const northAmericaLandLinePatternsMexico = ['^1-800-\\d{2}-\\d{4}$', null, '^1-888-\\d{3}-\\d{4}$'];
+const northAmericaLandLinePatternNameMexico = 'toll-free';
+const northAmericaInternationalPatternsMexico = ['^\\+52 \\d{1,2} \\d{4} \\d{4}$', '^1-800-\\d{2}-\\d{4}$', '^\\+52 \\d{1,2} \\d{3} \\d{4}$'];
+const northAmericaInternationalPatternNameMexico = 'service';
+const northAmericaFormatObjectMexico = createPhoneNumberFormats(
+  northAmericaContinent,
+  ['Mexico'],
+  ['52'],
+  northAmericaFixedLinePatternsMexico,
+  northAmericaFixedLinePatternNameMexico,
+  northAmericaLandLinePatternsMexico,
+  northAmericaLandLinePatternNameMexico,
+  northAmericaLocalPatternsMexico,
+  northAmericaLocalPatternNameMexico,
+  northAmericaInternationalPatternsMexico,
+  northAmericaInternationalPatternNameMexico
+);
+
+// Combine all North American formats
+const northAmericaFormatObject = [
+  ...northAmericaFormatObjectCanada,
+  ...northAmericaFormatObjectUS,
+  ...northAmericaFormatObjectMexico
+];
+
+writeToJsonFile(northAmericaFormatObject);

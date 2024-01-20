@@ -610,5 +610,74 @@
         "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$"
       }
     ]
+  },
+  {
+    "continent": "North America",
+    "country": "Canada",
+    "countryCode": "1",
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
+      },
+      {
+        "type": "service",
+        "pattern": "^\\+1 \\d{10}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
+      },
+      {
+        "type": "toll-free",
+        "pattern": "^1-800-\\d{2}-\\d{4}$"
+      }
+    ]
+  },
+  {
+    "continent": "North America",
+    "country": "United States",
+    "countryCode": "1",
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
+      },
+      {
+        "type": "service",
+        "pattern": "^\\+1 \\d{10}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
+      },
+      {
+        "type": "toll-free",
+        "pattern": "^1-800-\\d{2}-\\d{4}$"
+      }
+    ]
+  },
+  {
+    "continent": "North America",
+    "country": "Mexico",
+    "countryCode": "52",
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^\\d{2} \\d{4} \\d{4}$"
+      },
+      {
+        "type": "service",
+        "pattern": "^\\+52 \\d{1,2} \\d{4} \\d{4}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^\\d{2} \\d{4} \\d{4}$"
+      },
+      {
+        "type": "toll-free",
+        "pattern": "^1-800-\\d{2}-\\d{4}$"
+      }
+    ]
   }
 ]

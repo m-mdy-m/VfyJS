@@ -28,5 +28,4 @@ jobs:
           npm install
           npm test
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH }}
           GITHUB_TOKE : ${{secrets.GITHUB_TOKEN}}

@@ -679,5 +679,130 @@
         "pattern": "^1-800-\\d{2}-\\d{4}$"
       }
     ]
+  },
+  {
+    "continent": "Central America",
+    "country": "Costa Rica",
+    "countryCode": "506",
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^2\\d{3}-\\d{4}$"
+      },
+      {
+        "type": "service",
+        "pattern": "^90\\d-\\d{3}-\\d{4}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^2\\d{3}-\\d{4}$"
+      },
+      {
+        "type": "toll-free",
+        "pattern": "^800-\\d{3}-\\d{4}$"
+      }
+    ]
+  },
+  {
+    "continent": "Central America",
+    "country": "El Salvador",
+    "countryCode": "503",
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^2\\d{3}-\\d{4}$"
+      },
+      {
+        "type": "service",
+        "pattern": "^9\\d-\\d{3}-\\d{4}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^2\\d{3}-\\d{4}$"
+      }
+    ]
+  },
+  {
+    "continent": "Central America",
+    "country": "Guatemala",
+    "countryCode": "502",
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^2\\d{3}-\\d{4}$"
+      },
+      {
+        "type": "service",
+        "pattern": "^\\+52 \\d{1,2} \\d{4} \\d{4}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^2\\d{3}-\\d{4}$"
+      }
+    ]
+  },
+  {
+    "continent": "Central America",
+    "country": "Honduras",
+    "countryCode": "504",
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^\\d{3}-\\d{4}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^\\d{3}-\\d{4}$"
+      }
+    ]
+  },
+  {
+    "continent": "South America",
+    "country": "Argentina",
+    "countryCode": "54",
+    "formats": [
+      {
+        "type": "service",
+        "pattern": "^0800 \\d{3} \\d{4}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^\\(0\\d{1,4}\\) \\d{4}-\\d{4}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^15\\d{6,8}$"
+      }
+    ]
+  },
+  {
+    "continent": "South America",
+    "country": "Brazil",
+    "countryCode": "55",
+    "formats": [
+      {
+        "type": "landline",
+        "pattern": "^\\d{2} \\d{4}-\\d{4}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^\\d{2} 9\\d{4,5}-\\d{4}$"
+      }
+    ]
+  },
+  {
+    "continent": "South America",
+    "country": "Peru",
+    "countryCode": "51",
+    "formats": [
+      {
+        "type": "landline",
+        "pattern": "^\\(\\d{2}\\) \\d{2}-\\d{4}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^9\\d{8}$"
+      }
+    ]
   }
 ]

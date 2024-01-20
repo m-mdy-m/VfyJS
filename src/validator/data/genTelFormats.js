@@ -456,3 +456,65 @@ const centralAmericaFormatObject = [
 ];
 
 writeToJsonFile(centralAmericaFormatObject);
+// Information for South America
+const southAmericaContinent = 'South America';
+const southAmericanCountries = ['Argentina', 'Brazil', 'Peru'];
+const southAmericanCountryCodes = ['54', '55', '51'];
+
+// Patterns for Argentina
+const southAmericaFixedLinePatternsArgentina = ['^\\(0\\d{1,4}\\) \\d{4}-\\d{4}$', '^\\(0\\d{3,4}\\) \\d{3}-\\d{4}$', '^\\(0\\d{4}\\) \\d{2}-\\d{4}$'];
+const southAmericaFixedLinePatternNameArgentina = 'landline';
+const southAmericaMobilePatternsArgentina = ['^15\\d{6,8}$', '^\\(0\\d{2}\\) 15\\d{6,8}$', '^\\(0\\d{3}\\) 15\\d{6,8}$'];
+const southAmericaMobilePatternNameArgentina = 'mobile';
+const southAmericaSpecialNumberPatternsArgentina = ['^0800 \\d{3} \\d{4}$', '^0810 \\d{3} \\d{4}$', '^0600 \\d{3} \\d{4}$'];
+const southAmericaSpecialNumberPatternNameArgentina = 'service';
+const southAmericaFormatObjectArgentina = createPhoneNumberFormats(
+  southAmericaContinent,
+  ['Argentina'],
+  ['54'],
+  southAmericaFixedLinePatternsArgentina,
+  southAmericaFixedLinePatternNameArgentina,
+  southAmericaMobilePatternsArgentina,
+  southAmericaMobilePatternNameArgentina,
+  southAmericaSpecialNumberPatternsArgentina,
+  southAmericaSpecialNumberPatternNameArgentina
+);
+
+// Patterns for Brazil
+const southAmericaFixedLinePatternsBrazil = ['^\\d{2} \\d{4}-\\d{4}$'];
+const southAmericaFixedLinePatternNameBrazil = 'landline';
+const southAmericaMobilePatternsBrazil = ['^\\d{2} 9\\d{4,5}-\\d{4}$'];
+const southAmericaMobilePatternNameBrazil = 'mobile';
+const southAmericaFormatObjectBrazil = createPhoneNumberFormats(
+  southAmericaContinent,
+  ['Brazil'],
+  ['55'],
+  southAmericaFixedLinePatternsBrazil,
+  southAmericaFixedLinePatternNameBrazil,
+  southAmericaMobilePatternsBrazil,
+  southAmericaMobilePatternNameBrazil
+);
+
+// Patterns for Peru
+const southAmericaFixedLinePatternsPeru = ['^\\(\\d{2}\\) \\d{2}-\\d{4}$'];
+const southAmericaFixedLinePatternNamePeru = 'landline';
+const southAmericaMobilePatternsPeru = ['^9\\d{8}$', '^\\(\\d{2}\\) 9\\d{8}$'];
+const southAmericaMobilePatternNamePeru = 'mobile';
+const southAmericaFormatObjectPeru = createPhoneNumberFormats(
+  southAmericaContinent,
+  ['Peru'],
+  ['51'],
+  southAmericaFixedLinePatternsPeru,
+  southAmericaFixedLinePatternNamePeru,
+  southAmericaMobilePatternsPeru,
+  southAmericaMobilePatternNamePeru
+);
+
+// Combine all South American formats
+const southAmericaFormatObject = [
+  ...southAmericaFormatObjectArgentina,
+  ...southAmericaFormatObjectBrazil,
+  ...southAmericaFormatObjectPeru
+];
+
+writeToJsonFile(southAmericaFormatObject);

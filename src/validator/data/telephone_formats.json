@@ -2,7 +2,7 @@
   {
     "continent": "Africa",
     "country": "Djibouti",
-    "countryCode": "\"253\"",
+    "countryCode": "253",
     "formats": [
       {
         "type": "local",

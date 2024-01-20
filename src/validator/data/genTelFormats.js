@@ -1,60 +1,63 @@
 const fs = require('fs')
 const path =  require('path')
 const pathFile = path.join(__dirname + '/telephone_formats.json')
-function createPhoneNumberFormat(
-continent,
-name = [],
-code = [],
-//---
+function createPhoneNumberFormats(
+    continent,
+    countries = [],
+    countryCodes = [],
+    fixedLinePatterns = [],
+    fixedLinePatternName,
+    landLinePatterns = [],
+    landLinePatternName,
+    localPatterns = [],
+    localPatternName,
+    internationalPatterns = [],
+    internationalPatternName,
+    { objOption } = {}
+) {
+    const countryFormats = [];
 
-fixed_linePattern = [],fixPattern_name,
-landLinePattern = [],landLinePattern_name,
-localPattern = [],localPattern_name,
-internationalPattern = [],fixPattern_international,{objOption}={})
- {
-    const countries = [];
-
-    for (let i = 0; i < name.length; i++) {
+    for (let i = 0; i < countries.length; i++) {
         const countryFormatObject = {
             "continent": continent,
-            "country": name[i],
-            "countryCode": code[i],
+            "country": countries[i],
+            "countryCode": countryCodes[i],
             "formats": []
         };
 
-        if (localPattern && localPattern[i]) {
+        if (localPatterns && localPatterns[i]) {
             countryFormatObject.formats.push({
-                "type": localPattern_name,
-                "pattern": localPattern[i],
+                "type": localPatternName,
+                "pattern": localPatterns[i],
             });
         }
-        if (internationalPattern && internationalPattern[i]) {
+        if (internationalPatterns && internationalPatterns[i]) {
             countryFormatObject.formats.push({
-                "type": fixPattern_international,
-                "pattern": internationalPattern[i]
+                "type": internationalPatternName,
+                "pattern": internationalPatterns[i]
             });
         }
-        if (fixed_linePattern && fixed_linePattern[i]) {
+        if (fixedLinePatterns && fixedLinePatterns[i]) {
             countryFormatObject.formats.push({
-                "type": fixPattern_name,
-                'pattern': fixed_linePattern[i]
+                "type": fixedLinePatternName,
+                'pattern': fixedLinePatterns[i]
             });
         }
-        if (landLinePattern && landLinePattern[i]) {
+        if (landLinePatterns && landLinePatterns[i]) {
             countryFormatObject.formats.push({
-                "type": landLinePattern_name,
-                "pattern": landLinePattern[i]
+                "type": landLinePatternName,
+                "pattern": landLinePatterns[i]
             });
         }
 
-        countries.push(countryFormatObject);
+        countryFormats.push(countryFormatObject);
     }
 
-    return countries;
+    return countryFormats;
 }
 
 function writeToJsonFile(data) {
-    let existsCountries = data.map(country => country.country);
+    const existingCountries = data.map(country => country.country);
     let countryExists = false;
     let existingData = [];
 
@@ -63,7 +66,7 @@ function writeToJsonFile(data) {
         existingData = JSON.parse(fileContent);
 
         // Check if any country already exists in the file
-        countryExists = existingData.some(content => existsCountries.includes(content.country));
+        countryExists = existingData.some(content => existingCountries.includes(content.country));
 
         if (countryExists) {
             console.log(`Countries already exist in the JSON file.`);
@@ -81,32 +84,33 @@ function writeToJsonFile(data) {
     }
 }
 // information for AFrica
-const Africa = 'Africa'
-const countryAfrica = ['Djibouti','Morocco','Kenya','South Africa']
-const codeCountryAfrica = ['"253"','212','254','27']
-const localPatternAfrica = ["^(21|27)[0-9]{4}$","^(05[0-9]{2}){2}[0-9]{4}$","^0[0-9]{3}[0-9]{6}$","^(0[0-9]{2}|0AA)[0-9]{7}$"]
-const localPatternAfrica_name = 'local'
-const internationalPatternAfrica = ["^\\+253[0-9]{8}$","^\\+212[567][0-9]{8}$","^\\+254[0-9]{9}$","^\\+27[0-9]{9}$"]
-const internationalPatternAfrica_name = 'international'
-const fixed_linePatternAfrica = ["^(21|27)[0-9]{4}$","^(05[0-9]{2}){2}[0-9]{4}$","^0[0-9]{3}[0-9]{6}$", "^(0[0-9]{2}|0AA)[0-9]{7}$"]
-const fixed_linePatternAfrica_name = 'fixed-line'
-const formatObjectAfrica = 
-createPhoneNumberFormat
-(
-    Africa,
-    countryAfrica
-    ,codeCountryAfrica
-    ,fixed_linePatternAfrica , fixed_linePatternAfrica_name
-    ,null,null
-    ,localPatternAfrica,localPatternAfrica_name
-    ,internationalPatternAfrica,internationalPatternAfrica_name
-    );
-writeToJsonFile(formatObjectAfrica);
-/// information  Asia
-const Asia = 'Asia'
-const countryAsia = []
-const codeCountryAsia = []
-const localPattern = []
-const internationalPattern = []
-const fixed_linePattern = []
+const africaContinent = 'Africa';
+const africanCountries = ['Djibouti', 'Morocco', 'Kenya', 'South Africa'];
+const africanCountryCodes = ['253', '212', '254', '27'];
+const africanLocalPatterns = ["^(21|27)[0-9]{4}$", "^(05[0-9]{2}){2}[0-9]{4}$", "^0[0-9]{3}[0-9]{6}$", "^(0[0-9]{2}|0AA)[0-9]{7}$"];
+const africanLocalPatternName = 'local';
+const africanInternationalPatterns = ["^\\+253[0-9]{8}$", "^\\+212[567][0-9]{8}$", "^\\+254[0-9]{9}$", "^\\+27[0-9]{9}$"];
+const africanInternationalPatternName = 'international';
+const africanFixedLinePatterns = ["^(21|27)[0-9]{4}$", "^(05[0-9]{2}){2}[0-9]{4}$", "^0[0-9]{3}[0-9]{6}$", "^(0[0-9]{2}|0AA)[0-9]{7}$"];
+const africanFixedLinePatternName = 'fixed-line';
+const africanFormatObject = createPhoneNumberFormats(
+    africaContinent,
+    africanCountries,
+    africanCountryCodes,
+    africanFixedLinePatterns,
+    africanFixedLinePatternName,
+    null, null,
+    africanLocalPatterns,
+    africanLocalPatternName,
+    africanInternationalPatterns,
+    africanInternationalPatternName
+);
+writeToJsonFile(africanFormatObject);
+// Information for Asia
+const asiaContinent = 'Asia';
+const asianCountries = [];
+const asianCountryCodes = [];
+const asianLocalPatterns = [];
+const asianInternationalPatterns = [];
+const asianFixedLinePatterns = [];
 

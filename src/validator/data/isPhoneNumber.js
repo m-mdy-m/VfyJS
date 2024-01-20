@@ -101,10 +101,4 @@ async function getPhoneDetails(code, phone) {
   }
   throw new Error("Invalid phone number format. Please check and try again.");
 }
-// Example usage
-const result = getPhoneDetails();
-
-// [+][country code][area code][local phone number]
-//  + 1 415 123 1234
-
 module.exports = getPhoneDetails;

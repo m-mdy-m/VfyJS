@@ -298,7 +298,7 @@ exports.TypesCheck = (property, types, message) => {
  */
 exports.isEmpty = (value, message = 'Value should not be empty') => {
   if (!value) {
-    throw new Error(message);
+    throw new ValidationError(message);
   }
   return value;
 };

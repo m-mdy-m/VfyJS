@@ -277,3 +277,28 @@ exports.TypesCheck = (property, types, message) => {
     throw new TypeError(message || `${property} is not of type ${types.join(' or ')}`);
   }
 };
+/**
+ * Checks if a value is empty and throws an error if it is.
+ *
+ * This function checks if the provided value is empty (falsy), and if so,
+ * it throws an error with the specified message. Otherwise, it returns the input value.
+ *
+ * @param {any} value - The value to be checked for emptiness.
+ * @param {string} [message='Value should not be empty'] - The error message to be associated with the emptiness check failure.
+ * @throws {Error} - Throws an error with the specified message if the value is empty.
+ * @returns {any} - Returns the input value if it is not empty.
+ * 
+ * @example
+ * try {
+ *   isEmpty('someValue', 'The value must not be empty');
+ * } catch (error) {
+ *   console.error(error.name); // 'Error'
+ *   console.error(error.message); // 'The value must not be empty'
+ * }
+ */
+exports.isEmpty = (value, message = 'Value should not be empty') => {
+  if (!value) {
+    throw new Error(message);
+  }
+  return value;
+};

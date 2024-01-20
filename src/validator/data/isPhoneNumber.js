@@ -1,52 +1,59 @@
-const { readPhoneCodeData } = require('./getPhoneCode')
-const { getPattern } = require('./getPhoneCode')
+const { IfNotType } = require("../../errors/HandleError");
+const { readPhoneCodeData,getPattern } = require("./getPhoneCode");
 
 async function getCodeCountries(code) {
-    const codeAllCountries = (await readPhoneCodeData()).phoneCodes;
-    const codeCountriesFormat = (await getPattern()).phoneCodes;
-  
-    const isCodeAllCountries = codeAllCountries.includes(code);
-    const isCodeCountriesFormat = codeCountriesFormat.includes(code);
-  
-    return isCodeAllCountries && isCodeCountriesFormat;
-  }
-  async  function findCountryByCode(code) {
-    const phoneFormats = (await getPattern()).format;
+  const codeAllCountries = (await readPhoneCodeData()).phoneCodes;
+  const codeCountriesFormat = (await getPattern()).phoneCodes;
 
-    // Filter countries that match the provided code
-    const matchingCountries = phoneFormats.filter((country) => country.countryCode === code);
-  
-    return matchingCountries;
-  }
+  const isCodeAllCountries = codeAllCountries.includes(code);
+  const isCodeCountriesFormat = codeCountriesFormat.includes(code);
 
-
-  async function phoneNumber(code, phone) {
-    const isCode = await getCodeCountries(code);
-  
-    if (isCode) {
-      const countriesWithMatchingCode = await findCountryByCode(code);
-  
-      if (countriesWithMatchingCode.length > 0) {
-        console.log(`Countries with code ${code}:`);
-        countriesWithMatchingCode.forEach((country) => {
-          console.log(`- ${country.country}`);
-          console.log(`  Country Code: ${country.countryCode}`);
-          console.log(`  Continent: ${country.continent}`);
-          console.log("  Formats:");
-          country.formats.forEach((format) => {
-            console.log(`    ${format.type}: ${format.pattern}`);
-          });
-        });
-      } else {
-        console.log(`No countries found with code ${code}`);
-      }
-    } else {
-      console.log(`Invalid phone code: ${code}`);
+  return isCodeAllCountries && isCodeCountriesFormat;
+}
+async function findCountryByCode(code) {
+    const phoneFormats = (await getPattern());
+    const index = phoneFormats.phoneCodes.indexOf(code);
+    if (index !== -1) {
+        const countryDetails = {
+            "country": phoneFormats.countries[index],
+            "countryCode": phoneFormats.phoneCodes[index],
+            "formats": phoneFormats.format[index]
+        }
+        return countryDetails
     }
-  }
-  const result = phoneNumber('1', '915291407');
-  // [+][country code][area code][local phone number]
+    return false
+}
+async function phoneNumber(code, phone) {
+    const details = await findCountryByCode(code)
+    const formats = details.formats
+    let Patterns = []
+    let type = []
+    formats.forEach(data  => {
+        Patterns.push(data.pattern)
+        type.push(data.type)
+    });
+    const format_number = `+${code}-${phone}`
+    for (let i = 0; i < Patterns.length; i++) {
+        const regex = new RegExp(Patterns[i])
+        const isNumber = regex.test(phone)
+        if (isNumber) {
+            return {
+                "country": details.country,
+                'countryCode': details.countryCode,
+                'type_number' : type[i],
+                'pattern' : Patterns[i],
+                "phone": phone,
+                "format_base": format_number,
+            }
+        }
+    }
+}
+
+const result = phoneNumber('98','09115291407').then(result =>{
+    console.log('result =>', result);
+})
+
+// [+][country code][area code][local phone number]
 //  + 1 415 123 1234
 
-console.log('result =>', result);
-module.exports = phoneNumber
+module.exports = phoneNumber;

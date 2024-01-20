@@ -27,16 +27,19 @@ const { readPhoneCodeData, getPattern } = require("./getPhoneCode");
  * }
  */
 async function findCountryDetailsByCode(code) {
-  const phoneFormats = await getPattern();
-  const index = phoneFormats.phoneCodes.indexOf(code);
-  return index !== -1
-    ? {
-        country: phoneFormats.countries[index],
-        countryCode: phoneFormats.phoneCodes[index],
-        formats: phoneFormats.format[index],
-      }
-    : null;
-}
+    // Retrieve phone patterns and formats
+    const phoneFormats = await getPattern();
+    // Find the index of the provided country code
+    const index = phoneFormats.phoneCodes.indexOf(code);
+    // Return country details if found, otherwise return null
+    return index !== -1
+      ? {
+          country: phoneFormats.countries[index],
+          countryCode: phoneFormats.phoneCodes[index],
+          formats: phoneFormats.format[index],
+        }
+      : null;
+  }
 /**
  * Retrieves phone details based on the provided country code and phone number.
  *
@@ -60,45 +63,55 @@ async function findCountryDetailsByCode(code) {
  * }
  */
 async function getPhoneDetails(code, phone) {
-  // Check if code is empty
-  isEmpty(code, "Code should not be empty");
-
-  // Check if phone is empty
-  isEmpty(phone, "Phone should not be empty");
-  code = trimmedValue(code);
-  phone = trimmedValue(phone);
-  TypesCheck(phone, ["number", "string"]);
-  TypesCheck(code, ["number", "string"]);
-  if (typeof code === "number") {
-    code = `${code}`;
-  }
-  const countryDetails = await findCountryDetailsByCode(code);
-  ifFalsyValue(
-    countryDetails,
-    "Country details not found for the provided code."
-  );
-  const phoneFormats = countryDetails.formats;
-  let phonePatterns = [];
-  let phoneTypes = [];
-  phoneFormats.forEach((data) => {
-    phonePatterns.push(data.pattern);
-    phoneTypes.push(data.type);
-  });
-  const formattedPhoneNumber = `+${code}-${phone}`;
-  for (let i = 0; i < phonePatterns.length; i++) {
-    const regex = new RegExp(phonePatterns[i]);
-    const isNumberMatch = regex.test(phone);
-    if (isNumberMatch) {
-      return {
-        country: countryDetails.country,
-        countryCode: countryDetails.countryCode,
-        numberType: phoneTypes[i],
-        numberPattern: phonePatterns[i],
-        inputPhoneNumber: phone,
-        formattedPhoneNumber: formattedPhoneNumber,
-      };
+    // Check if code is empty
+    isEmpty(code, "Code should not be empty");
+  
+    // Check if phone is empty
+    isEmpty(phone, "Phone should not be empty");
+    // Trim code and phone for consistency
+    code = trimmedValue(code);
+    phone = trimmedValue(phone);
+    // Check and enforce valid types for code and phone
+    TypesCheck(phone, ["number", "string"]);
+    TypesCheck(code, ["number", "string"]);
+    // Convert code to string if it's a number
+    if (typeof code === "number") {
+      code = `${code}`;
     }
+    // Retrieve country details for the provided code
+    const countryDetails = await findCountryDetailsByCode(code);
+    // Throw an error if country details are not found
+    ifFalsyValue(
+      countryDetails,
+      "Country details not found for the provided code."
+    );
+    // Extract phone patterns and types from country details
+    const phoneFormats = countryDetails.formats;
+    let phonePatterns = [];
+    let phoneTypes = [];
+    phoneFormats.forEach((data) => {
+      phonePatterns.push(data.pattern);
+      phoneTypes.push(data.type);
+    });
+    // Construct formatted phone number
+    const formattedPhoneNumber = `+${code}-${phone}`;
+    // Check if the provided phone number matches any of the patterns
+    for (let i = 0; i < phonePatterns.length; i++) {
+      const regex = new RegExp(phonePatterns[i]);
+      const isNumberMatch = regex.test(phone);
+      // If a match is found, return phone details
+      if (isNumberMatch) {
+        return {
+          country: countryDetails.country,
+          countryCode: countryDetails.countryCode,
+          numberType: phoneTypes[i],
+          numberPattern: phonePatterns[i],
+          inputPhoneNumber: phone,
+          formattedPhoneNumber: formattedPhoneNumber,
+        };
+      }
+    }
+    // Throw an error if no matching pattern is found
+    throw new Error("Invalid phone number format. Please check and try again.");
   }
-  throw new Error("Invalid phone number format. Please check and try again.");
-}
 module.exports = getPhoneDetails;

@@ -108,9 +108,15 @@ const africanFormatObject = createPhoneNumberFormats(
 writeToJsonFile(africanFormatObject);
 // Information for Asia
 const asiaContinent = 'Asia';
-const asianCountries = [];
-const asianCountryCodes = [];
-const asianLocalPatterns = [];
-const asianInternationalPatterns = [];
-const asianFixedLinePatterns = [];
-
+const asianCountries = ['China','Hong Kong and Macau','India','Iran','Japan','Malaysia','Pakistan','Philippines','Singapore','Sri Lanka','South Korea','Taiwan','Thailand'];
+const asianCountryCodes = ['86','852','91','98','81','60','92','63','65','94','82','886','66'];
+const asianFixedLinePatterns = ['^\\(0\\d{2,3}\\) \\d{7,8}$','^\\d{4} \\d{4}$',"^\\d{3,4}-\\d{6,7}$","^0\\d{2} \\d{8}$","^0\\d{2}-\\d{4}-\\d{4}$","^0\\d{1,2}-\\d{7,8}$","^0\\d{2}-\\d{7,8}$","^\\d{11}$","^\\(\\d{3}\\) \\d{1} \\d{6}$","^0\\d{1,3}-\\d{3,4}-\\d{4}$","^\\(\\d{2}\\) \\d{4} \\d{4}$","^\\d{4} \\d{4}$",]
+const asianFixedLinePatternName = 'landline'
+const asianLocalPatterns = ['^1[3-9]\\d{9}$',null,"^9[1-9]\\d{9}$","^09\\d{9}$","^(0120|0570|0800)-\\d{2}-\\d{4}$","^01\\d{1}-\\d{6,8}$",null,"^(\\+63|0)\\d{10}$","^\\d{3} \\d{7}$","^01\\d{1}-\\d{4}-\\d{4}$","^0 \\d{3} \\d{4}$",]
+const asianLocalPatternName = 'mobile'
+const asianLandLinePatterns = ['^(800|400) \\d{4} \\d{4}$',null,"^1800 \\d{6}$",null,null,"^1-800-\\d{2}-\\d{4}$",null,null,null,"^070-\\d{4}-\\d{4}$","^09\\d{2} \\d{6}$",null,]
+const asianLandLinePatternName = 'toll-free"'
+const asianInternationalPatterns = ['^\\d{3,5}$',null,"^\\d{3,4}$","^\\+98 (0\\d{2}|09) \\d{8}$","^1[12]$", "^1-300-\\d{2}-\\d{4}$",null,null,"^\\+94 (\\d{3} \\d{1}|\\d{3}) \\d{6}$","^1[12]{2}$",null,"^\\+66 \\d{4} \\d{4}$",]
+const asianInternationalPatternNam = 'service'
+const asianFormatObject = createPhoneNumberFormats(asiaContinent,asianCountries,asianCountryCodes,asianFixedLinePatterns,asianFixedLinePatternName,asianLandLinePatterns,asianLandLinePatternName,asianLocalPatterns,asianLocalPatternName,asianInternationalPatterns,asianInternationalPatternNam)
+writeToJsonFile(asianFormatObject)

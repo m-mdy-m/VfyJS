@@ -3,9 +3,36 @@
     "country": "Djibouti",
     "countryCode": "253",
     "formats": [
-      { "type": "local", "pattern": "77[0-9]{6}$" },
-      { "type": "international", "pattern": "^\\+253[0-9]{8}$" },
-      { "type": "fixed-line", "pattern": "^(21|27)[0-9]{6}$" }
+      {
+        "type": "local",
+        "pattern": "77[0-9]{6}$"
+      },
+      {
+        "type": "international",
+        "pattern": "^\\+253[0-9]{8}$"
+      },
+      {
+        "type": "fixed-line",
+        "pattern": "^(21|27)[0-9]{6}$"
+      }
+    ]
+  },
+  {
+    "country": "iran",
+    "countryCode": "253",
+    "formats": [
+      {
+        "type": "local",
+        "pattern": "77[0-9]{6}$"
+      },
+      {
+        "type": "international",
+        "pattern": "^\\+253[0-9]{8}$"
+      },
+      {
+        "type": "fixed-line",
+        "pattern": "^(21|27)[0-9]{6}$"
+      }
     ]
   }
 ]

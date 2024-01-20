@@ -58,5 +58,66 @@ async function readPhoneCodeData() {
     throw new Error(`Error reading or parsing JSON: ${error.message}`);
   }
 }
-
-module.exports = readPhoneCodeData;
+/**
+ * Gets phone pattern information from the specified JSON file.
+ *
+ * @async
+ * @returns {Promise<{countries: string[], phoneCodes: string[], continent: string[]}>} - A Promise that resolves to an object containing arrays of countries, phone codes, and unique continents.
+ */
+async function getPattern() {
+    /**
+     * @type {string} - The path to the JSON file containing phone pattern information.
+     */
+    const filePath = path.join(__dirname, "telephone_formats.json");
+  
+    try {
+      // Read the JSON file
+      const jsonData = await fs.readFile(filePath, "utf8");
+      const phoneFormats = JSON.parse(jsonData);
+  
+      /**
+       * Array containing names of countries.
+       * @type {string[]}
+       */
+      let countries = [];
+  
+      /**
+       * Array containing phone codes.
+       * @type {string[]}
+       */
+      let phoneCodes = [];
+  
+      /**
+       * Array containing continents.
+       * @type {string[]}
+       */
+      let continentArray = [];
+  
+      // Extract information from the JSON data
+      phoneFormats.forEach((formats) => {
+        countries.push(formats.country);
+        continentArray.push(formats.continent);
+        phoneCodes.push(formats.countryCode);
+      });
+  
+      // Create a Set to get unique continents
+      const countriesSet = new Set(continentArray);
+      
+      // Convert Set to array using spread operator
+      const continent = [...countriesSet];
+  
+      return {
+        countries,
+        phoneCodes,
+        continent,
+      };
+    } catch (error) {
+      /**
+       * Throws an error if there is an issue reading the file or parsing the JSON.
+       * @throws {Error}
+       */
+      throw new Error(`Error reading or parsing JSON: ${error.message}`);
+    }
+  }
+  
+module.exports = {getPattern , readPhoneCodeData};

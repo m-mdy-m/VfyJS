@@ -1,40 +1,37 @@
 const { phoneNumberUtils } = require("../../index");
-
 // Test cases for invalid phone numbers without options
 test("invalid phone number - empty code", async () => {
-  await expect(
-    async () => await phoneNumberUtils("", "1234567890")
-  ).rejects.toThrowError("Code should not be empty");
+  await expect(phoneNumberUtils("", "1234567890")).rejects.toThrowError(
+    "Code should not be empty"
+  );
 });
 
 test("invalid phone number - empty phone", async () => {
-  await expect(
-    async () => await phoneNumberUtils("1", "")
-  ).rejects.toThrowError("Phone should not be empty");
+  await expect(phoneNumberUtils("1", "")).rejects.toThrowError(
+    "Phone should not be empty"
+  );
 });
 
 test("invalid phone number - invalid code type", async () => {
-  await expect(
-    async () => await phoneNumberUtils(123, "1234567890")
-  ).rejects.toThrowError("Code must be of type string or number");
+  await expect(phoneNumberUtils(123, "1234567890")).rejects.toThrowError(
+    "Code must be of type string or number"
+  );
 });
 
 test("invalid phone number - invalid phone type", async () => {
-  await expect(
-    async () => await phoneNumberUtils("1", 1234567890)
-  ).rejects.toThrowError("Phone must be of type string or number");
+  await expect(phoneNumberUtils("1", 1234567890)).rejects.toThrowError(
+    "Phone must be of type string or number"
+  );
 });
 
 test("invalid phone number - invalid country code", async () => {
-  await expect(
-    async () => await phoneNumberUtils("999", "1234567890")
-  ).rejects.toThrowError("Country details not found for the provided code.");
+  await expect(phoneNumberUtils("999", "1234567890")).rejects.toThrowError(
+    "Country details not found for the provided code."
+  );
 });
 
 test("invalid phone number - invalid phone format", async () => {
-  await expect(
-    async () => await phoneNumberUtils("1", "abcdefghij")
-  ).rejects.toThrowError(
+  await expect(phoneNumberUtils("1", "abcdefghij")).rejects.toThrowError(
     "Invalid phone number format. Please check and try again."
   );
 });
@@ -51,44 +48,39 @@ test("valid phone number - valid code and phone", async () => {
     formattedPhoneNumber: "+1-1234567890",
   });
 });
+
 test("invalid phone number - empty code with custom error message", async () => {
-  await expect(
-    async () => await phoneNumberUtils("", "1234567890")
-  ).rejects.toThrowError("Custom error: Code should not be empty");
+  await expect(phoneNumberUtils("", "1234567890")).rejects.toThrowError(
+    "Custom error: Code should not be empty"
+  );
 });
 
 test("invalid phone number - empty phone with custom error message", async () => {
-  await expect(
-    async () => await phoneNumberUtils("1", "")
-  ).rejects.toThrowError("Custom error: Phone should not be empty");
+  await expect(phoneNumberUtils("1", "")).rejects.toThrowError(
+    "Custom error: Phone should not be empty"
+  );
 });
 
 test("invalid phone number - invalid code type with custom error message", async () => {
-  await expect(
-    async () => await phoneNumberUtils(123, "1234567890")
-  ).rejects.toThrowError("Custom error: Code must be of type string or number");
+  await expect(phoneNumberUtils(123, "1234567890")).rejects.toThrowError(
+    "Custom error: Code must be of type string or number"
+  );
 });
 
 test("invalid phone number - invalid phone type with custom error message", async () => {
-  await expect(
-    async () => await phoneNumberUtils("1", 1234567890)
-  ).rejects.toThrowError(
+  await expect(phoneNumberUtils("1", 1234567890)).rejects.toThrowError(
     "Custom error: Phone must be of type string or number"
   );
 });
 
 test("invalid phone number - invalid country code with custom error message", async () => {
-  await expect(
-    async () => await phoneNumberUtils("999", "1234567890")
-  ).rejects.toThrowError(
+  await expect(phoneNumberUtils("999", "1234567890")).rejects.toThrowError(
     "Custom error: Country details not found for the provided code."
   );
 });
 
 test("invalid phone number - invalid phone format with custom error message", async () => {
-  await expect(
-    async () => await phoneNumberUtils("1", "abcdefghij")
-  ).rejects.toThrowError(
+  await expect(phoneNumberUtils("1", "abcdefghij")).rejects.toThrowError(
     "Custom error: Invalid phone number format. Please check and try again."
   );
 });
@@ -103,6 +95,18 @@ test("valid phone number - valid code and phone with custom options", async () =
     numberPattern: "\\d{10}",
     inputPhoneNumber: "7912345678",
     formattedPhoneNumber: "+44-7912345678",
+  });
+});
+
+test("valid phone number - valid code and phone with different country code", async () => {
+  const result = await phoneNumberUtils("33", "612345678");
+  expect(result).toEqual({
+    country: "France",
+    countryCode: "33",
+    numberType: "Mobile",
+    numberPattern: "\\d{9}",
+    inputPhoneNumber: "612345678",
+    formattedPhoneNumber: "+33-612345678",
   });
 });
 

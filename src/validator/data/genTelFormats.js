@@ -350,3 +350,109 @@ const northAmericaFormatObject = [
 ];
 
 writeToJsonFile(northAmericaFormatObject);
+// Information for Central America
+const centralAmericaContinent = 'Central America';
+const centralAmericanCountries = ['Costa Rica', 'El Salvador', 'Guatemala', 'Honduras'];
+const centralAmericanCountryCodes = ['506', '503', '502', '504'];
+
+// Patterns for Costa Rica
+const centralAmericaFixedLinePatternsCostaRica = ['^2\\d{3}-\\d{4}$'];
+const centralAmericaFixedLinePatternNameCostaRica = 'landline';
+const centralAmericaLocalPatternsCostaRica = ['^2\\d{3}-\\d{4}$', '^8\\d{3}-\\d{4}$', '^6\\d{3}-\\d{4}$', '^7\\d{3}-\\d{4}$'];
+const centralAmericaLocalPatternNameCostaRica = 'mobile';
+const centralAmericaLandLinePatternsCostaRica = ['^800-\\d{3}-\\d{4}$'];
+const centralAmericaLandLinePatternNameCostaRica = 'toll-free';
+const centralAmericaInternationalPatternsCostaRica = ['^90\\d-\\d{3}-\\d{4}$'];
+const centralAmericaInternationalPatternNameCostaRica = 'service';
+const centralAmericaFormatObjectCostaRica = createPhoneNumberFormats(
+  centralAmericaContinent,
+  ['Costa Rica'],
+  ['506'],
+  centralAmericaFixedLinePatternsCostaRica,
+  centralAmericaFixedLinePatternNameCostaRica,
+  centralAmericaLandLinePatternsCostaRica,
+  centralAmericaLandLinePatternNameCostaRica,
+  centralAmericaLocalPatternsCostaRica,
+  centralAmericaLocalPatternNameCostaRica,
+  centralAmericaInternationalPatternsCostaRica,
+  centralAmericaInternationalPatternNameCostaRica
+);
+
+// Patterns for El Salvador
+const centralAmericaFixedLinePatternsElSalvador = ['^2\\d{3}-\\d{4}$'];
+const centralAmericaFixedLinePatternNameElSalvador = 'landline';
+const centralAmericaLocalPatternsElSalvador = ['^2\\d{3}-\\d{4}$', '^7\\d{3}-\\d{4}$'];
+const centralAmericaLocalPatternNameElSalvador = 'mobile';
+const centralAmericaLandLinePatternsElSalvador = [];
+const centralAmericaLandLinePatternNameElSalvador = 'toll-free';
+const centralAmericaInternationalPatternsElSalvador = ['^9\\d-\\d{3}-\\d{4}$'];
+const centralAmericaInternationalPatternNameElSalvador = 'service';
+const centralAmericaFormatObjectElSalvador = createPhoneNumberFormats(
+  centralAmericaContinent,
+  ['El Salvador'],
+  ['503'],
+  centralAmericaFixedLinePatternsElSalvador,
+  centralAmericaFixedLinePatternNameElSalvador,
+  centralAmericaLandLinePatternsElSalvador,
+  centralAmericaLandLinePatternNameElSalvador,
+  centralAmericaLocalPatternsElSalvador,
+  centralAmericaLocalPatternNameElSalvador,
+  centralAmericaInternationalPatternsElSalvador,
+  centralAmericaInternationalPatternNameElSalvador
+);
+
+// Patterns for Guatemala
+const centralAmericaFixedLinePatternsGuatemala = ['^2\\d{3}-\\d{4}$', '^6\\d{3}-\\d{4}$', '^7\\d{3}-\\d{4}$'];
+const centralAmericaFixedLinePatternNameGuatemala = 'landline';
+const centralAmericaLocalPatternsGuatemala = ['^2\\d{3}-\\d{4}$', '^6\\d{3}-\\d{4}$', '^7\\d{3}-\\d{4}$', '^5\\d{3}-\\d{4}$', '^4\\d{3}-\\d{4}$', '^3\\d{3}-\\d{4}$'];
+const centralAmericaLocalPatternNameGuatemala = 'mobile';
+const centralAmericaLandLinePatternsGuatemala = [];
+const centralAmericaLandLinePatternNameGuatemala = 'toll-free';
+const centralAmericaInternationalPatternsGuatemala = ['^\\+52 \\d{1,2} \\d{4} \\d{4}$', '^1-800-\\d{2}-\\d{4}$', '^\\+52 \\d{1,2} \\d{3} \\d{4}$'];
+const centralAmericaInternationalPatternNameGuatemala = 'service';
+const centralAmericaFormatObjectGuatemala = createPhoneNumberFormats(
+  centralAmericaContinent,
+  ['Guatemala'],
+  ['502'],
+  centralAmericaFixedLinePatternsGuatemala,
+  centralAmericaFixedLinePatternNameGuatemala,
+  centralAmericaLandLinePatternsGuatemala,
+  centralAmericaLandLinePatternNameGuatemala,
+  centralAmericaLocalPatternsGuatemala,
+  centralAmericaLocalPatternNameGuatemala,
+  centralAmericaInternationalPatternsGuatemala,
+  centralAmericaInternationalPatternNameGuatemala
+);
+
+// Patterns for Honduras
+const centralAmericaFixedLinePatternsHonduras = ['^\\d{3}-\\d{4}$'];
+const centralAmericaFixedLinePatternNameHonduras = 'landline';
+const centralAmericaLocalPatternsHonduras = ['^\\d{3}-\\d{4}$', '^\\d{4}-\\d{4}$'];
+const centralAmericaLocalPatternNameHonduras = 'mobile';
+const centralAmericaLandLinePatternsHonduras = [];
+const centralAmericaLandLinePatternNameHonduras = 'toll-free';
+const centralAmericaInternationalPatternsHonduras = [];
+const centralAmericaInternationalPatternNameHonduras = 'service';
+const centralAmericaFormatObjectHonduras = createPhoneNumberFormats(
+  centralAmericaContinent,
+  ['Honduras'],
+  ['504'],
+  centralAmericaFixedLinePatternsHonduras,
+  centralAmericaFixedLinePatternNameHonduras,
+  centralAmericaLandLinePatternsHonduras,
+  centralAmericaLandLinePatternNameHonduras,
+  centralAmericaLocalPatternsHonduras,
+  centralAmericaLocalPatternNameHonduras,
+  centralAmericaInternationalPatternsHonduras,
+  centralAmericaInternationalPatternNameHonduras
+);
+
+// Combine all Central American formats
+const centralAmericaFormatObject = [
+  ...centralAmericaFormatObjectCostaRica,
+  ...centralAmericaFormatObjectElSalvador,
+  ...centralAmericaFormatObjectGuatemala,
+  ...centralAmericaFormatObjectHonduras
+];
+
+writeToJsonFile(centralAmericaFormatObject);

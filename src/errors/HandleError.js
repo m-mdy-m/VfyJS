@@ -127,7 +127,7 @@ exports.validateIfBothTruthy  = (property, method , message)=>{
  */
 exports.IfNotType = (type, property, message) => {
   if (typeof property !== type) {
-    throw new TypeError(property, message);
+    throw new TypeError(property, message || `${property} is not of type ${type}` );
   }
 };
 /**
@@ -254,4 +254,26 @@ exports.validatePropertyLengthAndType = (
   this.IfTypeMatches(minLengthType, property, message);
   this.IfTypeMatches(maxLengthType, property, message);
   this.validateLength(property, minLength, maxLength, message);
+};
+/**
+ * Throws a type error if the type of the specified property is not one of the expected types.
+ *
+ * This function checks if the type of the provided property is not one of the expected types,
+ * and if so, it throws a type error with the specified property and message.
+ *
+ * @param {any} property - The property to be validated for its type.
+ * @param {string[]} types - An array of expected types.
+ * @throws {TypeError} - Throws a type error with the specified property and message if type validation fails.
+ * @example
+ * try {
+ *   TypesCheck('42', ['number', 'string'], 'Value should be a number or a string');
+ * } catch (error) {
+ *   console.error(error.name); // 'TypeError'
+ *   console.error(error.message); // 'Value should be a number or a string'
+ * }
+ */
+exports.TypesCheck = (property, types, message) => {
+  if (!types.includes(typeof property)) {
+    throw new TypeError(message || `${property} is not of type ${types.join(' or ')}`);
+  }
 };

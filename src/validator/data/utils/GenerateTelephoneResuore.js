@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path =  require('path')
 const pathFile = path.join(__dirname + '/telephone_formats.json')
+console.log('pathFile =>',pathFile);
 function createPhoneNumberFormats(
     continent,
     countries = [],

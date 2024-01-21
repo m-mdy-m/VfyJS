@@ -26,6 +26,16 @@ const { readPhoneCodeData, getPattern } = require("./getPhoneCode");
  *   // Output: 'Country details not found for the provided code.'
  * }
  */
+
+/*continent: [
+  'Africa',
+  'Asia',
+  'Oceania',
+  'Europe',
+  'North America',
+  'Central America',
+  'South America'
+ ]*/
 async function findCountryDetailsByCode(code) {
   // Retrieve phone patterns and formats
   const phoneFormats = await getPattern();
@@ -102,15 +112,13 @@ async function getPhoneDetails(code, phone) {
   });
   const formattedPhoneNumber = `+${code}-${phone}`;
   const formattedPhone = `${code}-${phone}`;
-  console.log('phoneFormats =>',phoneFormats.length);
-  console.log('phonePatterns =>',phonePatterns.length);
+  const formattedPhone2 = `${code}${phone}`;
   // Check if the provided phone number matches any of the patterns
   for (let i = 0; i < phonePatterns.length; i++) {
     const regex = phonePatterns[i];
+    console.log(regex);
+    console.log(formattedPhone2);
     const isNumberMatch = regex.test(formattedPhone);
-    console.log('regex =>', regex);
-    console.log('formattedPhone =>', formattedPhone);
-    console.log('isNumberMatch =>', isNumberMatch);
     // If a match is found, return phone details
     if (isNumberMatch) {
       return {

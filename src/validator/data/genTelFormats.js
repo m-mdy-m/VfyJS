@@ -126,75 +126,75 @@ const asianCountryCodes =[
 ];
 const asianFixedLinePatterns = [
   //China
-  '^0\d2,3\d{7,8}$',
+  '^0\\d2,3\\d{7,8}$',
   ///Hong Kong and Macau
-  '^\d{4} \d{4}$',
+  '^\\d{4} \\d{4}$',
   ///India 
-  "^\d{3,4}-\d{6,7}$",
+  "^\\d{3,4}-\\d{6,7}$",
   //Iran 
-  "^0\d{2} \d{8}$",
+  "^0\\d{2} \\d{8}$",
   /// Japan 
-  "^0\d{2}-\d{4}-\d{4}$",
+  "^0\\d{2}-\\d{4}-\\d{4}$",
   // Malaysia 
-  "^0\d{1,2}-\d{7,8}$",
+  "^0\\d{1,2}-\\d{7,8}$",
   ///Pakistan 
-  "^0\d{2}-\d{7,8}$",
+  "^0\\d{2}-\\d{7,8}$",
   /// Philippines 
-  "^\d{11}$",
+  "^\\d{11}$",
   // Singapore 
-  "^\d3\d3 \d{1} \d{6}$",
+  "^\\d3\\d3 \\d{1} \\d{6}$",
   //Sri Lanka 
-  "^0\d{1,3}-\d{3,4}-\d{4}$",
+  "^0\\d{1,3}-\\d{3,4}-\\d{4}$",
   // South Korea 
-  "^\d2\d2\d{4}\d{4}$",
+  "^\\d2\\d2\\d{4}\\d{4}$",
   // Taiwan 
-  "^\d{4} \d{4}$",
+  "^\\d{4} \d{4}$",
   // Thailand 
-  "^0\d{1,2}-\d{7}$"
+  "^0\\d{1,2}-\\d{7}$"
 ]
 const asianFixedLinePatternName = 'landline'
 const asianLocalPatterns = [
   //China
-  ' ^1[3-9]\d{9}$',
+  ' ^1[3-9]\\d{9}$',
   ///Hong Kong and Macau
   null,
   ///India 
-  "^9[1-9]\d{9}$",
+  "^9[1-9]\\d{9}$",
   //Iran 
-  "^09\d{9}$",
+  "^09\\d{9}$",
   /// Japan 
-  "^(0120|0570|0800)-\d{2}-\d{4}$",
+  "^(0120|0570|0800)-\\d{2}-\\d{4}$",
   // Malaysia 
-  "^01\d{1}-\d{6,8}$",
+  "^01\\d{1}-\\d{6,8}$",
   ///Pakistan 
   null,
   /// Philippines 
-  "^(+63|0)\d{10}$",
+  "^(+63|0)\\d{10}$",
   // Singapore 
-  "^\d{3} \d{7}$",
+  "^\\d{3} \\d{7}$",
   //Sri Lanka 
-  "^01\d{1}-\d{4}-\d{4}$",
+  "^01\\d{1}-\\d{4}-\\d{4}$",
   // South Korea 
-  "^0\d{3} \d{4}$",
+  "^0\\d{3} \\d{4}$",
   // Taiwan 
   null,
   // Thailand 
-  "^0\d{9}$"
+  "^0\\d{9}$"
 ]
 const asianLocalPatternName = 'mobile'
 const asianLandLinePatterns = [
   //China
-  '^(800|400) \d{4} \d{4}$',
+  '^(800|400) \\d{4} \\d{4}$',
   ///Hong Kong and Macau
   null,
   ///India 
-  "^1800 \d{6}$",
+  "^1800 \\d{6}$",
   //Iran 
   null,
   /// Japan 
   null,
   // Malaysia 
-  "^1-800-\d{2}-\d{4}$",
+  "^1-800-\\d{2}-\\d{4}$",
   ///Pakistan 
   null,
   /// Philippines 
@@ -202,9 +202,9 @@ const asianLandLinePatterns = [
   // Singapore 
   null,
   //Sri Lanka 
-  "^070-\d{4}-\d{4}$",
+  "^070-\\d{4}-\\d{4}$",
   // South Korea 
-  "^09\d{2} \d{6}$",
+  "^09\\d{2} \\d{6}$",
   // Taiwan 
   null,
   // Thailand 
@@ -213,28 +213,28 @@ const asianLandLinePatterns = [
 const asianLandLinePatternName = 'toll-free"'
 const asianInternationalPatterns = [
   //China
-  '^\d{3,5}$',
+  '^\\d{3,5}$',
   null,
   ///India 
-  "^\d{3,4}$",
+  "^\\d{3,4}$",
   //Iran 
-  "^+98 (0\d{2}|09) \d{8}$",
+  "^+98 (0\\d{2}|09) \\d{8}$",
   /// Japan 
   "^1[12]$",
   // Malaysia 
-  "^1-300-\d{2}-\d{4}$",
+  "^1-300-\\d{2}-\\d{4}$",
   ///Pakistan 
   null,
   /// Philippines 
   null,
   // Singapore 
-  "^+94 (\d{3} \d{1}|\d{3}) \d{6}$",
+  "^+94 (\\d{3} \\d{1}|\\d{3}) \\d{6}$",
   //Sri Lanka 
   "^1[12]{2}$",
   // South Korea 
   null,
   // Taiwan 
-  "^+66 \d{4} \d{4}$",
+  "^+66 \\d{4} \\d{4}$",
   // Thailand 
   null,
 ]
@@ -249,13 +249,13 @@ const oceaniaCountries = ['Australia', 'New Zealand'];
 const oceaniaCountryCodes = ['61', '64'];
 
 // Patterns for Australia
-const oceaniaFixedLinePatternsAustralia = ['^(0[2378])?\d{8}$',"^\d{4} \d{4}$"];
+const oceaniaFixedLinePatternsAustralia = ['^(0[2378])?\\d{8}$',"^\\d{4} \\d{4}$"];
 const oceaniaFixedLinePatternNameAustralia = 'landline';
-const oceaniaLocalPatternsAustralia = ['^1[3-9]\d{9}$', null,];
+const oceaniaLocalPatternsAustralia = ['^1[3-9]\\d{9}$', null,];
 const oceaniaLocalPatternNameAustralia = 'mobile';
-const oceaniaLandLinePatternsAustralia = ['^(800|400) \d{4} \d{4}$', null,];
+const oceaniaLandLinePatternsAustralia = ['^(800|400) \\d{4} \\d{4}$', null,];
 const oceaniaLandLinePatternNameAustralia = 'toll-free';
-const oceaniaInternationalPatternsAustralia = ['^\d{3,5}$', null];
+const oceaniaInternationalPatternsAustralia = ['^\\d{3,5}$', null];
 const oceaniaInternationalPatternNameAustralia = 'service';
 const oceaniaFormatObject = createPhoneNumberFormats(
     oceaniaContinent,
@@ -361,15 +361,15 @@ const northAmericanCountryCodes = ['1', '1', '52'];
 
 // Patterns for Canada
 const northAmericaFixedLinePatterns = [
-  '^\d3\d{3}-\d{4}$', // Canada
-  '^\d3 \d{3}-\d{4}$', // United States
-  '^\d{2} \d{4} \d{4}$' // Mexico
+  '^\\d3\\d{3}-\\d{4}$', // Canada
+  '^\\d3\\d{3}-\\d{4}$', // United States
+  '^\\d{2}\\d{4} \\d{4}$' // Mexico
 ];
 const northAmericaFixedLinePatternName = 'landline';
 const northAmericaLocalPatterns = [
-  '^\d3\d{3}-\d{4}$', //Canada
- ' ^\d3\d{3}-\d{4}$', //United States
-  '^\d{2} \d{4} \d{4}$']; //Mexico
+  '^\\d3\\d{3}-\\d{4}$', //Canada
+ ' ^\\d3\\d{3}-\\d{4}$', //United States
+  '^\\d{2} \\d{4} \\d{4}$']; //Mexico
 const northAmericaLocalPatternName = 'mobile';
 const northAmericaLandLinePatterns = [
   '^1-800-\\d{2}-\\d{4}$', //Canada
@@ -377,9 +377,9 @@ const northAmericaLandLinePatterns = [
    '^1-888-\\d{3}-\\d{4}$']; //Mexico
 const northAmericaLandLinePatternName = 'toll-free';
 const northAmericaInternationalPatterns= [
-  '^+1 \d{10}$', //Canada
-  '^+1 \d{10}$', //United States
-  '^1-800-\d{2}-\d{4}$']; //Mexico
+  '^\\+1\\d{10}$', //Canada
+  '/^\\+1\d{10}$/', //United States
+  '^1-800-\\d{2}-\\d{4}$']; //Mexico
 const northAmericaInternationalPatternName = 'service';
 const northAmericaFormatObject = createPhoneNumberFormats(
   northAmericaContinent,
@@ -403,31 +403,31 @@ const centralAmericanCountryCodes = ['506', '503', '502', '504'];
 
 // Patterns for Central America
 const centralAmericaFixedLinePatterns = [
-  '^2\d{3}-\d{4}$', // Costa Rica
-  '^2\d{3}-\d{4}$',// El Salvador
-  "^2\d{3}-\d{4}$", // Guatemala
-  '^\d{3}-\d{4}$' // Honduras 
+  '^2\\d3}-\\d4}$', // Costa Rica
+  '^2\\d3}-\\d4}$',// El Salvador
+  "^2\\d3}-\\d4}$", // Guatemala
+  '^\\d3}-\\d4}$' // Honduras 
 ];
 const centralAmericaFixedLinePatternName = 'landline';
 const centralAmericaLocalPatterns = [
-  '^2\d{3}-\d{4}$', // Costa Rica
-  '^2\d{3}-\d{4}$', // El Salvador
-  '^2\d{3}-\d{4}$', // Guatemala
-  ' ^\d{3}-\d{4}$' // Honduras 
+  '^2\\d{3}-\\d{4}$', // Costa Rica
+  '^2\\d{3}-\\d{4}$', // El Salvador
+  '^2\\d{3}-\\d{4}$', // Guatemala
+  ' ^\\d{3}-\\d{4}$' // Honduras 
   
   ];
 const centralAmericaLocalPatternName = 'mobile';
 const centralAmericaLandLinePatterns = [
-  ' ^800-\d{3}-\d{4}$', // Costa Rica
+  ' ^800-\\d{3}-\\d{4}$', // Costa Rica
   null, // El Salvador
   null, // Guatemala
   null, // Honduras
 ];
 const centralAmericaLandLinePatternName = 'toll-free';
 const centralAmericaInternationalPatterns = [
-  '^90\d-\d{3}-\d{4}$', // Costa Rica
-  "^9\d-\d{3}-\d{4}$", // El Salvador
-  "^+52 \d{1,2} \d{4} \d{4}$", // Guatemala
+  '^90\\d-\\d{3}-\\d{4}$', // Costa Rica
+  "^9\\d-\\d{3}-\\d{4}$", // El Salvador
+  "^+52 \\d{1,2} \\d{4} \\d{4}$", // Guatemala
   null, // Honduras
 ];
 const centralAmericaInternationalPatternName = 'service';

@@ -70,11 +70,11 @@ async function readPhoneCodeData() {
 * }>} - A Promise that resolves to an object containing arrays of countries, phone codes, continents, and phone number formats.
 * @throws {Error} - Throws an error if there is an issue reading the file or parsing the JSON.
 */
-async function getPattern() {
+async function getTelResource() {
  /**
   * @type {string} - The path to the JSON file containing phone pattern information.
   */
- const filePath = path.join(__dirname, "telephone_formats.json");
+  const filePath = path.join(__dirname, '..','resources','TelResource.json');
 
  try {
    // Read the JSON file
@@ -133,4 +133,4 @@ async function getPattern() {
    throw new Error(`Error reading or parsing JSON: ${error.message}`);
  }
 }
-module.exports = {getPattern , readPhoneCodeData};
+module.exports = {getTelResource , readPhoneCodeData};

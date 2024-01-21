@@ -23,9 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org
 
-      - name: Install Dependencies and Run Tests
-        run: |
-          npm install
-          npm test
+      - name: Run Tests
+        run: npm test
         env:
           GITHUB_TOKE : ${{secrets.GITHUB_TOKEN}}

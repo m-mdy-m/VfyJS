@@ -17,8 +17,7 @@ function ChecKValue(value,min,max,ContentError=String){
     if (typeof value === 'number') {
         value = `${value}`
     }
-    value = trimmedValue(value)
-    return value
+    return trimmedValue(value)
 }
 async function hasCode(code){
     const validatedValue  = ChecKValue(code, MIN_LENGTH_CODE,MAX_LENGTH_CODE,'Code')
@@ -30,20 +29,40 @@ async function hasCode(code){
     const index = phoneCodes.indexOf(validatedValue)
     return index !==-1 ? {
         code : phoneCodes[index],
-        country : countries[index].toLowerCase(),
+        country : countries[index],
         iso : isoCodes[index],
         hasCode : true
     }: false
 }
-hasCode(98).then(result =>{
-    console.log(result);
-})
 function hasPhone(phone){
     const validatedPhoneNumber = ChecKValue(phone, MIN_LENGTH_PHONE_NUMBER, MAX_LENGTH_PHONE_NUMBER, "Phone Number");
-    
-    return validatedPhoneNumber;
+    return validatedPhoneNumber?{
+        phone : validatedPhoneNumber,
+        hasPhone : true
+    } : false
 }
-function GlobalVal(code,phone){
-    
+async function GlobalVal(code, phone) {
+    try {
+        const validatedCode = await hasCode(code);
+        const validatedPhone = await hasPhone(phone);
+
+        ifFalsyValue(validatedCode, 'Failed to validate country code.');
+        ifFalsyValue(validatedPhone, 'Failed to validate phone number.');
+
+        return {
+            code: validatedCode.code,
+            country: validatedCode.country,
+            iso: validatedCode.iso,
+            phone: validatedPhone.phone,
+            hasCode: validatedCode.hasCode,
+            hasPhone: validatedPhone.hasPhone,
+        };
+    } catch (error) {
+        console.error('An unexpected error occurred:', error);
+        throw new Error('Internal server error. Please try again later.');
+    }
 }
+GlobalVal('98','9115291407').then(result =>{
+    console.log(result);
+})
 module.exports = GlobalVal 

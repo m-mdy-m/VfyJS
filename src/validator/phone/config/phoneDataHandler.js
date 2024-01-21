@@ -1,7 +1,6 @@
 "use strict";
 const fs = require("fs").promises;
 const path = require("path");
-
 /**
  * Reads and extracts phone code information from the specified JSON file.
  *
@@ -12,7 +11,7 @@ async function readPhoneCodeData() {
   /**
    * @type {string} - The path to the JSON file containing phone code information.
    */
-  const filePath = path.join(__dirname, "countryPhoneCodes.json");
+  const filePath = path.join(__dirname, '..','resources','countryCodes.json');
 
   try {
     // Read the JSON file

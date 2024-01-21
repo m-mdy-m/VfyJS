@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path =  require('path')
-const pathFile = path.join(__dirname,'..','resources'+'/TelResource.json')
+const pathFile = path.join(__dirname,'..','resources','TelResource.json')
 function createPhoneNumberFormats(
     continent,
     countries = [],

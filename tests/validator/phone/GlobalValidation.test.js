@@ -95,7 +95,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
       const result = hasPhone('1234567890123456789012345678');
       expect(result).toBe(false);
     } catch (error) {
-      expect(error.message).toBe('Invalid Phone Number length. The Phone Number should be between 6 and 25 characters.');
+      expect(error.message).toBe("this is not valid");
     }
   });
   
@@ -127,7 +127,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
     try {
       await GlobalVal('12345678901', '9115291407');
     } catch (error) {
-      expect(error.message).toBe('Invalid Code length. The Code should be between 1 and 10 characters');
+      expect(error.message).toBe("Invalid Code length. The Code should be between 1 and 10 characters.");
     }
   });
   

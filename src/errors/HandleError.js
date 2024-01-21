@@ -215,10 +215,7 @@ exports.IfIsNumber = (property, message) => {
 exports.validateLength = (value, minLength, maxLength, message) => {
   const length = value.length;
   if (length < minLength || length > maxLength) {
-    throw new LengthError(
-      message ||
-        `Length must be between ${minLength} and ${maxLength || value} characters.`
-    );
+    throw new LengthError(value,message ||`Length must be between ${minLength} and ${maxLength || value} characters.`);
   }
 };
 /**
@@ -274,7 +271,7 @@ exports.validatePropertyLengthAndType = (
  */
 exports.TypesCheck = (property, types, message) => {
   if (!types.includes(typeof property)) {
-    throw new TypeError(message || `${property} is not of type ${types.join(' or ')}`);
+    throw new TypeError(property,message || `${property} is not of type ${types.join(' or ')}`);
   }
 };
 /**
@@ -298,7 +295,7 @@ exports.TypesCheck = (property, types, message) => {
  */
 exports.isEmpty = (value, message = 'Value should not be empty') => {
   if (!value) {
-    throw new ValidationError(message);
+    throw new ValidationError(value,message);
   }
   return value;
 };

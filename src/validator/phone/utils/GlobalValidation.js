@@ -39,8 +39,9 @@ hasCode(98).then(result =>{
     console.log(result);
 })
 function hasPhone(phone){
-    ChecKValue(phone, MIN_LENGTH_PHONE_NUMBER,MAX_LENGTH_PHONE_NUMBER,"Phone Number")
-
+    const validatedPhoneNumber = ChecKValue(phone, MIN_LENGTH_PHONE_NUMBER, MAX_LENGTH_PHONE_NUMBER, "Phone Number");
+    
+    return validatedPhoneNumber;
 }
 function GlobalVal(code,phone){
     

@@ -134,5 +134,4 @@ async function getPattern() {
    throw new Error(`Error reading or parsing JSON: ${error.message}`);
  }
 }
-  
 module.exports = {getPattern , readPhoneCodeData};

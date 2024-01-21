@@ -1,3 +1,4 @@
+"use strict";
 const {getTelResource,readPhoneCodeData} = require("../config/phoneDataHandler")
 const { trimmedValue } = require('../../../common/validationConstants')
 const { TypesCheck, isEmpty, validateLength, ifFalsyValue }= require('../../../errors/HandleError')
@@ -17,29 +18,23 @@ const MIN_LENGTH_PHONE_NUMBER = 6
  * @returns {string} - The trimmed and validated value.
  */
 function ChecKValue(value, min, max, ContentError = String) {
-    // Convert value to a number for additional validation
-    const numberCode = +value;
-    const validator = inputValidator(numberCode);
-
     // Check for empty value
     isEmpty(value, `${ContentError} should not be empty. Please provide a valid ${ContentError}.`);
-
-    // Validate length
-    validateLength(value, min, max, `Invalid ${ContentError} length. The ${ContentError} should be between ${min} and ${max} characters.`);
-
     // Check for valid types
     TypesCheck(value, ['string', 'number'], `Invalid ${ContentError}. ${ContentError} should be a string or a number.`);
-
+    // Convert value to a number for additional validation
+    let numberCode = +value;
+    const validator = inputValidator(numberCode);
     // Check for numeric characters
     ifFalsyValue(validator.hasNumeric(), `Invalid ${ContentError} format. The ${ContentError} should contain numeric characters.`);
-
     // Convert to string if the value is a number
-    if (typeof value === 'number') {
-        value = `${value}`;
+    if (typeof numberCode === 'number') {
+        numberCode = `${numberCode}`;
     }
-
+    // Validate length
+    validateLength(numberCode, min, max, `Invalid ${ContentError} length. The ${ContentError} should be between ${min} and ${max} characters.`);
     // Trim and return the validated value
-    return trimmedValue(value);
+    return trimmedValue(numberCode);
 }
 /**
  * Represents the result of validating a phone code.
@@ -137,7 +132,6 @@ async function getContinentInfo(code) {
         } : false;
     } catch (error) {
         // Log unexpected errors and throw a generic error message
-        console.error('An unexpected error occurred:', error);
         throw new Error('Internal server error. Please try again later.');
     }
 }
@@ -164,7 +158,6 @@ async function getContinentInfo(code) {
  */
 
 async function GlobalVal(code, phone) {
-    try {
         // Validate country code and phone number
         const validatedCode = await hasCode(code);
         const validatedPhone = await hasPhone(phone);
@@ -185,14 +178,8 @@ async function GlobalVal(code, phone) {
             hasCode: validatedCode.hasCode,
             hasPhone: validatedPhone.hasPhone,
         };
-    } catch (error) {
-        // Log unexpected errors and throw a generic error message
-        console.error('An unexpected error occurred:', error);
-        throw new Error('Internal server error. Please try again later.');
-    }
 }
-GlobalVal('98','9115291407').then(result =>{
-    console.log(result);
-})
-// Export GlobalVal function
-module.exports = GlobalVal;
+GlobalVal('12345678901', '9115291407').then((result) => {
+        console.log('result =>',result);
+});
+module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};

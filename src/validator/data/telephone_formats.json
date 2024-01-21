@@ -10,7 +10,7 @@
       },
       {
         "type": "international",
-        "pattern": "^\\+253[0-9]{8}$"
+        "pattern": "^+253[0-9]{8}$"
       },
       {
         "type": "fixed-line",
@@ -29,7 +29,7 @@
       },
       {
         "type": "international",
-        "pattern": "^\\+212[567][0-9]{8}$"
+        "pattern": "^+212[567][0-9]{8}$"
       },
       {
         "type": "fixed-line",
@@ -48,7 +48,7 @@
       },
       {
         "type": "international",
-        "pattern": "^\\+254[0-9]{9}$"
+        "pattern": "^+254[0-9]{9}$"
       },
       {
         "type": "fixed-line",
@@ -67,7 +67,7 @@
       },
       {
         "type": "international",
-        "pattern": "^\\+27[0-9]{9}$"
+        "pattern": "^+27[0-9]{9}$"
       },
       {
         "type": "fixed-line",
@@ -82,19 +82,19 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^1[3-9]\\d{9}$"
+        "pattern": " ^1[3-9]d{9}$"
       },
       {
         "type": "service",
-        "pattern": "^\\d{3,5}$"
+        "pattern": "^d{3,5}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\(0\\d{2,3}\\) \\d{7,8}$"
+        "pattern": "^0d2,3d{7,8}$"
       },
       {
         "type": "toll-free\"",
-        "pattern": "^(800|400) \\d{4} \\d{4}$"
+        "pattern": "^(800|400) d{4} d{4}$"
       }
     ]
   },
@@ -105,7 +105,7 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\d{4} \\d{4}$"
+        "pattern": "^d{4} d{4}$"
       }
     ]
   },
@@ -116,19 +116,19 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^9[1-9]\\d{9}$"
+        "pattern": "^9[1-9]d{9}$"
       },
       {
         "type": "service",
-        "pattern": "^\\d{3,4}$"
+        "pattern": "^d{3,4}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{3,4}-\\d{6,7}$"
+        "pattern": "^d{3,4}-d{6,7}$"
       },
       {
         "type": "toll-free\"",
-        "pattern": "^1800 \\d{6}$"
+        "pattern": "^1800 d{6}$"
       }
     ]
   },
@@ -139,15 +139,15 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^09\\d{9}$"
+        "pattern": "^09d{9}$"
       },
       {
         "type": "service",
-        "pattern": "^\\+98 (0\\d{2}|09) \\d{8}$"
+        "pattern": "^+98 (0d{2}|09) d{8}$"
       },
       {
         "type": "landline",
-        "pattern": "^0\\d{2} \\d{8}$"
+        "pattern": "^0d{2} d{8}$"
       }
     ]
   },
@@ -158,7 +158,7 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^(0120|0570|0800)-\\d{2}-\\d{4}$"
+        "pattern": "^(0120|0570|0800)-d{2}-d{4}$"
       },
       {
         "type": "service",
@@ -166,7 +166,7 @@
       },
       {
         "type": "landline",
-        "pattern": "^0\\d{2}-\\d{4}-\\d{4}$"
+        "pattern": "^0d{2}-d{4}-d{4}$"
       }
     ]
   },
@@ -177,19 +177,19 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^01\\d{1}-\\d{6,8}$"
+        "pattern": "^01d{1}-d{6,8}$"
       },
       {
         "type": "service",
-        "pattern": "^1-300-\\d{2}-\\d{4}$"
+        "pattern": "^1-300-d{2}-d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^0\\d{1,2}-\\d{7,8}$"
+        "pattern": "^0d{1,2}-d{7,8}$"
       },
       {
         "type": "toll-free\"",
-        "pattern": "^1-800-\\d{2}-\\d{4}$"
+        "pattern": "^1-800-d{2}-d{4}$"
       }
     ]
   },
@@ -200,7 +200,7 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^0\\d{2}-\\d{7,8}$"
+        "pattern": "^0d{2}-d{7,8}$"
       }
     ]
   },
@@ -211,11 +211,11 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^(\\+63|0)\\d{10}$"
+        "pattern": "^(+63|0)d{10}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{11}$"
+        "pattern": "^d{11}$"
       }
     ]
   },
@@ -226,15 +226,15 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^\\d{3} \\d{7}$"
+        "pattern": "^d{3} d{7}$"
       },
       {
         "type": "service",
-        "pattern": "^\\+94 (\\d{3} \\d{1}|\\d{3}) \\d{6}$"
+        "pattern": "^+94 (d{3} d{1}|d{3}) d{6}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\(\\d{3}\\) \\d{1} \\d{6}$"
+        "pattern": "^d3d3 d{1} d{6}$"
       }
     ]
   },
@@ -245,7 +245,7 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^01\\d{1}-\\d{4}-\\d{4}$"
+        "pattern": "^01d{1}-d{4}-d{4}$"
       },
       {
         "type": "service",
@@ -253,11 +253,11 @@
       },
       {
         "type": "landline",
-        "pattern": "^0\\d{1,3}-\\d{3,4}-\\d{4}$"
+        "pattern": "^0d{1,3}-d{3,4}-d{4}$"
       },
       {
         "type": "toll-free\"",
-        "pattern": "^070-\\d{4}-\\d{4}$"
+        "pattern": "^070-d{4}-d{4}$"
       }
     ]
   },
@@ -268,15 +268,15 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^0 \\d{3} \\d{4}$"
+        "pattern": "^0d{3} d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\(\\d{2}\\) \\d{4} \\d{4}$"
+        "pattern": "^d2d2d{4}d{4}$"
       },
       {
         "type": "toll-free\"",
-        "pattern": "^09\\d{2} \\d{6}$"
+        "pattern": "^09d{2} d{6}$"
       }
     ]
   },
@@ -287,11 +287,11 @@
     "formats": [
       {
         "type": "service",
-        "pattern": "^\\+66 \\d{4} \\d{4}$"
+        "pattern": "^+66 d{4} d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{4} \\d{4}$"
+        "pattern": "^d{4} d{4}$"
       }
     ]
   },
@@ -299,7 +299,16 @@
     "continent": "Asia",
     "country": "Thailand",
     "countryCode": "66",
-    "formats": []
+    "formats": [
+      {
+        "type": "mobile",
+        "pattern": "^0d{9}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^0d{1,2}-d{7}$"
+      }
+    ]
   },
   {
     "continent": "Oceania",
@@ -308,19 +317,19 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^1[3-9]\\d{9}$"
+        "pattern": "^1[3-9]d{9}$"
       },
       {
         "type": "service",
-        "pattern": "^\\d{3,5}$"
+        "pattern": "^d{3,5}$"
       },
       {
         "type": "landline",
-        "pattern": "^(0[2378])?\\d{8}$"
+        "pattern": "^(0[2378])?d{8}$"
       },
       {
         "type": "toll-free",
-        "pattern": "^(800|400) \\d{4} \\d{4}$"
+        "pattern": "^(800|400) d{4} d{4}$"
       }
     ]
   },
@@ -331,7 +340,7 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\d{4} \\d{4}$"
+        "pattern": "^d{4} d{4}$"
       }
     ]
   },
@@ -341,11 +350,11 @@
     "countryCode": "32",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^04[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2}$"
+        "type": "landline",
+        "pattern": "^0[0-9]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2}$"
       },
       {
-        "type": "landline",
+        "type": "mobile",
         "pattern": "^0[0-9]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2}$"
       }
     ]
@@ -367,12 +376,12 @@
     "countryCode": "358",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^0[7-9]{1}[0-9]{1}-[0-9]{3} [0-9]{2} [0-9]{2}$"
-      },
-      {
         "type": "landline",
         "pattern": "^0[0-9]{1}-[0-9]{3} [0-9]{3} [0-9]{2}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^0[7-9]{1}[0-9]{1}-[0-9]{3} [0-9]{2} [0-9]{2}$"
       }
     ]
   },
@@ -382,12 +391,12 @@
     "countryCode": "33",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^06 [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
-      },
-      {
         "type": "landline",
         "pattern": "^0[1-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^06 [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
       }
     ]
   },
@@ -397,16 +406,16 @@
     "countryCode": "49",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^[0-9]{4}$"
-      },
-      {
         "type": "service",
         "pattern": "^[+]{1}49 [0-9]{4} [0-9]{6,8}$"
       },
       {
         "type": "landline",
         "pattern": "^0[0-9]{3} [0-9]{6,8}(-[0-9]{2})?$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^[0-9]{4}$"
       }
     ]
   },
@@ -416,16 +425,16 @@
     "countryCode": "30",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^08[0-9]{1} [0-9]{6}$"
-      },
-      {
         "type": "service",
         "pattern": "^[+]{1}30 [0-9]{3} [0-9]{7,8}$"
       },
       {
         "type": "landline",
         "pattern": "^[0-9]{3} [0-9]{7,8}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^08[0-9]{1} [0-9]{6}$"
       }
     ]
   },
@@ -435,12 +444,12 @@
     "countryCode": "36",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^(1800|1850|1550) [0-9]{3} [0-9]{3}$"
-      },
-      {
         "type": "landline",
         "pattern": "^[0-9]{2} [0-9]{6}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^(1800|1850|1550) [0-9]{3} [0-9]{3}$"
       }
     ]
   },
@@ -450,12 +459,12 @@
     "countryCode": "354",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "Variable length, no fixed convention"
-      },
-      {
         "type": "landline",
         "pattern": "^[0-9]{3} [0-9]{4}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "Variable length, no fixed convention"
       }
     ]
   },
@@ -465,16 +474,16 @@
     "countryCode": "353",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^06-[0-9]{8}$"
-      },
-      {
         "type": "service",
         "pattern": "^[0-9]{3} [0-9]{4}$"
       },
       {
         "type": "landline",
         "pattern": "^[0-9]{2,3} [0-9]{5,7}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^06-[0-9]{8}$"
       }
     ]
   },
@@ -484,16 +493,12 @@
     "countryCode": "39",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^14 [0-9]{2}$"
-      },
-      {
         "type": "service",
         "pattern": "^[+]{1}353 [0-9]{2} [0-9]{5,7}$"
       },
       {
-        "type": "landline",
-        "pattern": "Variable length, no fixed convention"
+        "type": "mobile",
+        "pattern": "^14 [0-9]{2}$"
       }
     ]
   },
@@ -503,16 +508,12 @@
     "countryCode": "31",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^[+]{1}31 [0-9]{2} [0-9]{7,9}$"
-      },
-      {
-        "type": "service",
-        "pattern": "Variable length, no fixed convention"
-      },
-      {
         "type": "landline",
         "pattern": "^0[0-9]{1,2}-[0-9]{7,9}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^[+]{1}31 [0-9]{2} [0-9]{7,9}$"
       }
     ]
   },
@@ -522,15 +523,15 @@
     "countryCode": "47",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
-      },
-      {
         "type": "service",
         "pattern": "^[+]{1}31 [0-9]{2} [0-9]{7,9}$"
       },
       {
         "type": "landline",
+        "pattern": "^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
+      },
+      {
+        "type": "mobile",
         "pattern": "^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
       }
     ]
@@ -541,15 +542,15 @@
     "countryCode": "48",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{3}$"
-      },
-      {
         "type": "service",
         "pattern": "^[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
       },
       {
         "type": "landline",
+        "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{3}$"
+      },
+      {
+        "type": "mobile",
         "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{3}$"
       }
     ]
@@ -560,15 +561,15 @@
     "countryCode": "351",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^[0-9]{3} [0-9]{3} [0-9]{3}$"
-      },
-      {
         "type": "service",
         "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{3}$"
       },
       {
         "type": "landline",
+        "pattern": "^[0-9]{3} [0-9]{3} [0-9]{3}$"
+      },
+      {
+        "type": "mobile",
         "pattern": "^[0-9]{3} [0-9]{3} [0-9]{3}$"
       }
     ]
@@ -579,15 +580,15 @@
     "countryCode": "40",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^[0-9]{4}-[0-9]{3}-[0-9]{3}$"
-      },
-      {
         "type": "service",
         "pattern": "^[0-9]{3} [0-9]{3} [0-9]{3}$"
       },
       {
         "type": "landline",
+        "pattern": "^[0-9]{4}-[0-9]{3}-[0-9]{3}$"
+      },
+      {
+        "type": "mobile",
         "pattern": "^[0-9]{4}-[0-9]{3}-[0-9]{3}$"
       }
     ]
@@ -598,15 +599,15 @@
     "countryCode": "7",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$"
-      },
-      {
         "type": "service",
         "pattern": "^[0-9]{4}-[0-9]{3}-[0-9]{3}$"
       },
       {
         "type": "landline",
+        "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$"
+      },
+      {
+        "type": "mobile",
         "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$"
       }
     ]
@@ -617,20 +618,20 @@
     "countryCode": "1",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
+        "type": "toll-free",
+        "pattern": "^1-800-\\d{2}-\\d{4}$"
       },
       {
         "type": "service",
-        "pattern": "^\\+1 \\d{10}$"
+        "pattern": "^+1 d{10}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
+        "pattern": "^d3d{3}-d{4}$"
       },
       {
-        "type": "toll-free",
-        "pattern": "^1-800-\\d{2}-\\d{4}$"
+        "type": "mobile",
+        "pattern": "^d3d{3}-d{4}$"
       }
     ]
   },
@@ -640,20 +641,16 @@
     "countryCode": "1",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
-      },
-      {
         "type": "service",
-        "pattern": "^\\+1 \\d{10}$"
+        "pattern": "^+1 d{10}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\(\\d{3}\\) \\d{3}-\\d{4}$"
+        "pattern": "^d3 d{3}-d{4}$"
       },
       {
-        "type": "toll-free",
-        "pattern": "^1-800-\\d{2}-\\d{4}$"
+        "type": "mobile",
+        "pattern": " ^d3d{3}-d{4}$"
       }
     ]
   },
@@ -663,20 +660,20 @@
     "countryCode": "52",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^\\d{2} \\d{4} \\d{4}$"
+        "type": "toll-free",
+        "pattern": "^1-888-\\d{3}-\\d{4}$"
       },
       {
         "type": "service",
-        "pattern": "^\\+52 \\d{1,2} \\d{4} \\d{4}$"
+        "pattern": "^1-800-d{2}-d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{2} \\d{4} \\d{4}$"
+        "pattern": "^d{2} d{4} d{4}$"
       },
       {
-        "type": "toll-free",
-        "pattern": "^1-800-\\d{2}-\\d{4}$"
+        "type": "mobile",
+        "pattern": "^d{2} d{4} d{4}$"
       }
     ]
   },
@@ -686,20 +683,20 @@
     "countryCode": "506",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^2\\d{3}-\\d{4}$"
+        "type": "toll-free",
+        "pattern": " ^800-d{3}-d{4}$"
       },
       {
         "type": "service",
-        "pattern": "^90\\d-\\d{3}-\\d{4}$"
+        "pattern": "^90d-d{3}-d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^2\\d{3}-\\d{4}$"
+        "pattern": "^2d{3}-d{4}$"
       },
       {
-        "type": "toll-free",
-        "pattern": "^800-\\d{3}-\\d{4}$"
+        "type": "mobile",
+        "pattern": "^2d{3}-d{4}$"
       }
     ]
   },
@@ -709,16 +706,16 @@
     "countryCode": "503",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^2\\d{3}-\\d{4}$"
-      },
-      {
         "type": "service",
-        "pattern": "^9\\d-\\d{3}-\\d{4}$"
+        "pattern": "^9d-d{3}-d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^2\\d{3}-\\d{4}$"
+        "pattern": "^2d{3}-d{4}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^2d{3}-d{4}$"
       }
     ]
   },
@@ -728,16 +725,16 @@
     "countryCode": "502",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^2\\d{3}-\\d{4}$"
-      },
-      {
         "type": "service",
-        "pattern": "^\\+52 \\d{1,2} \\d{4} \\d{4}$"
+        "pattern": "^+52 d{1,2} d{4} d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^2\\d{3}-\\d{4}$"
+        "pattern": "^2d{3}-d{4}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^2d{3}-d{4}$"
       }
     ]
   },
@@ -747,12 +744,12 @@
     "countryCode": "504",
     "formats": [
       {
-        "type": "mobile",
-        "pattern": "^\\d{3}-\\d{4}$"
+        "type": "landline",
+        "pattern": "^d{3}-d{4}$"
       },
       {
-        "type": "landline",
-        "pattern": "^\\d{3}-\\d{4}$"
+        "type": "mobile",
+        "pattern": " ^d{3}-d{4}$"
       }
     ]
   },
@@ -763,11 +760,11 @@
     "formats": [
       {
         "type": "service",
-        "pattern": "^0800 \\d{3} \\d{4}$"
+        "pattern": "^0800 d{3} d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\(0\\d{1,4}\\) \\d{4}-\\d{4}$"
+        "pattern": "^0d1,4d{4}-d{4}$"
       },
       {
         "type": "mobile",
@@ -782,11 +779,11 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\d{2} \\d{4}-\\d{4}$"
+        "pattern": "^d{2}d{4}-d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d{2} 9\\d{4,5}-\\d{4}$"
+        "pattern": "^d{2} 9d{4,5}-d{4}$"
       }
     ]
   },
@@ -797,11 +794,11 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\(\\d{2}\\) \\d{2}-\\d{4}$"
+        "pattern": "^d2d{2}-d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": "^9\\d{8}$"
+        "pattern": "^9d{8}$"
       }
     ]
   }

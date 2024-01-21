@@ -114,10 +114,9 @@ async function getTelResource() {
    });
 
    // Create a Set to get unique continents
-   const countriesSet = new Set(continentArray);
 
    // Convert Set to array using spread operator
-   const continent = [...countriesSet];
+   const continent = [...continentArray]
 
    return {
      countries,

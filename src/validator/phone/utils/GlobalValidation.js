@@ -82,7 +82,8 @@ async function hasCode(code) {
         code: phoneCodes[index],
         country: countries[index],
         iso: isoCodes[index],
-        hasCode: true
+        hasCode: true,
+        code : validatedValue,
     } : false;
 }
 /**
@@ -110,17 +111,46 @@ function hasPhone(phone) {
         hasPhone: true
     } : false;
 }
-
-function getContinent(code,phone){
-
+/**
+ * Represents the result of retrieving continent and formatting patterns information for a phone code.
+ * @typedef {Object} ContinentInfoResult
+ * @property {string} continent - The continent associated with the phone code.
+ * @property {Array} patterns - An array of formatting patterns for the phone code.
+ *   Each pattern is an object with 'type' and 'pattern' properties.
+ * @example
+ * const continentInfo = await getContinentInfo('98');
+ * if (continentInfo) {
+ *    console.log(continentInfo.continent); // Continent information
+ *    console.log(continentInfo.patterns); // Formatting patterns
+ * } else {
+ *    console.log('Invalid phone code');
+ * }
+ */
+async function getContinentInfo(code) {
+    try {
+        const phoneData = await getTelResource();
+        const index = phoneData.phoneCodes.indexOf(code);
+        // Return information if valid, otherwise false
+        return index !== -1 ? {
+            continent: phoneData.continent[index],
+            patterns: phoneData.format[index],
+        } : false;
+    } catch (error) {
+        // Log unexpected errors and throw a generic error message
+        console.error('An unexpected error occurred:', error);
+        throw new Error('Internal server error. Please try again later.');
+    }
 }
 /**
  * Represents the result of validating both country code and phone number.
  * @typedef {Object} ValidationResult
+ * @property {string} continent - Validated continent.
  * @property {string} code - Validated phone code.
  * @property {string} country - Validated country.
  * @property {string} iso - Validated ISO code.
  * @property {string} phone - Validated phone number.
+ * @property {Array} patterns - An array of formatting patterns for the phone code.
+ *   Each pattern is an object with 'type' and 'pattern' properties.
  * @property {boolean} hasCode - Indicates if the code is valid (true) or not (false).
  * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
  */
@@ -132,22 +162,26 @@ function getContinent(code,phone){
  * @returns {ValidationResult} - An object with validated information.
  * @throws Will throw an error if validation fails.
  */
+
 async function GlobalVal(code, phone) {
     try {
         // Validate country code and phone number
         const validatedCode = await hasCode(code);
         const validatedPhone = await hasPhone(phone);
 
+        const ContinentInfo =await getContinentInfo(validatedCode.code)
         // Check for validation failures
         ifFalsyValue(validatedCode, 'Failed to validate country code.');
         ifFalsyValue(validatedPhone, 'Failed to validate phone number.');
 
         // Return validated information
         return {
+            continent : ContinentInfo.continent,
             code: validatedCode.code,
             country: validatedCode.country,
             iso: validatedCode.iso,
             phone: validatedPhone.phone,
+            patterns: ContinentInfo.patterns,
             hasCode: validatedCode.hasCode,
             hasPhone: validatedPhone.hasPhone,
         };

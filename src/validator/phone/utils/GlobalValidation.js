@@ -110,6 +110,10 @@ function hasPhone(phone) {
         hasPhone: true
     } : false;
 }
+
+function getContinent(code,phone){
+
+}
 /**
  * Represents the result of validating both country code and phone number.
  * @typedef {Object} ValidationResult

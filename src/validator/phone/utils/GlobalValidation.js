@@ -4,23 +4,30 @@ const { TypesCheck, isEmpty, validateLength, ifFalsyValue }= require('../../../e
 const inputValidator = require('../../../utils/inputValidator')
 const MAX_LENGTH_CODE = 10
 const MIN_LENGTH_CODE = 1
-async function hasCode(code){
-    const numberCode = +code
+const MAX_LENGTH_PHONE_NUMBER = 25
+const MIN_LENGTH_PHONE_NUMBER = 6
+
+function ChecKValue(value,min,max,ContentError=String){
+    const numberCode = +value
     const validator = inputValidator(numberCode)
-    isEmpty(code, 'Code should not be empty. Please provide a valid code.');
-    validateLength(code,MIN_LENGTH_CODE,MAX_LENGTH_CODE,`Invalid code length. The code should be between ${MIN_LENGTH_CODE}and${MAX_LENGTH_CODE}characters.`)
-    TypesCheck(code,['string', 'number'],'Invalid code. Code should be a string or a number.')
-    ifFalsyValue(validator.hasNumeric(),'Invalid code format. The code should contain numeric characters.')
-    if (typeof code === 'number') {
-        code = `${code}`
+    isEmpty(value, `${ContentError} should not be empty. Please provide a valid ${ContentError}.`);
+    validateLength(value,min,max,`Invalid ${ContentError} length. The ${ContentError} should be between ${min}and${max}characters.`)
+    TypesCheck(value,['string', 'number'],`Invalid ${ContentError}. ${ContentError} should be a string or a number.`)
+    ifFalsyValue(validator.hasNumeric(),`Invalid ${ContentError} format. The ${ContentError} should contain numeric characters.`)
+    if (typeof value === 'number') {
+        value = `${value}`
     }
+    value = trimmedValue(value)
+    return value
+}
+async function hasCode(code){
+    const validatedValue  = ChecKValue(code, MIN_LENGTH_CODE,MAX_LENGTH_CODE,'Code')
     const phoneCodeData = await readPhoneCodeData();
     ifFalsyValue(phoneCodeData,'Error fetching phone code data. Please try again later.')
     const phoneCodes = phoneCodeData.phoneCodes;
     const isoCodes = phoneCodeData.isoCodes;
     const countries = phoneCodeData.countries;
-    code = trimmedValue(code)
-    const index = phoneCodes.indexOf(code)
+    const index = phoneCodes.indexOf(validatedValue)
     return index !==-1 ? {
         code : phoneCodes[index],
         country : countries[index].toLowerCase(),
@@ -31,9 +38,8 @@ async function hasCode(code){
 hasCode(98).then(result =>{
     console.log(result);
 })
-
 function hasPhone(phone){
-    isEmpty(phone, 'phone should not be empty. Please provide a valid code.');
+    ChecKValue(phone, MIN_LENGTH_PHONE_NUMBER,MAX_LENGTH_PHONE_NUMBER,"Phone Number")
 
 }
 function GlobalVal(code,phone){

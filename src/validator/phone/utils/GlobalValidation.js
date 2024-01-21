@@ -23,7 +23,11 @@ function ChecKValue(value, min, max, ContentError = String) {
     // Check for valid types
     TypesCheck(value, ['string', 'number'], `Invalid ${ContentError}. ${ContentError} should be a string or a number.`);
     // Convert value to a number for additional validation
+    
     let numberCode = +value;
+    if (numberCode !== value) {
+        throw new Error('value is not valid')
+    }
     const validator = inputValidator(numberCode);
     // Check for numeric characters
     ifFalsyValue(validator.hasNumeric(), `Invalid ${ContentError} format. The ${ContentError} should contain numeric characters.`);
@@ -34,6 +38,8 @@ function ChecKValue(value, min, max, ContentError = String) {
     // Validate length
     validateLength(numberCode, min, max, `Invalid ${ContentError} length. The ${ContentError} should be between ${min} and ${max} characters.`);
     // Trim and return the validated value
+    // console.log('value =>',value);
+    // console.log('numberCode =>',numberCode);
     return trimmedValue(numberCode);
 }
 /**
@@ -179,7 +185,6 @@ async function GlobalVal(code, phone) {
             hasPhone: validatedPhone.hasPhone,
         };
 }
-GlobalVal('12345678901', '9115291407').then((result) => {
-        console.log('result =>',result);
-});
+const result = hasPhone('1234567890123456789012345678')
+console.log(result);
 module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};

@@ -127,7 +127,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
     try {
       await GlobalVal('12345678901', '9115291407');
     } catch (error) {
-      expect(error.message).toBe('Internal server error. Please try again later.');
+      expect(error.message).toBe('Invalid Code length. The Code should be between 1 and 10 characters');
     }
   });
   
@@ -135,7 +135,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
     try {
       await GlobalVal('98','');
     } catch (error) {
-      expect(error.message).toBe('Internal server error. Please try again later.');
+      expect(error.message).toBe('Phone Number should not be empty. Please provide a valid Phone Number.');
     }
   });
   

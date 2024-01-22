@@ -12,3 +12,9 @@ exports.China = (values)=>{
     const hasValidFormat =validationFormats(patterns,format)
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
+exports.HongKongAndMacau = (values)=>{
+    const {code,hasCode,hasPhone,patterns,phone }= extractInfoValue(values)
+    const format = [phone]
+    const hasValidFormat = validationFormats(patterns,format)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+}

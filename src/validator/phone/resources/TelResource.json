@@ -105,7 +105,7 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\d{4} \\d{4}$"
+        "pattern": "^\\d{4}\\d{4}$"
       }
     ]
   },

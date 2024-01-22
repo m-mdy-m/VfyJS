@@ -57,13 +57,39 @@ function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isD
   };
 }
 /**
- * Extracts relevant information from the input values.
+ * Extracts information values from the provided object.
  *
- * @param {Object} values - The input values object.
- * @returns {Object} - An object containing extracted information (code, phone, patterns, hasCode, hasPhone).
+ * @param {Object} values - The input object containing information values.
+ * @param {string} values.code - The code value to be extracted.
+ * @param {string} values.phone - The phone value to be extracted.
+ * @param {string[]} values.patterns - The patterns value to be extracted (an array of strings).
+ * @param {boolean} values.hasCode - Indicates whether the object has the 'code' property.
+ * @param {boolean} values.hasPhone - Indicates whether the object has the 'phone' property.
+ * @returns {ExtractInfoValue} An object containing the extracted information values.
+ /**
+ * @typedef {Object} ExtractInfoValue
+ * @property {string} code - The extracted code value.
+ * @property {string} phone - The extracted phone value.
+ * @property {string[]} patterns - The extracted patterns value.
+ * @property {boolean} hasCode - Indicates whether the object has the 'code' property.
+ * @property {boolean} hasPhone - Indicates whether the object has the 'phone' property.
+ * @example
+ * const inputObject = {
+ *   code: "ABC123",
+ *   phone: "555-1234",
+ *   patterns: ["pattern1", "pattern2"],
+ *   hasCode: true,
+ *   hasPhone: false,
+ * };
+ * const extractedValues = extractInfoValue(inputObject);
+ * console.log(extractedValues);
+ * // Output: { code: 'ABC123', phone: '555-1234', patterns: ['pattern1', 'pattern2'], hasCode: true, hasPhone: false }
  */
 function extractInfoValue(values) {
+  // Destructure the input object
   const { code, phone, patterns, hasCode, hasPhone } = values;
+
+  // Return an object with the extracted values
   return { code, phone, patterns, hasCode, hasPhone };
 }
 

@@ -25,6 +25,7 @@ jobs:
 
       - name: Run Tests
         run: |
-         npm test
+          npm install
+          npm test
         env:
           GITHUB_TOKE : ${{secrets.GITHUB_TOKEN}}

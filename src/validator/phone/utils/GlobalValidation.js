@@ -30,12 +30,13 @@ function ChecKValue(value, min, max, ContentError = String) {
     // Check for numeric characters
     ifFalsyValue(validator.hasNumeric(), `Invalid ${ContentError} format. The ${ContentError} should contain numeric characters.`);
     // Convert to string if the value is a number
-    if (typeof numberCode === 'number') {
+    if (typeof (value || numberCode) === 'number') {
         numberCode = `${numberCode}`;
+        value = `${value}`;
     }
     if (numberCode.length !== value.length) {
-        throw new Error('this is not valid')
-    }    
+        throw new Error(`${ContentError} length mismatch after conversion to a number.`);
+    }  
     // Validate length
     validateLength(numberCode, min, max, `Invalid ${ContentError} length. The ${ContentError} should be between ${min} and ${max} characters.`);
     // Trim and return the validated value
@@ -62,10 +63,10 @@ function ChecKValue(value, min, max, ContentError = String) {
 async function hasCode(code) {
     // Validate the code using ChecKValue function
     const validatedValue = ChecKValue(code, MIN_LENGTH_CODE, MAX_LENGTH_CODE, 'Code');
-
+    
+    findEqualCodes(code)
     // Fetch phone code data
     const phoneCodeData = await readPhoneCodeData();
-
     // Check for error fetching data
     ifFalsyValue(phoneCodeData, 'Error fetching phone code data. Please try again later.');
 
@@ -86,6 +87,49 @@ async function hasCode(code) {
         code : validatedValue,
     } : false;
 }
+/**
+ * Finds phone codes that match specified criteria and retrieves associated information.
+ *
+ * @async
+ * @function
+ * @param {string|number} code - The code to search for matches.
+ * @returns {Promise<Array<Object>>} - An array of objects containing ISO codes, phone codes, and countries.
+ * @throws {Error} - Throws an error if there is an issue fetching phone code data.
+ *
+ * @example
+ * const equalCodes = ["1"];
+ * const matchingCodes = await findEqualCodes(equalCodes);
+ * console.log(matchingCodes);
+ */
+async function findEqualCodes(code){
+    let equalCodes=["1"]
+    // Fetch phone code data
+    const phoneCodeData = await readPhoneCodeData();
+    // Check for error fetching data
+    ifFalsyValue(phoneCodeData, 'Error fetching phone code data. Please try again later.');
+
+    // Retrieve phone codes, iso codes, and countries
+    const phoneCodes = phoneCodeData.phoneCodes;
+    const isoCodes = phoneCodeData.isoCodes;
+    const countries = phoneCodeData.countries;
+    // Find matching codes
+    const matchCodes = phoneCodes.map((value, index) => {
+        if (equalCodes.includes(value)) {
+            const isoCode = isoCodes[index];
+            const code = value;
+            const country = countries[index];
+            return { isoCode, code, country };
+        }
+    });
+
+    // Filter out undefined values
+    const matchingData = matchCodes.filter(value => value !== undefined);
+
+    return matchingData;
+}
+hasCode(1).then(result =>{
+    console.log('result =>',result);
+})
 /**
  * Represents the result of validating a phone number.
  * @typedef {Object} PhoneNumberValidationResult
@@ -166,7 +210,6 @@ async function GlobalVal(code, phone) {
         // Validate country code and phone number
         const validatedCode = await hasCode(code);
         const validatedPhone = await hasPhone(phone);
-
         const ContinentInfo =await getContinentInfo(validatedCode.code)
         // Check for validation failures
         ifFalsyValue(validatedCode, 'Failed to validate country code.');

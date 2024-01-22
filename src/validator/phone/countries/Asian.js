@@ -119,3 +119,9 @@ exports.Taiwan = (values)=>{
     const hasValidFormat = validationFormats(patterns,format)
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
+exports.Thailand = (values)=>{
+    const {hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
+    const format = [phone,phone]
+    const hasValidFormat = validationFormats(patterns,format)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+}

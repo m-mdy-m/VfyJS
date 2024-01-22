@@ -150,7 +150,7 @@ const asianFixedLinePatterns = [
   // Taiwan 
   "^\\d{2}-\\d{6}$",
   // Thailand 
-  "^0\\d{1,2}-\\d{7}$"
+  "^0\\d{1,2}\\d{7}$"
 ]
 const asianFixedLinePatternName = 'landline'
 const asianLocalPatterns = [

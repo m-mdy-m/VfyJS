@@ -268,15 +268,15 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^0\\d{3} \\d{4}$"
+        "pattern": "^0\\d{2,3}-\\d{4}-\\d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d2\\d2\\d{4}\\d{4}$"
+        "pattern": "^\\d{2}-\\d{4}-\\d{4}$"
       },
       {
         "type": "toll-free\"",
-        "pattern": "^09\\d{2} \\d{6}$"
+        "pattern": "^080\\d{6}$"
       }
     ]
   },

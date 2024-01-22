@@ -91,12 +91,22 @@ exports.Singapore = (values)=>{
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
 exports.SriLanka = (values)=>{
-    const {code,hasCode,hasPhone,patterns,phone,} = extractInfoValue(values)
+    const {hasCode,hasPhone,patterns,phone,} = extractInfoValue(values)
     const [w,f,g] = getSubstring(phone,[0,3],[3,6],[6])
     const formattedLandline = `${w}-${f}-${g}`
     const [h,j,u ] = getSubstring(phone,[0,3],[3,7],[7])
     const formattedTollFreeNumber = `${h}-${j}-${u}`
     const format = [phone,phone,formattedLandline,formattedTollFreeNumber]
+    const hasValidFormat = validationFormats(patterns,format)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+}
+exports.SouthKorea = (values)=>{
+    const {hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
+    const [w,f,g] = getSubstring(phone,[0,3],[3,7],[7])
+    const formattedMobile = `${w}-${f}-${g}`
+    const [c,y,j] = getSubstring(phone,[0,2],[2,6],[6])
+    const formattedLandline = `${c}-${y}-${j}`
+    const format = [formattedMobile,formattedLandline,phone]
     const hasValidFormat = validationFormats(patterns,format)
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }

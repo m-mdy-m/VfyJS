@@ -146,7 +146,7 @@ const asianFixedLinePatterns = [
   //Sri Lanka 
   "^0\\d{1,3}-\\d{3,4}-\\d{4}$",
   // South Korea 
-  "^\\d2\\d2\\d{4}\\d{4}$",
+  "^\\d{2}-\\d{4}-\\d{4}$",
   // Taiwan 
   "^\\d{4} \d{4}$",
   // Thailand 
@@ -175,7 +175,7 @@ const asianLocalPatterns = [
   //Sri Lanka 
   "^01\\d{1}-\\d{4}-\\d{4}$",
   // South Korea 
-  "^0\\d{3} \\d{4}$",
+  "^0\\d{2,3}-\\d{4}-\\d{4}$",
   // Taiwan 
   null,
   // Thailand 
@@ -204,7 +204,7 @@ const asianLandLinePatterns = [
   //Sri Lanka 
   "^070-\\d{4}-\\d{4}$",
   // South Korea 
-  "^09\\d{2} \\d{6}$",
+  "^080\\d{6}$",
   // Taiwan 
   null,
   // Thailand 

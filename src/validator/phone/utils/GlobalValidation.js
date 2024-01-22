@@ -225,7 +225,7 @@ async function GlobalVal(code, phone) {
         };
 }
 // good night
-// GlobalVal(1,9115191407).then(result =>{
+// GlobalVal(1,91234214).then(result =>{
 //     console.log('result =>', result);
 // })
 module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};

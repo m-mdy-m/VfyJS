@@ -64,7 +64,8 @@ async function hasCode(code) {
     // Validate the code using ChecKValue function
     const validatedValue = ChecKValue(code, MIN_LENGTH_CODE, MAX_LENGTH_CODE, 'Code');
     
-    findEqualCodes(code)
+    const isFind = await findEqualCodes(validatedValue)
+    // console.log('isFind =>',isFind);
     // Fetch phone code data
     const phoneCodeData = await readPhoneCodeData();
     // Check for error fetching data
@@ -102,6 +103,7 @@ async function hasCode(code) {
  * console.log(matchingCodes);
  */
 async function findEqualCodes(code){
+    console.log('code =>',code);
     let equalCodes=["1"]
     // Fetch phone code data
     const phoneCodeData = await readPhoneCodeData();
@@ -112,23 +114,21 @@ async function findEqualCodes(code){
     const phoneCodes = phoneCodeData.phoneCodes;
     const isoCodes = phoneCodeData.isoCodes;
     const countries = phoneCodeData.countries;
-    // Find matching codes
-    const matchCodes = phoneCodes.map((value, index) => {
+    const matchingCodes = phoneCodes.filter(value => equalCodes.includes(value));
+    console.log(matchingCodes);
+
+    const match = phoneCodes.forEach((value , index)=>{
         if (equalCodes.includes(value)) {
             const isoCode = isoCodes[index];
             const code = value;
             const country = countries[index];
             return { isoCode, code, country };
         }
-    });
-
-    // Filter out undefined values
-    const matchingData = matchCodes.filter(value => value !== undefined);
-
-    return matchingData;
+    })
+    console.log(match);
 }
-hasCode(1).then(result =>{
-    console.log('result =>',result);
+findEqualCodes("1").then(result =>{
+    console.log('result =>', result);
 })
 /**
  * Represents the result of validating a phone number.

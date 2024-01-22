@@ -30,9 +30,13 @@ function ChecKValue(value, min, max, ContentError = String) {
     // Check for numeric characters
     ifFalsyValue(validator.hasNumeric(), `Invalid ${ContentError} format. The ${ContentError} should contain numeric characters.`);
     // Convert to string if the value is a number
-    if (typeof (value || numberCode) === 'number') {
+    if (typeof (numberCode) === 'number') {
         numberCode = `${numberCode}`;
+
+    }
+    if (typeof (value) === 'number') {
         value = `${value}`;
+
     }
     if (numberCode.length !== value.length) {
         throw new Error(`${ContentError} length mismatch after conversion to a number.`);
@@ -257,7 +261,4 @@ async function GlobalVal(code, phone) {
             };
         }
 }
-GlobalVal(1,124214).then(result =>{
-    console.log(result);
-})
 module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};

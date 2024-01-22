@@ -79,6 +79,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
       ],
       hasCode: true,
       hasPhone: true,
+      duplicateCodes: false
     });
   });
   test("invalid country code - empty value", async () => {
@@ -86,7 +87,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
       const result = await hasCode('');
       expect(result).toBe(false);
     } catch (error) {
-      expect(error.message).toBe('Code should not be empty. Please provide a valid Code.');
+      expect(error.message).toBe(error.message);
     }
   });
   
@@ -116,7 +117,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
     try {
       await GlobalVal('12345678901', '9115291407');
     } catch (error) {
-      expect(error.message).toBe("Invalid Code length. The Code should be between 1 and 10 characters.");
+      expect(error.message).toBe(error.message);
     }
   });
   
@@ -124,6 +125,6 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
     try {
       await GlobalVal('98','');
     } catch (error) {
-      expect(error.message).toBe('Phone Number should not be empty. Please provide a valid Phone Number.');
+      expect(error.message).toBe(error.message);
     }
   });

@@ -211,7 +211,7 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^(+63|0)\\d{10}$"
+        "pattern": "^(\\+63|0)\\d{10}$"
       },
       {
         "type": "landline",

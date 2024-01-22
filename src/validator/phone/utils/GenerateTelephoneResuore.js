@@ -169,7 +169,7 @@ const asianLocalPatterns = [
   ///Pakistan 
   null,
   /// Philippines 
-  "^(+63|0)\\d{10}$",
+  "^(\\+63|0)\\d{10}$",
   // Singapore 
   "^\\d{3} \\d{7}$",
   //Sri Lanka 

@@ -36,7 +36,7 @@ function validationFormats(patterns, mobile, landline, service) {
  * @param {boolean} hasCode - Indicates if the code is valid.
  * @param {boolean} hasPhone - Indicates if the phone number is valid.
  * @param {boolean} isDuplicateCode - Indicates if there is a duplicate code.
- * @returns {Object} - The generated validation result object.
+ * @returns {ValidationResult} - The generated validation result object.
  */
 function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isDuplicateCode) {
   return {
@@ -53,5 +53,30 @@ function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isD
     isDuplicateCode: isDuplicateCode,
   };
 }
-
-module.exports = { validationFormats, generateValidationResult };
+/**
+ * Extracts relevant information from the input values.
+ *
+ * @param {Object} values - The input values object.
+ * @returns {Object} - An object containing extracted information (code, phone, patterns, hasCode, hasPhone).
+ */
+function extractInfoValue(values) {
+  const { code, phone, patterns, hasCode, hasPhone } = values;
+  return { code, phone, patterns, hasCode, hasPhone };
+}
+/**
+ * @typedef {Object} ValidationResult
+ * @property {string} continent - Validated continent.
+ * @property {string} code - Validated phone code.
+ * @property {string} country - Validated country.
+ * @property {string} isoCode - Validated ISO code.
+ * @property {string} phone - Validated phone number.
+ * @property {Array} patterns - An array of formatting patterns for the phone code.
+ * Each pattern is an object with 'type' and 'pattern' properties.
+ * @property {boolean} isValidMobileFormat - Indicates if the mobile format is valid (true) or not (false).
+ * @property {boolean} isValidServiceFormat - Indicates if the service format is valid (true) or not (false).
+ * @property {boolean} isValidLandlineFormat - Indicates if the landline format is valid (true) or not (false).
+ * @property {boolean} hasCode - Indicates if the code is valid (true) or not (false).
+ * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
+ * @property {boolean} isDuplicateCode - Indicates if there is a duplicate code (true) or not (false).
+ */
+module.exports = { validationFormats, generateValidationResult,extractInfoValue  };

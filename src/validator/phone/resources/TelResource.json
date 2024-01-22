@@ -143,11 +143,11 @@
       },
       {
         "type": "service",
-        "pattern": "^+98 (0\\d{2}|09) \\d{8}$"
+        "pattern": "^\\+98(0\\d{2}|09)\\d{8}$"
       },
       {
         "type": "landline",
-        "pattern": "^0\\d{2} \\d{8}$"
+        "pattern": "^0\\d{2}?\\d{8}$"
       }
     ]
   },

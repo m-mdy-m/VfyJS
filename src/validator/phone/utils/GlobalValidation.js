@@ -8,6 +8,7 @@ const MIN_LENGTH_CODE = 1
 const MAX_LENGTH_PHONE_NUMBER = 25
 const MIN_LENGTH_PHONE_NUMBER = 6
 
+
 /**
  * Validates a given value based on specified criteria.
  *
@@ -47,7 +48,6 @@ function ChecKValue(value, min, max, ContentError = String) {
     return trimmedValue(numberCode);
 }
 /**
- * Represents the result of validating a phone code.
  * @typedef {Object} PhoneCodeValidationResult
  * @property {string} code - Validated phone code.
  * @property {string} country - Validated country.
@@ -63,6 +63,12 @@ function ChecKValue(value, min, max, ContentError = String) {
  * } else {
  *    console.log('Invalid phone code');
  * }
+ */
+/**
+ * Represents the result of validating a phone code.
+ *
+ * @param {string|number} code - The phone code to be validated.
+ * @returns {Promise<PhoneCodeValidationResult|boolean>} - An object with validated information or false if invalid.
  */
 async function hasCode(code) {
     // Validate the code using ChecKValue function
@@ -132,7 +138,6 @@ async function findEqualCodes(code){
     
 }
 /**
- * Represents the result of validating a phone number.
  * @typedef {Object} PhoneNumberValidationResult
  * @property {string} phone - Validated phone number.
  * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
@@ -145,7 +150,12 @@ async function findEqualCodes(code){
  *    console.log('Invalid phone number');
  * }
  */
-
+/**
+ * Represents the result of validating a phone number.
+ *
+ * @param {string|number} phone - The phone number to be validated.
+ * @returns {PhoneNumberValidationResult|boolean} - An object with validated information or false if invalid.
+ */
 function hasPhone(phone) {
     // Validate the phone number using ChecKValue function
     const validatedPhoneNumber = ChecKValue(phone, MIN_LENGTH_PHONE_NUMBER, MAX_LENGTH_PHONE_NUMBER, "Phone Number");
@@ -157,7 +167,6 @@ function hasPhone(phone) {
     } : false;
 }
 /**
- * Represents the result of retrieving continent and formatting patterns information for a phone code.
  * @typedef {Object} ContinentInfoResult
  * @property {string} continent - The continent associated with the phone code.
  * @property {Array} patterns - An array of formatting patterns for the phone code.
@@ -170,6 +179,14 @@ function hasPhone(phone) {
  * } else {
  *    console.log('Invalid phone code');
  * }
+ */
+
+/**
+ * Represents the result of retrieving continent and formatting patterns information for a phone code.
+ *
+ * @async
+ * @param {string|number} code - The phone code for which continent information is retrieved.
+ * @returns {Promise<ContinentInfoResult|boolean>} - An object with continent and patterns information or false if invalid.
  */
 async function getContinentInfo(code) {
     try {
@@ -186,7 +203,6 @@ async function getContinentInfo(code) {
     }
 }
 /**
- * Represents the result of validating both country code and phone number.
  * @typedef {Object} ValidationResult
  * @property {string} continent - Validated continent.
  * @property {string} code - Validated phone code.
@@ -261,4 +277,11 @@ async function GlobalVal(code, phone) {
             };
         }
 }
-module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};
+module.exports = {
+    hasCode,
+    hasPhone,
+    getContinentInfo,
+    GlobalVal,
+    ChecKValue,
+    findEqualCodes
+};

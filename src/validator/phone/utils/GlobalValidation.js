@@ -65,7 +65,7 @@ async function hasCode(code) {
     const validatedValue = ChecKValue(code, MIN_LENGTH_CODE, MAX_LENGTH_CODE, 'Code');
     
     const isFind = await findEqualCodes(validatedValue)
-    // console.log('isFind =>',isFind);
+    console.log('isFind =>',isFind);
     // Fetch phone code data
     const phoneCodeData = await readPhoneCodeData();
     // Check for error fetching data
@@ -78,15 +78,17 @@ async function hasCode(code) {
 
     // Find the index of the validated code
     const index = phoneCodes.indexOf(validatedValue);
-
-    // Return information if valid, otherwise false
-    return index !== -1 ? {
-        code: phoneCodes[index],
-        country: countries[index],
-        iso: isoCodes[index],
-        hasCode: true,
-        code : validatedValue,
-    } : false;
+    if (isFind.length > 0) {
+        return isFind;  // Return the array when there are matching codes
+    } else {
+        return index !== -1 ? {
+            code: phoneCodes[index],
+            country: countries[index],
+            iso: isoCodes[index],
+            hasCode: true,
+            code: validatedValue,
+        } : false;
+    }
 }
 /**
  * Finds phone codes that match specified criteria and retrieves associated information.
@@ -103,7 +105,6 @@ async function hasCode(code) {
  * console.log(matchingCodes);
  */
 async function findEqualCodes(code){
-    console.log('code =>',code);
     let equalCodes=["1"]
     // Fetch phone code data
     const phoneCodeData = await readPhoneCodeData();
@@ -114,22 +115,18 @@ async function findEqualCodes(code){
     const phoneCodes = phoneCodeData.phoneCodes;
     const isoCodes = phoneCodeData.isoCodes;
     const countries = phoneCodeData.countries;
-    const matchingCodes = phoneCodes.filter(value => equalCodes.includes(value));
-    console.log(matchingCodes);
-
-    const match = phoneCodes.forEach((value , index)=>{
-        if (equalCodes.includes(value)) {
+     // Use reduce to accumulate matching codes
+     const matchingData = phoneCodes.reduce((accumulator, value, index) => {
+        if (equalCodes.includes(value) && +value === +code) {
             const isoCode = isoCodes[index];
-            const code = value;
             const country = countries[index];
-            return { isoCode, code, country };
+            accumulator.push({ isoCode, code: value, country });
         }
-    })
-    console.log(match);
+        return accumulator;
+    }, []);
+    return matchingData
+    
 }
-findEqualCodes("1").then(result =>{
-    console.log('result =>', result);
-})
 /**
  * Represents the result of validating a phone number.
  * @typedef {Object} PhoneNumberValidationResult
@@ -227,4 +224,8 @@ async function GlobalVal(code, phone) {
             hasPhone: validatedPhone.hasPhone,
         };
 }
+// good night
+// GlobalVal(1,9115191407).then(result =>{
+//     console.log('result =>', result);
+// })
 module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};

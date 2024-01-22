@@ -126,7 +126,7 @@ const asianCountryCodes =[
 ];
 const asianFixedLinePatterns = [
   //China
-  '^0\\d2,3\\d{7,8}$',
+  '^0\\d{2,3}\\d{7,8}$',
   ///Hong Kong and Macau
   '^\\d{4} \\d{4}$',
   ///India 

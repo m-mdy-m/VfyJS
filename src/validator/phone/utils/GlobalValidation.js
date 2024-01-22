@@ -65,7 +65,7 @@ async function hasCode(code) {
     const validatedValue = ChecKValue(code, MIN_LENGTH_CODE, MAX_LENGTH_CODE, 'Code');
     
     const isFind = await findEqualCodes(validatedValue)
-    console.log('isFind =>',isFind);
+    // console.log('isFind =>',isFind);
     // Fetch phone code data
     const phoneCodeData = await readPhoneCodeData();
     // Check for error fetching data
@@ -207,10 +207,31 @@ async function GlobalVal(code, phone) {
         // Validate country code and phone number
         const validatedCode = await hasCode(code);
         const validatedPhone = await hasPhone(phone);
-        const ContinentInfo =await getContinentInfo(validatedCode.code)
         // Check for validation failures
         ifFalsyValue(validatedCode, 'Failed to validate country code.');
         ifFalsyValue(validatedPhone, 'Failed to validate phone number.');
+        if (typeof validatedCode === 'object') {
+            let a = validatedCode.forEach(async (validations) =>{
+                // let equalCountry  = new Set()
+                // const ContinentInfo =await getContinentInfo(validations.code)
+                // equalCountry.add(validations.code)
+                // equalCountry.add(ContinentInfo.continent)
+                // equalCountry.add(ContinentInfo.patterns)
+                // equalCountry.add(validations.isoCode)
+                // equalCountry.add(validations.country)
+                // console.log('equalCountry =>',equalCountry);
+                // return {
+                //     code: equalCountry[0],
+                //     continent: equalCountry[1],
+                //     patterns: equalCountry.patterns[2],
+                //     iso: equalCountry[3],
+                //     country: equalCountry[4],
+                // };
+
+                // goooooooooooooodd nightttt
+            })
+        }
+        const ContinentInfo =await getContinentInfo(validatedCode.code)
 
         // Return validated information
         return {
@@ -224,8 +245,7 @@ async function GlobalVal(code, phone) {
             hasPhone: validatedPhone.hasPhone,
         };
 }
-// good night
-// GlobalVal(1,91234214).then(result =>{
-//     console.log('result =>', result);
-// })
+GlobalVal(1,91234214).then(result =>{
+    // console.log('result =>', result);
+})
 module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};

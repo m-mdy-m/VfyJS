@@ -106,9 +106,6 @@ function extractInfoValue(values) {
 function getSubstring(input, ...ranges) {
   return ranges.map(range => input.substring(...range));
 }
-function getSubstring(input, ...ranges) {
-  return ranges.map(range => input.substring(...range));
-}
 /**
  * @typedef {Object} ValidationResult
  * @property {string} continent - Validated continent.

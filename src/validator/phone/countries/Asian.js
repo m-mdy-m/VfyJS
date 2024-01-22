@@ -88,5 +88,15 @@ exports.Singapore = (values)=>{
     const service = `+${code}${phone}`
     const format = [phone,service,phone]
     const hasValidFormat = validationFormats(patterns,format)
-    return generateValidationResult(values,hasValidFormat,hasCode,hasCode,false)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+}
+exports.SriLanka = (values)=>{
+    const {code,hasCode,hasPhone,patterns,phone,} = extractInfoValue(values)
+    const [w,f,g] = getSubstring(phone,[0,3],[3,6],[6])
+    const formattedLandline = `${w}-${f}-${g}`
+    const [h,j,u ] = getSubstring(phone,[0,3],[3,7],[7])
+    const formattedTollFreeNumber = `${h}-${j}-${u}`
+    const format = [phone,phone,formattedLandline,formattedTollFreeNumber]
+    const hasValidFormat = validationFormats(patterns,format)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }

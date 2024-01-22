@@ -226,15 +226,15 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^\\d{3} \\d{7}$"
+        "pattern": "^[689]\\d{7}$"
       },
       {
         "type": "service",
-        "pattern": "^+94 (\\d{3} \\d{1}|\\d{3}) \\d{6}$"
+        "pattern": "^\\+65\\d{8,9}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d3\\d3 \\d{1} \\d{6}$"
+        "pattern": "^[2-8]\\d{7}$"
       }
     ]
   },

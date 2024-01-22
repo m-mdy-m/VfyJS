@@ -142,7 +142,7 @@ const asianFixedLinePatterns = [
   /// Philippines 
   "^\\d{11}$",
   // Singapore 
-  "^\\d3\\d3 \\d{1} \\d{6}$",
+  "^[2-8]\\d{7}$",
   //Sri Lanka 
   "^0\\d{1,3}-\\d{3,4}-\\d{4}$",
   // South Korea 
@@ -171,7 +171,7 @@ const asianLocalPatterns = [
   /// Philippines 
   "^(\\+63|0)\\d{10}$",
   // Singapore 
-  "^\\d{3} \\d{7}$",
+  "^[689]\\d{7}$",
   //Sri Lanka 
   "^01\\d{1}-\\d{4}-\\d{4}$",
   // South Korea 
@@ -228,7 +228,7 @@ const asianInternationalPatterns = [
   /// Philippines 
   null,
   // Singapore 
-  "^+94 (\\d{3} \\d{1}|\\d{3}) \\d{6}$",
+  "^\\+65\\d{8,9}$",
   //Sri Lanka 
   "^1[12]{2}$",
   // South Korea 

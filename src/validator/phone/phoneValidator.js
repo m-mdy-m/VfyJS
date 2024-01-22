@@ -9,7 +9,7 @@ async function validatePhoneNumber(code,phone){
       return '//'
   }
 }
-validatePhoneNumber('63', '09123456789').then(result => {
+validatePhoneNumber('65', '91234567').then(result => {
   console.log(result);
 });
 module.exports = validatePhoneNumber;

@@ -90,8 +90,24 @@ function extractInfoValue(values) {
   // Return an object with the extracted values
   return { code, phone, patterns, hasCode, hasPhone };
 }
-function getSubstring(str,start,end){
-  return str.substring(start,end)
+/**
+ * Extracts substrings from the given input string based on the specified ranges.
+ *
+ * @param {string} input - The input string from which substrings will be extracted.
+ * @param {...number[]} ranges - Variable number of ranges specified as pairs of start and end indices.
+ * @returns {string[]} - An array of substrings extracted from the input string based on the specified ranges.
+ *
+ * @example
+ * const inputString = "Hello, World!";
+ * const result = getSubstring(inputString, [0, 5], [7, 12]);
+ * console.log(result);
+ * // Output: ['Hello', 'World']
+ */
+function getSubstring(input, ...ranges) {
+  return ranges.map(range => input.substring(...range));
+}
+function getSubstring(input, ...ranges) {
+  return ranges.map(range => input.substring(...range));
 }
 /**
  * @typedef {Object} ValidationResult

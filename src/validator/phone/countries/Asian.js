@@ -1,4 +1,4 @@
-const {generateValidationResult , validationFormats,extractInfoValue,getSubstring} = require('../utils/FormatValidation')
+const {generateValidationResult , validationFormats,extractInfoValue,getSubstring, customSubstring} = require('../utils/FormatValidation')
 exports.iran = (values) => {
     const { code, phone, patterns,hasCode,hasPhone } = extractInfoValue(values)
     const format = [ `0${phone}`,`+${code}0${phone}`, `0${phone}`]
@@ -38,19 +38,14 @@ exports.India = (values)=>{
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
 exports.Japan = (values)=>{
-    const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
-    const FourDigits = getSubstring(phone,0,4)
-    const TwoDigits =  getSubstring(phone,4,6)
-    const threeDigits = getSubstring(phone,6)
-    const formattedPhoneNumber = `${FourDigits}-${TwoDigits}-${threeDigits}`;
-
-    const TwoDigitsLandLine = getSubstring(phone,0,2)
-    const FourDigitsLandLine = getSubstring(phone,2,6)
-    const FourDigitsLandLine2 = getSubstring(phone,6)
+    const {hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
+    const [w,r,y]=getSubstring(phone,[0,4],[4,6],[6])
+    const formattedPhoneNumber = `${w}-${r}-${y}`;
+    const [h,j,l] = getSubstring(phone,[0,2],[2,6],[6])
     const hasStartZero = phone.startsWith("0")
     let format;
     if (hasStartZero) {
-        const formattedLandLineNumber = `${TwoDigitsLandLine}-${FourDigitsLandLine}-${FourDigitsLandLine2}`
+        const formattedLandLineNumber = `${h}-${j}-${l}`
         format = [formattedPhoneNumber,phone,formattedLandLineNumber]
     }else{
         format = [formattedPhoneNumber,phone,false]
@@ -61,25 +56,17 @@ exports.Japan = (values)=>{
 exports.Malaysia = (values)=>{
     const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
     // Mobile Number Formatting
-    const mobileAreaCode = getSubstring(phone,0,3)
-    const mobileRemainingDigits = getSubstring(phone,3)
-    const formattedMobile = `${mobileAreaCode}-${mobileRemainingDigits}`;
+    const [m,s] = getSubstring(phone,[0,3],[3])
+    const formattedMobile = `${m}-${s}`;
     // Service Number Formatting
-    const serviceCountryCode = getSubstring(phone,0,1) // '1-300-12-3456'
-    const serviceCode = getSubstring(phone,1,4)
-    const serviceGroupCode = getSubstring(phone,4,6) 
-    const serviceSubscriberNumber = getSubstring(phone,6) 
-    const formattedService = `${serviceCountryCode}-${serviceCode}-${serviceGroupCode}-${serviceSubscriberNumber}`;
+    const [c,f,g,n] = getSubstring(phone,[0,1],[1,4],[4,6],[6])
+    const formattedService = `${c}-${f}-${g}-${n}`;
     // Landline Number Formatting
-    const landlineAreaCode = getSubstring(phone,0,2)  // '03-12345678'
-    const landlineSubscriberNumber = getSubstring(phone,2)
-    const formattedLandline = `${landlineAreaCode}-${landlineSubscriberNumber}`;
+    const [ h,t]= getSubstring(phone,[0,2],[2])
+    const formattedLandline = `${h}-${t}`;
     // Toll-Free Number Formatting
-    const tollFreeCountryCode = getSubstring(phone,0,1)
-    const tollFreeCode = getSubstring(phone,1,4)
-    const tollFreeGroupCode = getSubstring(phone,4,6)
-    const tollFreeSubscriberNumber = getSubstring(phone,6)
-    const formattedTollFreeNumber = `${tollFreeCountryCode}-${tollFreeCode}-${tollFreeGroupCode}-${tollFreeSubscriberNumber}`;
+    const [w,r,u,i] = getSubstring(phone,[0,1],[1,4],[4,6],[6])
+    const formattedTollFreeNumber = `${w}-${r}-${u}-${i}`;
     const format = [formattedMobile,formattedService,formattedLandline,formattedTollFreeNumber]
     const hasValidFormat = validationFormats(patterns,format)
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)

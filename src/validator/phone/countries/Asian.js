@@ -110,3 +110,12 @@ exports.SouthKorea = (values)=>{
     const hasValidFormat = validationFormats(patterns,format)
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
+exports.Taiwan = (values)=>{
+    const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
+    let formattedMobile = `+${code}${phone}`
+    const [f,k] = getSubstring(phone,[0,2],[2])
+    const formattedLandline = `${f}-${k}`
+    const format = [formattedMobile,formattedLandline]
+    const hasValidFormat = validationFormats(patterns,format)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+}

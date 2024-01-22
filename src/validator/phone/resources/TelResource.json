@@ -287,11 +287,11 @@
     "formats": [
       {
         "type": "service",
-        "pattern": "^+66 \\d{4} \\d{4}$"
+        "pattern": "^\\+886\\d{4}\\d{4}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{4} d{4}$"
+        "pattern": "^\\d{2}-\\d{6}$"
       }
     ]
   },

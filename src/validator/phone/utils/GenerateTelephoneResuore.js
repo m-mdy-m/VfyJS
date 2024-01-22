@@ -148,7 +148,7 @@ const asianFixedLinePatterns = [
   // South Korea 
   "^\\d{2}-\\d{4}-\\d{4}$",
   // Taiwan 
-  "^\\d{4} \d{4}$",
+  "^\\d{2}-\\d{6}$",
   // Thailand 
   "^0\\d{1,2}-\\d{7}$"
 ]
@@ -234,7 +234,7 @@ const asianInternationalPatterns = [
   // South Korea 
   null,
   // Taiwan 
-  "^+66 \\d{4} \\d{4}$",
+  "^\\+886\\d{4}\\d{4}$",
   // Thailand 
   null,
 ]

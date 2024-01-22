@@ -13,18 +13,17 @@
 function validationFormats(patterns,formats) {
   /**
    * Map through the patterns and test each format against its corresponding pattern.
-   *
-   * @param {Object} patternObj - The pattern object containing the regex pattern.
-   * @param {number} index - The index of the pattern in the array.
-   * @returns {boolean} - True if the format matches the pattern, false otherwise.
-   */
-  return patterns.map((patternObj, index) => {
-    // Create a regex object from the pattern
-    const regex = new RegExp(patternObj.pattern);
-    
-    // Test the format against the pattern
-    const testResult = regex.test(formats[index]);
-
+  *
+  * @param {Object} patternObj - The pattern object containing the regex pattern.
+  * @param {number} index - The index of the pattern in the array.
+  * @returns {boolean} - True if the format matches the pattern, false otherwise.
+  */
+ return patterns.map((patternObj, index) => {
+   // Create a regex object from the pattern
+   const regex = new RegExp(patternObj.pattern);
+   
+   // Test the format against the pattern
+   const testResult = regex.test(formats[index]);
     return testResult;
   });
 }

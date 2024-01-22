@@ -37,3 +37,24 @@ exports.India = (values)=>{
     const hasValidFormat = validationFormats(patterns,format)
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
+exports.Japan = (values)=>{
+    const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
+    const FourDigits = phone.substring(0, 4);
+    const TwoDigits = phone.substring(4,6);
+    const threeDigits = phone.substring(6);
+    const formattedPhoneNumber = `${FourDigits}-${TwoDigits}-${threeDigits}`;
+
+    const TwoDigitsLandLine = phone.substring(0,2)
+    const FourDigitsLandLine = phone.substring(2,6)
+    const FourDigitsLandLine2 = phone.substring(6)
+    const hasStartZero = phone.startsWith("0")
+    let format;
+    if (hasStartZero) {
+        const formattedLandLineNumber = `${TwoDigitsLandLine}-${FourDigitsLandLine}-${FourDigitsLandLine2}`
+        format = [formattedPhoneNumber,phone,formattedLandLineNumber]
+    }else{
+        format = [formattedPhoneNumber,phone,false]
+    }
+    const hasValidFormat = validationFormats(patterns,format)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+}

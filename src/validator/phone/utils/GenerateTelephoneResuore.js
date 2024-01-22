@@ -134,7 +134,7 @@ const asianFixedLinePatterns = [
   //Iran 
   "^0\\d{2}?\\d{8}$",
   /// Japan 
-  "^0\\d{2}-\\d{4}-\\d{4}$",
+  "^\\d{2}-\\d{4}-\\d{4}$",
   // Malaysia 
   "^0\\d{1,2}-\\d{7,8}$",
   ///Pakistan 

@@ -138,7 +138,7 @@ const asianFixedLinePatterns = [
   // Malaysia 
   "^0\\d{1,2}-\\d{7,8}$",
   ///Pakistan 
-  "^0\\d{2}-\\d{7,8}$",
+  "^0\\d{2}\\d{7,8}$",
   /// Philippines 
   "^\\d{11}$",
   // Singapore 

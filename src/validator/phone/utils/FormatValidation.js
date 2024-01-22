@@ -21,7 +21,6 @@ function validationFormats(patterns,formats) {
  return patterns.map((patternObj, index) => {
    // Create a regex object from the pattern
    const regex = new RegExp(patternObj.pattern);
-   
    // Test the format against the pattern
    const testResult = regex.test(formats[index]);
     return testResult;
@@ -91,7 +90,9 @@ function extractInfoValue(values) {
   // Return an object with the extracted values
   return { code, phone, patterns, hasCode, hasPhone };
 }
-
+function getSubstring(str,start,end){
+  return str.substring(start,end)
+}
 /**
  * @typedef {Object} ValidationResult
  * @property {string} continent - Validated continent.
@@ -108,4 +109,4 @@ function extractInfoValue(values) {
  * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
  * @property {boolean} isDuplicateCode - Indicates if there is a duplicate code (true) or not (false).
  */
-module.exports = { validationFormats, generateValidationResult,extractInfoValue  };
+module.exports = { validationFormats, generateValidationResult,extractInfoValue ,getSubstring };

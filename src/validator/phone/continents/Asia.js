@@ -1,4 +1,4 @@
-const {iran,China,HongKongAndMacau} = require('../countries/Asian')
+const {iran,China,HongKongAndMacau, India} = require('../countries/Asian')
 function AsiaPhoneNumber(value){
     const country = value.country
     switch (country){
@@ -8,7 +8,7 @@ function AsiaPhoneNumber(value){
         case "Hong Kong":
             return HongKongAndMacau(value)
         case "India":
-            return '//'
+            return India(value)
         case "Iran":
             return iran(value)
         case "Japan":

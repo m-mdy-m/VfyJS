@@ -128,7 +128,7 @@ const asianFixedLinePatterns = [
   //China
   '^0\\d{2,3}\\d{7,8}$',
   ///Hong Kong and Macau
-  '^\\d{4} \\d{4}$',
+  '^\\d{4}\\d{4}$',
   ///India 
   "^\\d{3,4}-\\d{6,7}$",
   //Iran 
@@ -159,7 +159,7 @@ const asianLocalPatterns = [
   ///Hong Kong and Macau
   null,
   ///India 
-  "^9[1-9]\\d{9}$",
+  "^\\+9[1-9]\\d{10}$",
   //Iran 
   "^09\\d{9}$",
   /// Japan 
@@ -188,7 +188,7 @@ const asianLandLinePatterns = [
   ///Hong Kong and Macau
   null,
   ///India 
-  "^1800 \\d{6}$",
+  "^1-800\\d{6}$",
   //Iran 
   null,
   /// Japan 

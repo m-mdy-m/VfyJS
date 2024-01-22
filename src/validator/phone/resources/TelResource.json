@@ -116,7 +116,7 @@
     "formats": [
       {
         "type": "mobile",
-        "pattern": "^9[1-9]\\d{9}$"
+        "pattern": "^\\+9[1-9]\\d{10}$"
       },
       {
         "type": "service",
@@ -128,7 +128,7 @@
       },
       {
         "type": "toll-free\"",
-        "pattern": "^1800 \\d{6}$"
+        "pattern": "^1-800\\d{6}$"
       }
     ]
   },

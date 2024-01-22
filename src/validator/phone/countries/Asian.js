@@ -13,8 +13,27 @@ exports.China = (values)=>{
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
 exports.HongKongAndMacau = (values)=>{
-    const {code,hasCode,hasPhone,patterns,phone }= extractInfoValue(values)
+    const {hasCode,hasPhone,patterns,phone }= extractInfoValue(values)
     const format = [phone]
+    const hasValidFormat = validationFormats(patterns,format)
+    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+}
+exports.India = (values)=>{
+    const { code,hasCode,hasPhone,patterns,phone } = extractInfoValue(values)
+    const LandlinePhone = phone.split(phone.length - 4)
+    const sectionOne = LandlinePhone[0]
+    const sectionTwo = LandlinePhone[1]
+    const landline = `${sectionOne}-${sectionTwo}`;
+    let tollFree = phone
+    const hasStartWithOne =  tollFree.startsWith("1")
+    const numbers = tollFree.split('800')[1]
+    const hasSixNumber = /^\d{6}$/.test(numbers)
+    let format;
+    if (hasStartWithOne && hasSixNumber) {
+        format = [`+${code}${phone}`,phone,landline,tollFree]
+    }else{
+        format = [`+${code}${phone}`,phone,landline,false]
+    }
     const hasValidFormat = validationFormats(patterns,format)
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }

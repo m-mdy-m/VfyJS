@@ -6,8 +6,11 @@
  * @param {string} landline - The landline format to be validated.
  * @param {string} service - The service format to be validated.
  * @returns {Array<boolean>} - An array of boolean values indicating the validity of each format against the corresponding pattern.
+ * 
+ * @typedef {Array<boolean>} ValidationResultArray - An array indicating the validity of each format against the corresponding pattern.
+ * Each boolean value in the array represents the validity of the corresponding format (mobile, service, landline).
  */
-function validationFormats(patterns, mobile, landline, service) {
+function validationFormats(patterns,formats) {
   /**
    * Map through the patterns and test each format against its corresponding pattern.
    *
@@ -20,9 +23,7 @@ function validationFormats(patterns, mobile, landline, service) {
     const regex = new RegExp(patternObj.pattern);
     
     // Test the format against the pattern
-    const testResult = regex.test(
-      index === 0 ? mobile : index === 1 ? service : landline
-    );
+    const testResult = regex.test(formats[index]);
 
     return testResult;
   });
@@ -39,15 +40,17 @@ function validationFormats(patterns, mobile, landline, service) {
  * @returns {ValidationResult} - The generated validation result object.
  */
 function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isDuplicateCode) {
+  const defaultValue = null
   return {
     continent: values.continent,
     country: values.country,
     code: values.code,
     isoCode: values.iso,
     phone: values.phone,
-    isValidMobileFormat: hasValidFormat[0],
-    isValidServiceFormat: hasValidFormat[1],
-    isValidLandlineFormat: hasValidFormat[2],
+    isValidMobileFormat: hasValidFormat[0]  !== undefined ? hasValidFormat[0] : defaultValue,
+    isValidServiceFormat: hasValidFormat[1] !== undefined ? hasValidFormat[1] : defaultValue,
+    isValidLandlineFormat: hasValidFormat[2] !== undefined ? hasValidFormat[2] : defaultValue,
+    isValidTollFree: hasValidFormat[3] !== undefined ? hasValidFormat[3] : defaultValue,
     hasCode: hasCode,
     hasPhone: hasPhone,
     isDuplicateCode: isDuplicateCode,
@@ -63,6 +66,7 @@ function extractInfoValue(values) {
   const { code, phone, patterns, hasCode, hasPhone } = values;
   return { code, phone, patterns, hasCode, hasPhone };
 }
+
 /**
  * @typedef {Object} ValidationResult
  * @property {string} continent - Validated continent.

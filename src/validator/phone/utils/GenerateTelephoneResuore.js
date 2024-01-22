@@ -155,7 +155,7 @@ const asianFixedLinePatterns = [
 const asianFixedLinePatternName = 'landline'
 const asianLocalPatterns = [
   //China
-  ' ^1[3-9]\\d{9}$',
+  '^1[3-9]\\d{9}$',
   ///Hong Kong and Macau
   null,
   ///India 
@@ -184,7 +184,7 @@ const asianLocalPatterns = [
 const asianLocalPatternName = 'mobile'
 const asianLandLinePatterns = [
   //China
-  '^(800|400) \\d{4} \\d{4}$',
+  '^(800|400)\\d{4}\\d{4}$',
   ///Hong Kong and Macau
   null,
   ///India 

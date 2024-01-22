@@ -4,14 +4,12 @@ async function validatePhoneNumber(code,phone){
   const informationPhone = await GlobalVal(code,phone)
   switch(informationPhone.continent){
     case "Asia":
-      AsiaPhoneNumber(informationPhone)
-      break;
+      return AsiaPhoneNumber(informationPhone)
     case "//":
-      break;
-
+      return '//'
   }
 }
-validatePhoneNumber(98,9115291407)
-
-
+validatePhoneNumber(98,'9115291407').then(result =>{
+  console.log(result);
+})
 module.exports = validatePhoneNumber;

@@ -3,8 +3,9 @@ function AsiaPhoneNumber(value){
     const country = value.country
     switch (country){
         case "Iran":
-            iran(value)
-            break;
+            return iran(value)
+        case "":
+            return '//'
     }
 }
 

@@ -23,7 +23,11 @@ function ChecKValue(value, min, max, ContentError = String) {
     isEmpty(value, `${ContentError} should not be empty. Please provide a valid ${ContentError}.`);
     // Check for valid types
     TypesCheck(value, ['string', 'number'], `Invalid ${ContentError}. ${ContentError} should be a string or a number.`);
-    // Convert value to a number for additional validation
+    // Convert value to a string
+    const stringValue = String(value);
+
+    // Check if it starts with '0'
+    const startsWithZero = stringValue.startsWith('0');
     
     let numberCode = +value;
     
@@ -35,9 +39,11 @@ function ChecKValue(value, min, max, ContentError = String) {
         numberCode = `${numberCode}`;
 
     }
+    if (startsWithZero) {
+        numberCode = "0"+numberCode
+    }
     if (typeof (value) === 'number') {
         value = `${value}`;
-
     }
     if (numberCode.length !== value.length) {
         throw new Error(`${ContentError} length mismatch after conversion to a number.`);

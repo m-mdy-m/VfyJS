@@ -120,7 +120,7 @@ async function findEqualCodes(code){
         if (equalCodes.includes(value) && +value === +code) {
             const isoCode = isoCodes[index];
             const country = countries[index];
-            accumulator.push({ isoCode, code: value, country });
+            accumulator.push({ isoCode, code: value, country});
         }
         return accumulator;
     }, []);
@@ -199,7 +199,7 @@ async function getContinentInfo(code) {
  *
  * @param {string|number} code - The country code to be validated.
  * @param {string|number} phone - The phone number to be validated.
- * @returns {ValidationResult} - An object with validated information.
+ * @returns {Promise<ValidationResult>}  - An object with validated information.
  * @throws Will throw an error if validation fails.
  */
 
@@ -210,42 +210,54 @@ async function GlobalVal(code, phone) {
         // Check for validation failures
         ifFalsyValue(validatedCode, 'Failed to validate country code.');
         ifFalsyValue(validatedPhone, 'Failed to validate phone number.');
-        if (typeof validatedCode === 'object') {
-            let a = validatedCode.forEach(async (validations) =>{
-                // let equalCountry  = new Set()
-                // const ContinentInfo =await getContinentInfo(validations.code)
-                // equalCountry.add(validations.code)
-                // equalCountry.add(ContinentInfo.continent)
-                // equalCountry.add(ContinentInfo.patterns)
-                // equalCountry.add(validations.isoCode)
-                // equalCountry.add(validations.country)
-                // console.log('equalCountry =>',equalCountry);
-                // return {
-                //     code: equalCountry[0],
-                //     continent: equalCountry[1],
-                //     patterns: equalCountry.patterns[2],
-                //     iso: equalCountry[3],
-                //     country: equalCountry[4],
-                // };
-
-                // goooooooooooooodd nightttt
-            })
+        if (Array.isArray(validatedCode)) {
+            const uniqueValues = validatedCode.reduce((acc, obj) => {
+                console.log(obj);
+                acc.code = obj.code;
+                if (!acc.isoCode) {
+                    acc.isoCode = [];
+                }
+                if (!acc.country) {
+                    acc.country = [];
+                }
+                if (!acc.isoCode.includes(obj.isoCode)) {
+                    acc.isoCode.push(obj.isoCode);
+                }
+                if (!acc.country.includes(obj.country)) {
+                    acc.country.push(obj.country);
+                }
+                return acc;
+            }, {});
+            const ContinentInfo =await getContinentInfo(uniqueValues.code)
+            return{
+                continent : ContinentInfo.continent,
+                code : uniqueValues.code,
+                country : uniqueValues.country,
+                iso : uniqueValues.isoCode,
+                phone : validatedPhone.phone,
+                patterns: ContinentInfo.patterns,
+                hasCode: true,
+                duplicateCodes : true,
+                hasPhone: validatedPhone.hasPhone,
+            }
+            // return uniqueValues
+        }else{
+            const ContinentInfo =await getContinentInfo(validatedCode.code)
+            // Return validated information
+            return {
+                continent : ContinentInfo.continent,
+                code: validatedCode.code,
+                country: validatedCode.country,
+                iso: validatedCode.iso,
+                phone: validatedPhone.phone,
+                patterns: ContinentInfo.patterns,
+                hasCode: validatedCode.hasCode,
+                hasPhone: validatedPhone.hasPhone,
+                duplicateCodes : false,
+            };
         }
-        const ContinentInfo =await getContinentInfo(validatedCode.code)
-
-        // Return validated information
-        return {
-            continent : ContinentInfo.continent,
-            code: validatedCode.code,
-            country: validatedCode.country,
-            iso: validatedCode.iso,
-            phone: validatedPhone.phone,
-            patterns: ContinentInfo.patterns,
-            hasCode: validatedCode.hasCode,
-            hasPhone: validatedPhone.hasPhone,
-        };
 }
-GlobalVal(1,91234214).then(result =>{
-    // console.log('result =>', result);
+GlobalVal(1,124214).then(result =>{
+    console.log(result);
 })
 module.exports = {hasCode,hasPhone,getContinentInfo,GlobalVal,ChecKValue};

@@ -329,7 +329,7 @@
       },
       {
         "type": "toll-free",
-        "pattern": "^(800|400) \\d{4} \\d{4}$"
+        "pattern": "^(800|400)\\d{8}"
       }
     ]
   },
@@ -340,7 +340,7 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\d{4} \\d{4}$"
+        "pattern": "^\\d{8}$"
       }
     ]
   },

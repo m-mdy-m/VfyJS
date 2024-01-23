@@ -22,7 +22,7 @@ function validationFormats(patterns,formats) {
    // Create a regex object from the pattern
    const regex = new RegExp(patternObj.pattern);
    // Test the format against the pattern
-   const testResult = regex.test( formats ||formats[index]);
+   const testResult = regex.test(formats.length?formats[index] : formats);
     return testResult;
   });
 }

@@ -19,6 +19,9 @@ const MIN_LENGTH_PHONE_NUMBER = 6
  * @returns {string} - The trimmed and validated value.
  */
 function ChecKValue(value, min, max, ContentError = String) {
+    if (typeof (value) === 'number') {
+        value = `${value}`;
+    }
     //  trim validated value
     value = trimmedValue(value)
     // Check for empty value

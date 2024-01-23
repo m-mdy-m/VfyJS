@@ -3,7 +3,8 @@ const emailValidate = require('./src/validator/form/email')
 const userValidate = require('./src/validator/form/username')
 const isHttp = require('./src/validator/links/http')
 const isHttps = require('./src/validator/links/https')
-const colorValidate = require('./src/validator/colors/isColor')
+const colorValidate = require('./src/validator/colors/isColor');
+const validatePhoneNumber = require('./src/validator/phone/phoneValidator');
 /**
  * Validates a password based on specified criteria.
  *
@@ -19,3 +20,4 @@ exports.username = userValidate
 exports.isColor = colorValidate
 exports.isHttp = isHttp
 exports.isHttps = isHttps
+exports.validPhone = validatePhoneNumber

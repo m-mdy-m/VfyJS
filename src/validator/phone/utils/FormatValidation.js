@@ -130,22 +130,6 @@ function getSubstring(input, ...ranges) {
  * @property {boolean} hasCode - Indicates if the code is valid (true) or not (false).
  * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
  * @property {boolean} isDuplicateCode - Indicates if there is a duplicate code (true) or not (false).
- *
- * @example
- * const inputObject = {
- *   code: "ABC123",
- *   phone: "555-1234",
- *   patterns: ["pattern1", "pattern2"],
- *   hasCode: true,
- *   hasPhone: false,
- * };
- * const validationFunction = (values, hasValidFormat, hasCode, hasPhone) => {
- *   // Custom validation logic here
- *   return generateValidationResult(values, hasValidFormat, hasCode, hasPhone);
- * };
- * const result = validatedCountry(inputObject, validationFunction);
- * console.log(result);
- * // Output: { continent: '...', code: '...', ... }
  */
 function validatedCountry(values,func){
   const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)

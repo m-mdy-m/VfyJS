@@ -240,7 +240,6 @@ async function GlobalVal(code, phone) {
         ifFalsyValue(validatedPhone, 'Failed to validate phone number.');
         if (Array.isArray(validatedCode)) {
             const uniqueValues = validatedCode.reduce((acc, obj) => {
-                console.log(obj);
                 acc.code = obj.code;
                 if (!acc.isoCode) {
                     acc.isoCode = [];

@@ -19,6 +19,8 @@ const MIN_LENGTH_PHONE_NUMBER = 6
  * @returns {string} - The trimmed and validated value.
  */
 function ChecKValue(value, min, max, ContentError = String) {
+    //  trim validated value
+    value = trimmedValue(value)
     // Check for empty value
     isEmpty(value, `${ContentError} should not be empty. Please provide a valid ${ContentError}.`);
     // Check for valid types
@@ -50,8 +52,8 @@ function ChecKValue(value, min, max, ContentError = String) {
     }  
     // Validate length
     validateLength(numberCode, min, max, `Invalid ${ContentError} length. The ${ContentError} should be between ${min} and ${max} characters.`);
-    // Trim and return the validated value
-    return trimmedValue(numberCode);
+    //  return the validated value
+    return numberCode;
 }
 /**
  * @typedef {Object} PhoneCodeValidationResult

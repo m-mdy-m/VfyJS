@@ -22,10 +22,12 @@ function validationFormats(patterns,formats) {
    // Create a regex object from the pattern
    const regex = new RegExp(patternObj.pattern);
    // Test the format against the pattern
-   const testResult = regex.test(formats[index]);
-  //  console.log('regex=>',regex);
-  //  console.log('testResult=>',testResult);
-  //  console.log('formats[index]=>',formats[index]);
+   const testResult = regex.test(formats || formats[index]);
+   console.log('regex=>',regex);
+   console.log('formats[index]=>',formats[index]);
+   console.log('formats=>',formats);
+   console.log('patternObj=>',patternObj);
+   console.log('testResult=>',testResult);
     return testResult;
   });
 }
@@ -139,6 +141,21 @@ function validatedCountry(values,func){
   return func(values,hasValidFormat,hasCode,hasPhone)
 }
 /**
+ * Validates phone formats for a specific country using a custom validation function.
+ *
+ * @param {Object} values - The input values object.
+ * @param {Function} func - The validation function to be applied.
+ * @param {...string} phones - Phone numbers to be validated.
+ * @returns {ValidationResult} - The generated validation result object.
+ */
+function validationCountry(values, func, numberFormat) {
+  const { code, hasCode, hasPhone, patterns, phone } = extractInfoValue(values);
+  const phoneFormats = Array.from({ length: numberFormat }, () => phone);
+  const hasValidFormat = validationFormats(patterns, ...phoneFormats);
+  return func(values, hasValidFormat, hasCode, hasPhone);
+}
+
+/**
  * @typedef {Object} ValidationResult
  * @property {string} continent - Validated continent.
  * @property {string} code - Validated phone code.
@@ -154,4 +171,4 @@ function validatedCountry(values,func){
  * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
  * @property {boolean} isDuplicateCode - Indicates if there is a duplicate code (true) or not (false).
  */
-module.exports = { validationFormats, generateValidationResult,extractInfoValue ,getSubstring,validatedCountry };
+module.exports = { validationFormats, generateValidationResult,extractInfoValue ,getSubstring,validatedCountry ,validationCountry};

@@ -1,4 +1,4 @@
-const {generateValidationResult , validationFormats,extractInfoValue,getSubstring, customSubstring} = require('../utils/FormatValidation')
+const {generateValidationResult , validationFormats,extractInfoValue,getSubstring, customSubstring, validatedCountry, validationCountry} = require('../utils/FormatValidation')
 exports.iran = (values) => {
     const { code, phone, patterns,hasCode,hasPhone } = extractInfoValue(values)
     const format = [ `0${phone}`,`+${code}0${phone}`, `0${phone}`]
@@ -13,10 +13,7 @@ exports.China = (values)=>{
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
 exports.HongKongAndMacau = (values)=>{
-    const {hasCode,hasPhone,patterns,phone }= extractInfoValue(values)
-    const format = [phone]
-    const hasValidFormat = validationFormats(patterns,format)
-    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+    return validationCountry(values,generateValidationResult,1)
 }
 exports.India = (values)=>{
     const { code,hasCode,hasPhone,patterns,phone } = extractInfoValue(values)
@@ -72,10 +69,7 @@ exports.Malaysia = (values)=>{
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
 exports.Pakistan = (values)=>{
-    const { hasCode,hasPhone,patterns,phone } = extractInfoValue(values)
-    const format = [phone]
-    const hasValidFormat = validationFormats(patterns,format)
-    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+    return validationCountry(values,generateValidationResult,1)
 }
 exports.Philippines = (values)=>{
     const { hasCode,hasPhone,patterns,phone } = extractInfoValue(values)
@@ -84,11 +78,7 @@ exports.Philippines = (values)=>{
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)    
 }
 exports.Singapore = (values)=>{
-    const { code,hasCode,hasPhone,patterns,phone } = extractInfoValue(values)
-    const service = `+${code}${phone}`
-    const format = [phone,service,phone]
-    const hasValidFormat = validationFormats(patterns,format)
-    return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
+    return  validatedCountry(values,generateValidationResult)
 }
 exports.SriLanka = (values)=>{
     const {hasCode,hasPhone,patterns,phone,} = extractInfoValue(values)

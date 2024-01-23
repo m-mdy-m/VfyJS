@@ -1,4 +1,4 @@
-const {extractInfoValue,generateValidationResult,getSubstring,validationFormats, validatedCountry} = require('../utils/FormatValidation')
+const {generateValidationResult, validatedCountry} = require('../utils/FormatValidation')
 const countries  = [ 'Djibouti' ,'Morocco', 'Kenya' ,'SouthAfrica']
 countries.forEach((country)=>{
     exports[country] = (values)=>{

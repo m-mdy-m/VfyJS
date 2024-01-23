@@ -6,5 +6,5 @@ exports.Morocco = (values)=>{
     return validatedCountry(values,generateValidationResult)
 }
 exports.Kenya = (values)=>{
-    const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
+    return validatedCountry(values,generateValidationResult)
 }

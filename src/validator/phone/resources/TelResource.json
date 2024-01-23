@@ -446,11 +446,11 @@
       },
       {
         "type": "landline",
-        "pattern": "^[2-9]\\d{7,8}$"
+        "pattern": "^[2-9]\\d{7,10}$"
       },
       {
         "type": "mobile",
-        "pattern": "^6\\d{8}$"
+        "pattern": "^6\\d{9}$"
       }
     ]
   },

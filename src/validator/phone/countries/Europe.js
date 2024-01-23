@@ -1,5 +1,5 @@
 const { validationCountry, generateValidationResult, validatedCountry, extractInfoValue, validationFormats } = require("../utils/FormatValidation")
-const countries = ['Belgium','Denmark','Finland','France','Germany','Greece','Hungary','Iceland']
+const countries = ['Belgium','Denmark','Finland','France','Germany','Greece','Hungary','Iceland','Ireland']
 countries.forEach((country)=>{
     exports[country] = (values)=>{
         const { code,phone} = extractInfoValue(values)

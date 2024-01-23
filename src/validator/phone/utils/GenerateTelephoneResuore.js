@@ -288,7 +288,7 @@ const europeanFixedLinePatterns = [
   '^[2-9]\\d{7,10}$',       // Greece 
   '^\\d{8}$',              // Hungary 
   '^\\d{7}$',              // Iceland 
-  '^[2-9]\\d{7,9}$',       // Ireland 
+  '^\\d{7,12}$',       // Ireland 
   null,                    // Italy (no fixed convention)
   '^\\d{10}$',             // Netherlands
   '^\\d{8}$',              // Norway
@@ -309,7 +309,7 @@ const europeanLocalPatterns = [
   '^6\\d{9}$',               // Greece 
   '^(1800|1850|1550)\\d{6}$', // Hungary 
   'Variable length, no fixed convention',  // Iceland 
-  '^06-\\d{8}$',             // Ireland 
+  '^\\d{7,12}$',             // Ireland 
   '^14\\d{2}$',              // Italy
   '^\d{10}$',                // Netherlands
   '^\\d{10}$',               // Norway
@@ -329,7 +329,7 @@ const europeanInternationalPatterns = [
   '^(\\+30)?\\d{2,13}$', // Greece
   '^(\\+36)?\\d{8}$',  // Hungary 
   '^(\\+354)?\\d{7}$',  // Iceland
-  '^(\\+353)?\\d{8,9}$',  // Ireland  
+  '^(\\+353)?\\d{8,12}$',  // Ireland  
   '^(\\+39)?\\d{2,12}$',  // Italy 
   '^(\\+31)?\\d{9,11}$',  // Netherlands 
   '^(\\+47)?\\d{7,11}$',  // Norway 

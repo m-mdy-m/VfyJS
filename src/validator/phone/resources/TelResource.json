@@ -499,15 +499,15 @@
     "formats": [
       {
         "type": "International",
-        "pattern": "^(\\+353)?\\d{8,9}$"
+        "pattern": "^(\\+353)?\\d{8,12}$"
       },
       {
         "type": "landline",
-        "pattern": "^[2-9]\\d{7,9}$"
+        "pattern": "^\\d{7,12}$"
       },
       {
         "type": "mobile",
-        "pattern": "^06-\\d{8}$"
+        "pattern": "^\\d{7,12}$"
       }
     ]
   },

@@ -4,10 +4,7 @@ countries.forEach((country)=>{
     exports[country] = (values)=>{
         const { code,phone} = extractInfoValue(values)
         const international = `+${code}${phone}`
-        const isBelgium = country === 'Denmark'?[international,phone]:[international,phone,phone]
-        return validatedCountry(values,generateValidationResult,isBelgium)
+        const isDenmark = country === 'Denmark'?[international,phone]:[international,phone,phone]
+        return validatedCountry(values,generateValidationResult,isDenmark)
     }
 })
-exports.Finland = (values)=>{
-
-}

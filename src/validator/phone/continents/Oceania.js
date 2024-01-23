@@ -1,11 +1,11 @@
-const {Australia} = require('../countries/Oceania')
+const {Australia, NewZealand} = require('../countries/Oceania')
 function AsiaPhoneNumber(value){
     const country = value.country
     switch (country){
         case "Australia":
             return Australia(value)
         case "New Zealand":
-            return //
+            return NewZealand(value)
     }
 }
 

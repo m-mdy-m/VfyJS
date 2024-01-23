@@ -249,7 +249,7 @@ const oceaniaCountries = ['Australia', 'New Zealand'];
 const oceaniaCountryCodes = ['61', '64'];
 
 // Patterns for Australia
-const oceaniaFixedLinePatternsAustralia = ['^(0[2378])?\\d{8}$',"^\\d{8}$"];
+const oceaniaFixedLinePatternsAustralia = ['^(0[2378])?\\d{8}$',"^\\d{8,11}$"];
 const oceaniaFixedLinePatternNameAustralia = 'landline';
 const oceaniaLocalPatternsAustralia = ['^1[3-9]\\d{9}$', null,];
 const oceaniaLocalPatternNameAustralia = 'mobile';

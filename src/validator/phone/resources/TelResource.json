@@ -340,7 +340,7 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\d{8}$"
+        "pattern": "^\\d{8,11}$"
       }
     ]
   },

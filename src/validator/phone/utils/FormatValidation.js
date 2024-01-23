@@ -148,7 +148,7 @@ function validatedCountry(values,func){
  * @param {...string} phones - Phone numbers to be validated.
  * @returns {ValidationResult} - The generated validation result object.
  */
-function validationCountry(values, func, numberFormat) {
+function validationCountry(values, func, numberFormat=1) {
   const { code, hasCode, hasPhone, patterns, phone } = extractInfoValue(values);
   const phoneFormats = Array.from({ length: numberFormat }, () => phone);
   const hasValidFormat = validationFormats(patterns, ...phoneFormats);

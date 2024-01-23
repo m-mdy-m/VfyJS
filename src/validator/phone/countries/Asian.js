@@ -69,7 +69,7 @@ exports.Malaysia = (values)=>{
     return generateValidationResult(values,hasValidFormat,hasCode,hasPhone,false)
 }
 exports.Pakistan = (values)=>{
-    return validationCountry(values,generateValidationResult,1)
+    return validationCountry(values,generateValidationResult)
 }
 exports.Philippines = (values)=>{
     const { hasCode,hasPhone,patterns,phone } = extractInfoValue(values)

@@ -110,6 +110,51 @@ function getSubstring(input, ...ranges) {
   return ranges.map(range => input.substring(...range));
 }
 /**
+ * Validates country information using the provided function and returns the result.
+ *
+ * @param {Object} values - The input values object.
+ * @param {function} func - The function to validate the country information.
+ * @returns {ValidationResult} - The generated validation result object.
+ *
+ * @typedef {Object} ValidationResult
+ * @property {string} continent - Validated continent.
+ * @property {string} code - Validated phone code.
+ * @property {string} country - Validated country.
+ * @property {string} isoCode - Validated ISO code.
+ * @property {string} phone - Validated phone number.
+ * @property {Array} patterns - An array of formatting patterns for the phone code.
+ * Each pattern is an object with 'type' and 'pattern' properties.
+ * @property {boolean} isValidMobileFormat - Indicates if the mobile format is valid (true) or not (false).
+ * @property {boolean} isValidServiceFormat - Indicates if the service format is valid (true) or not (false).
+ * @property {boolean} isValidLandlineFormat - Indicates if the landline format is valid (true) or not (false).
+ * @property {boolean} hasCode - Indicates if the code is valid (true) or not (false).
+ * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
+ * @property {boolean} isDuplicateCode - Indicates if there is a duplicate code (true) or not (false).
+ *
+ * @example
+ * const inputObject = {
+ *   code: "ABC123",
+ *   phone: "555-1234",
+ *   patterns: ["pattern1", "pattern2"],
+ *   hasCode: true,
+ *   hasPhone: false,
+ * };
+ * const validationFunction = (values, hasValidFormat, hasCode, hasPhone) => {
+ *   // Custom validation logic here
+ *   return generateValidationResult(values, hasValidFormat, hasCode, hasPhone);
+ * };
+ * const result = validatedCountry(inputObject, validationFunction);
+ * console.log(result);
+ * // Output: { continent: '...', code: '...', ... }
+ */
+function validatedCountry(values,func){
+  const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
+  const international = `+${code}${phone}`
+  const format = [phone,international,phone]
+  const hasValidFormat = validationFormats(patterns,format)
+  return func(values,hasValidFormat,hasCode,hasPhone)
+}
+/**
  * @typedef {Object} ValidationResult
  * @property {string} continent - Validated continent.
  * @property {string} code - Validated phone code.
@@ -125,4 +170,4 @@ function getSubstring(input, ...ranges) {
  * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
  * @property {boolean} isDuplicateCode - Indicates if there is a duplicate code (true) or not (false).
  */
-module.exports = { validationFormats, generateValidationResult,extractInfoValue ,getSubstring };
+module.exports = { validationFormats, generateValidationResult,extractInfoValue ,getSubstring,validatedCountry };

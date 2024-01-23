@@ -15,14 +15,29 @@ const SouthAmericaPhoneNumber = require('./continents/America/south');
  * @returns {Promise<object>} - A promise that resolves to an object containing information about the validated phone number.
  *
  * @example
- * const code1 = '1';
- * const phone1 = '1234567890';
- * validatePhoneNumber(code1, phone1)
- *   .then(result1 => {
- *     console.log(result1);
+ * // Example: Validating a US phone number
+ * const usCode = '1';
+ * const usPhoneNumber = '1234567890';
+ * validatePhoneNumber(usCode, usPhoneNumber)
+ *   .then(result => {
+ *     // The result object contains detailed information about the validated phone number
+ *     console.log('Validation Result:');
+ *     console.log('-------------------');
+ *     console.log('Continent:', result.continent);
+ *     console.log('Country:', result.country);
+ *     console.log('Country Code:', result.code);
+ *     console.log('ISO Codes:', result.isoCode);
+ *     console.log('Phone Number:', result.phone);
+ *     console.log('Has Country Code:', result.hasCode);
+ *     console.log('Has Phone Number:', result.hasPhone);
+ *     console.log('Is Duplicate Code:', result.isDuplicateCode);
+ *     console.log('Is Toll-Free:', result.tollFree);
+ *     console.log('Is Service Number:', result.service);
+ *     console.log('Is Landline Number:', result.landline);
+ *     console.log('Is Mobile Number:', result.mobile);
  *   })
- *   .catch(error1 => {
- *     console.error(error1);
+ *   .catch(error => {
+ *     console.error(error);
  *   });
  */
 async function validatePhoneNumber(code, phone) {

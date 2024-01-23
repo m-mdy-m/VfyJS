@@ -280,7 +280,7 @@ const europeanCountries = ['Belgium', 'Denmark', 'Finland', 'France', 'Germany',
 const europeanCountryCodes = ['32', '45', '358', '33', '49', '30', '36', '354', '353', '39', '31', '47', '48', '351', '40', '7'];
 
 const europeanFixedLinePatterns = [
-  '^0[2-9]\\d{7}$',        // Belgium 
+  '^0[2-9]\\d{7,8}$',        // Belgium 
   '^\\d{8}$',              // Denmark 
   '^0[1-9]\\d{7}$',        // Finland 
   '^0[1-9]\\d{8}$',        // France 
@@ -301,7 +301,7 @@ const europeanFixedLinePatterns = [
 const europeanFixedLinePatternName = 'landline';
 
 const europeanLocalPatterns = [
-  '^0[4-9]\\d{7}$',          // Belgium 
+  '^0[4-9]\\d{8}$',          // Belgium 
   null,                      // Denmark 
   '^0[7-9]\\d{7}$',          // Finland 
   '^06\\d{8}$',              // France 

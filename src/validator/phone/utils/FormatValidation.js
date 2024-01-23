@@ -22,8 +22,8 @@ function validationFormats(patterns,formats) {
    // Create a regex object from the pattern
    const regex = new RegExp(patternObj.pattern);
    // Test the format against the pattern
-   const testResult = regex.test(formats || formats[index]);
-   console.log('regex=>',regex);
+   const testResult = regex.test(formats[index]);
+  //  console.log('regex=>',regex);
   //  console.log('formats[index]=>',formats[index]);
   //  console.log('formats=>',formats);
   //  console.log('patternObj=>',patternObj);
@@ -39,25 +39,31 @@ function validationFormats(patterns,formats) {
  * @param {Array<boolean>} hasValidFormat - An array of boolean values indicating the validity of each format.
  * @param {boolean} hasCode - Indicates if the code is valid.
  * @param {boolean} hasPhone - Indicates if the phone number is valid.
- * @param {boolean} isDuplicateCode - Indicates if there is a duplicate code.
+ * @param {boolean} [isDuplicateCode=false] - Indicates if there is a duplicate code.
  * @returns {ValidationResult} - The generated validation result object.
  */
 function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isDuplicateCode=false) {
+  console.log('values =>',values);
   const defaultValue = null
-  return {
+  const result = {
     continent: values.continent,
     country: values.country,
     code: values.code,
     isoCode: values.iso,
     phone: values.phone,
-    isValidMobileFormat: hasValidFormat[0]  !== undefined ? hasValidFormat[0] : defaultValue,
-    isValidServiceFormat: hasValidFormat[1] !== undefined ? hasValidFormat[1] : defaultValue,
-    isValidLandlineFormat: hasValidFormat[2] !== undefined ? hasValidFormat[2] : defaultValue,
-    isValidTollFree: hasValidFormat[3] !== undefined ? hasValidFormat[3] : defaultValue,
     hasCode: hasCode,
     hasPhone: hasPhone,
     isDuplicateCode: isDuplicateCode,
   };
+  values.patterns.forEach((format, index) => {
+    /**
+     * Dynamic property name based on format type.
+     * @type {boolean}
+     */
+    const propertyName = `${format.type}`;
+    result[propertyName] = hasValidFormat[index] !== undefined ? hasValidFormat[index] : defaultValue;
+  });
+  return result;
 }
 /**
  * Extracts information values from the provided object.
@@ -133,10 +139,10 @@ function getSubstring(input, ...ranges) {
  * @property {boolean} hasPhone - Indicates if the phone number is valid (true) or not (false).
  * @property {boolean} isDuplicateCode - Indicates if there is a duplicate code (true) or not (false).
  */
-function validatedCountry(values,func){
+function validatedCountry(values,func,formats){
   const {code,hasCode,hasPhone,patterns,phone} = extractInfoValue(values)
   const international = `+${code}${phone}`
-  const format = [phone,international,phone]
+  const format = formats || [phone,international,phone]
   const hasValidFormat = validationFormats(patterns,format)
   return func(values,hasValidFormat,hasCode,hasPhone)
 }

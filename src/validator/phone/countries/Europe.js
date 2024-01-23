@@ -5,3 +5,8 @@ exports.Belgium = (values)=>{
     const international = `+${code}${phone}`
     return validatedCountry(values,generateValidationResult,[international,phone,phone])
 }
+exports.Denmark = (values)=>{
+    const {code,phone}=extractInfoValue(values)
+    const international = `+${code}${phone}`
+    return validatedCountry(values,generateValidationResult,[international,phone])
+}

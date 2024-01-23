@@ -1,4 +1,4 @@
-const { Belgium, Denmark, Finland,France ,Germany,Greece,Hungary,Iceland,Ireland,Italy} = require("../countries/Europe")
+const { Belgium, Denmark, Finland,France ,Germany,Greece,Hungary,Iceland,Ireland,Italy,Netherlands} = require("../countries/Europe")
 
 function EuropePhoneNumber(value){
     const country = value.country
@@ -23,6 +23,8 @@ function EuropePhoneNumber(value){
             return Ireland(value)
         case "Italy":
             return Italy(value)
+        case "Netherlands":
+            return Netherlands(value)
     }
 }
 

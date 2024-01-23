@@ -311,7 +311,7 @@ const europeanLocalPatterns = [
   'Variable length, no fixed convention',  // Iceland 
   '^\\d{7,12}$',             // Ireland 
   '^14\\d{4}$',              // Italy
-  '^\d{10}$',                // Netherlands
+  '^\\d{10}$',                // Netherlands
   '^\\d{10}$',               // Norway
   '^\\d{9}$',                // Poland
   '^\\d{9}$',                // Portugal

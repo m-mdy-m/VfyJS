@@ -522,7 +522,7 @@
       },
       {
         "type": "mobile",
-        "pattern": "^14\\d{2}$"
+        "pattern": "^14\\d{4}$"
       }
     ]
   },

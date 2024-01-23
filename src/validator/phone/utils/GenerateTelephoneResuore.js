@@ -310,7 +310,7 @@ const europeanLocalPatterns = [
   '^(1800|1850|1550)\\d{6}$', // Hungary 
   'Variable length, no fixed convention',  // Iceland 
   '^\\d{7,12}$',             // Ireland 
-  '^14\\d{2}$',              // Italy
+  '^14\\d{4}$',              // Italy
   '^\d{10}$',                // Netherlands
   '^\\d{10}$',               // Norway
   '^\\d{9}$',                // Poland

@@ -1,8 +1,8 @@
 const { validationCountry, generateValidationResult } = require("../utils/FormatValidation")
-
-exports.Australia = (values)=>{
-    return validationCountry(values,generateValidationResult,4)
-}
-exports.NewZealand = (values)=>{
-    return validationCountry(values,generateValidationResult)
-}
+const countries = ['Australia', 'NewZealand'];
+countries.forEach(country => {
+    exports[country] = (values) => {
+        const lastDigit = country === 'Australia' ? 4 : 1;
+        return validationCountry(values, generateValidationResult, lastDigit);
+    }
+});

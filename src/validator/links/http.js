@@ -12,19 +12,19 @@ const inputValidation = require('../../utils/inputValidator');
  *
  * @example
  * // Example 1: Valid HTTP URL
- * const result1 = isHttpUrl("http://www.example.com");
+ * const result1 = isHttp("http://www.example.com");
  * console.log(result1); // Output: true
  *
  * @example
  * // Example 2: Handling an invalid HTTPS URL with try-catch
  * try {
- *   const result2 = isHttpUrl("https://www.example.com");
+ *   const result2 = isHttp("https://www.example.com");
  *   console.log(result2);
  * } catch (error) {
  *   console.error(error.message); // Output: "Only HTTP URLs are allowed."
  * }
  */
-function isHttpUrl(url) {
+function isHttp(url) {
     // Check if the URL contains the substring "http"
     const isHttp = /(?=.*(HTTP|http))/.test(url);
     ifFalsyValue(isHttp, 'The URL must contain the substring "http". Please provide a valid URL.');
@@ -68,4 +68,4 @@ function isHttpUrl(url) {
     // Check if the protocol is 'http' and the URL is in the correct format
     return protocol && hasHttp;
 }
-module.exports = isHttpUrl;
+module.exports = isHttp;

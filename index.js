@@ -49,7 +49,7 @@ const HandleError = require('./src/errors/HandleError');
  * @returns {boolean} - True if the password is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  */
-exports.password = passwordValidate;
+exports.isPassword = passwordValidate;
 
 /**
  * Validates an email address.
@@ -59,7 +59,7 @@ exports.password = passwordValidate;
  * @returns {boolean} - True if the email is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  */
-exports.email = emailValidate;
+exports.isEmail = emailValidate;
 
 /**
  * Validates a username.

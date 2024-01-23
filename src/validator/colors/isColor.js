@@ -5,7 +5,6 @@ const { trimmedValue } = require('../../common/validationConstants');
  * Validates if a given input represents a color in various formats.
  *
  * @typedef {Object} ColorValidationFunctions
- * @property {string} color - The color string to validate.
  * @property {() => boolean} HEX - Validates if the input represents a valid Hex color (#RRGGBB or #RRGGBBAA).
  * @property {() => boolean} NameColor - Validates if the input represents a valid named color.
  * @property {() => boolean} RGB - Validates if the input represents a valid RGB color (rgb(R, G, B)).

@@ -9,6 +9,7 @@ class CustomError extends Error {
   constructor(property, message) {
     super(message);
     this.property = property;
+    this.message = message
   }
 }
 /**

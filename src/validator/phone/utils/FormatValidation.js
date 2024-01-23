@@ -23,11 +23,11 @@ function validationFormats(patterns,formats) {
    const regex = new RegExp(patternObj.pattern);
    // Test the format against the pattern
    const testResult = regex.test(formats[index]);
-  //  console.log('regex=>',regex);
-  //  console.log('formats[index]=>',formats[index]);
-  //  console.log('formats=>',formats);
-  //  console.log('patternObj=>',patternObj);
-  //  console.log('testResult=>',testResult);
+   console.log('regex=>',regex);
+   console.log('formats[index]=>',formats[index]);
+   console.log('formats=>',formats);
+   console.log('patternObj=>',patternObj);
+   console.log('testResult=>',testResult);
     return testResult;
   });
 }

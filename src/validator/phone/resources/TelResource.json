@@ -743,11 +743,11 @@
       },
       {
         "type": "landline",
-        "pattern": "^2\\d3}-\\d4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": "^2\\d{3}-\\d{4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       }
     ]
   },
@@ -762,11 +762,11 @@
       },
       {
         "type": "landline",
-        "pattern": "^2\\d3}-\\d4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": "^2\\d{3}-\\d{4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       }
     ]
   },
@@ -777,15 +777,15 @@
     "formats": [
       {
         "type": "service",
-        "pattern": "^+52 \\d{1,2} \\d{4} \\d{4}$"
+        "pattern": "^\\+502\\d{1,2}\\d{7,8}$"
       },
       {
         "type": "landline",
-        "pattern": "^2\\d3}-\\d4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": "^2\\d{3}-\\d{4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       }
     ]
   },
@@ -796,11 +796,11 @@
     "formats": [
       {
         "type": "landline",
-        "pattern": "^\\d3}-\\d4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": " ^\\d{3}-\\d{4}$"
+        "pattern": "^\\d{4}-\\d{4}$"
       }
     ]
   },

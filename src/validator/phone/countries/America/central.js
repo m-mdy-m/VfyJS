@@ -1,6 +1,6 @@
 const { extractInfoValue, getSubstring, validationFormats, generateValidationResult } = require("../../utils/FormatValidation")
 const Validations = (values, countryCode) => {
-    const { hasCode, hasPhone, patterns, phone } = extractInfoValue(values);
+    const {code, hasCode, hasPhone, patterns, phone } = extractInfoValue(values);
 
     let formats;
     switch (countryCode) {
@@ -19,9 +19,13 @@ const Validations = (values, countryCode) => {
                 getSubstring(phone, [0, 4], [4])
             ];
             break;
-
-        default:
-            throw new Error(`Unsupported country code: ${countryCode}`);
+        case "Guatemala":
+            formats =[
+                `+${code}${phone}`,
+                getSubstring(phone,[0,4],[4]),
+                getSubstring(phone,[0,4],[4]),
+            ]
+            break;
     }
 
     const hasValidFormat = validationFormats(patterns, formats);
@@ -32,4 +36,7 @@ exports.CostaRica = (values)=>{
 }
 exports.ElSalvador = (values)=>{
     return Validations(values,'ElSalvador')
+}
+exports.Guatemala = (values)=>{
+    return Validations(values,'Guatemala')
 }

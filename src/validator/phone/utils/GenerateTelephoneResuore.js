@@ -407,17 +407,17 @@ const centralAmericanCountryCodes = ['506', '503', '502', '504'];
 
 // Patterns for Central America
 const centralAmericaFixedLinePatterns = [
-  '^2\\d3}-\\d4}$', // Costa Rica
-  '^2\\d3}-\\d4}$',// El Salvador
-  "^2\\d3}-\\d4}$", // Guatemala
-  '^\\d3}-\\d4}$' // Honduras 
+  '^\\d{4}-\\d{4}$', // Costa Rica
+  '^\\d{4}-\\d{4}$',// El Salvador
+  "^\\d{4}-\\d{4}$", // Guatemala
+  '^\\d{4}-\\d{4}$' // Honduras 
 ];
 const centralAmericaFixedLinePatternName = 'landline';
 const centralAmericaLocalPatterns = [
-  '^2\\d{3}-\\d{4}$', // Costa Rica
-  '^2\\d{3}-\\d{4}$', // El Salvador
-  '^2\\d{3}-\\d{4}$', // Guatemala
-  ' ^\\d{3}-\\d{4}$' // Honduras 
+  '^\\d{4}-\\d{4}$', // Costa Rica
+  '^\\d{4}-\\d{4}$', // El Salvador
+  '^\\d{4}-\\d{4}$', // Guatemala
+  '^\\d{4}-\\d{4}$' // Honduras 
   
   ];
 const centralAmericaLocalPatternName = 'mobile';
@@ -431,7 +431,7 @@ const centralAmericaLandLinePatternName = 'toll-free';
 const centralAmericaInternationalPatterns = [
   '^90\\d-\\d{3}-\\d{4}$', // Costa Rica
   "^9\\d-\\d{3}-\\d{4}$", // El Salvador
-  "^+52 \\d{1,2} \\d{4} \\d{4}$", // Guatemala
+  "^\\+502\\d{1,2}\\d{7,8}$", // Guatemala
   null, // Honduras
 ];
 const centralAmericaInternationalPatternName = 'service';

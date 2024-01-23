@@ -366,7 +366,7 @@ const northAmericanCountryCodes = ['1', '1', '52'];
 const northAmericaFixedLinePatterns = [
   '^\\d{3}-\\d{3}-\\d{4}$', // Canada
   '^\\d{3}-\\d{3}-\\d{4}$', // United States
-  '^\d{10}$' // Mexico
+  '^\\d{10}$' // Mexico
 ];
 const northAmericaFixedLinePatternName = 'landline';
 const northAmericaLocalPatterns = [

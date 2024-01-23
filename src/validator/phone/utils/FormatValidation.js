@@ -108,16 +108,17 @@ function extractInfoValue(values) {
  *
  * @param {string} input - The input string from which substrings will be extracted.
  * @param {...number[]} ranges - Variable number of ranges specified as pairs of start and end indices.
- * @returns {string[]} - An array of substrings extracted from the input string based on the specified ranges.
+ * @returns {string} - A formatted string created by joining the extracted substrings with hyphens.
  *
  * @example
  * const inputString = "Hello, World!";
  * const result = getSubstring(inputString, [0, 5], [7, 12]);
  * console.log(result);
- * // Output: ['Hello', 'World']
+ * // Output: 'Hello-World'
  */
 function getSubstring(input, ...ranges) {
-  return ranges.map(range => input.substring(...range));
+  const formattedString = ranges.map(([start, end]) => input.substring(start, end)).join('-');
+  return formattedString;
 }
 /**
  * Validates country information using the provided function and returns the result.

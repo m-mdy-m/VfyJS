@@ -1,4 +1,4 @@
-const {CanadaOrUs} = require('../../countries/America/north')
+const {CanadaOrUs, Mexico} = require('../../countries/America/north')
 function NorthPhoneNumber(value){
     const country = value.country
     if (Array.isArray(country)) {
@@ -8,10 +8,6 @@ function NorthPhoneNumber(value){
                 return CanadaOrUs(value)
         }
     }
-    switch (country){
-        case "Djibouti":
-            return '//'
-
-    }
+    return Mexico(value)
 }
 module.exports = NorthPhoneNumber

@@ -19,7 +19,7 @@ async function validatePhoneNumber(code,phone){
       return NorthAmericaPhoneNumber(informationPhone)
   }
 }
-validatePhoneNumber('1', '1234567890').then(result => {
+validatePhoneNumber('52', '1800123456').then(result => {
   console.log(result);
 });
 module.exports = validatePhoneNumber;

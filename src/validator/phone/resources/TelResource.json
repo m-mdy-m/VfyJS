@@ -10,7 +10,7 @@
       },
       {
         "type": "international",
-        "pattern": "^+253[0-9]{8}$"
+        "pattern": "^\\+253[0-9]{8}$"
       },
       {
         "type": "fixed-line",
@@ -29,7 +29,7 @@
       },
       {
         "type": "international",
-        "pattern": "^+212[567][0-9]{8}$"
+        "pattern": "^\\+212[567][0-9]{8}$"
       },
       {
         "type": "fixed-line",
@@ -48,7 +48,7 @@
       },
       {
         "type": "international",
-        "pattern": "^+254[0-9]{9}$"
+        "pattern": "^\\+254[0-9]{9}$"
       },
       {
         "type": "fixed-line",
@@ -67,7 +67,7 @@
       },
       {
         "type": "international",
-        "pattern": "^+27[0-9]{9}$"
+        "pattern": "^\\+27[0-9]{9}$"
       },
       {
         "type": "fixed-line",

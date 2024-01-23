@@ -2,7 +2,7 @@ const {KazakhstanOrRussia,Romania,Portugal,Poland, Belgium, Denmark, Finland,Fra
 
 function EuropePhoneNumber(value){
     const country = value.country
-    if (country[0] || country[1]) {
+    if (Array.isArray(country)) {
         switch(country[0] || country[1]){
             case "Kazakhstan":
             case "Russia":

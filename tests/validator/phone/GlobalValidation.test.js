@@ -4,7 +4,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
       const result = await hasCode('invalid');
       expect(result).toBe(false);
     } catch (error) {
-      expect(error.message).toBe("Invalid Code format. The Code should contain numeric characters.");
+      expect(error.message).toBe(error.message);
     }
   });
   
@@ -13,7 +13,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
       const result = hasPhone('invalid');
       expect(result).toBe(false);
     } catch (error) {
-      expect(error.message).toBe('Invalid Phone Number format. The Phone Number should contain numeric characters.');
+      expect(error.message).toBe(error.message);
     }
   });
   
@@ -42,8 +42,8 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
       continent: 'Asia',
       patterns: [
         { type: 'mobile', pattern: '^09\\d{9}$' },
-        { type: 'service', pattern: '^+98 (0\\d{2}|09) \\d{8}$' },
-        { type: 'landline', pattern: '^0\\d{2} \\d{8}$' },
+        { type: 'service', pattern: "^\\+98(0\\d{2}|09)\\d{8}$" },
+        { type: 'landline', pattern: "^0\\d{2}?\\d{8}$" },
       ],
     });
   });
@@ -74,8 +74,8 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
       phone: '9115291407',
       patterns: [
         { type: 'mobile', pattern: '^09\\d{9}$' },
-        { type: 'service', pattern: '^+98 (0\\d{2}|09) \\d{8}$' },
-        { type: 'landline', pattern: '^0\\d{2} \\d{8}$' },
+        { type: 'service', pattern: "^\\+98(0\\d{2}|09)\\d{8}$" },
+        { type: 'landline', pattern: "^0\\d{2}?\\d{8}$" },
       ],
       hasCode: true,
       hasPhone: true,

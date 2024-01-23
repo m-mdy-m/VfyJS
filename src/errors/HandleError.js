@@ -222,7 +222,7 @@ exports.IfIsNumber = (property, message) => {
 exports.validateLength = (value, minLength, maxLength, message) => {
   const length = typeof value === 'string' ? value.length : `${value}`.length;
   if (length < minLength || length > maxLength) {
-    throw new Error(message || `Length must be between ${minLength} and ${maxLength || value} characters.`);
+    throw new LengthError(value, message || `Length must be between ${minLength} and ${maxLength || value} characters.`);
   }
 };
 /**
@@ -250,9 +250,9 @@ exports.validateLength = (value, minLength, maxLength, message) => {
  *   console.error(error.message); // 'Invalid value' or 'Length must be between 2 and 5 characters.'
  * }
  */
-exports.validatePropertyLengthAndType = (property, minLength, maxLength, minLengthType, maxLengthType, message) => {
-  this.IfTypeMatches(minLengthType, minLength, message);
-  this.IfTypeMatches(maxLengthType, maxLength, message);
+exports.validatePropertyLengthAndType = (minLength,maxLength,minLengthType,maxLengthType,property,message) => {
+  this.IfTypeMatches(minLengthType, property, message);
+  this.IfTypeMatches(maxLengthType, property, message);
   this.validateLength(property, minLength, maxLength, message);
 };
 /**
@@ -276,9 +276,9 @@ exports.validatePropertyLengthAndType = (property, minLength, maxLength, minLeng
  *   console.error(error.message); // 'Value should be a number or a string'
  * }
  */
-exports.TypesCheck = (property, expectedTypes, message) => {
-  if (!expectedTypes.includes(typeof property)) {
-    throw new TypeError(property, message || `Value should be of type ${expectedTypes.join(' or ')}`);
+exports.TypesCheck = (property, types, message) => {
+  if (!types.includes(typeof property)) {
+    throw new TypeError(property, message || `${property} is not of type ${types.join(' or ')}`);
   }
 };
 /**
@@ -301,8 +301,8 @@ exports.TypesCheck = (property, expectedTypes, message) => {
  * }
  */
 exports.isEmpty = (value, message = 'Value should not be empty') => {
-  if (value === null || value === undefined || value === "" || value !== 0) {
-    throw new Error(message);
+  if (value === null || value === undefined || value === "" || value === 0) {
+    throw new ValidationError(value, message);
   }
   return value;
 };

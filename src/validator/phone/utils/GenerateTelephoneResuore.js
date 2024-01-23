@@ -422,7 +422,7 @@ const centralAmericaLocalPatterns = [
   ];
 const centralAmericaLocalPatternName = 'mobile';
 const centralAmericaLandLinePatterns = [
-  ' ^800-\\d{3}-\\d{4}$', // Costa Rica
+  '^800-\\d{3}-\\d{4}$', // Costa Rica
   null, // El Salvador
   null, // Guatemala
   null, // Honduras

@@ -735,7 +735,7 @@
     "formats": [
       {
         "type": "toll-free",
-        "pattern": " ^800-\\d{3}-\\d{4}$"
+        "pattern": "^800-\\d{3}-\\d{4}$"
       },
       {
         "type": "service",

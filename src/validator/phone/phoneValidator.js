@@ -4,6 +4,7 @@ const AfricaPhoneNumber = require('./continents/Africa')
 const OceaniaPhoneNumber = require('./continents/Oceania')
 const EuropePhoneNumber = require('./continents/Europe')
 const NorthAmericaPhoneNumber = require('./continents/America/north')
+const CentralAmericaPhoneNumber = require('./continents/America/central')
 async function validatePhoneNumber(code,phone){
   const informationPhone = await GlobalVal(code,phone)
   switch(informationPhone.continent){
@@ -17,9 +18,11 @@ async function validatePhoneNumber(code,phone){
       return EuropePhoneNumber(informationPhone)
     case "North America":
       return NorthAmericaPhoneNumber(informationPhone)
+    case "Central America":
+      return CentralAmericaPhoneNumber(informationPhone)
   }
 }
-validatePhoneNumber('52', '1800123456').then(result => {
+validatePhoneNumber('506', '8001234567').then(result => {
   console.log(result);
 });
 module.exports = validatePhoneNumber;

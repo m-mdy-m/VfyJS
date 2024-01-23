@@ -811,11 +811,11 @@
     "formats": [
       {
         "type": "service",
-        "pattern": "^0800 d{3} d{4}$"
+        "pattern": "^0800\\d{7}$"
       },
       {
         "type": "landline",
-        "pattern": "^0d1,4d{4}-d{4}$"
+        "pattern": "^0\\d{1,4}\\d{9}"
       },
       {
         "type": "mobile",
@@ -829,12 +829,16 @@
     "countryCode": "55",
     "formats": [
       {
+        "type": "service",
+        "pattern": "^\\d{10,11}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^d{2}d{4}-d{4}$"
+        "pattern": "^\\d{10}"
       },
       {
         "type": "mobile",
-        "pattern": "^d{2} 9d{4,5}-d{4}$"
+        "pattern": "^\\d{2}9\\d{8,9}"
       }
     ]
   },
@@ -844,12 +848,16 @@
     "countryCode": "51",
     "formats": [
       {
+        "type": "service",
+        "pattern": "^\\d{4,6}\\d{3,6}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^d2d{2}-d{4}$"
+        "pattern": "^\\d{8}"
       },
       {
         "type": "mobile",
-        "pattern": "^9d{8}$"
+        "pattern": "^9\\d{8}$"
       }
     ]
   }

@@ -458,21 +458,20 @@ const southAmericanCountryCodes = ['54', '55', '51'];
 
 // Patterns for Argentina
 const southAmericaFixedLinePatterns = [
-  '^0\d1,4\d{4}-\d{4}$', // Argentina
-  '^\d{2}\d{4}-\d{4}$', // Brazil
-  '^\d2\d{2}-\d{4}$']; // Peru
+  '^0\\d{1,4}\\d{9}', // Argentina
+  '^\\d{10}', // Brazil
+  '^\\d{8}']; // Peru
 const southAmericaFixedLinePatternName = 'landline';
 const southAmericaMobilePatterns = [
   '^15\\d{6,8}$', // Argentina
-  '^\d{2} 9\d{4,5}-\d{4}$', // Brazil
-  '^9\d{8}$' // Peru
-
+  '^\\d{2}9\\d{8,9}', // Brazil
+  '^9\\d{8}$' // Peru
 ];
 const southAmericaMobilePatternName = 'mobile';
 const southAmericaSpecialNumberPatterns = [
-  '^0800 \d{3} \d{4}$', // Argentina
-  null, // Brazil
-  null, // Peru
+  '^0800\\d{7}$', // Argentina
+  '^\\d{10,11}$', // Brazil
+  '^\\d{4,6}\\d{3,6}$' // Peru
 ];
 const southAmericaSpecialNumberPatternName = 'service';
 const southAmericaFormatObject = createPhoneNumberFormats(

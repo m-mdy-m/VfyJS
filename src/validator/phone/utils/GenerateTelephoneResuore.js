@@ -87,11 +87,11 @@ function writeToJsonFile(data) {
 const africaContinent = 'Africa';
 const africanCountries = ['Djibouti', 'Morocco', 'Kenya', 'South Africa'];
 const africanCountryCodes = ['253', '212', '254', '27'];
-const africanLocalPatterns = ["^(21|27)[0-9]{6}$","^(05[0-9]{2}){2}[0-9]{4}$", "^0[0-9]{3}[0-9]{6}$", "^(0[0-9]{2}|0AA)[0-9]{7}$"];
+const africanLocalPatterns = ["^(21|27)[0-9]{6}$","^(05[0-9]{2})[0-9]{2}[0-9]{4}$", "^0[0-9]{3}[0-9]{6}$", "^(0[0-9]{2}|0AA)[0-9]{7}$"];
 const africanLocalPatternName = 'local';
 const africanInternationalPatterns = ["^\\+253[0-9]{8}$","^\\+212[567][0-9]{8}$", "^\\+254[0-9]{9}$", "^\\+27[0-9]{9}$"];
 const africanInternationalPatternName = 'international';
-const africanFixedLinePatterns = ["^(21|27)[0-9]{6}$", "^(05[0-9]{2}){2}[0-9]{4}$", "^0[0-9]{3}[0-9]{6}$", "^(0[0-9]{2}|0AA)[0-9]{7}$"];
+const africanFixedLinePatterns = ["^(21|27)[0-9]{6}$", "^(05[0-9]{2})[0-9]{2}[0-9]{4}$", "^0[0-9]{3}[0-9]{6}$", "^(0[0-9]{2}|0AA)[0-9]{7}$"];
 const africanFixedLinePatternName = 'fixed-line';
 const africanFormatObject = createPhoneNumberFormats(
     africaContinent,

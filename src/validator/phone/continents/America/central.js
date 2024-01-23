@@ -1,4 +1,4 @@
-const { CostaRica, Guatemala, ElSalvador }=require('../../countries/America/central')
+const { CostaRica, Guatemala, ElSalvador ,Honduras}=require('../../countries/America/central')
 function CentralPhoneNumber(value){
     const country = value.country
     switch(country){
@@ -8,6 +8,8 @@ function CentralPhoneNumber(value){
             return ElSalvador(value)
         case "Guatemala":
             return Guatemala(value)
+        case "Honduras":
+            return Honduras(value)
     }
 }
 module.exports = CentralPhoneNumber

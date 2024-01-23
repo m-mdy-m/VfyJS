@@ -22,7 +22,7 @@ async function validatePhoneNumber(code,phone){
       return CentralAmericaPhoneNumber(informationPhone)
   }
 }
-validatePhoneNumber('502', '24123456').then(result => {
+validatePhoneNumber('504', '24123456').then(result => {
   console.log(result);
 });
 module.exports = validatePhoneNumber;

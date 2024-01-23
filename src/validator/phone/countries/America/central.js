@@ -26,6 +26,11 @@ const Validations = (values, countryCode) => {
                 getSubstring(phone,[0,4],[4]),
             ]
             break;
+        case 'Honduras':
+            formats = [
+                getSubstring(phone,[0,4],[4]),
+                getSubstring(phone,[0,4],[4]),
+            ]
     }
 
     const hasValidFormat = validationFormats(patterns, formats);
@@ -39,4 +44,7 @@ exports.ElSalvador = (values)=>{
 }
 exports.Guatemala = (values)=>{
     return Validations(values,'Guatemala')
+}
+exports.Honduras = (values)=>{
+    return Validations(values,'Honduras')
 }

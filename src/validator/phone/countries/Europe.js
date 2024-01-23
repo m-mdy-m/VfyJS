@@ -10,3 +10,6 @@ exports.Denmark = (values)=>{
     const international = `+${code}${phone}`
     return validatedCountry(values,generateValidationResult,[international,phone])
 }
+exports.Finland = (values)=>{
+    
+}

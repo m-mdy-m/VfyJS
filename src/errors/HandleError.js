@@ -35,15 +35,13 @@ class LengthError extends CustomError {}
 /**
  * Throws a validation error if the specified property is truthy.
  *
- * This function checks if the provided property is truthy, and if so,
- * it throws a validation error with the specified property and message.
- * Otherwise, it returns the input property.
- *
  * @param {any} property - The property or condition to be validated.
- * @param {string} message - The error message to be associated with the validation failure.
+ * @param {string} message - The error message for the validation failure.
  * @returns {any} - Returns the input property if it is falsy.
  * @throws {ValidationError} - Throws a validation error with the specified property and message if validation fails.
+ *
  * @example
+ * // Example: Throw error if value is empty
  * try {
  *   ifFalsyValue('', 'Value should not be empty');
  * } catch (error) {
@@ -53,81 +51,85 @@ class LengthError extends CustomError {}
  */
 exports.ifFalsyValue = (property, message) => {
   if (!property) {
-    throw new ValidationError(property, message);
+    throw new ValidationError(property, message || 'Invalid value');
   }
   return property;
 };
 /**
- * Validates if both the provided property and method are truthy.
- *
- * This function checks if both the provided property and method are truthy, and if so,
- * it throws a validation error with the specified property and message.
- * Otherwise, it returns true.
+ * Validates if the provided property is truthy.
  *
  * @param {any} property - The property to be validated.
- * @param {any} method - The method or condition to be validated.
- * @param {string} message - The error message to be associated with the validation failure.
- * @returns {boolean} - Returns true if both property and method are truthy.
+ * @param {string} message - The error message for the validation failure.
  * @throws {ValidationError} - Throws a validation error with the specified property and message if validation fails.
+ * @returns {boolean} - Returns true if the property is falsy.
+ *
  * @example
+ * // Example: Throw error if value is truthy
  * try {
- *   validateIfBothTruthy('Some Value', someMethod(), 'Invalid value or method');
+ *   ifTruthyValue('Some Value', 'Invalid value');
  * } catch (error) {
  *   console.error(error.name); // 'ValidationError'
- *   console.error(error.message); // 'Invalid value or method'
+ *   console.error(error.message); // 'Invalid value'
  * }
  */
 exports.ifTruthyValue = (property, message) => {
   if (property) {
-    throw new ValidationError(property, message);
+    throw new ValidationError(property, message || 'Invalid value');
   }
   return property;
 };
 /**
  * Validates if both the provided property and method are truthy.
  *
- * This function checks if both the provided property and method are truthy, and if so,
- * it throws a validation error with the specified property and message.
- * Otherwise, it returns true.
- *
  * @param {any} property - The property to be validated.
  * @param {any} method - The method or condition to be validated.
  * @param {string} message - The error message to be associated with the validation failure.
- * @returns {boolean} - Returns true if both property and method are truthy.
  * @throws {ValidationError} - Throws a validation error with the specified property and message if validation fails.
+ * 
  * @example
+ * // Example: Validate if password has at least one number and is not empty
+ * const userPassword = 'Secret123';
  * try {
- *   validateIfBothTruthy(isNumber, !validator.hasNumber() && !validator.hasNumeric(), 'Invalid input. The password must contain at least one number.');
+ *   validateIfBothTruthy(
+ *     userPassword, 
+ *     userPassword && /\d/.test(userPassword), 
+ *     'Invalid password. It must contain at least one number and should not be empty.'
+ *   );
+ *   console.log('Password is valid.');
  * } catch (error) {
  *   console.error(error.name); // 'ValidationError'
- *   console.error(error.message); // 'Invalid input. The password must contain at least one number.'
+ *   console.error(error.message); // 'Invalid password. It must contain at least one number and should not be empty.'
  * }
  */
-exports.validateIfBothTruthy  = (property, method , message)=>{
+exports.validateIfBothTruthy = (property, method, message) => {
   if (property) {
     if (method) {
-      this.ifTruthyValue(property, message);
+      this.ifTruthyValue(property, message || 'Invalid Input');
     }
   }
-}
+};
 /**
  * Throws a type error if the type of the specified property is not as expected.
  *
- * @param {string} type - The expected type of the property.
+ * @param {string} expectedType - The expected type of the property.
  * @param {any} property - The property to be validated for its type.
  * @param {string} message - The error message to be associated with the type validation failure.
  * @throws {TypeError} - Throws a type error with the specified property and message if type validation fails.
+ * 
  * @example
+ * // Example: Validate if the age is a number
+ * const userAge = '25'; // Note: '25' is a string, not a number
  * try {
- *   IfNotType('string', 42, 'Value should be a string');
+ *   IfNotType('number', userAge, 'Age should be a number');
+ *   console.log('Age is valid.');
  * } catch (error) {
  *   console.error(error.name); // 'TypeError'
- *   console.error(error.message); // 'Value should be a string'
+ *   console.error(error.message); // 'Age should be a number'
  * }
  */
-exports.IfNotType = (type, property, message) => {
-  if (typeof property !== type) {
-    throw new TypeError(property, message || `${property} is not of type ${type}` );
+exports.IfNotType = (expectedType, property, message) => {
+  if (typeof property !== expectedType) {
+    throw new TypeError(property, message || `Property should be of type ${expectedType}`);
   }
 };
 /**
@@ -141,21 +143,21 @@ exports.IfNotType = (type, property, message) => {
  *   // Handle the type mismatch
  * }
  */
-exports.isTypeMismatch = (type, property) => {
-  if (typeof property !== type) {
-    return;
-  }
+exports.isTypeMismatch = (expectedType, property) => {
+  return typeof property !== expectedType;
 };
 /**
  * Throws a type error if the type of the specified property matches the expected type.
  *
  * This function is used to throw a type error if the type of the provided property matches the expected type.
  *
- * @param {string} type - The expected type of the property.
+ * @param {string} expectedType - The expected type of the property.
  * @param {any} property - The property to be validated for its type.
  * @param {string} message - The error message to be associated with the type validation failure.
  * @throws {TypeError} - Throws a type error with the specified property and message if type validation fails.
+ *
  * @example
+ * // Example: Throw error if value is not a string
  * try {
  *   IfTypeMatches('string', 42, 'Value should be a string');
  * } catch (error) {
@@ -163,9 +165,9 @@ exports.isTypeMismatch = (type, property) => {
  *   console.error(error.message); // 'Value should be a string'
  * }
  */
-exports.IfTypeMatches = (type, property, message) => {
-  if (typeof property === type) {
-    throw new TypeError(property, message);
+exports.IfTypeMatches = (expectedType, property, message) => {
+  if (typeof property === expectedType) {
+    throw new TypeError(property, message || `Value should be of type ${expectedType}`);
   }
 };
 
@@ -180,8 +182,10 @@ exports.IfTypeMatches = (type, property, message) => {
  * @throws {TypeError} - Throws a type error with the specified property and message if the property is a valid number.
  *
  * @example
+ * // Example: Throw error if value is a number
+ * const value = 42;
  * try {
- *   IfIsNumber(property, 'Value should not be a number');
+ *   IfIsNumber(value, 'Value should not be a number');
  * } catch (error) {
  *   console.error(error.name); // 'TypeError'
  *   console.error(error.message); // 'Value should not be a number'
@@ -189,7 +193,7 @@ exports.IfTypeMatches = (type, property, message) => {
  */
 exports.IfIsNumber = (property, message) => {
   if (!isNaN(property)) {
-    throw new TypeError(property, message);
+    throw new TypeError(property, message || 'Value should not be a number');
   }
 };
 
@@ -206,8 +210,11 @@ exports.IfIsNumber = (property, message) => {
  * @throws {Error} - Throws an error with the specified message if length validation fails.
  *
  * @example
+ * // Example: Validate the length of a string
+ * const stringValue = 'abc';
  * try {
- *   validateLength('abc', 2, 5, 'Length should be between 2 and 5 characters.');
+ *   validateLength(stringValue, 2, 5, 'Length should be between 2 and 5 characters.');
+ *   console.log('Length is valid.');
  * } catch (error) {
  *   console.error(error.message); // 'Length should be between 2 and 5 characters.'
  * }
@@ -215,7 +222,7 @@ exports.IfIsNumber = (property, message) => {
 exports.validateLength = (value, minLength, maxLength, message) => {
   const length = typeof value === 'string' ? value.length : `${value}`.length;
   if (length < minLength || length > maxLength) {
-    throw new LengthError(value, message || `Length must be between ${minLength} and ${maxLength || value} characters.`);
+    throw new Error(message || `Length must be between ${minLength} and ${maxLength || value} characters.`);
   }
 };
 /**
@@ -233,16 +240,19 @@ exports.validateLength = (value, minLength, maxLength, message) => {
  * @throws {TypeError|LengthError} - Throws a TypeError or LengthError with the specified message if type or length validation fails.
  *
  * @example
+ * // Example: Validate both type and length of a property
+ * const propertyValue = 'abc';
  * try {
- *   validatePropertyLengthAndType('abc', 2, 5, 'number', 'number', 'Invalid value');
+ *   validatePropertyLengthAndType(propertyValue, 2, 5, 'number', 'string', 'Invalid value');
+ *   console.log('Property is valid.');
  * } catch (error) {
  *   console.error(error.name); // 'TypeError' or 'LengthError'
  *   console.error(error.message); // 'Invalid value' or 'Length must be between 2 and 5 characters.'
  * }
  */
-exports.validatePropertyLengthAndType = (minLength,maxLength,minLengthType,maxLengthType,property,message) => {
-  this.IfTypeMatches(minLengthType, property, message);
-  this.IfTypeMatches(maxLengthType, property, message);
+exports.validatePropertyLengthAndType = (property, minLength, maxLength, minLengthType, maxLengthType, message) => {
+  this.IfTypeMatches(minLengthType, minLength, message);
+  this.IfTypeMatches(maxLengthType, maxLength, message);
   this.validateLength(property, minLength, maxLength, message);
 };
 /**
@@ -252,19 +262,23 @@ exports.validatePropertyLengthAndType = (minLength,maxLength,minLengthType,maxLe
  * and if so, it throws a type error with the specified property and message.
  *
  * @param {any} property - The property to be validated for its type.
- * @param {string[]} types - An array of expected types.
+ * @param {string[]} expectedTypes - An array of expected types.
+ * @param {string} [message] - The error message to be associated with the type validation failure.
  * @throws {TypeError} - Throws a type error with the specified property and message if type validation fails.
+ *
  * @example
+ * // Example: Throw error if value is not a number or a string
+ * const value = '42';
  * try {
- *   TypesCheck('42', ['number', 'string'], 'Value should be a number or a string');
+ *   TypesCheck(value, ['number', 'string'], 'Value should be a number or a string');
  * } catch (error) {
  *   console.error(error.name); // 'TypeError'
  *   console.error(error.message); // 'Value should be a number or a string'
  * }
  */
-exports.TypesCheck = (property, types, message) => {
-  if (!types.includes(typeof property)) {
-    throw new TypeError(property,message || `${property} is not of type ${types.join(' or ')}`);
+exports.TypesCheck = (property, expectedTypes, message) => {
+  if (!expectedTypes.includes(typeof property)) {
+    throw new TypeError(property, message || `Value should be of type ${expectedTypes.join(' or ')}`);
   }
 };
 /**
@@ -287,8 +301,8 @@ exports.TypesCheck = (property, types, message) => {
  * }
  */
 exports.isEmpty = (value, message = 'Value should not be empty') => {
-  if (value === null || value === undefined || value === "" || value==='') {
-    throw new ValidationError(value, message);
+  if (value === null || value === undefined || value === "" || value !== 0) {
+    throw new Error(message);
   }
   return value;
 };

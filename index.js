@@ -5,6 +5,12 @@ const isHttp = require('./src/validator/links/http')
 const isHttps = require('./src/validator/links/https')
 const colorValidate = require('./src/validator/colors/isColor');
 const validatePhoneNumber = require('./src/validator/phone/phoneValidator');
+
+//
+const inputValidations = require('./src/utils/inputValidator')
+const {getSubstring}= require('./src/validator/phone/utils/FormatValidation')
+const {trimmedValue}=require('./src/common/validationConstants')
+const HandleError = require('./src/errors/HandleError')
 /**
  * Validates a password based on specified criteria.
  *
@@ -21,3 +27,11 @@ exports.isColor = colorValidate
 exports.isHttp = isHttp
 exports.isHttps = isHttps
 exports.validPhone = validatePhoneNumber
+
+
+// utils 
+
+exports.inputValidations =inputValidations
+exports.getSubstring = getSubstring
+exports.trimValue = trimmedValue
+exports.HandleError = HandleError

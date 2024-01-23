@@ -16,6 +16,13 @@ const MAX_LENGTH = 64;
  * @function
  * @param {string} value - The input string to be trimmed.
  * @returns {string} - The input string with leading and trailing whitespaces removed.
+ *
+ * @example
+ * // Example: Trimming whitespaces from a string
+ * const inputString = '    H   ell o,    World!   ';
+ * const result = trimmedValue(inputString);
+ * console.log(result);
+ * // Output: 'Hello,World!'
  */
 const trimmedValue = (value) => value.replace(/\s/g, '').trim();
 /**

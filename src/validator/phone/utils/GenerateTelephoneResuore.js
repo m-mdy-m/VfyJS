@@ -364,20 +364,21 @@ const northAmericanCountryCodes = ['1', '1', '52'];
 
 // Patterns for Canada
 const northAmericaFixedLinePatterns = [
-  '^\\d3\\d{3}-\\d{4}$', // Canada
-  '^\\d3\\d{3}-\\d{4}$', // United States
-  '^\\d{2}\\d{4} \\d{4}$' // Mexico
+  '^\\d{3}-\\d{3}-\\d{4}$', // Canada
+  '^\\d{3}-\\d{3}-\\d{4}$', // United States
+  '^\d{10}$' // Mexico
 ];
 const northAmericaFixedLinePatternName = 'landline';
 const northAmericaLocalPatterns = [
-  '^\\d3\\d{3}-\\d{4}$', //Canada
- ' ^\\d3\\d{3}-\\d{4}$', //United States
-  '^\\d{2} \\d{4} \\d{4}$']; //Mexico
+  '^\\d{3}-\\d{3}-\\d{4}$', // Canada
+  '^\\d{3}-\\d{3}-\\d{4}$', // United States
+  '^\\d{10}$']; //Mexico
 const northAmericaLocalPatternName = 'mobile';
 const northAmericaLandLinePatterns = [
   '^1-800-\\d{2}-\\d{4}$', //Canada
-   null, //United States
-   '^1-888-\\d{3}-\\d{4}$']; //Mexico
+  '^1-800-\\d{2}-\\d{4}$', //United States
+  '^1-888-\\d{3}-\\d{4}$' //Mexico
+];
 const northAmericaLandLinePatternName = 'toll-free';
 const northAmericaInternationalPatterns= [
   '^\\+1\\d{10}$', //Canada

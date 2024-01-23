@@ -674,11 +674,11 @@
       },
       {
         "type": "landline",
-        "pattern": "^\\d3\\d{3}-\\d{4}$"
+        "pattern": "^\\d{3}-\\d{3}-\\d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d3\\d{3}-\\d{4}$"
+        "pattern": "^\\d{3}-\\d{3}-\\d{4}$"
       }
     ]
   },
@@ -688,16 +688,20 @@
     "countryCode": "1",
     "formats": [
       {
+        "type": "toll-free",
+        "pattern": "^1-800-\\d{2}-\\d{4}$"
+      },
+      {
         "type": "service",
         "pattern": "^\\+1\\d{10}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d3\\d{3}-\\d{4}$"
+        "pattern": "^\\d{3}-\\d{3}-\\d{4}$"
       },
       {
         "type": "mobile",
-        "pattern": " ^\\d3\\d{3}-\\d{4}$"
+        "pattern": "^\\d{3}-\\d{3}-\\d{4}$"
       }
     ]
   },
@@ -716,11 +720,11 @@
       },
       {
         "type": "landline",
-        "pattern": "^\\d{2}\\d{4} \\d{4}$"
+        "pattern": "^d{10}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d{2} \\d{4} \\d{4}$"
+        "pattern": "^\\d{10}$"
       }
     ]
   },

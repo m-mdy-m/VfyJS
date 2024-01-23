@@ -350,12 +350,16 @@
     "countryCode": "32",
     "formats": [
       {
+        "type": "International",
+        "pattern": "^(\\+32)?\\d{8,12}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^0\\d{1}\\d{1}\\d{2}\\d{2}\\d{2}$"
+        "pattern": "^0[2-9]\\d{7}$"
       },
       {
         "type": "mobile",
-        "pattern": "^0\\d{1}\\d{1}\\d{2}\\d{2}\\d{2}$"
+        "pattern": "^0[4-9]\\d{7}$"
       }
     ]
   },
@@ -365,8 +369,12 @@
     "countryCode": "45",
     "formats": [
       {
+        "type": "International",
+        "pattern": "^(\\+45)?\\d{6,12}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^\\d{2}\\d{2}\\d{2}\\d{2}$"
+        "pattern": "^\\d{8}$"
       }
     ]
   },
@@ -376,12 +384,16 @@
     "countryCode": "358",
     "formats": [
       {
+        "type": "International",
+        "pattern": "^(\\+358)?\\d{5,12}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^0\\d{1}-\\d{3}\\d{3}\\d{2}$"
+        "pattern": "^0[1-9]\\d{7}$"
       },
       {
         "type": "mobile",
-        "pattern": "^0[7-9]{1}\\d{1}-\\d{3}\\d{2} \\d{2}$"
+        "pattern": "^0[7-9]\\d{7}$"
       }
     ]
   },
@@ -391,12 +403,16 @@
     "countryCode": "33",
     "formats": [
       {
+        "type": "International",
+        "pattern": "^(\\+33)?\\d{9,12}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^0[1-9]{1}\\d{2}\\d{2}\\d{2}\\d{2}$"
+        "pattern": "^0[1-9]\\d{8}$"
       },
       {
         "type": "mobile",
-        "pattern": "^06\\d{2}\\d{2}\\d{2}\\d{2}$"
+        "pattern": "^06\\d{8}$"
       }
     ]
   },
@@ -406,12 +422,12 @@
     "countryCode": "49",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^[+]{1}49\\d{4}\\d{6,8}$"
+        "type": "International",
+        "pattern": "^(\\+49)?\\d{2,14}$"
       },
       {
         "type": "landline",
-        "pattern": "^0\\d{3}\\d{6,8}(-\\d{2})?$"
+        "pattern": "^0[1-9]\\d{8}(-\\d{2})?$"
       },
       {
         "type": "mobile",
@@ -425,16 +441,16 @@
     "countryCode": "30",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^[+]{1}30\\d{3}\\d{7,8}$"
+        "type": "International",
+        "pattern": "^(\\+30)?\\d{2,13}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{3}\\d{7,8}$"
+        "pattern": "^[2-9]\\d{7,8}$"
       },
       {
         "type": "mobile",
-        "pattern": "^08\\d{1}\\d{6}$"
+        "pattern": "^6\\d{8}$"
       }
     ]
   },
@@ -444,12 +460,16 @@
     "countryCode": "36",
     "formats": [
       {
+        "type": "International",
+        "pattern": "^(\\+36)?\\d{8}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^\\d{2}\\d{6}$"
+        "pattern": "^\\d{8}$"
       },
       {
         "type": "mobile",
-        "pattern": "^(1800|1850|1550)\\d{3}\\d{3}$"
+        "pattern": "^(1800|1850|1550)\\d{6}$"
       }
     ]
   },
@@ -459,8 +479,12 @@
     "countryCode": "354",
     "formats": [
       {
+        "type": "International",
+        "pattern": "^(\\+354)?\\d{7}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^\\d{3}\\d{4}$"
+        "pattern": "^\\d{7}$"
       },
       {
         "type": "mobile",
@@ -474,12 +498,12 @@
     "countryCode": "353",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^\\d{3}\\d{4}$"
+        "type": "International",
+        "pattern": "^(\\+353)?\\d{8,9}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{2,3}\\d{5,7}$"
+        "pattern": "^[2-9]\\d{7,9}$"
       },
       {
         "type": "mobile",
@@ -493,12 +517,12 @@
     "countryCode": "39",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^[+]{1}353 \\d{2} \\d{5,7}$"
+        "type": "International",
+        "pattern": "^(\\+39)?\\d{2,12}$"
       },
       {
         "type": "mobile",
-        "pattern": "^14 \\d{2}$"
+        "pattern": "^14\\d{2}$"
       }
     ]
   },
@@ -508,12 +532,16 @@
     "countryCode": "31",
     "formats": [
       {
+        "type": "International",
+        "pattern": "^(\\+31)?\\d{9,11}$"
+      },
+      {
         "type": "landline",
-        "pattern": "^0\\d{1,2}-\\d{7,9}$"
+        "pattern": "^\\d{10}$"
       },
       {
         "type": "mobile",
-        "pattern": "^[+]{1}31\\d{2}\\d{7,9}$"
+        "pattern": "^d{10}$"
       }
     ]
   },
@@ -523,16 +551,16 @@
     "countryCode": "47",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^[+]{1}31\\d{2}\\d{7,9}$"
+        "type": "International",
+        "pattern": "^(\\+47)?\\d{7,11}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{2}\\d{2}\\d{2}\\d{2}$"
+        "pattern": "^\\d{8}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d{2}\\d{2}\\d{2} \\d{2}$"
+        "pattern": "^\\d{10}$"
       }
     ]
   },
@@ -542,16 +570,16 @@
     "countryCode": "48",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^\\d{2}\\d{2}\\d{2}\\d{2}$"
+        "type": "International",
+        "pattern": "^(\\+48)?\\d{9}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{3}-\\d{3}-\\d{3}$"
+        "pattern": "^\\d{9}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d{3}-\\d{3}-\\d{3}$"
+        "pattern": "^\\d{9}$"
       }
     ]
   },
@@ -561,16 +589,16 @@
     "countryCode": "351",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^\\d{3}-\\d{3}-\\d{3}$"
+        "type": "International",
+        "pattern": "^(\\+351)?\\d{9}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{3}\\d{3}\\d{3}$"
+        "pattern": "^\\d{9}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d{3}\\d{3}\\d{3}$"
+        "pattern": "^\\d{9}$"
       }
     ]
   },
@@ -580,16 +608,16 @@
     "countryCode": "40",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^\\d{3} \\d{3} \\d{3}$"
+        "type": "International",
+        "pattern": "^(\\+40)?\\d{9}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{4}-\\d{3}-\\d{3}$"
+        "pattern": "^\\d{9,10}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d{4}-\\d{3}-\\d{3}$"
+        "pattern": "^\\d{9,10}$"
       }
     ]
   },
@@ -599,16 +627,16 @@
     "countryCode": "7",
     "formats": [
       {
-        "type": "service",
-        "pattern": "^\\d{4}-\\d{3}-\\d{3}$"
+        "type": "International",
+        "pattern": "^(\\+7)?\\d{10,11}$"
       },
       {
         "type": "landline",
-        "pattern": "^\\d{3}-\\d{3}-\\d{2}-\\d{2}$"
+        "pattern": "^\\d{10,11}$"
       },
       {
         "type": "mobile",
-        "pattern": "^\\d{3}-\\d{3}-\\d{2}-\\d{2}$"
+        "pattern": "^\\d{10,11}$"
       }
     ]
   },

@@ -280,66 +280,66 @@ const europeanCountries = ['Belgium', 'Denmark', 'Finland', 'France', 'Germany',
 const europeanCountryCodes = ['32', '45', '358', '33', '49', '30', '36', '354', '353', '39', '31', '47', '48', '351', '40', '7'];
 
 const europeanFixedLinePatterns = [
-  '^0[2-9]\\d{7}$',  // Belgium 
-  '^\\d{8}$',  // Denmark 
-  '^0[1-9]\\d{7}$',  // Finland 
-  '^0[1-9]\\d{8}$',  // France 
-  '^0[1-9]\d{8}(-\\d{2})?$',  // Germany 
-  '^[2-9]\\d{7,8}$',  // Greece 
-  '^\\d{8}$',  // Hungary 
-  '^\\d{7}$',  // Iceland 
-  '^\\d{2,3}\\d{5,7}$',  // Ireland 
-  null,  // Italy
-  '^\\d{10}$',  // Netherlands
-  '^\\d{8}$',  // Norway
-  '^\\d{9}$',  // Poland
-  '^\\d{9}$',  // Portugal
-  '^\\d{10}$',  // Romania
-  '^\\d{10}$',  // Russia
+  '^0[2-9]\\d{7}$',        // Belgium 
+  '^\\d{8}$',              // Denmark 
+  '^0[1-9]\\d{7}$',        // Finland 
+  '^0[1-9]\\d{8}$',        // France 
+  '^0[1-9]\\d{8}(-\\d{2})?$',  // Germany 
+  '^[2-9]\\d{7,8}$',       // Greece 
+  '^\\d{8}$',              // Hungary 
+  '^\\d{7}$',              // Iceland 
+  '^[2-9]\\d{7,9}$',       // Ireland 
+  null,                    // Italy (no fixed convention)
+  '^\\d{10}$',             // Netherlands
+  '^\\d{8}$',              // Norway
+  '^\\d{9}$',              // Poland 
+  '^\\d{9}$',              // Portugal 
+  '^\\d{9,10}$',           // Romania 
+  '^\\d{10,11}$',          // Russia 
 ];
 
 const europeanFixedLinePatternName = 'landline';
 
 const europeanLocalPatterns = [
-  '^0[4-9]\\d{7}$',  // Belgium 
-  null,  // Denmark 
-  '^0[7-9]\\d{7}$',  // Finland 
-  '^06\\d{8}$"',  // France 
-  '^\\d{4}$',  // Germany 
-  '^6\\d{8}$',  // Greece 
-  '^(1800|1850|1550)\\d{6}$',  // Hungary 
+  '^0[4-9]\\d{7}$',          // Belgium 
+  null,                      // Denmark 
+  '^0[7-9]\\d{7}$',          // Finland 
+  '^06\\d{8}$',              // France 
+  '^\\d{4}$',                // Germany 
+  '^6\\d{8}$',               // Greece 
+  '^(1800|1850|1550)\\d{6}$', // Hungary 
   'Variable length, no fixed convention',  // Iceland 
-  '^06-\\d{8}$',  // Ireland 
-  '^14\\d{2}$',  // Italy
-  '^\d{10}$',  // Netherlands
-  '^\\d{10}$',  // Norway
-  '^\\d{9}$',  // Poland
-  '^\\d{9}$',  // Portugal
-  '^\\d{10}$',  // Romania
-  '^\\d{10}$',  // Russia
+  '^06-\\d{8}$',             // Ireland 
+  '^14\\d{2}$',              // Italy
+  '^\d{10}$',                // Netherlands
+  '^\\d{10}$',               // Norway
+  '^\\d{9}$',                // Poland
+  '^\\d{9}$',                // Portugal
+  '^\\d{9,10}$',             // Romania
+  '^\\d{10,11}$',            // Russia
 ];
-
 const europeanLocalPatternName = 'mobile';
+
 const europeanInternationalPatterns = [
-  null, // Belgium
-  null, // Denmark
-  null, // Finland
-  null, // France
-  '^(\\+49)?\\d{4}\\d{6,8}$', // Germany
-  '^^(\\+30)?\\d{3}\\d{7,8}$', // Greece
-  null,  //  Hungary 
-  null,  // Iceland
-  '^\\d{7}$',  // Ireland  
-  '^(\\+39)?\\d{2}\\d{5,7}$',  // Italy 
-  null,  // Netherlands 
-  '^(\\+47)?\\d{7,9}$',  // Norway 
+  '^(\\+32)?\\d{8,12}$',  // Belgium
+  '^(\\+45)?\\d{6,12}$',  // Denmark
+  '^(\\+358)?\\d{5,12}$',  // Finland
+  '^(\\+33)?\\d{9,12}$',  // France
+  '^(\\+49)?\\d{2,14}$', // Germany
+  '^(\\+30)?\\d{2,13}$', // Greece
+  '^(\\+36)?\\d{8}$',  // Hungary 
+  '^(\\+354)?\\d{7}$',  // Iceland
+  '^(\\+353)?\\d{8,9}$',  // Ireland  
+  '^(\\+39)?\\d{2,12}$',  // Italy 
+  '^(\\+31)?\\d{9,11}$',  // Netherlands 
+  '^(\\+47)?\\d{7,11}$',  // Norway 
   '^(\\+48)?\\d{9}$',  // Poland
   '^(\\+351)?\\d{9}$',  // Portugal 
   '^(\\+40)?\\d{9}$',  // Romania 
   '^(\\+7)?\\d{10,11}$',  // Russia 
 ];
 
-const europeanInternationalPatternName = 'service';
+const europeanInternationalPatternName = 'International';
 
 const europeanFormatObject = createPhoneNumberFormats(
   europeContinent,

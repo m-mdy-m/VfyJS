@@ -13,7 +13,7 @@ async function validatePhoneNumber(code,phone){
       return OceaniaPhoneNumber(informationPhone)
   }
 }
-validatePhoneNumber('66','0812345678').then(result => {
+validatePhoneNumber('61','13910998888').then(result => {
   console.log(result);
 });
 module.exports = validatePhoneNumber;

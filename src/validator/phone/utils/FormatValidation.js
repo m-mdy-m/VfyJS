@@ -59,7 +59,10 @@ function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isD
      * Dynamic property name based on format type.
      * @type {boolean}
      */
-    const propertyName = `${format.type}`;
+    let propertyName = format.type;
+    if (propertyName === 'toll-free') {
+      propertyName = 'tollFree'
+    }
     result[propertyName] = hasValidFormat[index] !== undefined ? hasValidFormat[index] : defaultValue;
   });
   return result;

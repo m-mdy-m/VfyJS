@@ -1,15 +1,13 @@
 const { validationCountry, generateValidationResult, validatedCountry, extractInfoValue, validationFormats } = require("../utils/FormatValidation")
-
-exports.Belgium = (values)=>{
-    const { code,phone } = extractInfoValue(values)
-    const international = `+${code}${phone}`
-    return validatedCountry(values,generateValidationResult,[international,phone,phone])
-}
-exports.Denmark = (values)=>{
-    const {code,phone}=extractInfoValue(values)
-    const international = `+${code}${phone}`
-    return validatedCountry(values,generateValidationResult,[international,phone])
-}
+const countries = ['Belgium','Denmark','Finland']
+countries.forEach((country)=>{
+    exports[country] = (values)=>{
+        const { code,phone} = extractInfoValue(values)
+        const international = `+${code}${phone}`
+        const isBelgium = country === 'Denmark'?[international,phone]:[international,phone,phone]
+        return validatedCountry(values,generateValidationResult,isBelgium)
+    }
+})
 exports.Finland = (values)=>{
-    
+
 }

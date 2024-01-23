@@ -2,6 +2,7 @@ const {GlobalVal}= require('./utils/GlobalValidation')
 const AsiaPhoneNumber = require('./continents/Asia')
 const AfricaPhoneNumber = require('./continents/Africa')
 const OceaniaPhoneNumber = require('./continents/Oceania')
+const EuropePhoneNumber = require('./continents/Europe')
 async function validatePhoneNumber(code,phone){
   const informationPhone = await GlobalVal(code,phone)
   switch(informationPhone.continent){
@@ -11,6 +12,8 @@ async function validatePhoneNumber(code,phone){
       return AfricaPhoneNumber(informationPhone)
     case "Oceania":
       return OceaniaPhoneNumber(informationPhone)
+    case "Europe":
+      return EuropePhoneNumber(informationPhone)
   }
 }
 validatePhoneNumber('64','02212345678').then(result => {

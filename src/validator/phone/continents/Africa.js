@@ -1,5 +1,5 @@
 const { Djibouti, Morocco, Kenya,SouthAfrica }= require('../countries/Africa')
-function AsiaPhoneNumber(value){
+function AfricaPhoneNumber(value){
     const country = value.country
     switch (country){
         case "Djibouti":
@@ -13,4 +13,4 @@ function AsiaPhoneNumber(value){
     }
 }
 
-module.exports = AsiaPhoneNumber
+module.exports = AfricaPhoneNumber

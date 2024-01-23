@@ -641,6 +641,25 @@
     ]
   },
   {
+    "continent": "Europe",
+    "country": "Kazakhstan",
+    "countryCode": "7",
+    "formats": [
+      {
+        "type": "International",
+        "pattern": "^(\\+7)?\\d{10,11}$"
+      },
+      {
+        "type": "landline",
+        "pattern": "^\\d{10,11}$"
+      },
+      {
+        "type": "mobile",
+        "pattern": "^\\d{10,11}$"
+      }
+    ]
+  },
+  {
     "continent": "North America",
     "country": "Canada",
     "countryCode": "1",

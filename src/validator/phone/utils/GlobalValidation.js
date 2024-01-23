@@ -123,7 +123,7 @@ async function hasCode(code) {
  * console.log(matchingCodes);
  */
 async function findEqualCodes(code){
-    let equalCodes=["1"]
+    let equalCodes=["1","7"]
     // Fetch phone code data
     const phoneCodeData = await readPhoneCodeData();
     // Check for error fetching data

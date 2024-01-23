@@ -1,7 +1,14 @@
-const {Kazakhstan,Romania,Portugal,Poland, Belgium, Denmark, Finland,France ,Germany,Greece,Hungary,Iceland,Ireland,Italy,Netherlands,Norway} = require("../countries/Europe")
+const {KazakhstanOrRussia,Romania,Portugal,Poland, Belgium, Denmark, Finland,France ,Germany,Greece,Hungary,Iceland,Ireland,Italy,Netherlands,Norway} = require("../countries/Europe")
 
 function EuropePhoneNumber(value){
     const country = value.country
+    if (country[0] || country[1]) {
+        switch(country[0] || country[1]){
+            case "Kazakhstan":
+            case "Russia":
+                return KazakhstanOrRussia(value)
+        }
+    }
     switch (country){
         case "Belgium":
             return Belgium(value)
@@ -33,8 +40,6 @@ function EuropePhoneNumber(value){
             return Portugal(value)
         case "Romania":
             return Romania(value)
-        case "Kazakhstan":
-            return Kazakhstan(value)
     }
 }
 

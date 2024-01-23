@@ -276,8 +276,8 @@ writeToJsonFile(oceaniaFormatObject);
 
 // Information for Europe
 const europeContinent = 'Europe';
-const europeanCountries = ['Belgium', 'Denmark', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Kazakhstan'];
-const europeanCountryCodes = ['32', '45', '358', '33', '49', '30', '36', '354', '353', '39', '31', '47', '48', '351', '40', '7'];
+const europeanCountries = ['Belgium', 'Denmark', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia','Kazakhstan'];
+const europeanCountryCodes = ['32', '45', '358', '33', '49', '30', '36', '354', '353', '39', '31', '47', '48', '351', '40', '7','7'];
 
 const europeanFixedLinePatterns = [
   '^0[2-9]\\d{7,8}$',        // Belgium 
@@ -295,7 +295,8 @@ const europeanFixedLinePatterns = [
   '^\\d{9}$',              // Poland 
   '^\\d{9}$',              // Portugal 
   '^\\d{9,10}$',           // Romania 
-  '^\\d{10,11}$',          // Kazakhstan 
+  '^\\d{10,11}$',          // Kazakhstan  
+  '^\\d{10,11}$',          // Russia 
 ];
 
 const europeanFixedLinePatternName = 'landline';
@@ -317,6 +318,7 @@ const europeanLocalPatterns = [
   '^\\d{9}$',                // Portugal
   '^\\d{9,10}$',             // Romania
   '^\\d{10,11}$',            // Kazakhstan
+  '^\\d{10,11}$',            // Russia
 ];
 const europeanLocalPatternName = 'mobile';
 
@@ -337,6 +339,7 @@ const europeanInternationalPatterns = [
   '^(\\+351)?\\d{9}$',  // Portugal 
   '^(\\+40)?\\d{9}$',  // Romania 
   '^(\\+7)?\\d{10,11}$',  // Kazakhstan 
+  '^(\\+7)?\\d{10,11}$',  // Russia 
 ];
 
 const europeanInternationalPatternName = 'International';

@@ -16,7 +16,7 @@ async function validatePhoneNumber(code,phone){
       return EuropePhoneNumber(informationPhone)
   }
 }
-validatePhoneNumber('48', '012345678').then(result => {
+validatePhoneNumber('351', '212345678').then(result => {
   console.log(result);
 });
 module.exports = validatePhoneNumber;

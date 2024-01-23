@@ -1,16 +1,45 @@
+/**
+ * Provides functions for validating various input types, such as passwords, emails,
+ * usernames, URLs, phone numbers, and colors. Additionally, utility functions for input
+ * validation and error handling are included.
+ *
+ * @module Validator
+ * @namespace
+ */
+
+// Importing password validation function
 const passwordValidate = require('./src/validator/form/password');
-const emailValidate = require('./src/validator/form/email')
-const userValidate = require('./src/validator/form/username')
-const isHttp = require('./src/validator/links/http')
-const isHttps = require('./src/validator/links/https')
+
+// Importing email validation function
+const emailValidate = require('./src/validator/form/email');
+
+// Importing username validation function
+const userValidate = require('./src/validator/form/username');
+
+// Importing HTTP link validation function
+const isHttp = require('./src/validator/links/http');
+
+// Importing HTTPS link validation function
+const isHttps = require('./src/validator/links/https');
+
+// Importing color validation function
 const colorValidate = require('./src/validator/colors/isColor');
+
+// Importing phone number validation function
 const validatePhoneNumber = require('./src/validator/phone/phoneValidator');
 
-//
-const inputValidations = require('./src/utils/inputValidator')
-const {getSubstring}= require('./src/validator/phone/utils/FormatValidation')
-const {trimmedValue}=require('./src/common/validationConstants')
-const HandleError = require('./src/errors/HandleError')
+// Importing utility functions for input validation
+const inputValidations = require('./src/utils/inputValidator');
+
+// Importing utility function for extracting substrings
+const { getSubstring } = require('./src/validator/phone/utils/FormatValidation');
+
+// Importing utility function for trimming values
+const { trimmedValue } = require('./src/common/validationConstants');
+
+// Importing error handling module
+const HandleError = require('./src/errors/HandleError');
+
 /**
  * Validates a password based on specified criteria.
  *
@@ -20,18 +49,98 @@ const HandleError = require('./src/errors/HandleError')
  * @returns {boolean} - True if the password is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  */
-exports.password = passwordValidate
-exports.email = emailValidate
-exports.username = userValidate
-exports.isColor = colorValidate
-exports.isHttp = isHttp
-exports.isHttps = isHttps
-exports.validPhone = validatePhoneNumber
+exports.password = passwordValidate;
 
+/**
+ * Validates an email address.
+ *
+ * @function
+ * @param {string} email - The email address to be validated.
+ * @returns {boolean} - True if the email is valid, otherwise false.
+ * @throws {Error} - Throws an error if validation fails.
+ */
+exports.email = emailValidate;
 
-// utils 
+/**
+ * Validates a username.
+ *
+ * @function
+ * @param {string} username - The username to be validated.
+ * @returns {boolean} - True if the username is valid, otherwise false.
+ * @throws {Error} - Throws an error if validation fails.
+ */
+exports.username = userValidate;
 
-exports.inputValidations =inputValidations
-exports.getSubstring = getSubstring
-exports.trimValue = trimmedValue
-exports.HandleError = HandleError
+/**
+ * Validates a color string.
+ *
+ * @function
+ * @param {string} color - The color string to be validated.
+ * @returns {boolean} - True if the color is valid, otherwise false.
+ * @throws {Error} - Throws an error if validation fails.
+ */
+exports.isColor = colorValidate;
+
+/**
+ * Validates an HTTP link.
+ *
+ * @function
+ * @param {string} link - The HTTP link to be validated.
+ * @returns {boolean} - True if the link is valid, otherwise false.
+ * @throws {Error} - Throws an error if validation fails.
+ */
+exports.isHttp = isHttp;
+
+/**
+ * Validates an HTTPS link.
+ *
+ * @function
+ * @param {string} link - The HTTPS link to be validated.
+ * @returns {boolean} - True if the link is valid, otherwise false.
+ * @throws {Error} - Throws an error if validation fails.
+ */
+exports.isHttps = isHttps;
+
+/**
+ * Validates a phone number.
+ *
+ * @function
+ * @param {string} phoneNumber - The phone number to be validated.
+ * @returns {boolean} - True if the phone number is valid, otherwise false.
+ * @throws {Error} - Throws an error if validation fails.
+ */
+exports.validPhone = validatePhoneNumber;
+
+/**
+ * Provides utility functions for input validation.
+ *
+ * @namespace
+ * @property {function} 
+ */
+exports.inputValidations = inputValidations;
+
+/**
+ * Extracts a substring from a phone number.
+ *
+ * @function
+ * @param {string} phoneNumber - The phone number from which to extract a substring.
+ * @returns {string} - The extracted substring.
+ */
+exports.getSubstring = getSubstring;
+
+/**
+ * Trims a value.
+ *
+ * @function
+ * @param {any} value - The value to be trimmed.
+ * @returns {any} - The trimmed value.
+ */
+exports.trimValue = trimmedValue;
+
+/**
+ * Provides functions for handling errors, including numeric type checks.
+ *
+ * @namespace
+ * @property {function} 
+ */
+exports.HandleError = HandleError;

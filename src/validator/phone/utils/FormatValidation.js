@@ -23,6 +23,9 @@ function validationFormats(patterns,formats) {
    const regex = new RegExp(patternObj.pattern);
    // Test the format against the pattern
    const testResult = regex.test(formats[index]);
+  //  console.log('regex=>',regex);
+  //  console.log('testResult=>',testResult);
+  //  console.log('formats[index]=>',formats[index]);
     return testResult;
   });
 }
@@ -37,7 +40,7 @@ function validationFormats(patterns,formats) {
  * @param {boolean} isDuplicateCode - Indicates if there is a duplicate code.
  * @returns {ValidationResult} - The generated validation result object.
  */
-function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isDuplicateCode) {
+function generateValidationResult(values, hasValidFormat, hasCode, hasPhone, isDuplicateCode=false) {
   const defaultValue = null
   return {
     continent: values.continent,

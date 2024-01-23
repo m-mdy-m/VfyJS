@@ -1,8 +1,9 @@
+const { Djibouti }= require('../countries/Africa')
 function AsiaPhoneNumber(value){
     const country = value.country
     switch (country){
-        case "":
-            return ''
+        case "Djibouti":
+            return Djibouti(value)
         case "//":
             return ''
         case "/":

@@ -6,7 +6,7 @@
     "formats": [
       {
         "type": "local",
-        "pattern": "^(21|27)[0-9]{4}$"
+        "pattern": "^(21|27)[0-9]{6}$"
       },
       {
         "type": "international",
@@ -14,7 +14,7 @@
       },
       {
         "type": "fixed-line",
-        "pattern": "^(21|27)[0-9]{4}$"
+        "pattern": "^(21|27)[0-9]{6}$"
       }
     ]
   },

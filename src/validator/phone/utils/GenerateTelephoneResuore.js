@@ -284,7 +284,7 @@ const europeanFixedLinePatterns = [
   '^\\d{8}$',              // Denmark 
   '^0[1-9]\\d{7}$',        // Finland 
   '^0[1-9]\\d{8}$',        // France 
-  '^0[1-9]\\d{8}(-\\d{2})?$',  // Germany 
+  '^0[1-9]\\d{9}(\\d{2})?$',  // Germany 
   '^[2-9]\\d{7,8}$',       // Greece 
   '^\\d{8}$',              // Hungary 
   '^\\d{7}$',              // Iceland 

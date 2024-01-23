@@ -427,7 +427,7 @@
       },
       {
         "type": "landline",
-        "pattern": "^0[1-9]\\d{8}(-\\d{2})?$"
+        "pattern": "^0[1-9]\\d{9}(\\d{2})?$"
       },
       {
         "type": "mobile",

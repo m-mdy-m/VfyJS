@@ -10,7 +10,7 @@ async function validatePhoneNumber(code,phone){
       return AfricaPhoneNumber(informationPhone)
   }
 }
-validatePhoneNumber('254', '0123456789').then(result => {
+validatePhoneNumber('27', '0112345678').then(result => {
   console.log(result);
 });
 module.exports = validatePhoneNumber;

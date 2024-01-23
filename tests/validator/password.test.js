@@ -125,7 +125,7 @@ test("invalid password - insufficient length with custom error message", () => {
     const isValid = password("Weak@P", { minLength: { value: 10, errorMessage: "Custom error: Password must be at least 10 characters long." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -134,7 +134,7 @@ test("invalid password - exceeds maximum length with custom error message", () =
     const isValid = password("VeryLongPassword1234567890", { maxLength: { value: 20, errorMessage: "Custom error: Password cannot exceed 20 characters." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -143,7 +143,7 @@ test("invalid password - missing uppercase letter with custom error message", ()
     const isValid = password("weakpassword@123", { uppercase: { required: true, errorMessage: "Custom error: Password must contain at least one uppercase letter." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -152,7 +152,7 @@ test("invalid password - missing lowercase letter with custom error message", ()
     const isValid = password("STRONGPASSWORD@123", { lowercase: { required: true, errorMessage: "Custom error: Password must contain at least one lowercase letter." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -161,7 +161,7 @@ test("invalid password - missing numeric digit with custom error message", () =>
     const isValid = password("StrongPassword@", { number: { required: true, errorMessage: "Custom error: Password must have at least one number." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -170,7 +170,7 @@ test("invalid password - missing special character with custom error message", (
     const isValid = password("StrongPassword123", { specialCharacter: { required: true, errorMessage: "Custom error: Password must contain at least one special character such as (@#$%^&*)." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -179,7 +179,7 @@ test("invalid password - missing alphabetic character with custom error message"
     const isValid = password("1234567890@#$%^&*", { alphabetic: { required: true, errorMessage: "Custom error: Input must contain at least one alphabetic character." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 
@@ -188,7 +188,7 @@ test("invalid password - contains whitespace with custom error message", () => {
     const isValid = password("Whitespace Password", { whitespace: { required: false, errorMessage: "Custom error: Whitespace is not allowed. Please remove any leading or trailing spaces." } });
     expect(isValid).toBe(false);
   } catch (error) {
-    expect(error.property).toBe(error.property);
+    expect(error.property).toBe(false);
   }
 });
 

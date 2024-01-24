@@ -107,7 +107,7 @@ test("Valid email with custom options (minLengthLocal, maxLengthDomainPart)", ()
 
 test("Invalid email - special characters in domain", () => {
   try {
-    const isValid = email('j.d@example.com', { minLengthLocal: 3, maxLengthDomainPart: 10 });
+    const isValid = email('j.d@example.c!om', { minLengthLocal: 3, maxLengthDomainPart: 10 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);

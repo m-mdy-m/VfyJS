@@ -110,7 +110,7 @@ const inputValidator = (input) => ({
    * Checks if the input matches the standard email format.
    * @returns {boolean} - True if the input is a valid email, otherwise false.
    */
-  matchesEmailFormat: () =>/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/.test(input),
+  matchesEmailFormat: () => /^[\w.+-]+@[a-zA-Z\d.-]+\.{1}[a-zAZ]{2,5}$/.test(input),
 
   /**
    * Checks if the input contains consecutive repeated characters.

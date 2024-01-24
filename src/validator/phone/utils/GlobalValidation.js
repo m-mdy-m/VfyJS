@@ -1,7 +1,7 @@
 "use strict";
 const {getTelResource,readPhoneCodeData} = require("../config/phoneDataHandler")
 const { trimmedValue } = require('../../../common/validationConstants')
-const { TypesCheck, isEmpty, validateLength, ifFalsyValue }= require('../../../errors/HandleError')
+const { TypesCheck, isEmpty, validateLength, ifFalsyValue, ifTruthyValue }= require('../../../errors/HandleError')
 const inputValidator = require('../../../utils/inputValidator')
 const MAX_LENGTH_CODE = 10
 const MIN_LENGTH_CODE = 1
@@ -22,6 +22,9 @@ function ChecKValue(value, min, max, ContentError = String) {
     if (typeof (value) === 'number') {
         value = `${value}`;
     }
+    const hasSpecialChar = inputValidator(value).hasSpecialCharacter()
+    console.log('value =>',value);
+    ifTruthyValue(hasSpecialChar,'Special characters are not allowed.')
     //  trim validated value
     value = trimmedValue(value)
     // Check for empty value

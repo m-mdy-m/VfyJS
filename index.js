@@ -109,7 +109,7 @@ exports.isHttps = isHttps;
  * @returns {boolean} - True if the phone number is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  */
-exports.hasPho = validatePhoneNumber;
+exports.hasPhone = validatePhoneNumber;
 
 /**
  * Provides utility functions for input validation.

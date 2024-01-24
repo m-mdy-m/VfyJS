@@ -227,7 +227,7 @@ try {
 This example demonstrates various isPassword configuration options, allowing you to set custom minimum and maximum lengths, specify character requirements, and control the presence of whitespace in the password. Adjust these configurations based on your specific requirements.
 
 
-
+---
 
 # ConfigEmail
 
@@ -281,6 +281,98 @@ console.log('Result =>', result); // Output: true
 In this example, the isEmail function validates that the subdomain part of the email address has a maximum length of 2 characters. The email address is considered valid, and the result is true.
 
 Feel free to customize these configurations based on your specific requirements. Adjust the values as needed for your use case.
+
+
+---
+
+## ConfigPhone
+
+### hasPhone
+
+The hasPhone function in vfyjs is a versatile utility designed for validating and extracting detailed information about phone numbers. This function aids in understanding the origin, type (landline or mobile), and service availability of a given phone number.
+
+
+#### Parameters
+
+- `code`: The country code of the phone number.
+- `phoneNumber`: The phone number to be validated.
+
+### Explanation
+
+The primary purpose of the hasPhone function is to offer comprehensive validation and analysis of phone numbers. It verifies the input phone number against the specified country code, providing detailed information in the result object. The result includes data such as the continent, country, ISO code, validation status, duplicate code presence, service availability, and phone type (landline or mobile).
+
+#### Examples
+
+### Example 1: Validating and Extracting Information for an Iranian Mobile Number
+
+```javaScript
+const { hasPhone } = require("vfyjs");
+
+hasPhone('98', '9112348424').then(result => {
+    console.log('Result =>', result);
+});
+
+// Output:
+/**
+{
+  continent: 'Asia',
+  country: 'Iran',
+  code: '98',
+  isoCode: 'IR',
+  phone: '9112348424',
+  hasCode: true,
+  hasPhone: true,
+  isDuplicateCode: false,
+  mobile: true,
+  service: true,
+  landline: false
+}
+*/
+```
+In this example, the hasPhone function is used to validate and extract information about an Iranian mobile number ('9112348424') with the country code '98'. The result object provides a comprehensive set of details about the phone number, including its continent, country, ISO code, and characteristics.
+
+### Example 2: Validating and Extracting Information for a North American Phone Number
+
+
+```javaScript
+const { hasPhone } = require("vfyjs");
+
+hasPhone("1", "1234567890").then(result => {
+    console.log('Result =>', result);
+});
+
+// Output:
+/**
+{
+  continent: 'North America',
+  country: [ 'Canada', 'United States' ],
+  code: '1',
+  isoCode: [ 'CA', 'US' ],
+  phone: '1234567890',
+  hasCode: true,
+  hasPhone: true,
+  isDuplicateCode: true,
+  tollFree: false,
+  service: true,
+  landline: true,
+  mobile: true
+}
+*/
+```
+
+In this example, the hasPhone function is applied to validate and extract information about a North American phone number ('1234567890') with the country code '1'. The result object provides a detailed analysis, including continent, countries, ISO codes, and various characteristics of the phone number.
+
+## Usage
+To use the hasPhone function, import it from the vfyjs library and invoke it with the appropriate country code and phone number as parameters. The function returns a Promise, so it should be used with asynchronous syntax, such as .then().
+
+```javaScript
+const { hasPhone } = require("vfyjs");
+
+hasPhone('98', '9112348424').then(result => {
+    console.log('Result =>', result);
+});
+```
+Feel free to incorporate this utility into your applications to enhance phone number validation and gain valuable insights into the provided phone numbers. Adjust the parameters and utilize the information in the result object based on your specific requirements.
 
 ## License
 

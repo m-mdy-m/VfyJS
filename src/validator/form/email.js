@@ -10,18 +10,18 @@ const { getValidValue } = require("../../common/validationConstants");
  *
  * @param {string} value - The input string to be validated as an email.
  * @param {Object} [options={}] - Additional options for email validation.
- * @param {number} [options.minLengthLocal=3] - The minimum length allowed for the local part of the email.
- * @param {number} [options.maxLengthLocal=255] - The maximum length allowed for the local part of the email.
- * @param {number} [options.minLengthDomainPart=3] - The minimum length allowed for the domain part of the email.
- * @param {number} [options.maxLengthDomainPart=255] - The maximum length allowed for the domain part of the email.
- * @param {number} [options.minLengthSubdomain=2] - The minimum length allowed for the subdomain part of the email.
- * @param {number} [options.maxLengthSubdomain=255] - The maximum length allowed for the subdomain part of the email.
+ * @param {number} [options.minLenLocal=3] - The minimum length allowed for the local part of the email.
+ * @param {number} [options.maxLenLocal=255] - The maximum length allowed for the local part of the email.
+ * @param {number} [options.minLenDomain=3] - The minimum length allowed for the domain part of the email.
+ * @param {number} [options.maxLenDomain=255] - The maximum length allowed for the domain part of the email.
+ * @param {number} [options.minLenSubdomain=2] - The minimum length allowed for the subdomain part of the email.
+ * @param {number} [options.maxLenSubdomain=255] - The maximum length allowed for the subdomain part of the email.
  * @returns {boolean} - True if the input is a valid email, otherwise false.
  * @throws {TypeError} - Throws a TypeError if the input is not a string.
  * @throws {ValidationError} - Throws a ValidationError if the email format is invalid.
  * @example
  * const { email } = require('vfyjs');
- * const isValid = email('mahdimamashli1383@gmail.com', { minLengthLocal: 3, maxLengthLocal: 255 });
+ * const isValid = email('mahdimamashli1383@gmail.com', { minLenLocal: 3, maxLenLocal: 255 });
  * console.log(isValid); // true
  */
 function validateEmail(value, options = {}) {
@@ -37,7 +37,7 @@ function validateEmail(value, options = {}) {
   const standardMaxLength = 255;
   const standardMinLength = 3
   // Validation options
-  const optionName = ['minLengthLocal', 'minLengthDomainPart', 'minLengthSubdomain', 'maxLengthLocal', 'maxLengthDomainPart', 'maxLengthSubdomain'];
+  const optionName = ['minLenLocal', 'minLenDomain', 'minLenSubdomain', 'maxLenLocal', 'maxLenDomain', 'maxLenSubdomain'];
   const optionValidations = [standardMinLength,standardMinLength,2, standardMaxLength,standardMaxLength,standardMaxLength];
   const msgError = 
   [
@@ -52,38 +52,38 @@ function validateEmail(value, options = {}) {
   
   objectOPtion = { ...objectOPtion, ...options };
 
-  const { minLengthLocal, minLengthDomainPart, minLengthSubdomain, maxLengthLocal, maxLengthDomainPart, maxLengthSubdomain } = objectOPtion;
+  const { minLenLocal, minLenDomain, minLenSubdomain, maxLenLocal, maxLenDomain, maxLenSubdomain } = objectOPtion;
 
   // Local part length validation
   const localPart = value.split('@')[0];
   validateLength(localPart,{
-    min : getValidValue(minLengthLocal,minLengthLocal),
-    max : getValidValue(maxLengthLocal,maxLengthLocal),
-    minMessage : minLengthLocal.errorMessage,
-    maxMessage : maxLengthLocal.errorMessage
+    min : getValidValue(minLenLocal,minLenLocal),
+    max : getValidValue(maxLenLocal,maxLenLocal),
+    minMessage : minLenLocal.errorMessage,
+    maxMessage : maxLenLocal.errorMessage
   })
   // Domain and subdomain length validation
   const ArrayDomain = value.split('@')[1].split('.');
   const domain = value.split('@')[1].trim();
-  const subdomain = ArrayDomain[ArrayDomain.length - 1];
-  const domainPart = domain.split(subdomain)[0].trim();
-  const hasSpecialChar = inputValidator(subdomain).hasSpecialCharacter()
+  const domainPart = ArrayDomain[ArrayDomain.length - 1];
+  const subdomain = domain.split(domainPart)[0].trim();
+  const hasSpecialChar = inputValidator(domainPart).hasSpecialCharacter()
   ifTruthyValue(hasSpecialChar,'Subdomain should not contain special characters')
   validateLength(subdomain, {
-    min: getValidValue(minLengthSubdomain,minLengthSubdomain),
-    max:  getValidValue(maxLengthSubdomain,maxLengthSubdomain),
-    minMessage: minLengthSubdomain.errorMessage,
-    maxMessage: maxLengthSubdomain.errorMessage,
+    min: getValidValue(minLenSubdomain,minLenSubdomain),
+    max:  getValidValue(maxLenSubdomain,maxLenSubdomain),
+    minMessage: minLenSubdomain.errorMessage,
+    maxMessage: maxLenSubdomain.errorMessage,
   });
   validateLength(domainPart, {
-    min: getValidValue(minLengthDomainPart, minLengthDomainPart),
-    max: getValidValue(maxLengthDomainPart, maxLengthDomainPart),
-    minMessage: minLengthDomainPart.errorMessage,
-    maxMessage: maxLengthDomainPart.errorMessage,
+    min: getValidValue(minLenDomain, minLenDomain),
+    max: getValidValue(maxLenDomain, maxLenDomain),
+    minMessage: minLenDomain.errorMessage,
+    maxMessage: maxLenDomain.errorMessage,
   });
   // Email format validation using inputValidator
   const validator = inputValidator(value);
-  const email = localPart+'@'+domainPart+subdomain
+  const email = localPart+'@'+subdomain+domainPart
   const isValidEmail = email ===value
   const isValidFormat = validator.matchesEmailFormat(value);
   IfNotType('boolean', isValidFormat, `Unexpected validation result. The email validation should return a boolean.`);

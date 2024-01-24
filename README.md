@@ -231,7 +231,56 @@ This example demonstrates various isPassword configuration options, allowing you
 
 # ConfigEmail
 
+### isEmail
 
+The `isEmail` function in vfyjs allows you to validate and configure email address requirements.
+
+#### Configurations
+
+- `minLenLocal`: Specifies the minimum length for the local part of the email address.
+- `maxLenLocal`: Specifies the maximum length for the local part of the email address.
+- `minLenSubdomain`: Specifies the minimum length for the subdomain part of the email address.
+- `maxLenSubdomain`: Specifies the maximum length for the subdomain part of the email address.
+- `minLenDomain`: Specifies the minimum length for the domain part of the email address.
+- `maxLenDomain`: Specifies the maximum length for the domain part of the email address.
+
+#### Explanation
+
+An email address typically consists of three parts: `local@subdomain.domainPart`. Let's break down each part:
+
+- **Local Part**: The local part is the portion of the email address before the '@' symbol. It often represents the user's username or mailbox name.
+
+- **Subdomain Part**: The subdomain part is the section between the '@' symbol and the first dot ('.'). It may represent a subdomain of the email provider.
+
+- **Domain Part**: The domain part is the portion after the first dot ('.'). It signifies the domain name of the email provider.
+#### Examples
+
+### Example 1: Minimum Length for Local Part
+
+```javascript
+const { isEmail } = require("vfyjs");
+let email = 'je@sub.example.com';
+
+try {
+    isEmail(email, { minLenLocal: 5 });
+} catch (error) {
+    console.log(error.message); // Output: "Length must be at least 5 characters for the local part."
+}
+```
+
+In this example, the isEmail function checks if the local part of the email address has a minimum length of 5 characters and throws an error if it doesn't meet this requirement.
+
+### Example 2: Maximum Length for Subdomain Part
+
+```javaScript
+const { isEmail } = require("vfyjs");
+let email = 'john.doe@sub.example.com';
+let result = isEmail(email, { maxLenSubdomain: 2 });
+console.log('Result =>', result); // Output: true
+```
+In this example, the isEmail function validates that the subdomain part of the email address has a maximum length of 2 characters. The email address is considered valid, and the result is true.
+
+Feel free to customize these configurations based on your specific requirements. Adjust the values as needed for your use case.
 
 ## License
 

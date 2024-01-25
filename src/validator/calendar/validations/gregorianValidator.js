@@ -2,6 +2,13 @@ const {getSubstring}  = require('../../phone/utils/FormatValidation')
 const {trimmedValue} = require('../../../common/validationConstants')
 const inputValidator= require('../../../utils/inputValidator')
 const { ifTruthyValue, TypesCheck, validationsLen, validateMaxLen, validateMinLen }= require('../../../errors/HandleError')
+class FutureDateError extends Error {
+    constructor(invalidDate, message, currentDate) {
+        super(message);
+        this.invalidDate = invalidDate; 
+        this.currentDate = currentDate; 
+    }
+}
 function validateGregorianDate(inputYear, inputMonth, inputDay) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay];
@@ -39,17 +46,17 @@ function validateGregorianDate(inputYear, inputMonth, inputDay) {
     const nowDay = nowDate.getDate();
     
     if (nowYear < year) {
-
+        throw new FutureDateError(year, `The year ${year} cannot be in the future. Please enter a previous or current year.`,nowYear);
     }
     if (nowMonth < month) {
-        
+        throw new FutureDateError(year, `The month ${month} cannot be in the future. Please enter a previous or current month.`,nowMonth);
     }
     if (nowDay < day) {
-        
+        throw new FutureDateError(year, `The day ${day} cannot be in the future. Please enter a previous or current day.`,nowDay);
     }
 
 }
-const year = 2024;
+const year = 2025;
 const month = 12;
 const day = 1;
 console.log(validateGregorianDate(year, month, day)); 

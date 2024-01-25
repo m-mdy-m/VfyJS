@@ -3,7 +3,7 @@ const inputValidator= require('../../../utils/inputValidator')
 const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleError')
 const remainingTimeOfYear = require('../utils/remainingTimeOfYear')
 const {getDay,getMonth} = require('../utils/dateTimeHelpers')
-const { validateDateComponents } = require('../utils/dateValidation')
+const { validateDateComponents, getFormatted } = require('../utils/dateValidation')
 const {getDateNowGregorian} = require('../utils/getDate')
 function validateGregorianDate( inputYear = new Date().getFullYear(), inputMonth = new Date().getMonth() + 1, inputDay = new Date().getDate(), hasWrite = false) {
     // Create an array to hold the input values (year, month, day)
@@ -12,6 +12,10 @@ function validateGregorianDate( inputYear = new Date().getFullYear(), inputMonth
     const {nowDay,nowMonth,nowYear } = getDateNowGregorian()
     if (inputYear !== nowYear || inputMonth !== nowMonth || inputDay !== nowDay) {
         hasWrite = true
+    }
+    if (inputYear > nowYear ||
+        (inputYear === nowYear && inputMonth > nowMonth) || (inputYear === nowYear && inputMonth === nowMonth && inputDay > nowDay)) {
+        console.log('hi');
     }
     let year,month,day;
     // Iterate over each date component (year, month, day)
@@ -44,7 +48,10 @@ function validateGregorianDate( inputYear = new Date().getFullYear(), inputMonth
 
     // Convert the time difference to days, hours, minutes, and seconds
     const remaining = remainingTimeOfYear()
-    const {formatDay,formatMonth} = validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
+    const {formatDay,formatMonth} = getFormatted(nowMonth,nowDay)
+    if (!hasWrite) {
+        validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
+    }
     //  Prepare result object
      const result = {
         format : `${nowYear}-${formatMonth}-${formatDay}`,
@@ -65,6 +72,6 @@ function validateGregorianDate( inputYear = new Date().getFullYear(), inputMonth
     return result
 }
 const year = 2024;
-const month = 1;
-const day = 22;
+const month = 2;
+const day = 25;
 console.log(validateGregorianDate(year,month,day)); 

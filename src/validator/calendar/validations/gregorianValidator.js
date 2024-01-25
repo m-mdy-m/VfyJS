@@ -1,7 +1,7 @@
 const {getSubstring}  = require('../../phone/utils/FormatValidation')
 const {trimmedValue} = require('../../../common/validationConstants')
 const inputValidator= require('../../../utils/inputValidator')
-const { ifTruthyValue, TypesCheck, validationsLen, validateMaxLen, validateMinLen }= require('../../../errors/HandleError')
+const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleError')
 class FutureDateError extends Error {
     constructor(invalidDate, message, currentDate) {
         super(message);
@@ -15,6 +15,7 @@ function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth 
     let year,month,day;
     // Iterate over each date component (year, month, day)
     dateComponents.forEach((component, index) => {
+        isEmpty(component, 'Year, month, and day must not Empty.')
         // Check if the component is of type 'number' or 'string'
         TypesCheck(component, ['number', 'string'], 'Year, month, and day must be either numbers or strings.');
 
@@ -81,23 +82,24 @@ function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth 
         formatDay = `0${nowDay}`
     }
      // Prepare result object
-     const result = {
-        format : `${nowYear}-${formatMonth ? formatMonth : nowMonth}-${formatDay ? formatDay : nowDay}`,
-        currentDateTime: {
-            year: nowYear,
-            month: { monthOfYear: nowMonth, monthName: monthOfYearName },
-            day: { dayOfMonth: nowDay, dayOfWeek: dayOfWeekName }
-        },
-        timeLeftUntilEndOfYear: {
-            months: monthRemaining,
-            days: daysRemaining,
-            hours: hoursRemaining,
-            minutes: minutesRemaining,
-            seconds: secondsRemaining,
-        },
-        traveledFuture : false,
-    };
-    return result
+    //  const result = {
+    //     format : `${nowYear}-${formatMonth ? formatMonth : nowMonth}-${formatDay ? formatDay : nowDay}`,
+    //     currentDateTime: {
+    //         year: nowYear,
+    //         month: { monthOfYear: nowMonth, monthName: monthOfYearName },
+    //         day: { dayOfMonth: nowDay, dayOfWeek: dayOfWeekName }
+    //     },
+    //     timeLeftUntilEndOfYear: {
+    //         months: monthRemaining,
+    //         days: daysRemaining,
+    //         hours: hoursRemaining,
+    //         minutes: minutesRemaining,
+    //         seconds: secondsRemaining,
+    //     },
+    //     traveledFuture : false,
+    //     hasValidInput : ','
+    // };
+    // return result
 }
 const year = 2024;
 const month = 1;

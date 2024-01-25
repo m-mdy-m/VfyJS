@@ -6,14 +6,14 @@ const {getDay,getMonth} = require('../utils/dateTimeHelpers')
 const { validateDateComponents, getFormatted } = require('../utils/dateValidation')
 const {getDateNowGregorian} = require('../utils/getDate')
 const { nowDay, nowMonth, nowYear,nowHours, nowMinutes, nowSeconds } = getDateNowGregorian();
-function validateGregorianDate( 
+function validateGregorianDate( {
     inputYear = nowYear,
     inputMonth = nowMonth,
     inputDay = nowDay,
     inputMinutes = nowMinutes,
     inputHours = nowHours,
     inputSeconds = nowSeconds,
-    hasWrite = false) {
+    hasWrite = false}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay,inputHours,inputMinutes,inputSeconds,];
     // Get the current date
@@ -105,10 +105,4 @@ function validateGregorianDate(
     };
     return result
 }
-const year = 2024;
-const month = 1;
-const day = 26;
-const hours = 1
-const minutes = 2
-const second = 20
-console.log(validateGregorianDate()); 
+console.log(validateGregorianDate({inputSeconds:50})); 

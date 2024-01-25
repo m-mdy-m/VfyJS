@@ -722,10 +722,34 @@ try {
 ```
 ## License
 
-VfyJS is released under the MIT License. For more information, see the LICENSE file.
+VfyJS is released under the MIT License. For more information, see the [LICENSE](./LICENSE) file.
 
+## Links
 
-## ........
-link organization : https://github.com/VfyJs
-link main repository : https://github.com/m-mdy-m/VfyJS
-link npm : https://www.npmjs.com/package/vfyjs
+- GitHub Organization: [VfyJS](https://github.com/VfyJs)
+- Main Repository: [VfyJS Repository](https://github.com/m-mdy-m/VfyJS)
+- npm Package: [VfyJS on npm](https://www.npmjs.com/package/vfyjs)
+
+## Feedback and Suggestions
+
+If you have any feedback, suggestions, or feature requests for VfyJS, we'd love to hear from you! Your input is valuable in improving the library and making it more useful for the community.
+
+- **Feedback**: Share your thoughts on your experience with VfyJS.
+- **Feature Requests**: Let us know if there are specific features you'd like to see in future releases.
+- **Suggestions**: If you have ideas for improvement or alternative approaches, feel free to suggest them.
+- **Criticism**: Constructive criticism helps us identify areas for enhancement.
+
+## Community Discussions
+
+For open discussions, questions, and community interactions, we encourage you to visit the [VfyJS Discussions](https://github.com/orgs/VfyJs/discussions) section on GitHub. This is the ideal space for:
+
+- Asking questions about how to use VfyJS effectively.
+- Sharing your experiences and best practices with the community.
+- Discussing potential features or improvements.
+- Providing feedback and suggestions.
+
+Feel free to start a new discussion thread or participate in existing conversations. The Discussions section is a collaborative space where the VfyJS community can come together, learn from each other, and contribute to the growth of the library.
+
+I look forward to seeing you in the [VfyJS Discussions](https://github.com/orgs/VfyJs/discussions) area!
+
+I appreciate your support and involvement in the development of VfyJS!

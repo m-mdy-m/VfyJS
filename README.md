@@ -7,12 +7,12 @@ Data validation, string manipulation, and error handling are fundamental aspects
 
 ## Features 
 
-- [Data Validation](#data-validation)
-- [String Manipulation](#string-manipulation)
-- [Error Handling](#error-handling)
+- [Data Validation](#DataValidation)
+- [String Manipulation](#StringManipulation)
+- [Error Handling](#ErrorHandling)
 - [Configuration](#configuration)
 
-### Data Validation {#data-validation}
+### DataValidation
 
 - **Colors**: Validate various color formats, including hex, name, RGB, RGBA, and CssVarHwb. [Configuration](#ConfigColor)
 - **Links**: Detect and validate HTTP or HTTPS links. [Configuration](#ConfigLinks)
@@ -21,12 +21,12 @@ Data validation, string manipulation, and error handling are fundamental aspects
 - **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](#ConfigPhone)
 - **Custom Validation Functions**: Validate various aspects of a string input. [Configuration](#ConfigValue)
 
-### String Manipulation {#string-manipulation}
+### StringManipulation 
 
 - **getSubstring**: Retrieve substrings from a given string based on specified indexes. [Configuration](#ConfigSubstring)
 - **trimValue**: Trim extra spaces from the beginning and end of a string. [Configuration](#ConfigtrimValue)
 
-### Error Handling {#error-handling}
+### ErrorHandling
 
 - **HandleError**: A utility for consistent error handling and type validation. [Configuration](#ConfigErrors)
 
@@ -72,7 +72,7 @@ try {
 
 # Configuration
 
-## ConfigColor {#ConfigColor}
+## ConfigColor 
 The `isColor` function in vfyjs provides various methods to identify and validate different color formats. Here are the available methods:
 
 - `HEX()`: Validate if the input is a valid hexadecimal color code.

@@ -19,6 +19,7 @@ Data validation, string manipulation, and error handling are fundamental aspects
 - **Passwords**: Strong password detection with customization options. [Configuration](#ConfigPassword)
 - **Emails**: Recognize and validate email addresses. [Configuration](#ConfigEmail)
 - **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](#ConfigPhone)
+- **Custom Validation Functions**: Validate various aspects of a string input. [Configuration](#ConfigValue)
 
 ### String Manipulation {#string-manipulation}
 
@@ -375,6 +376,36 @@ hasPhone('98', '9112348424').then(result => {
 Feel free to incorporate this utility into your applications to enhance phone number validation and gain valuable insights into the provided phone numbers. Adjust the parameters and utilize the information in the result object based on your specific requirements.
 
 
+---
+## ConfigValue
+
+
+## Validation Functions
+
+The `inputValidator` function returns an object with various validation functions for string inputs. Here are the available functions:
+
+- `hasUppercase`: Checks if the input has at least one uppercase letter.
+- `hasLowerCase`: Checks if the input has at least one lowercase letter.
+- `hasNumber`: Checks if the input has at least one numeric digit.
+- `hasSpecialCharacter`: Checks if the input has at least one special character.
+- `hasAlphabetic`: Checks if the input contains at least one alphabetic character.
+- `hasNumeric`: Checks if the input contains at least one numeric digit.
+- `hasAlphanumeric`: Checks if the input contains only alphanumeric characters.
+- `hasWhitespace`: Checks if the input contains any whitespace character.
+- `hasNonAlphanumeric`: Checks if the input contains any non-alphanumeric character.
+- `hasMinLength(minLength)`: Checks if the input has a minimum length.
+- `hasMaxLength(maxLength)`: Checks if the input has a maximum length.
+- `matchesCustomPattern(pattern)`: Checks if the input matches a custom regex pattern.
+- `matchesEmailFormat`: Checks if the input matches the standard email format.
+- `hasRepeat(repeatCount)`: Checks if the input contains consecutive repeated characters.
+
+## Usage Example
+
+```javascript
+const validator = inputValidator("Sample123");
+const isValid = validator.hasUppercase() && validator.hasNumber();
+console.log(isValid); // true
+```
 ---
 
 ## ConfigSubstring

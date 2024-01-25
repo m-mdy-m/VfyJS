@@ -9,7 +9,7 @@ class FutureDateError extends Error {
         this.currentDate = currentDate; 
     }
 }
-function validateGregorianDate(inputYear, inputMonth, inputDay) {
+function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth = new Date().getMonth() + 1, inputDay = new Date().getDate(),{traveledFuture}={}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay];
     let year,month,day;
@@ -95,11 +95,11 @@ function validateGregorianDate(inputYear, inputMonth, inputDay) {
             minutes: minutesRemaining,
             seconds: secondsRemaining,
         },
-
+        traveledFuture : false,
     };
     return result
 }
 const year = 2024;
 const month = 1;
 const day = 25;
-console.log(validateGregorianDate(year, month, day)); 
+console.log(validateGregorianDate()); 

@@ -1,8 +1,12 @@
 /**
- * Retrieves the current date in the Gregorian calendar format.
- * @param {number} nowYear - The current year.
- * @param {number} nowMonth - The current month.
- * @param {number} nowDay - The current day of the month.
+ * Retrieves the current date and time in the Gregorian calendar format.
+ * @returns {object} An object containing the current date and time components.
+ * @property {number} nowYear - The current year.
+ * @property {number} nowMonth - The current month.
+ * @property {number} nowDay - The current day of the month.
+ * @property {number} nowHours - The current hour.
+ * @property {number} nowMinutes - The current minute.
+ * @property {number} nowSeconds - The current second.
  */
 exports.getDateNowGregorian = () => {
     // Get the current date
@@ -16,23 +20,23 @@ exports.getDateNowGregorian = () => {
     
     // Get the current day of the month
     const nowDay = nowDate.getDate();
+
+    // Get the current hour
+    const nowHours = nowDate.getHours();
+
+    // Get the current minute
+    const nowMinutes = nowDate.getMinutes();
+
+    // Get the current second
+    const nowSeconds = nowDate.getSeconds();
     
-    // Return an object containing the current date components
+    // Return an object containing the current date and time components
     return {
-      /**
-       * The current year.
-       * @type {number}
-       */
-      nowYear,
-      /**
-       * The current month.
-       * @type {number}
-       */
-      nowMonth,
-      /**
-       * The current day of the month.
-       * @type {number}
-       */
-      nowDay,
+        nowYear,
+        nowMonth,
+        nowDay,
+        nowHours,
+        nowMinutes,
+        nowSeconds
     };
 };

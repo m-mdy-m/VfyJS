@@ -5,23 +5,24 @@ const remainingTimeOfYear = require('../utils/remainingTimeOfYear')
 const {getDay,getMonth} = require('../utils/dateTimeHelpers')
 const { validateDateComponents, getFormatted } = require('../utils/dateValidation')
 const {getDateNowGregorian} = require('../utils/getDate')
+const { nowDay, nowMonth, nowYear,nowHours, nowMinutes, nowSeconds } = getDateNowGregorian();
 function validateGregorianDate( 
-    inputYear = new Date().getFullYear(),
-    inputMonth = new Date().getMonth() + 1,
-    inputDay = new Date().getDate(),
-    inputMinutes = new Date().getMinutes(),
-    inputHours = new Date().getHours(),
-    inputSeconds = new Date().getSeconds(),
+    inputYear = nowYear,
+    inputMonth = nowMonth,
+    inputDay = nowDay,
+    inputMinutes = nowMinutes,
+    inputHours = nowHours,
+    inputSeconds = nowSeconds,
     hasWrite = false) {
     // Create an array to hold the input values (year, month, day)
-    const dateComponents = [inputYear, inputMonth, inputDay,inputMinutes,inputHours,inputSeconds,];
+    const dateComponents = [inputYear, inputMonth, inputDay,inputHours,inputMinutes,inputSeconds,];
     // Get the current date
-    const { nowDay, nowMonth, nowYear, nowMinutes, nowHours, nowSeconds } = getDateNowGregorian();
     if (inputYear !== nowYear || inputMonth !== nowMonth || inputDay !== nowDay ||
         inputMinutes !== nowMinutes || inputHours !== nowHours || inputSeconds !== nowSeconds) {
         hasWrite = true;
     }
-    let year,month,day;
+
+    let year,month,day,hours,minute,second;
     // Iterate over each date component (year, month, day)
     dateComponents.forEach((component, index) => {
         isEmpty(component, 'Year, month, and day must not Empty.')
@@ -48,6 +49,9 @@ function validateGregorianDate(
         year = +dateComponents[0]
         month = +dateComponents[1]
         day = +dateComponents[2]
+        hours = +dateComponents[3]
+        minute = +dateComponents[4]
+        second = +dateComponents[5]
     })
 
     // Convert the time difference to days, hours, minutes, and seconds
@@ -55,25 +59,40 @@ function validateGregorianDate(
     const {formatDay,formatMonth} = getFormatted(nowMonth,nowDay)
     let totalMilliSeconds;
     let isTimeExpired = false;
-    if (inputYear > nowYear ||(inputYear === nowYear && inputMonth > nowMonth) || (inputYear === nowYear && inputMonth === nowMonth && inputDay > nowDay)) {
-        totalMilliSeconds = (inputYear - nowYear) * 365 * 24 * 60 * 60 * 1000 + (inputMonth - nowMonth )* 30 * 24 * 60 * 60 * 1000 + (inputDay - nowDay) * 24 * 60 * 60 * 1000
-    }
-    console.log('totalMilliSeconds =>',totalMilliSeconds);
+    if (inputYear > nowYear || 
+        (inputYear === nowYear && inputMonth > nowMonth) || 
+        (inputYear === nowYear && inputMonth === nowMonth && inputDay > nowDay) ||
+        (inputYear === nowYear && inputMonth === nowMonth && inputDay === nowDay && inputHours > nowHours) ||
+        (inputYear === nowYear && inputMonth === nowMonth && inputDay === nowDay && inputHours === nowHours && inputMinutes > nowMinutes) ||
+        (inputYear === nowYear && inputMonth === nowMonth && inputDay === nowDay && inputHours === nowHours && inputMinutes === nowMinutes && inputSeconds > nowSeconds)) {
+            const totalYearsMillis = (inputYear - nowYear) * 365 * 24 * 60 * 60 * 1000;
+            const totalMonthsMillis = (inputMonth - nowMonth) * 30 * 24 * 60 * 60 * 1000;
+            const totalDaysMillis = (inputDay - nowDay) * 24 * 60 * 60 * 1000;
+            const totalHoursMillis = (inputHours - nowHours) * 60 * 60 * 1000;
+            const totalMinutesMillis = (inputMinutes - nowMinutes) * 60 * 1000;
+            const totalSecondsMillis = (inputSeconds - nowSeconds) * 1000;
+            isTimeExpired = true;
+            totalMilliSeconds = totalYearsMillis + totalMonthsMillis + totalDaysMillis + totalHoursMillis + totalMinutesMillis + totalSecondsMillis;
+        }
     if (!hasWrite) {
         validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
     }
-    const handleTimeExpiration = ()=>{
-        isTimeExpired=true
-        console.log('timing');
+    if (isTimeExpired) {
+        const handleTimeExpiration = ()=>{
+            console.log('timing');
+        }
+        setTimeout(handleTimeExpiration,totalMilliSeconds)
     }
-    setTimeout(handleTimeExpiration,totalMilliSeconds)
     //  Prepare result object
      const result = {
         format : `${nowYear}-${formatMonth}-${formatDay}`,
         currentDateTime: {
             year: nowYear,
             month: { monthOfYear: nowMonth, monthName: getMonth() },
-            day: { dayOfMonth: nowDay, dayOfWeek: getDay() }
+            day: { dayOfMonth: nowDay, dayOfWeek: getDay() },
+            hours,
+            minute,
+            second,
         },
         timeLeftUntilEndOfYear: {
             months: remaining.months,
@@ -89,4 +108,7 @@ function validateGregorianDate(
 const year = 2024;
 const month = 1;
 const day = 26;
-console.log(validateGregorianDate(year,month,day)); 
+const hours = 1
+const minutes = 2
+const second = 20
+console.log(validateGregorianDate()); 

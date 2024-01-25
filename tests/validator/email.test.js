@@ -96,7 +96,7 @@ test("Valid email with custom minLengthSubdomain option", () => {
 });
 
 test("Valid email with custom maxLengthSubdomain option", () => {
-  const isValid = email('john.doe@sub.example.com', { maxLengthSubdomain: 10 });
+  const isValid = isEmail('john.doe@sub.example.com', { maxLengthSubdomain: 10 });
   expect(isValid).toBe(true);
 });
 

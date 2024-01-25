@@ -4,6 +4,7 @@ const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleErr
 const remainingTimeOfYear = require('../utils/remainingTimeOfYear')
 const {getDay,getMonth} = require('../utils/dateTimeHelpers')
 const { validateDateComponents } = require('../utils/dateValidation')
+const getDateNowGregorian = require('../utils/getDate')
 function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth = new Date().getMonth() + 1, inputDay = new Date().getDate(),{traveledFuture}={}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay];
@@ -36,16 +37,13 @@ function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth 
         day = +dateComponents[2]
     })
     // Get the current date
-    const nowDate = new Date();
-    const nowYear = nowDate.getFullYear();
-    const nowMonth = nowDate.getMonth() + 1;
-    const nowDay = nowDate.getDate();
+    const {nowDay,nowMonth,nowYear}=getDateNowGregorian()
     // Convert the time difference to days, hours, minutes, and seconds
     const remaining = remainingTimeOfYear()
-    const formatResult = validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
+    const {formatDay,formatMonth} = validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
     //  Prepare result object
      const result = {
-        format : `${nowYear}-${formatResult.formatMonth}-${formatResult.formatDay}`,
+        format : `${nowYear}-${formatMonth}-${formatDay}`,
         currentDateTime: {
             year: nowYear,
             month: { monthOfYear: nowMonth, monthName: getMonth() },

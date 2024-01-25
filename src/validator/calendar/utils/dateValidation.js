@@ -1,14 +1,14 @@
-const {FutureDateError} = require('../Error/Errors')
+const { FutureDateError } = require('../Error/Errors');
+
 /**
- * Validates the given date components and performs common checks.
+ * Validates the components of a date.
  * @param {number} year - The year component of the date.
  * @param {number} month - The month component of the date.
  * @param {number} day - The day component of the date.
  * @param {number} nowYear - The current year.
  * @param {number} nowMonth - The current month.
  * @param {number} nowDay - The current day.
- * @returns {string} The formatted month and day, if applicable.
- * @throws {FutureDateError} Throws error if the date components are invalid.
+ * @throws {FutureDateError} Throws an error if any validation fails.
  */
 function validateDateComponents(year, month, day, nowYear, nowMonth, nowDay) {
     if (day > 31) {
@@ -26,12 +26,12 @@ function validateDateComponents(year, month, day, nowYear, nowMonth, nowDay) {
     if (nowDay < day) {
         throw new FutureDateError(day, `The day ${day} cannot be in the future. Please enter a previous or current day.`, nowDay);
     }
-
     // Format month and day if necessary
-    let formatMonth = nowMonth < 10 ? `0${nowMonth}` :nowMonth;
-    let formatDay = nowDay < 10 ? `0${nowDay}` :nowDay;
+    let formatMonth = nowMonth < 10 ? `0${nowMonth}` : nowMonth;
+    let formatDay = nowDay < 10 ? `0${nowDay}` : nowDay;
 
-    return { formatMonth, formatDay };
+    // Return an object containing formatted month and day
+    return {formatMonth,formatDay};
 }
 
 module.exports = { FutureDateError, validateDateComponents };

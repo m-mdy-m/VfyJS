@@ -73,9 +73,16 @@ function validateGregorianDate(inputYear, inputMonth, inputDay) {
     const monthOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const monthOfYearIndex = nowDate.getMonth();
     const monthOfYearName = monthOfYear[monthOfYearIndex];
+    let formatMonth,formatDay
+    if (nowMonth < 10) {
+        formatMonth = `0${nowMonth}`
+    }
+    if (nowDay <10) {
+        formatDay = `0${nowDay}`
+    }
      // Prepare result object
      const result = {
-        format : `${nowYear}-${nowMonth}-${nowDay}`,
+        format : `${nowYear}-${formatMonth ? formatMonth : nowMonth}-${formatDay ? formatDay : nowDay}`,
         currentDateTime: {
             year: nowYear,
             month: { monthOfYear: nowMonth, monthName: monthOfYearName },
@@ -88,8 +95,7 @@ function validateGregorianDate(inputYear, inputMonth, inputDay) {
             minutes: minutesRemaining,
             seconds: secondsRemaining,
         },
-        
-        isValidDate: true,
+
     };
     return result
 }

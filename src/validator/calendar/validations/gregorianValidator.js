@@ -1,8 +1,8 @@
-const {getSubstring}  = require('../../phone/utils/FormatValidation')
 const {trimmedValue} = require('../../../common/validationConstants')
 const inputValidator= require('../../../utils/inputValidator')
 const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleError')
 const {FutureDateError } = require('../Error/Errors')
+const remainingTimeOfYear = require('../utils/remainingTimeOfYear')
 function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth = new Date().getMonth() + 1, inputDay = new Date().getDate(),{traveledFuture}={}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay];
@@ -42,11 +42,7 @@ function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth 
     const endYear = new Date(nowYear , 11, 31)
     const timeDifference = endYear.getTime() - nowDate.getTime()
     // Convert the time difference to days, hours, minutes, and seconds
-    const monthRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 60 * 12))
-    const daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hoursRemaining = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutesRemaining = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    const secondsRemaining = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    const remaining = remainingTimeOfYear()
     if (day > 31) {
         throw new FutureDateError(day, 'Invalid day value. Days cannot be greater than 31.',nowDay);
     }
@@ -75,25 +71,25 @@ function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth 
     if (nowDay <10) {
         formatDay = `0${nowDay}`
     }
-     // Prepare result object
-    //  const result = {
-    //     format : `${nowYear}-${formatMonth ? formatMonth : nowMonth}-${formatDay ? formatDay : nowDay}`,
-    //     currentDateTime: {
-    //         year: nowYear,
-    //         month: { monthOfYear: nowMonth, monthName: monthOfYearName },
-    //         day: { dayOfMonth: nowDay, dayOfWeek: dayOfWeekName }
-    //     },
-    //     timeLeftUntilEndOfYear: {
-    //         months: monthRemaining,
-    //         days: daysRemaining,
-    //         hours: hoursRemaining,
-    //         minutes: minutesRemaining,
-    //         seconds: secondsRemaining,
-    //     },
-    //     traveledFuture : false,
-    //     hasValidInput : ','
-    // };
-    // return result
+    //  Prepare result object
+     const result = {
+        format : `${nowYear}-${formatMonth ? formatMonth : nowMonth}-${formatDay ? formatDay : nowDay}`,
+        currentDateTime: {
+            year: nowYear,
+            month: { monthOfYear: nowMonth, monthName: monthOfYearName },
+            day: { dayOfMonth: nowDay, dayOfWeek: dayOfWeekName }
+        },
+        timeLeftUntilEndOfYear: {
+            months: remaining.month,
+            days: remaining.days,
+            hours: remaining.hours,
+            minutes: remaining.minutes,
+            seconds: remaining.seconds,
+        },
+        traveledFuture : false,
+        hasValidInput : ','
+    };
+    return result
 }
 const year = 2024;
 const month = 1;

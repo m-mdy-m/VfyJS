@@ -1,19 +1,4 @@
-/**
- * Custom error class for date-related errors.
- * @class
- * @extends Error
- * @param {number} invalidValue - The invalid value causing the error.
- * @param {string} message - The error message describing the validation failure.
- * @param {number} currentDate - The current date used for comparison.
- */
-class FutureDateError extends Error {
-    constructor(invalidValue, message, currentDate) {
-        super(message);
-        this.invalidValue = invalidValue;
-        this.currentDate = currentDate;
-    }
-}
-
+const {FutureDateError} = require('../Error/Errors')
 /**
  * Validates the given date components and performs common checks.
  * @param {number} year - The year component of the date.

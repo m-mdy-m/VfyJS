@@ -339,7 +339,6 @@ exports.isEmpty = (value, message = 'Value should not be empty') => {
  */
 exports.validationsLen = (value, options) => {
   const length = typeof value === 'string' ? value.length : `${value}`.length;
-
   if (options.min && length < options.min) {
     throw new LengthError(value, options.minMessage || `Length must be at least ${options.min} characters.`);
   }
@@ -356,12 +355,13 @@ exports.validationsLen = (value, options) => {
  * and if not, it throws an error with the specified message.
  *
  * @param {string} value - The value to be validated.
- * @param {number} minLength - The minimum allowed length.
- * @param {string} [message] - The error message to be associated with the minimum length validation failure.
+ * @param {object} options - Options object containing minimum length and error message.
+ * @param {number} options.min - The minimum allowed length.
+ * @param {string} [options.minMessage] - The error message for minimum length validation failure.
  * @throws {LengthError} - Throws a LengthError with the specified message if minimum length validation fails.
  *
  * @example
- * // Example: Validate the minimum length of a string
+ * // Validate the minimum length of a string
  * const stringValue = 'abc';
  * try {
  *   validateMinLen(stringValue, { min: 2, minMessage: 'Length should be at least 2 characters.' });
@@ -371,7 +371,33 @@ exports.validationsLen = (value, options) => {
  * }
  */
 exports.validateMinLen = (value, options) => {
-  this.validationsLen(value, { min: options.min, minMessage: options.minMessage || `Value must be at least {limit} characters long.` });
+  this.validationsLen(value, { min: options.min, minMessage: options.minMessage || `Value must be at least ${options.min} characters long.` });
+};
+
+/**
+ * Validates the minimum length of a value.
+ *
+ * This function checks if the length of the provided value is at least the specified minimum,
+ * and if not, it throws an error with the specified message.
+ *
+ * @param {string} value - The value to be validated.
+ * @param {object} options - Options object containing minimum length and error message.
+ * @param {number} options.min - The minimum allowed length.
+ * @param {string} [options.minMessage] - The error message for minimum length validation failure.
+ * @throws {LengthError} - Throws a LengthError with the specified message if minimum length validation fails.
+ *
+ * @example
+ * // Validate the minimum length of a string
+ * const stringValue = 'abc';
+ * try {
+ *   validateMinLen(stringValue, { min: 2, minMessage: 'Length should be at least 2 characters.' });
+ *   console.log('Length is valid.');
+ * } catch (error) {
+ *   console.error(error.message); // 'Length should be at least 2 characters.'
+ * }
+ */
+exports.validateMinLen = (value, options) => {
+  this.validationsLen(value, { min: options.min, minMessage: options.minMessage || `Value must be at least ${options.min} characters long.` });
 };
 
 /**
@@ -381,12 +407,13 @@ exports.validateMinLen = (value, options) => {
  * and if not, it throws an error with the specified message.
  *
  * @param {string} value - The value to be validated.
- * @param {number} maxLength - The maximum allowed length.
- * @param {string} [message] - The error message to be associated with the maximum length validation failure.
+ * @param {object} options - Options object containing maximum length and error message.
+ * @param {number} options.max - The maximum allowed length.
+ * @param {string} [options.maxMessage] - The error message for maximum length validation failure.
  * @throws {LengthError} - Throws a LengthError with the specified message if maximum length validation fails.
  *
  * @example
- * // Example: Validate the maximum length of a string
+ * // Validate the maximum length of a string
  * const stringValue = 'abc';
  * try {
  *   validateMaxLen(stringValue, { max: 5, maxMessage: 'Length should be at most 5 characters.' });
@@ -396,5 +423,5 @@ exports.validateMinLen = (value, options) => {
  * }
  */
 exports.validateMaxLen = (value, options) => {
-  this.validationsLen(value, { max: options.max, maxMessage: options.maxMessage || `Value must be at most {limit} characters long.` });
+  this.validationsLen(value, { max: options.max, maxMessage: options.maxMessage || `Value must be at most ${options.max} characters long.` });
 };

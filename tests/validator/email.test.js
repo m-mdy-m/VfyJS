@@ -1,35 +1,35 @@
-const { email } = require("../../index");
+const { isEmail } = require("../../index");
 
 // Valid Email Examples
 test("Valid email - standard format", () => {
-  const isValid = email('mahdimamashli1383@gmail.com');
+  const isValid = isEmail('mahdimamashli1383@gmail.com');
   expect(isValid).toBe(true);
 });
 
 test("Valid email - with subdomain", () => {
-  const isValid = email('j.doe@example.com', { minLengthLocal: 1 });
+  const isValid = isEmail('j.doe@example.com', { minLengthLocal: 1 });
   expect(isValid).toBe(true);
 });
 
 test("Valid email - with hyphen in domain", () => {
-  const isValid = email('j.doe@example.com', { maxLengthLocal: 10 });
+  const isValid = isEmail('j.doe@example.com', { maxLengthLocal: 10 });
   expect(isValid).toBe(true);
 });
 
 test("Valid email - with underscore in local part", () => {
-  const isValid = email('john.doe@sub.example.com', { minLengthDomainPart: 5 });
+  const isValid = isEmail('john.doe@sub.example.com', { minLengthDomainPart: 5 });
   expect(isValid).toBe(true);
 });
 
 test("Valid email - with plus sign in local part", () => {
-  const isValid = email('john.doe@sub.example.com', { maxLengthDomainPart: 15 });
+  const isValid = isEmail('john.doe@sub.example.com', { maxLengthDomainPart: 15 });
   expect(isValid).toBe(true);
 });
 
 // Invalid Email Examples
 test("Invalid email - missing @ symbol", () => {
   try {
-    const isValid = email('j.d@example.com', { minLengthLocal: 3 });
+    const isValid = isEmail('j.d@example.com', { minLengthLocal: 3 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -38,7 +38,7 @@ test("Invalid email - missing @ symbol", () => {
 
 test("Invalid email - missing local part", () => {
   try {
-    const isValid = email('john.doe@example.com', { maxLengthLocal: 3 });
+    const isValid = isEmail('john.doe@example.com', { maxLengthLocal: 3 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -47,7 +47,7 @@ test("Invalid email - missing local part", () => {
 
 test("Invalid email - missing domain", () => {
   try {
-    const isValid = email('j.doe@ex.com', { minLengthDomainPart: 10 });
+    const isValid = isEmail('j.doe@ex.com', { minLengthDomainPart: 10 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -56,7 +56,7 @@ test("Invalid email - missing domain", () => {
 
 test("Invalid email - consecutive dots in domain", () => {
   try {
-    const isValid = email('john.doe@sub.example.com', { maxLengthDomainPart: 10 });
+    const isValid = isEmail('john.doe@sub.example.com', { maxLengthDomainPart: 10 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -65,7 +65,7 @@ test("Invalid email - consecutive dots in domain", () => {
 
 test("Invalid email - spaces in email", () => {
   try {
-    const isValid = email('john.doe@ sub.example.com', { minLengthSubdomain: 5 });
+    const isValid = isEmail('john.doe@ sub.example.com', { minLengthSubdomain: 5 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -74,7 +74,7 @@ test("Invalid email - spaces in email", () => {
 
 test("Invalid email - special characters in domain", () => {
   try {
-    const isValid = email('john.doe@sub.example.com', { maxLengthSubdomain: 5 });
+    const isValid = isEmail('john.doe@sub.example.com', { maxLengthSubdomain: 5 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -83,7 +83,7 @@ test("Invalid email - special characters in domain", () => {
 
 test("Invalid email - no top-level domain", () => {
   try {
-    const isValid = email('john.doeexample.com');
+    const isValid = isEmail('john.doeexample.com');
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -91,7 +91,7 @@ test("Invalid email - no top-level domain", () => {
 });
 
 test("Valid email with custom minLengthSubdomain option", () => {
-  const isValid = email('john.doe@sub.example.com', { minLengthSubdomain: 2 });
+  const isValid = isEmail('john.doe@sub.example.com', { minLengthSubdomain: 2 });
   expect(isValid).toBe(true);
 });
 
@@ -101,13 +101,13 @@ test("Valid email with custom maxLengthSubdomain option", () => {
 });
 
 test("Valid email with custom options (minLengthLocal, maxLengthDomainPart)", () => {
-  const isValid = email('j.doe@example.com', { minLengthLocal: 1, maxLengthDomainPart: 15 });
+  const isValid = isEmail('j.doe@example.com', { minLengthLocal: 1, maxLengthDomainPart: 15 });
   expect(isValid).toBe(true);
 });
 
 test("Invalid email - special characters in domain", () => {
   try {
-    const isValid = email('j.d@example.c!om', { minLengthLocal: 3, maxLengthDomainPart: 10 });
+    const isValid = isEmail('j.d@example.c!om', { minLengthLocal: 3, maxLengthDomainPart: 10 });
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -116,7 +116,7 @@ test("Invalid email - special characters in domain", () => {
 
 test("Invalid email - consecutive dots in domain", () => {
   try {
-    const isValid = email('john.doe@sub..example.com');
+    const isValid = isEmail('john.doe@sub..example.com');
     expect(isValid).toBe(false);
   } catch (error) {
     expect(error.property).toBe(error.property);
@@ -124,6 +124,6 @@ test("Invalid email - consecutive dots in domain", () => {
 });
 
 test("Valid email with custom maxLengthSubdomain option", () => {
-  const isValid = email('john.doe@sub.example.com', { maxLengthSubdomain: 20 });
+  const isValid = isEmail('john.doe@sub.example.com', { maxLengthSubdomain: 20 });
   expect(isValid).toBe(true);
 });

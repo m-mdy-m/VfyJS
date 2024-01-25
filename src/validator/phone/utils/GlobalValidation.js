@@ -23,7 +23,6 @@ function ChecKValue(value, min, max, ContentError = String) {
         value = `${value}`;
     }
     const hasSpecialChar = inputValidator(value).hasSpecialCharacter()
-    console.log('value =>',value);
     ifTruthyValue(hasSpecialChar,'Special characters are not allowed.')
     //  trim validated value
     value = trimmedValue(value)

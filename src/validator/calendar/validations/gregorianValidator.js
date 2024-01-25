@@ -2,13 +2,7 @@ const {getSubstring}  = require('../../phone/utils/FormatValidation')
 const {trimmedValue} = require('../../../common/validationConstants')
 const inputValidator= require('../../../utils/inputValidator')
 const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleError')
-class FutureDateError extends Error {
-    constructor(invalidDate, message, currentDate) {
-        super(message);
-        this.invalidDate = invalidDate; 
-        this.currentDate = currentDate; 
-    }
-}
+const {FutureDateError } = require('../Error/Errors')
 function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth = new Date().getMonth() + 1, inputDay = new Date().getDate(),{traveledFuture}={}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay];

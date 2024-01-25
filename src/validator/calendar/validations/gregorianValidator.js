@@ -67,21 +67,30 @@ function validateGregorianDate(inputYear, inputMonth, inputDay) {
     if (nowDay < day) {
         throw new FutureDateError(day, `The day ${day} cannot be in the future. Please enter a previous or current day.`,nowDay);
     }
-    const result = {
-        TIME_NOW  : {
-            year : nowYear,
-            month : nowMonth,
-            day : nowDay
+    const dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayOfWeekIndex = nowDate.getDay();
+    const dayOfWeekName = dayOfWeek[dayOfWeekIndex];
+    const monthOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthOfYearIndex = nowDate.getMonth();
+    const monthOfYearName = monthOfYear[monthOfYearIndex];
+     // Prepare result object
+     const result = {
+        format : `${nowYear}-${nowMonth}-${nowDay}`,
+        currentDateTime: {
+            year: nowYear,
+            month: { monthOfYear: nowMonth, monthName: monthOfYearName },
+            day: { dayOfMonth: nowDay, dayOfWeek: dayOfWeekName }
         },
-        TimeLeftUntilTheEndOfTheYear : {
-            month : monthRemaining,
-            days : daysRemaining,
-            hours : hoursRemaining,
-            minutes : minutesRemaining,
-            seconds : secondsRemaining,
+        timeLeftUntilEndOfYear: {
+            months: monthRemaining,
+            days: daysRemaining,
+            hours: hoursRemaining,
+            minutes: minutesRemaining,
+            seconds: secondsRemaining,
         },
-        isValidDate : true,
-    }
+        
+        isValidDate: true,
+    };
     return result
 }
 const year = 2024;

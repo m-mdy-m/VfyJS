@@ -4,8 +4,6 @@ const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleErr
 const remainingTimeOfYear = require('../utils/remainingTimeOfYear')
 const {getDay,getMonth} = require('../utils/dateTimeHelpers')
 const { validateDateComponents, getFormatted } = require('../utils/dateValidation')
-const {getDateNowGregorian} = require('../utils/getDate')
-const { nowDay, nowMonth, nowYear,nowHours, nowMinutes, nowSeconds } = getDateNowGregorian();
 /**
  * Retrieves the current Gregorian date along with time remaining until the end of the year.
  * @returns {{

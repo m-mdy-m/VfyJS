@@ -71,7 +71,7 @@ function validateGregorianDate( inputYear = new Date().getFullYear(), inputMonth
     };
     return result
 }
-const year = 2024;
+const year = 2025;
 const month = 2;
-const day = 25;
+const day = 30;
 console.log(validateGregorianDate(year,month,day)); 

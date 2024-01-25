@@ -50,11 +50,9 @@ function validateGregorianDate( {
         validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
     }
     if (isTimeExpired) {
-        let remainingTime = totalMilliSeconds
-        const timeout = Math.min(remainingTime, 2147483647); 
         setTimeout(() => {
-            return console.log('Timing expired.');
-        }, remainingTime);
+            console.log('Timing expired.');
+        }, totalMilliSeconds);
     }
     //  Prepare result object
      const result = {
@@ -79,4 +77,4 @@ function validateGregorianDate( {
     };
     return result
 }
-console.log(validateGregorianDate({inputSeconds : 2})); 
+console.log(validateGregorianDate({inputSeconds : 20})); 

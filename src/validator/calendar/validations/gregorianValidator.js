@@ -4,6 +4,7 @@ const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleErr
 const {FutureDateError } = require('../Error/Errors')
 const remainingTimeOfYear = require('../utils/remainingTimeOfYear')
 const {getDay,getMonth} = require('../utils/dateTimeHelpers')
+const { validateDateComponents } = require('../utils/dateValidation')
 function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth = new Date().getMonth() + 1, inputDay = new Date().getDate(),{traveledFuture}={}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay];
@@ -40,48 +41,25 @@ function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth 
     const nowYear = nowDate.getFullYear();
     const nowMonth = nowDate.getMonth() + 1;
     const nowDay = nowDate.getDate();
-    const endYear = new Date(nowYear , 11, 31)
     // Convert the time difference to days, hours, minutes, and seconds
     const remaining = remainingTimeOfYear()
-    if (day > 31) {
-        throw new FutureDateError(day, 'Invalid day value. Days cannot be greater than 31.',nowDay);
-    }
-    if (month > 12) {
-        throw new FutureDateError(month, 'Invalid month value. Months cannot be greater than 12.',nowMonth);
-    }
-    if (nowYear < year) {
-        throw new FutureDateError(year, `The year ${year} cannot be in the future. Please enter a previous or current year.`,nowYear);
-    }
-    if (nowMonth < month) {
-        throw new FutureDateError(month, `The month ${month} cannot be in the future. Please enter a previous or current month.`,nowMonth);
-    }
-    if (nowDay < day) {
-        throw new FutureDateError(day, `The day ${day} cannot be in the future. Please enter a previous or current day.`,nowDay);
-    }
-    let formatMonth,formatDay
-    if (nowMonth < 10) {
-        formatMonth = `0${nowMonth}`
-    }
-    if (nowDay <10) {
-        formatDay = `0${nowDay}`
-    }
+    const formatResult = validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
     //  Prepare result object
      const result = {
-        format : `${nowYear}-${formatMonth ? formatMonth : nowMonth}-${formatDay ? formatDay : nowDay}`,
+        format : `${nowYear}-${formatResult.formatMonth}-${formatResult.formatDay}`,
         currentDateTime: {
             year: nowYear,
             month: { monthOfYear: nowMonth, monthName: getMonth() },
             day: { dayOfMonth: nowDay, dayOfWeek: getDay() }
         },
         timeLeftUntilEndOfYear: {
-            months: remaining.month,
+            months: remaining.months,
             days: remaining.days,
             hours: remaining.hours,
             minutes: remaining.minutes,
             seconds: remaining.seconds,
         },
         traveledFuture : false,
-        hasValidInput : ','
     };
     return result
 }

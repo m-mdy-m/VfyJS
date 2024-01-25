@@ -19,14 +19,12 @@ function calculateRemainingTimeOfYear() {
     
     // Calculate the time difference between the current date and the end of the year
     const timeDifference = endYear.getTime() - nowDate.getTime();
-    
     // Calculate the remaining time in months, days, hours, minutes, and seconds
     const monthRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 60 * 12));
     const daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const hoursRemaining = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutesRemaining = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
     const secondsRemaining = Math.floor((timeDifference % (1000 * 60)) / 1000);
-    
     // Return an object containing the remaining time
     return {
         months: monthRemaining,

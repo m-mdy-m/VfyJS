@@ -13,7 +13,7 @@ function validateGregorianDate( {
     inputMinutes = nowMinutes,
     inputHours = nowHours,
     inputSeconds = nowSeconds,
-    hasWrite = false}) {
+    hasWrite = false}={}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay,inputHours,inputMinutes,inputSeconds,];
     // Get the current date
@@ -53,9 +53,8 @@ function validateGregorianDate( {
         let remainingTime = totalMilliSeconds
         const timeout = Math.min(remainingTime, 2147483647); 
         setTimeout(() => {
-            return 'Timing expired.'
-        }, timeout);
-        remainingTime -= timeout;
+            return console.log('Timing expired.');
+        }, remainingTime);
     }
     //  Prepare result object
      const result = {
@@ -80,4 +79,4 @@ function validateGregorianDate( {
     };
     return result
 }
-console.log(validateGregorianDate()); 
+console.log(validateGregorianDate({inputSeconds : 2})); 

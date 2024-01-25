@@ -44,19 +44,47 @@ function validateGregorianDate(inputYear, inputMonth, inputDay) {
     const nowYear = nowDate.getFullYear();
     const nowMonth = nowDate.getMonth() + 1;
     const nowDay = nowDate.getDate();
-    
+    const endYear = new Date(nowYear , 11, 31)
+    const timeDifference = endYear.getTime() - nowDate.getTime()
+    // Convert the time difference to days, hours, minutes, and seconds
+    const monthRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 60 * 12))
+    const daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hoursRemaining = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutesRemaining = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const secondsRemaining = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    if (day > 31) {
+        throw new FutureDateError(day, 'Invalid day value. Days cannot be greater than 31.',nowDay);
+    }
+    if (month > 12) {
+        throw new FutureDateError(month, 'Invalid month value. Months cannot be greater than 12.',nowMonth);
+    }
     if (nowYear < year) {
         throw new FutureDateError(year, `The year ${year} cannot be in the future. Please enter a previous or current year.`,nowYear);
     }
     if (nowMonth < month) {
-        throw new FutureDateError(year, `The month ${month} cannot be in the future. Please enter a previous or current month.`,nowMonth);
+        throw new FutureDateError(month, `The month ${month} cannot be in the future. Please enter a previous or current month.`,nowMonth);
     }
     if (nowDay < day) {
-        throw new FutureDateError(year, `The day ${day} cannot be in the future. Please enter a previous or current day.`,nowDay);
+        throw new FutureDateError(day, `The day ${day} cannot be in the future. Please enter a previous or current day.`,nowDay);
     }
-
+    const result = {
+        TIME_NOW  : {
+            year : nowYear,
+            month : nowMonth,
+            day : nowDay
+        },
+        TimeLeftUntilTheEndOfTheYear : {
+            month : monthRemaining,
+            days : daysRemaining,
+            hours : hoursRemaining,
+            minutes : minutesRemaining,
+            seconds : secondsRemaining,
+        },
+        isValidDate : true,
+    }
+    return result
 }
-const year = 2025;
-const month = 12;
-const day = 1;
+const year = 2024;
+const month = 1;
+const day = 25;
 console.log(validateGregorianDate(year, month, day)); 

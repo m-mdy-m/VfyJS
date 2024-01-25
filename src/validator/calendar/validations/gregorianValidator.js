@@ -4,7 +4,7 @@ const { ifTruthyValue, TypesCheck, isEmpty }= require('../../../errors/HandleErr
 const remainingTimeOfYear = require('../utils/remainingTimeOfYear')
 const {getDay,getMonth} = require('../utils/dateTimeHelpers')
 const { validateDateComponents } = require('../utils/dateValidation')
-const getDateNowGregorian = require('../utils/getDate')
+const {getDateNowGregorian} = require('../utils/getDate')
 function validateGregorianDate(inputYear = new Date().getFullYear(), inputMonth = new Date().getMonth() + 1, inputDay = new Date().getDate(),{traveledFuture}={}) {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [inputYear, inputMonth, inputDay];

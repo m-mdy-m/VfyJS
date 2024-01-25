@@ -22,66 +22,40 @@ function validateGregorianDate( {
         hasWrite = true;
     }
 
-    let year,month,day,hours,minute,second;
-    // Iterate over each date component (year, month, day)
-    dateComponents.forEach((component, index) => {
-        isEmpty(component, 'Year, month, and day must not Empty.')
-        // Check if the component is of type 'number' or 'string'
+    let [year, month, day, hours, minute, second] = dateComponents.map((component, index) => {
+        isEmpty(component, 'Year, month, and day must not be empty.');
         TypesCheck(component, ['number', 'string'], 'Year, month, and day must be either numbers or strings.');
-
-        // Check for the presence of special characters in the date component
         const validator = inputValidator(component);
-        const hasSpecialChar = validator.hasSpecialCharacter();
-        const hasAlphabetic = validator.hasAlphabetic();
+        ifTruthyValue(validator.hasSpecialCharacter(), 'Year, month, or day cannot contain special characters.');
+        ifTruthyValue(validator.hasAlphabetic(), 'The value cannot contain alphabetic characters.');
 
-        // Display error message if special characters are found
-        ifTruthyValue(hasSpecialChar, 'Year, month, or day cannot contain special characters.');
-
-        // Display error message if alphabetic characters are found
-        ifTruthyValue(hasAlphabetic, 'The value cannot contain alphabetic characters.');
-
-        // Convert the date component to a string
-        dateComponents[index] = component.toString();
-
-        // Update the date component with the trimmed string representation
-        dateComponents[index] = trimmedValue(dateComponents[index])
-        // Assign values from the array to individual variables
-        year = +dateComponents[0]
-        month = +dateComponents[1]
-        day = +dateComponents[2]
-        hours = +dateComponents[3]
-        minute = +dateComponents[4]
-        second = +dateComponents[5]
-    })
+        return +trimmedValue(component.toString());
+    });
 
     // Convert the time difference to days, hours, minutes, and seconds
     const remaining = remainingTimeOfYear()
     const {formatDay,formatMonth} = getFormatted(nowMonth,nowDay)
     let totalMilliSeconds;
     let isTimeExpired = false;
-    if (inputYear > nowYear || 
-        (inputYear === nowYear && inputMonth > nowMonth) || 
-        (inputYear === nowYear && inputMonth === nowMonth && inputDay > nowDay) ||
-        (inputYear === nowYear && inputMonth === nowMonth && inputDay === nowDay && inputHours > nowHours) ||
-        (inputYear === nowYear && inputMonth === nowMonth && inputDay === nowDay && inputHours === nowHours && inputMinutes > nowMinutes) ||
-        (inputYear === nowYear && inputMonth === nowMonth && inputDay === nowDay && inputHours === nowHours && inputMinutes === nowMinutes && inputSeconds > nowSeconds)) {
-            const totalYearsMillis = (inputYear - nowYear) * 365 * 24 * 60 * 60 * 1000;
-            const totalMonthsMillis = (inputMonth - nowMonth) * 30 * 24 * 60 * 60 * 1000;
-            const totalDaysMillis = (inputDay - nowDay) * 24 * 60 * 60 * 1000;
-            const totalHoursMillis = (inputHours - nowHours) * 60 * 60 * 1000;
-            const totalMinutesMillis = (inputMinutes - nowMinutes) * 60 * 1000;
-            const totalSecondsMillis = (inputSeconds - nowSeconds) * 1000;
-            isTimeExpired = true;
-            totalMilliSeconds = totalYearsMillis + totalMonthsMillis + totalDaysMillis + totalHoursMillis + totalMinutesMillis + totalSecondsMillis;
-        }
-    if (!hasWrite) {
+    if (hasWrite) {
+        const totalYearsMillis = (inputYear - nowYear) * 365 * 24 * 60 * 60 * 1000;
+        const totalMonthsMillis = (inputMonth - nowMonth) * 30 * 24 * 60 * 60 * 1000;
+        const totalDaysMillis = (inputDay - nowDay) * 24 * 60 * 60 * 1000;
+        const totalHoursMillis = (inputHours - nowHours) * 60 * 60 * 1000;
+        const totalMinutesMillis = (inputMinutes - nowMinutes) * 60 * 1000;
+        const totalSecondsMillis = (inputSeconds - nowSeconds) * 1000;
+        totalMilliSeconds = totalYearsMillis + totalMonthsMillis + totalDaysMillis + totalHoursMillis + totalMinutesMillis + totalSecondsMillis;
+        isTimeExpired = true;
+    }else{
         validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
     }
     if (isTimeExpired) {
-        const handleTimeExpiration = ()=>{
-            console.log('timing');
-        }
-        setTimeout(handleTimeExpiration,totalMilliSeconds)
+        let remainingTime = totalMilliSeconds
+        const timeout = Math.min(remainingTime, 2147483647); 
+        setTimeout(() => {
+            return 'Timing expired.'
+        }, timeout);
+        remainingTime -= timeout;
     }
     //  Prepare result object
      const result = {
@@ -101,8 +75,9 @@ function validateGregorianDate( {
             minutes: remaining.minutes,
             seconds: remaining.seconds,
         },
-        traveledFuture : false,
+        TimeExpired: isTimeExpired ? 'TimeExpired' : 'NotExpired',
+        ExpirationTime: isTimeExpired ? `${totalMilliSeconds} milliseconds` : null
     };
     return result
 }
-console.log(validateGregorianDate({inputSeconds:50})); 
+console.log(validateGregorianDate()); 

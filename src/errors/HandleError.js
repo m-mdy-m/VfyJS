@@ -145,7 +145,9 @@ exports.IfNotType = (expectedType, property, message) => {
  * }
  */
 exports.isTypeMismatch = (expectedType, property) => {
-  return typeof property !== expectedType;
+  if (typeof property !== expectedType) {
+    return;
+  }
 };
 /**
  * Throws a type error if the type of the specified property matches the expected type.
@@ -322,7 +324,7 @@ exports.isEmpty = (value, message = 'Value should not be empty') => {
  * // Example: Validate the length of a string
  * const stringValue = 'abc';
  * try {
- *   validateLength(stringValue, {
+ *   validationsLen(stringValue, {
  *     min: 2,
  *     max: 5,
  *     minMessage: 'Length should be at least 2 characters.',
@@ -335,7 +337,7 @@ exports.isEmpty = (value, message = 'Value should not be empty') => {
  *
  * @throws {LengthError} Throws a LengthError with a specified message if length validation fails.
  */
-exports.validateLength = (value, options) => {
+exports.validationsLen = (value, options) => {
   const length = typeof value === 'string' ? value.length : `${value}`.length;
 
   if (options.min && length < options.min) {
@@ -369,7 +371,7 @@ exports.validateLength = (value, options) => {
  * }
  */
 exports.validateMinLen = (value, options) => {
-  this.validateLength(value, { min: options.min, minMessage: options.minMessage || `Value must be at least {limit} characters long.` });
+  this.validationsLen(value, { min: options.min, minMessage: options.minMessage || `Value must be at least {limit} characters long.` });
 };
 
 /**
@@ -394,5 +396,5 @@ exports.validateMinLen = (value, options) => {
  * }
  */
 exports.validateMaxLen = (value, options) => {
-  this.validateLength(value, { max: options.max, maxMessage: options.maxMessage || `Value must be at most {limit} characters long.` });
+  this.validationsLen(value, { max: options.max, maxMessage: options.maxMessage || `Value must be at most {limit} characters long.` });
 };

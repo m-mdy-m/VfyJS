@@ -1,7 +1,7 @@
 "use strict";
 
 const inputValidator = require("../../utils/inputValidator");
-const { ifFalsyValue,IfNotType , validateLength, ifTruthyValue, validateMinLength, validateMinLen, validateMaxLen } = require("../../errors/HandleError");
+const { ifFalsyValue,IfNotType , ifTruthyValue, validationsLen } = require("../../errors/HandleError");
 const createValidationOptions = require("../../utils/handleOption");
 const { getValidValue } = require("../../common/validationConstants");
 
@@ -56,7 +56,7 @@ function validateEmail(value, options = {}) {
 
   // Local part length validation
   const localPart = value.split('@')[0];
-  validateLength(localPart,{
+  validationsLen(localPart,{
     min : getValidValue(minLenLocal,minLenLocal),
     max : getValidValue(maxLenLocal,maxLenLocal),
     minMessage : minLenLocal.errorMessage,
@@ -69,13 +69,13 @@ function validateEmail(value, options = {}) {
   const subdomain = domain.split(domainPart)[0].trim();
   const hasSpecialChar = inputValidator(domainPart).hasSpecialCharacter()
   ifTruthyValue(hasSpecialChar,'Subdomain should not contain special characters')
-  validateLength(subdomain, {
+  validationsLen(subdomain, {
     min: getValidValue(minLenSubdomain,minLenSubdomain),
     max:  getValidValue(maxLenSubdomain,maxLenSubdomain),
     minMessage: minLenSubdomain.errorMessage,
     maxMessage: maxLenSubdomain.errorMessage,
   });
-  validateLength(domainPart, {
+  validationsLen(domainPart, {
     min: getValidValue(minLenDomain, minLenDomain),
     max: getValidValue(maxLenDomain, maxLenDomain),
     minMessage: minLenDomain.errorMessage,

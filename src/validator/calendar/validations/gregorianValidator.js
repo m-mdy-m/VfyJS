@@ -6,7 +6,7 @@ const {getDay,getMonth} = require('../utils/dateTimeHelpers')
 const { validateDateComponents, getFormatted } = require('../utils/dateValidation')
 const {getDateNowGregorian} = require('../utils/getDate')
 const { nowDay, nowMonth, nowYear,nowHours, nowMinutes, nowSeconds } = getDateNowGregorian();
-function validateGregorianDate() {
+function getGregorianDate() {
     // Create an array to hold the input values (year, month, day)
     const dateComponents = [nowYear , nowMonth, nowDay,nowHours,nowMinutes,nowSeconds,];
     let [year, month, day, hours, minute, second] = dateComponents.map((component, index) => {
@@ -18,7 +18,6 @@ function validateGregorianDate() {
 
         return +trimmedValue(component.toString());
     });
-
     // Convert the time difference to days, hours, minutes, and seconds
     const remaining = remainingTimeOfYear()
     const {formatDay,formatMonth} = getFormatted(nowMonth,nowDay)
@@ -44,4 +43,4 @@ function validateGregorianDate() {
     };
     return result
 }
-console.log(validateGregorianDate());
+module.exports =getGregorianDate

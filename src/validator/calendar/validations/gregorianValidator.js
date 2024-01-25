@@ -38,16 +38,21 @@ function validateGregorianDate( {
     let totalMilliSeconds;
     let isTimeExpired = false;
     if (hasWrite) {
-        const totalYearsMillis = (inputYear - nowYear) * 365 * 24 * 60 * 60 * 1000;
-        const totalMonthsMillis = (inputMonth - nowMonth) * 30 * 24 * 60 * 60 * 1000;
-        const totalDaysMillis = (inputDay - nowDay) * 24 * 60 * 60 * 1000;
-        const totalHoursMillis = (inputHours - nowHours) * 60 * 60 * 1000;
-        const totalMinutesMillis = (inputMinutes - nowMinutes) * 60 * 1000;
-        const totalSecondsMillis = (inputSeconds - nowSeconds) * 1000;
-        totalMilliSeconds = totalYearsMillis + totalMonthsMillis + totalDaysMillis + totalHoursMillis + totalMinutesMillis + totalSecondsMillis;
+        // Calculate the input time in milliseconds
+        const inputDate = new Date(inputYear, inputMonth - 1, inputDay, inputHours, inputMinutes, inputSeconds);
+        const inputTimeMillis = inputDate.getTime();
+        // Calculate the current time in milliseconds
+        const currentTime = new Date().getTime();
+        // Calculate the difference between input time and current time
+        totalMilliSeconds = inputTimeMillis - currentTime;
+        // Check if the input time is in the past
+        if (totalMilliSeconds < 0) {
+            // If so, set it to 0 to prevent immediate execution
+            totalMilliSeconds = 0;
+        }
         isTimeExpired = true;
-    }else{
-        validateDateComponents(year,month,day,nowYear,nowMonth,nowDay)
+    }  else {
+        validateDateComponents(year, month, day, nowYear, nowMonth, nowDay);
     }
     if (isTimeExpired) {
         setTimeout(() => {
@@ -55,26 +60,26 @@ function validateGregorianDate( {
         }, totalMilliSeconds);
     }
     //  Prepare result object
-     const result = {
-        format : `${nowYear}-${formatMonth}-${formatDay}`,
+    const result = {
+        format: `${nowYear}-${formatMonth}-${formatDay}`,
         currentDateTime: {
             year: nowYear,
             month: { monthOfYear: nowMonth, monthName: getMonth() },
             day: { dayOfMonth: nowDay, dayOfWeek: getDay() },
             hours,
             minute,
-            second,
+            second
         },
         timeLeftUntilEndOfYear: {
             months: remaining.months,
             days: remaining.days,
             hours: remaining.hours,
             minutes: remaining.minutes,
-            seconds: remaining.seconds,
+            seconds: remaining.seconds
         },
         TimeExpired: isTimeExpired ? 'TimeExpired' : 'NotExpired',
         ExpirationTime: isTimeExpired ? `${totalMilliSeconds} milliseconds` : null
     };
     return result
 }
-console.log(validateGregorianDate({inputSeconds : 20})); 
+console.log(validateGregorianDate({ inputSeconds: 10 }));

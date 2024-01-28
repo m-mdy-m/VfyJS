@@ -10,6 +10,7 @@
  * @property {() => Object} isDivisibleBy - Checks if the base number is divisible by each additional number.
  * @property {() => number} multiply - Multiplies the base number by all additional numbers.
  * @property {() => number} divide - Divides the base number by all additional numbers.
+ * @property {() => number} power - Raises the base number to the power of all additional numbers.
  * @property {(min: number, max: number) => number} generateRandomNumber - Generates a random number within the specified interval.
  * @property {(min: number, max: number) => number} generateRandomEvenNumber - Generates a random even number within the specified interval.
  * @property {(min: number, max: number) => number} generateRandomOddNumber - Generates a random odd number within the specified interval.
@@ -17,6 +18,7 @@
 
 /**
  * Defines a MathOperations object with various mathematical operations.
+ * @param {number} number - The base number for operations.
  * @param {...number} numbers - Additional numbers for operations.
  * @returns {MathOperations} An object containing various mathematical operations.
  * @example
@@ -30,6 +32,7 @@
  * console.log(math.isDivisibleBy()); // Output: {3: false, 4: true, 5: false} (2 % 3, 2 % 4, 2 % 5)
  * console.log(math.multiply()); // Output: 120 (2 * 3 * 4 * 5)
  * console.log(math.divide()); // Output: 0.03333333333333333 (2 / 3 / 4 / 5)
+ * console.log(math.power()); // Output: 32 (2^3^4^5)
  * console.log(math.generateRandomNumber(1, 100)); // Output: Random number between 1 and 100
  * console.log(math.generateRandomEvenNumber(1, 100)); // Output: Random even number between 1 and 100
  * console.log(math.generateRandomOddNumber(1, 100)); // Output: Random odd number between 1 and 100
@@ -102,6 +105,12 @@ const MathOperations = (number, ...numbers) => ({
     if (numbers.includes(0)) throw new Error("Division by zero is not allowed");
     return numbers.reduce((acc, curr) => acc / curr, number);
   },
+  /**
+   * Raises the base number to the power of all additional numbers.
+   * @returns {number} The result of raising the base number to the power of all additional numbers.
+   */
+  power: () => numbers.reduce((acc, curr) => acc ** curr, number),
+
   /**
    * Generates a random number within the specified interval.
    * @param {number} min - The minimum value of the interval (inclusive).

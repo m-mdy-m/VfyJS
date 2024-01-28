@@ -1,6 +1,7 @@
 /**
  * Represents a collection of mathematical operations on numbers.
  * @typedef {Object} MathOperations
+ * @property {() => boolean} isEqual - Checks if all additional numbers are equal to the base number.
  * @property {() => boolean} isEven - Checks if the base number is even.
  * @property {() => boolean} areAllOdd - Checks if all numbers (including the base number) are odd.
  * @property {() => boolean} isOdd - Checks if the base number is odd.
@@ -23,6 +24,7 @@
  * @returns {MathOperations} An object containing various mathematical operations.
  * @example
  * const math = MathOperations(2, 3, 4, 5);
+ * console.log(math.isEqual()); // Output: false
  * console.log(math.isEven()); // Output: true
  * console.log(math.areAllOdd()); // Output: false
  * console.log(math.isOdd()); // Output: true
@@ -38,6 +40,12 @@
  * console.log(math.generateRandomOddNumber(1, 100)); // Output: Random odd number between 1 and 100
  */
 const MathOperations = (number, ...numbers) => ({
+  /**
+   * Checks if all additional numbers passed are equal to the base number.
+   * @returns {boolean} True if all additional numbers are equal to the base number, false otherwise.
+   */
+  isEqual: () => numbers.every((num) => num === number),
+
   /**
    * Checks if the base number is even.
    * @returns {boolean} True if the base number is even, false otherwise.
@@ -148,4 +156,5 @@ const MathOperations = (number, ...numbers) => ({
     return randomNumber;
   },
 });
+
 module.exports = MathOperations;

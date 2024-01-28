@@ -786,6 +786,9 @@ const { mathOperations } = require('vfyjs');
     - `generateRandomOddNumber(min, max)` function generates a random odd number within the specified interval.
     - **Parameters:** `min` - The minimum value of the interval (inclusive), `max` - The maximum value of the interval (inclusive).
     - **Returns:** `number` - A random odd number between `min` and `max`.
+14. **isEqual**
+    - `isEqual()`  function checks if all additional numbers passed are equal to the base number.
+    - **Returns:** `boolean ` - True if all additional numbers are equal to the base number, false otherwise.
 
 #### Example
 
@@ -793,6 +796,7 @@ const { mathOperations } = require('vfyjs');
 const { mathOperations } = require('vfyjs');
 
 const math = MathOperations(2, 3, 4, 5);
+console.log(math.isEqual()); // Output: false (since additional numbers 3, 4, 5 are not equal to the base number 2)
 console.log(math.isEven()); // Output: true
 console.log(math.areAllOdd()); // Output: false
 console.log(math.isOdd()); // Output: true

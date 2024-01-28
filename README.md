@@ -5,12 +5,54 @@
 
 Data validation, string manipulation, and error handling are fundamental aspects of software development. vfyjs aims to simplify these tasks, allowing developers to focus on building robust applications without compromising on data integrity.
 
+### In Node.js
+
+After installing the package, you can import it into your Node.js application. Below is an example demonstrating how to use vfyjs for password validation:
+
+```javascript
+const vfyjs = require('vfyjs');
+
+// Example usage
+const data = '123!#@ScsA';
+const validationResult = vfyjs.isPassword(data);
+console.log(validationResult);
+```
+The `isPassword` function checks whether the provided string meets the criteria for a valid password. Adjust the `password` variable with your actual password data for validation.
+
+### In Browser
+
+To utilize vfyjs in a browser environment, include the `vfyjs.browser.js` script in your HTML file:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Webpage</title>
+</head>
+<body>
+    <!-- Include vfyjs script -->
+    <script src="path/to/vfyjs.browser.js"></script>
+    <script>
+        // Example usage in browser
+        const data = '123!#@ScsA';
+        const validationResult = vfyjs.isPassword(data);
+        console.log(validationResult);
+    </script>
+</body>
+</html>
+```
+
+Ensure to replace `"path/to/vfyjs.browser.js"` with the correct path relative to your HTML file.
+
+
 ## Features 
 
 - [Data Validation](#DataValidation)
 - [String Manipulation](#StringManipulation)
 - [Error Handling](#ErrorHandling)
-- [Math Operations](#math-operations)
+- [Math Operations](#MathOperations)
 - [Configuration](#configuration)
 
 ### DataValidation

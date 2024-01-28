@@ -40,6 +40,7 @@ const { trimmedValue } = require('./src/common/validationConstants');
 // Importing error handling module
 const HandleError = require('./src/errors/HandleError');
 
+
 /**
  * Validates a password based on specified criteria.
  *

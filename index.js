@@ -69,7 +69,7 @@ exports.isEmail = emailValidate;
  * @returns {boolean} - True if the username is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  */
-exports.username = userValidate;
+exports.isUsername = userValidate;
 
 /**
  * Validates a color string.

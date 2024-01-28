@@ -99,4 +99,3 @@ const MathOperations = (number, ...numbers) => ({
     },
   });
 module.exports = MathOperations;
-sDOc

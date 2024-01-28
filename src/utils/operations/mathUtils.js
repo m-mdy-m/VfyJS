@@ -35,107 +35,108 @@
  * console.log(math.generateRandomOddNumber(1, 100)); // Output: Random odd number between 1 and 100
  */
 const MathOperations = (number, ...numbers) => ({
-    /**
-     * Checks if the base number is even.
-     * @returns {boolean} True if the base number is even, false otherwise.
-     */
-    isEven: () => number % 2 === 0,
-  
-    /**
-     * Checks if all numbers (including the base number) are odd.
-     * @returns {boolean} True if all numbers are odd, false otherwise.
-     */
-    areAllOdd: () => [number, ...numbers].every((num) => num % 2 === 0),
-  
-    /**
-     * Checks if the base number is odd.
-     * @returns {boolean} True if the base number is odd, false otherwise.
-     */
-    isOdd: () => number % 2 !== 0,
-  
-    /**
-     * Checks if all numbers (including the base number) are even.
-     * @returns {boolean} True if all numbers are even, false otherwise.
-     */
-    areAllEven: () => [number, ...numbers].every((num) => num % 2 !== 0),
-  
-    /**
-     * Adds all additional numbers to the base number.
-     * @returns {number} The result of adding all numbers.
-     */
-    add: () => numbers.reduce((acc, curr) => acc + curr, number),
-  
-    /**
-     * Subtracts all additional numbers from the base number.
-     * @returns {number} The result of subtracting all numbers.
-     */
-    subtract: () => numbers.reduce((acc, curr) => acc - curr, number),
-  
-    /**
-     * Checks if the base number is divisible by each additional number.
-     * @returns {Object} An object where keys are additional numbers and values are boolean indicating divisibility.
-     */
-    isDivisibleBy: () => {
-      const divisibleBy = {};
-      numbers.forEach((num) => {
-        divisibleBy[num] = number % num === 0;
-      });
-      return divisibleBy;
-    },
-  
-    /**
-     * Multiplies the base number by all additional numbers.
-     * @returns {number} The result of multiplying all numbers.
-     */
-    multiply: () => {
-      if (numbers.length === 0) return number;
-      return numbers.reduce((acc, curr) => acc * curr, number);
-    },
-  
-    /**
-     * Divides the base number by all additional numbers.
-     * @throws {Error} If any of the additional numbers is zero.
-     * @returns {number} The result of dividing all numbers.
-     */
-    divide: () => {
-      if (numbers.length === 0) return number;
-      if (numbers.includes(0)) throw new Error("Division by zero is not allowed");
-      return numbers.reduce((acc, curr) => acc / curr, number);
-    },
-    /**
-     * Generates a random number within the specified interval.
-     * @param {number} min - The minimum value of the interval (inclusive).
-     * @param {number} max - The maximum value of the interval (inclusive).
-     * @returns {number} A random number between min and max.
-     */
-    generateRandomNumber: (min = 1, max = 1000) => Math.floor(Math.random() * (max - min + 1)) + min,
-  
-    /**
-     * Generates a random even number within the specified interval.
-     * @param {number} min - The minimum value of the interval (inclusive).
-     * @param {number} max - The maximum value of the interval (inclusive).
-     * @returns {number} A random even number between min and max.
-     */
-    generateRandomEvenNumber: (min = 1, max = 1000) => {
-      let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-      while (randomNumber % 2 !== 0) {
-        randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-      return randomNumber;
-    },
-  
-    /**
-     * Generates a random odd number within the specified interval.
-     * @param {number} min - The minimum value of the interval (inclusive).
-     * @param {number} max - The maximum value of the interval (inclusive).
-     * @returns {number} A random odd number between min and max.
-     */
-    generateRandomOddNumber: (min = 1, max = 1000) => {
-      let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-      while (randomNumber % 2 === 0) {
-        randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-      return randomNumber;
-    },
-  });
+  /**
+   * Checks if the base number is even.
+   * @returns {boolean} True if the base number is even, false otherwise.
+   */
+  isEven: () => number % 2 === 0,
+
+  /**
+   * Checks if all numbers (including the base number) are odd.
+   * @returns {boolean} True if all numbers are odd, false otherwise.
+   */
+  areAllOdd: () => [number, ...numbers].every((num) => num % 2 === 0),
+
+  /**
+   * Checks if the base number is odd.
+   * @returns {boolean} True if the base number is odd, false otherwise.
+   */
+  isOdd: () => number % 2 !== 0,
+
+  /**
+   * Checks if all numbers (including the base number) are even.
+   * @returns {boolean} True if all numbers are even, false otherwise.
+   */
+  areAllEven: () => [number, ...numbers].every((num) => num % 2 !== 0),
+
+  /**
+   * Adds all additional numbers to the base number.
+   * @returns {number} The result of adding all numbers.
+   */
+  add: () => numbers.reduce((acc, curr) => acc + curr, number),
+
+  /**
+   * Subtracts all additional numbers from the base number.
+   * @returns {number} The result of subtracting all numbers.
+   */
+  subtract: () => numbers.reduce((acc, curr) => acc - curr, number),
+
+  /**
+   * Checks if the base number is divisible by each additional number.
+   * @returns {Object} An object where keys are additional numbers and values are boolean indicating divisibility.
+   */
+  isDivisibleBy: () => {
+    const divisibleBy = {};
+    numbers.forEach((num) => {
+      divisibleBy[num] = number % num === 0;
+    });
+    return divisibleBy;
+  },
+
+  /**
+   * Multiplies the base number by all additional numbers.
+   * @returns {number} The result of multiplying all numbers.
+   */
+  multiply: () => {
+    if (numbers.length === 0) return number;
+    return numbers.reduce((acc, curr) => acc * curr, number);
+  },
+
+  /**
+   * Divides the base number by all additional numbers.
+   * @throws {Error} If any of the additional numbers is zero.
+   * @returns {number} The result of dividing all numbers.
+   */
+  divide: () => {
+    if (numbers.length === 0) return number;
+    if (numbers.includes(0)) throw new Error("Division by zero is not allowed");
+    return numbers.reduce((acc, curr) => acc / curr, number);
+  },
+  /**
+   * Generates a random number within the specified interval.
+   * @param {number} min - The minimum value of the interval (inclusive).
+   * @param {number} max - The maximum value of the interval (inclusive).
+   * @returns {number} A random number between min and max.
+   */
+  generateRandomNumber: (min = 1, max = 1000) =>
+    Math.floor(Math.random() * (max - min + 1)) + min,
+
+  /**
+   * Generates a random even number within the specified interval.
+   * @param {number} min - The minimum value of the interval (inclusive).
+   * @param {number} max - The maximum value of the interval (inclusive).
+   * @returns {number} A random even number between min and max.
+   */
+  generateRandomEvenNumber: (min = 1, max = 1000) => {
+    let randomNumber;
+    do {
+      randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    } while (randomNumber % 2 !== 0);
+    return randomNumber;
+  },
+
+  /**
+   * Generates a random odd number within the specified interval.
+   * @param {number} min - The minimum value of the interval (inclusive).
+   * @param {number} max - The maximum value of the interval (inclusive).
+   * @returns {number} A random odd number between min and max.
+   */
+  generateRandomOddNumber: (min = 1, max = 1000) => {
+    let randomNumber;
+    do {
+      randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    } while (randomNumber % 2 === 0);
+    return randomNumber;
+  },
+});
 module.exports = MathOperations;

@@ -39,7 +39,8 @@ const { trimmedValue } = require('./src/common/validationConstants');
 
 // Importing error handling module
 const HandleError = require('./src/errors/HandleError');
-
+// Importing math operations module
+const MathOperations = require('./src/utils/operations/mathUtils')
 
 /**
  * Validates a password based on specified criteria.
@@ -145,3 +146,11 @@ exports.trimValue = trimmedValue;
  * @property {function} 
  */
 exports.HandleError = HandleError;
+
+/**
+ * Provides utility functions for mathematical operations.
+ *
+ * @namespace
+ * @property {MathOperations}
+ */
+exports.mathOperations = MathOperations

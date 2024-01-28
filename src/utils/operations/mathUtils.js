@@ -4,13 +4,13 @@ const MathOperations = (number, ...numbers) => ({
   isEven: () => number % 2 === 0,
 
   // Check if all numbers (including the base number) are even
-  isEvenAll: () => [number, ...numbers].every((num) => num % 2 === 0),
+  areAllOdd: () => [number, ...numbers].every((num) => num % 2 === 0),
 
   // Check if the base number is odd
   isOdd: () => number % 2 !== 0,
 
   // Check if all numbers (including the base number) are odd
-  isOddAll: () => [number, ...numbers].every((num) => num % 2 !== 0),
+  areAllEven: () => [number, ...numbers].every((num) => num % 2 !== 0),
 
   // Add all additional numbers to the base number
   add: () => numbers.reduce((acc, curr) => acc + curr, number),
@@ -40,4 +40,4 @@ const MathOperations = (number, ...numbers) => ({
     return numbers.reduce((acc, curr) => acc / curr, number);
   },
 });
-ئخ
+module.exports = MathOperations

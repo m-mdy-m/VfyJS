@@ -1,25 +1,25 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  mode: 'production',
-  entry: './index.js',
+  mode: "production",
+  entry: "./index.js",
   output: {
-    filename: 'vfyjs.browser.js',
+    filename: "vfyjs.browser.js",
     path: path.resolve(__dirname),
-    library: 'vfyjs',
-    libraryTarget: 'umd',
-    globalObject: 'this',
+    library: "vfyjs",
+    libraryTarget: "umd",
+    globalObject: "this",
   },
   resolve: {
     fallback: {
-      path: require.resolve('path-browserify'),
-      fs: false, 
+      path: require.resolve("path-browserify"),
+      fs: false,
     },
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
     },
   },
 };

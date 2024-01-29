@@ -32,7 +32,7 @@ function handleOption(defaultValue, errorMessage) {
      */
   
     if (typeof defaultValue === 'number') {
-      option = /** @type {ValidationOption} */ {
+    option = /** @type {ValidationOption} */ {
         value: defaultValue,
         errorMessage: errorMessage,
       };

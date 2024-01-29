@@ -2,10 +2,9 @@ const { MIN_LENGTH, MAX_LENGTH } = require("../../../common/validationConstants"
 const createValidationOptions = require("../../../utils/handleOption");
 const inputValidator = require("../../../utils/inputValidator");
 
-function createOPtions (value,options){
-    const validator = inputValidator(value);
+function createOPtions (options){
     const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
-    const optionValidations = [validator.hasMinLength(MIN_LENGTH), validator.hasMaxLength(MAX_LENGTH), true, true, true, true, true, false];
+    const optionValidations = [MIN_LENGTH, MAX_LENGTH, true, true, true, true, true, false];
     const msgError = [
       'Password must be at least 8 characters long.',
       'Password cannot exceed 20 characters.',

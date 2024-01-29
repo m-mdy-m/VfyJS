@@ -10,6 +10,15 @@
         <input type="text" name="passwordName" id="passwordId" class="passwordClass">
     </form>
     <script src="./vfyjs.browser.js"></script>
-    <script src="./tesss.js"></script>
+    <script>
+        const input = document.querySelector('input')
+        input.addEventListener('input',()=>{
+            try {
+                const a = vfyjs.isPassword(input)
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
+    </script>
 </body>
 </html>

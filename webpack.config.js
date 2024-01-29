@@ -13,7 +13,8 @@ module.exports = {
   },
   resolve: {
     fallback: {
-      fs: false, // Exclude fs module
+      fs: false, 
+      path: require.resolve("path-browserify"),
     },
   },
   module: {

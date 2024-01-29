@@ -83,9 +83,6 @@ const {  validateWithCondition, TypeMatches, validationsLength, IfBothTruthy } =
  */
 function validateFormPassword(input, options = {}) {
     const value = input.value ? input.value : input
-    console.log('input =>',input);
-    console.log('input.value =>',input.value);
-    console.log('value =>',value);
     toString(value);
     const validator = inputValidator(value);
     const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = createOptions(options);

@@ -65,7 +65,7 @@ const { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue, getFalseRequired } = req
 const inputValidator = require("../../utils/inputValidator");
 const {isTypeMismatch}= require('../../errors/HandleError');
 const { toString } = require("./helper/dataConversion");
-const createOptions = require("./helper/genOption");
+const {optionsPassword} = require("./helper/genOption");
 const { getReq, getErrorMessage } = require("./helper/getValues");
 const {  validateWithCondition, TypeMatches, validationsLength, IfBothTruthy } = require("../../errors/FormError");
 
@@ -85,7 +85,7 @@ function validateFormPassword(input, options = {}) {
     const value = input.value ? input.value : input
     toString(value);
     const validator = inputValidator(value);
-    const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = createOptions(options);
+    const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(options);
     validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));
     validateWithCondition(getReq(lowercase), validator.hasLowerCase(), input, msgError, 'hasLowerCase', getErrorMessage(lowercase));
     validateWithCondition(getReq(number), validator.hasNumber(), input, msgError, 'hasNumber', getErrorMessage(number));

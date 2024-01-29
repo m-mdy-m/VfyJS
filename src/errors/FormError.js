@@ -48,7 +48,7 @@ class BooleanValueError extends ValidationError {}
 
 
 
-exports.throwIfFalsy  = (property, input, errors, validationRule,message) => {
+exports.throwIfFalsy=(property, input, errors, validationRule,message) => {
     if (!property) {
       throw new BooleanValueError(message ||  'Invalid value (Falsy)', property, input, errors, validationRule, 'boolean', 'Falsy value detected');
     }
@@ -69,10 +69,20 @@ exports.TypeMatches = (expectedType, property, message, input, errors, validatio
     }
 };
 
-exports.validationsLength = (value, minLength, maxLength, message, input, errors, validationRule) => {
+exports.validationsLength = (value,options={}, minLength, maxLength, message, input, errors, validationRule) => {
     const length = typeof value === 'string' ? value.length : toString(value).length;
-    if (length < minLength || length > maxLength) {
-        throw new StringLengthError(message || `Value must be between ${minLength} and ${maxLength} characters long`, value, input, errors, validationRule, 'length', 'Length out of range');
+    if (options) {
+        if (options.min && length < options.min) {
+            throw new StringLengthError(value, options.minMessage || `Length must be at least ${options.min} characters.`,input,errors,validationRule,'Option Length','Length out of range');
+          }
+        
+         if (options.max && length > options.max) {
+            throw new StringLengthError(value, options.maxMessage || `Length must be at most ${options.max} characters.`,input,errors,validationRule,'Option Length','Length out of range');
+          }
+    }else{
+        if (length < minLength || length > maxLength) {
+            throw new StringLengthError(message || `Value must be between ${minLength} and ${maxLength} characters long`, value, input, errors, validationRule, 'length', 'Length out of range');
+        }
     }
 };
 exports.IfBothTruthy = (property, method, message,input,errors,validationRule) => {
@@ -82,3 +92,4 @@ exports.IfBothTruthy = (property, method, message,input,errors,validationRule) =
       }
     }
   };
+  

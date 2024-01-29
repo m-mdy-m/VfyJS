@@ -1,8 +1,7 @@
 const { MIN_LENGTH, MAX_LENGTH } = require("../../../common/validationConstants");
 const createValidationOptions = require("../../../utils/handleOption");
-const inputValidator = require("../../../utils/inputValidator");
 
-function createOPtions (options){
+function optionsPassword (options){
     const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
     const optionValidations = [MIN_LENGTH, MAX_LENGTH, true, true, true, true, true, false];
     const msgError = [
@@ -22,4 +21,29 @@ function createOPtions (options){
     return { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError};
 
 }
-module.exports = createOPtions
+function optionEmail (options){
+      // Set standard length
+    const standardMaxLength = 255;
+    const standardMinLength = 3
+    const optionName = ['minLenLocal', 'minLenDomain', 'minLenSubdomain', 'maxLenLocal', 'maxLenDomain', 'maxLenSubdomain'];
+    const optionValidations = [standardMinLength,standardMinLength,2, standardMaxLength,standardMaxLength,standardMaxLength];
+    const msgError = 
+    [
+      `Local part must have between ${standardMinLength} and ${standardMaxLength} characters.`,
+      `Domain part must have between ${standardMinLength} and ${standardMaxLength} characters.`,
+      `Subdomain must have between 2 and ${standardMaxLength} characters.`,
+      `Local part must have at most ${standardMaxLength} characters.`,
+      `Domain part must have at most ${standardMaxLength} characters.`,
+      `Subdomain must have at most ${standardMaxLength} characters.`,
+    ];
+    var objectOPtion = createValidationOptions(optionName,optionValidations,msgError);
+    
+    objectOPtion = { ...objectOPtion, ...options };
+  
+    const { minLenLocal, minLenDomain, minLenSubdomain, maxLenLocal, maxLenDomain, maxLenSubdomain } = objectOPtion;
+    return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
+}
+module.exports = {
+    optionsPassword: optionsPassword,
+    optionEmail:optionEmail
+}

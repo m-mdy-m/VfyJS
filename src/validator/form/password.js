@@ -66,8 +66,8 @@ const inputValidator = require("../../utils/inputValidator");
 const {ifFalsyValue , ifTruthyValue, validatePropertyLengthAndType, isTypeMismatch, validateIfBothTruthy} = require('../../errors/HandleError')
 const { toString } = require("./helper/dataConversion");
 const createOptions = require("./helper/genOption");
-const { getReq, getStatusValue } = require("./helper/getValues");
-const { TypeValueError, CustomError } = require("../../errors/FormError");
+const { getReq, getStatusValue, getErrorMessage } = require("./helper/getValues");
+const {   throwIfFalsy, validateWithCondition } = require("../../errors/FormError");
 const createOPtions = require("./helper/genOption");
 /**
  * Validates a password based on the provided options.
@@ -83,18 +83,19 @@ const createOPtions = require("./helper/genOption");
  */
 
 
-
-
 function validateFormPassword(input,options ={}){
   const value = input.value
   toString(value)
   const validator = inputValidator(input)
-  const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength } = createOPtions(input,options)
-  
-
+  const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength,msgError } = createOPtions(input,options)
+  validateWithCondition(getReq(uppercase),validator.hasUppercase(),input,msgError,'hasUppercase', getErrorMessage(uppercase))
+  validateWithCondition(getReq(lowercase),validator.hasLowerCase(),input,msgError,'hasLowerCase',getErrorMessage(lowercase))
+  validateWithCondition(getReq(number),validator.hasNumber(),input,msgError,'hasNumber',getErrorMessage(number))
+  validateWithCondition(getReq(specialCharacter),validator.hasSpecialCharacter(),input,msgError,'hasSpecialCharacter',getErrorMessage(specialCharacter))
+  validateWithCondition(getReq(alphabetic),validator.hasAlphabetic(),input,msgError,'hasAlphabetic',getErrorMessage(alphabetic))
 }
 
-const pass = validateFormPassword('SKOCW ', {
+const pass = validateFormPassword('hj@2kAnb ', {
   minLength : {required : true , msgError : 'tets'}
 })
 

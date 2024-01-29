@@ -8,8 +8,5 @@ exports.getValue = (value)=>{
     return value.value
 }
 exports.getErrorMessage = (value)=>{
-    return value.msgError
+    return value.errorMessage
 }
-exports.getStatusValue = (value, validations) => {
-    
-};

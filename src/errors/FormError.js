@@ -44,22 +44,20 @@ class StringLengthError extends ValidationError {}
 
 class BooleanValueError extends ValidationError {}
 
-module.exports = {
-    ValidationError,
-    ValueTypeError,
-    StringLengthError,
-    BooleanValueError
-};
 
 
-exports.ifFalsyValue = (message, property, input, errors, validationRule) => {
+exports.throwIfFalsy  = (property, input, errors, validationRule,message) => {
     if (!property) {
       throw new BooleanValueError(message, property, input, errors, validationRule, 'boolean', 'Falsy value detected');
     }
     return property;
 };
+
 exports.ifTruthyValue = (message, property, input, errors, validationRule) => {
     if (property) {
         throw new BooleanValueError(message, property, input, errors, validationRule, 'boolean', 'Truthy value detected');
     }
 };
+exports.validateWithCondition = (condition, validatorFunction, input, msgError, validationRule, errorMessage) =>{
+    this.throwIfFalsy(condition ? validatorFunction : true, input, msgError, validationRule, errorMessage);
+}

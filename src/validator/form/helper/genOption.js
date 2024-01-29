@@ -20,7 +20,7 @@ function createOPtions (value,options){
     // Merge the values from 'options' into 'objectOPtion'
     objectOPtion = { ...objectOPtion, ...options };
     const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength } = objectOPtion;
-    return { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength };
+    return { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError};
 
 }
 module.exports = createOPtions

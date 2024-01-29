@@ -6,14 +6,10 @@
  * @param {string} message - The error message describing the validation failure.
  */
 class CustomError extends Error {
-  constructor(property, message,arrayError = [],input) {
+  constructor(property, message) {
     super(message);
     this.property = property;
     this.message = message
-    if (arrayError) {
-      this.arrayError = arrayError
-    }
-    this.input = input
   }
 }
 /**
@@ -54,9 +50,9 @@ class LengthError extends CustomError {}
  *   console.error(error.message); // 'Value should not be empty'
  * }
  */
-exports.ifFalsyValue = (property, message,msgArray=[],input) => {
+exports.ifFalsyValue = (property, message) => {
   if (!property) {
-    throw new ValidationError(property, message || 'Invalid value',msgArray,input);
+    throw new ValidationError(property, message || 'Invalid value');
   }
   return property;
 };

@@ -64,7 +64,9 @@
 const { MAX_LENGTH, MIN_LENGTH,getValidValue , isValue, getFalseRequired, getRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const {ifFalsyValue , ifTruthyValue, validatePropertyLengthAndType, isTypeMismatch, validateIfBothTruthy} = require('../../errors/HandleError')
-const createValidationOptions = require('../../utils/handleOption')
+const createValidationOptions = require('../../utils/handleOption');
+import {toString} from "./helper/dataConversion"
+const { TypeValueError } = require("../../errors/FormError");
 /**
  * Validates a password based on the provided options.
  *
@@ -77,6 +79,15 @@ const createValidationOptions = require('../../utils/handleOption')
  * const isValid = password("StrongPwd@123", { minLength: 8, uppercase: true, number: true });
  * console.log(isValid); // true
  */
+
+
+function validateFormPassword(input,options ={}){
+  const value = input.value
+
+}
+
+
+
 
 
 
@@ -177,12 +188,4 @@ const msgError = [
 
   return isValid;
 }
-try {
-  const pas = validatePassword('asdASC@E@')
-  console.log('pas =>',pas); 
-} catch (error) {
-  console.log('error =>',error); 
-  
-}
-
 module.exports = validatePassword;

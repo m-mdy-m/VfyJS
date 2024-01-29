@@ -31,7 +31,7 @@ const {MAX_LENGTH,MIN_LENGTH,getFalseRequired,trimmedValue,getValidValue,isValue
 const inputValidator = require("../../utils/inputValidator");
 const { isTypeMismatch} = require("../../errors/HandleError");
 const { optionUsername } = require("./helper/genOption");
-const { validateWithCondition, throwIfFalsy, ifTruthyValue, IfBothTruthy, validateType, validationsLength } = require("../../errors/FormError");
+const { validateWithCondition, throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, TypeMatches } = require("../../errors/FormError");
 const { getErrorMessage } = require("./helper/getValues");
 /**
  * Validates a password based on the provided options.
@@ -72,7 +72,7 @@ function validateUsername(input, options = {}) {
         minValue = +minValue;
         maxValue =+maxValue
     }
-    validateType('number',username,getErrorMessage(username),input,messageError,'Check Type')
+    TypeMatches(username,'number',getErrorMessage(username),input,messageError,'Check Type')
     validationsLength(username,null,min,max,`Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`,input,messageError,'Validation Length')
     if(typeof max === 'number' && username.length > max){
         throw new Error('Username length exceeds the maximum allowed length.');

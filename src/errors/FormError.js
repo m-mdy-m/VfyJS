@@ -92,4 +92,8 @@ exports.IfBothTruthy = (property, method, message,input,errors,validationRule) =
       }
     }
   };
-  
+  exports.TypeMatches = (property,expectedType,message,input,errors,validationRule)=>{
+    if (typeof property === expectedType) {
+        throw new ValueTypeError(property, message || `Value should be of type ${expectedType}`,input,errors,validationRule,'Type','Type Match');
+      }
+  }

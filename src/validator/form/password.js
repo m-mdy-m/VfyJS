@@ -64,10 +64,11 @@
 const { MAX_LENGTH, MIN_LENGTH,getValidValue , isValue, getFalseRequired, getRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
 const {ifFalsyValue , ifTruthyValue, validatePropertyLengthAndType, isTypeMismatch, validateIfBothTruthy} = require('../../errors/HandleError')
-const createValidationOptions = require('../../utils/handleOption');
-import {toString} from "./helper/dataConversion"
-import createOPtions from "./helper/genOption";
-const { TypeValueError } = require("../../errors/FormError");
+const { toString } = require("./helper/dataConversion");
+const createOptions = require("./helper/genOption");
+const { getReq } = require("./helper/getValues");
+const { TypeValueError, CustomError } = require("../../errors/FormError");
+const createOPtions = require("./helper/genOption");
 /**
  * Validates a password based on the provided options.
  *
@@ -86,21 +87,16 @@ const { TypeValueError } = require("../../errors/FormError");
 
 function validateFormPassword(input,options ={}){
   const value = input.value
+  const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength } = createOPtions(input,options)
   toString(value)
+  
 
 }
 
 
 
-
-
-
 function validatePassword(value, options = {}) {
-  // Input validation functions
-  if(typeof value !=='string'){
-    throw new Error("The first input should only be a string!!")
-  }
-  // Destructuring options with default values and error messages
+  toString(value)
   const validator = inputValidator(value);
   const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength } = createOPtions(value,options)
   /**

@@ -134,11 +134,11 @@ const msgError = [
    */
 
   // Additional validation checks
-  ifFalsyValue(uppercase.required ? validator.hasUppercase() : true, uppercase.errorMessage);
-  ifFalsyValue(lowercase.required ? validator.hasLowerCase() : true , lowercase.errorMessage)
-  ifFalsyValue(number.required ? validator.hasNumber() : true , number.errorMessage)
-  ifFalsyValue(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage)
-  ifFalsyValue(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage)
+  ifFalsyValue(uppercase.required ? validator.hasUppercase() : true, uppercase.errorMessage,msgError,value);
+  ifFalsyValue(lowercase.required ? validator.hasLowerCase() : true , lowercase.errorMessage,msgError,value)
+  ifFalsyValue(number.required ? validator.hasNumber() : true , number.errorMessage,msgError,value)
+  ifFalsyValue(specialCharacter.required ? validator.hasSpecialCharacter() : true , specialCharacter.errorMessage,msgError,value)
+  ifFalsyValue(alphabetic.required ? validator.hasAlphabetic() : true , alphabetic.errorMessage,msgError,value)
   // Check and trim whitespace if necessary
   let whitespaceCheck = getFalseRequired(whitespace)
   validateIfBothTruthy(!whitespaceCheck,validator.hasWhitespace(),"Whitespace is not allowed. Please remove any leading or trailing spaces.")
@@ -177,4 +177,12 @@ const msgError = [
 
   return isValid;
 }
+try {
+  const pas = validatePassword('asdASC@E@')
+  console.log('pas =>',pas); 
+} catch (error) {
+  console.log('error =>',error); 
+  
+}
+
 module.exports = validatePassword;

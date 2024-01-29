@@ -18,6 +18,7 @@ module.exports = {
   },
   devtool: "source-map",
   optimization: {
+    comments: true,
     splitChunks: {
       chunks: "all",
     },

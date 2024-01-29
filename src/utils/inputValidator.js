@@ -57,7 +57,7 @@ const inputValidator = (input) => ({
    * Checks if the input contains at least one alphabetic character.
    * @returns {boolean} - True if the input contains at least one alphabetic character, otherwise false.
    */
-  hasAlphabetic: () => /[a-zA-Z]/.test(input),
+  hasAlphabetic: () => /^[a-zA-Z]+$/.test(input),
 
   /**
    * Checks if the input contains at least one numeric digit.

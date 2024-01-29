@@ -75,3 +75,10 @@ exports.validationsLength = (value, minLength, maxLength, message, input, errors
         throw new StringLengthError(message || `Value must be between ${minLength} and ${maxLength} characters long`, value, input, errors, validationRule, 'length', 'Length out of range');
     }
 };
+exports.IfBothTruthy = (property, method, message,input,errors,validationRule) => {
+    if (property) {
+      if (method) {
+        this.ifTruthyValue(property, message || 'Invalid Input',input,errors,validationRule);
+      }
+    }
+  };

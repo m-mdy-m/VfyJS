@@ -1,25 +1,28 @@
-class CustomError extends Error {
-    constructor(message, property,input,Errors,value,validationRule,fieldType) {
+class ValidationError extends Error {
+    constructor(message, property, input, errors, validationRule, fieldType, statusError) {
         super(message);
         this.property = property;
         this.input = input;
-        this.Errors = Errors;
-        this.value = value;
+        this.errors = errors;
+        this.value = this.input.value ? this.input.value : 'Input is not a value';
         this.validationRule = validationRule;
         this.fieldType = fieldType;
         this.timestamp = new Date(); 
+        this.statusError = statusError;
     }
+
     getErrorDetails() {
         return {
             property: this.property,
             input: this.input,
-            Errors: this.Errors,
+            errors: this.errors,
             value: this.value,
             validationRule: this.validationRule,
             fieldType: this.fieldType,
             timestamp: this.timestamp
         };
     }
+
     getFormattedMessage() {
         return `${this.name} (${this.id}): ${this.message}`;
     }
@@ -27,17 +30,36 @@ class CustomError extends Error {
     logError() {
         return `[${this.timestamp}] ${this.name}: ${this.message}`;
     }
-    getInput(){
-        return `${this.input}:is Errors ${this.Errors}`
+
+    getInput() {
+        return {
+            value: this.value,
+            errors: this.errors
+        };
     }
 }
+class ValueTypeError extends ValidationError {}
 
-class TypeValueError extends CustomError {}
+class StringLengthError extends ValidationError {}
 
+class BooleanValueError extends ValidationError {}
 
-class LengthError extends CustomError{}
 module.exports = {
-    CustomError,
-    TypeValueError,
-    LengthError,
+    ValidationError,
+    ValueTypeError,
+    StringLengthError,
+    BooleanValueError
+};
+
+
+exports.ifFalsyValue = (message, property, input, errors, validationRule) => {
+    if (!property) {
+      throw new BooleanValueError(message, property, input, errors, validationRule, 'boolean', 'Falsy value detected');
+    }
+    return property;
+};
+exports.ifTruthyValue = (message, property, input, errors, validationRule) => {
+    if (property) {
+        throw new BooleanValueError(message, property, input, errors, validationRule, 'boolean', 'Truthy value detected');
+    }
 };

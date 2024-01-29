@@ -21,9 +21,37 @@ exports.isName = (value) => {
         isValidName : isValid,
     }; 
 };
-// Example usage:
-const result1 = exports.isName('mahdi2222');
-console.log('result1:', result1); // Logs false
-
-const result2 = exports.isName('mahdi');
-console.log('result2:', result2); // Logs true
+exports.ConfirmationFields =(fieldOne,fieldTwo)=>{
+    if (typeof (fieldOne && fieldTwo) === 'string') {
+        fieldOne = trimmedValue(fieldOne);
+        fieldTwo = trimmedValue(fieldTwo);
+        const isEqualLength = fieldOne.length === fieldTwo.length;
+        const isEqual = fieldOne === fieldTwo;
+        return isEqual && isEqualLength;
+    } else if (Array.isArray(fieldOne) && Array.isArray(fieldTwo)) {
+        const isEqualLength = fieldOne.length === fieldTwo.length;
+        const isEqual = JSON.stringify(fieldOne) === JSON.stringify(fieldTwo);
+        return isEqual && isEqualLength;
+    } else if (typeof (fieldOne && fieldTwo) === 'boolean') {
+        return fieldOne === fieldTwo;
+    } else if (typeof (fieldOne && fieldTwo) === 'object') {
+        const fieldOneKeys = Object.keys(fieldOne);
+        const fieldTwoKeys = Object.keys(fieldTwo);
+        if (fieldOneKeys.length !== fieldTwoKeys.length) {
+            return false;
+        }
+        for (let key of fieldOneKeys) {
+            if (fieldOne[key] !== fieldTwo[key]) {
+                return false;
+            }
+        }
+        return true;
+    } else if (typeof (fieldOne && fieldTwo) === 'symbol') {
+        return fieldOne === fieldTwo;
+    } else if (typeof (fieldOne && fieldTwo) === 'undefined') {
+        return fieldOne === fieldTwo;
+    } else {
+        return false; // Handle other types or invalid inputs
+    }
+    
+}

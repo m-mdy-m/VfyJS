@@ -1,5 +1,3 @@
-const inputValidator = require("../../../utils/inputValidator")
-
 exports.getReq = (value)=>{
     return value.required
 }

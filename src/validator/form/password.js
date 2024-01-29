@@ -66,7 +66,7 @@ const inputValidator = require("../../utils/inputValidator");
 const {ifFalsyValue , ifTruthyValue, validatePropertyLengthAndType, isTypeMismatch, validateIfBothTruthy} = require('../../errors/HandleError')
 const { toString } = require("./helper/dataConversion");
 const createOptions = require("./helper/genOption");
-const { getReq } = require("./helper/getValues");
+const { getReq, getStatusValue } = require("./helper/getValues");
 const { TypeValueError, CustomError } = require("../../errors/FormError");
 const createOPtions = require("./helper/genOption");
 /**
@@ -87,13 +87,16 @@ const createOPtions = require("./helper/genOption");
 
 function validateFormPassword(input,options ={}){
   const value = input.value
-  const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength } = createOPtions(input,options)
   toString(value)
+  const validator = inputValidator(input)
+  const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength } = createOPtions(input,options)
   
 
 }
 
-
+const pass = validateFormPassword('SKOCW ', {
+  minLength : {required : true , msgError : 'tets'}
+})
 
 function validatePassword(value, options = {}) {
   toString(value)

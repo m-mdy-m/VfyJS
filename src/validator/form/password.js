@@ -86,13 +86,11 @@ function validateFormPassword(input, options = {}) {
     toString(value);
     const validator = inputValidator(input);
     const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = createOptions(value, options);
-    
     validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));
     validateWithCondition(getReq(lowercase), validator.hasLowerCase(), input, msgError, 'hasLowerCase', getErrorMessage(lowercase));
     validateWithCondition(getReq(number), validator.hasNumber(), input, msgError, 'hasNumber', getErrorMessage(number));
     validateWithCondition(getReq(specialCharacter), validator.hasSpecialCharacter(), input, msgError, 'hasSpecialCharacter', getErrorMessage(specialCharacter));
     validateWithCondition(getReq(alphabetic), validator.hasAlphabetic(), input, msgError, 'hasAlphabetic', getErrorMessage(alphabetic));
-    
     let whitespaceCheck = getFalseRequired(whitespace);
     IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), "Whitespace is not allowed. Please remove any leading or trailing spaces.",input,msgError,'hasWhitespace');
 
@@ -129,6 +127,5 @@ function validateFormPassword(input, options = {}) {
         !whitespaceCheck;
 
     return isValid;
-}
-
+  }
 module.exports = validateFormPassword;

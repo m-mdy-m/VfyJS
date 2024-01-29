@@ -78,7 +78,7 @@ exports.validationsLength = (value, minLength, maxLength, message, input, errors
 exports.IfBothTruthy = (property, method, message,input,errors,validationRule) => {
     if (property) {
       if (method) {
-        this.ifTruthyValue(property, message || 'Invalid Input',input,errors,validationRule);
+        this.ifTruthyValue(message || 'Invalid Input',property,input,errors,validationRule);
       }
     }
   };

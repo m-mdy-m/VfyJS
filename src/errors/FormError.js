@@ -1,3 +1,5 @@
+const { toString } = require("../validator/form/helper/dataConversion");
+
 class ValidationError extends Error {
     constructor(message, property, input, errors, validationRule, fieldType, statusError) {
         super(message);
@@ -48,16 +50,28 @@ class BooleanValueError extends ValidationError {}
 
 exports.throwIfFalsy  = (property, input, errors, validationRule,message) => {
     if (!property) {
-      throw new BooleanValueError(message, property, input, errors, validationRule, 'boolean', 'Falsy value detected');
+      throw new BooleanValueError(message ||  'Invalid value (Falsy)', property, input, errors, validationRule, 'boolean', 'Falsy value detected');
     }
     return property;
 };
 
 exports.ifTruthyValue = (message, property, input, errors, validationRule) => {
     if (property) {
-        throw new BooleanValueError(message, property, input, errors, validationRule, 'boolean', 'Truthy value detected');
+        throw new BooleanValueError(message|| 'Invalid value (Truthy)', property, input, errors, validationRule, 'boolean', 'Truthy value detected');
     }
 };
 exports.validateWithCondition = (condition, validatorFunction, input, msgError, validationRule, errorMessage) =>{
     this.throwIfFalsy(condition ? validatorFunction : true, input, msgError, validationRule, errorMessage);
 }
+exports.TypeMatches = (expectedType, property, message, input, errors, validationRule) => {
+    if (typeof property !== expectedType) {
+        throw new ValueTypeError(property, message || `Value should be of type ${expectedType}`, input, errors, validationRule, 'type', 'Type mismatch');
+    }
+};
+
+exports.validationsLength = (value, minLength, maxLength, message, input, errors, validationRule) => {
+    const length = typeof value === 'string' ? value.length : toString(value).length;
+    if (length < minLength || length > maxLength) {
+        throw new StringLengthError(message || `Value must be between ${minLength} and ${maxLength} characters long`, value, input, errors, validationRule, 'length', 'Length out of range');
+    }
+};

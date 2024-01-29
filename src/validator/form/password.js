@@ -163,7 +163,7 @@ const msgError = [
   }
   
   // Check if the password length is within the specified range
-  validatePropertyLengthAndType(min , max , 'number ', 'number', value,`Password length must be between ${min} and ${max} characters.`)
+  validatePropertyLengthAndType(min , max , 'number ', 'number', value, (minLength.errorMessage + max.errorMessage )|| `Password length must be between ${min} and ${max} characters.`)
   // Final validation check
   const isValid =
   min &&

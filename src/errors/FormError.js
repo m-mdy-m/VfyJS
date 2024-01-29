@@ -63,7 +63,7 @@ exports.ifTruthyValue = (message, property, input, errors, validationRule) => {
 exports.validateWithCondition = (condition, validatorFunction, input, msgError, validationRule, errorMessage) =>{
     this.throwIfFalsy(condition ? validatorFunction : true, input, msgError, validationRule, errorMessage);
 }
-exports.TypeMatches = (expectedType, property, message, input, errors, validationRule) => {
+exports.validateType  = (expectedType, property, message, input, errors, validationRule) => {
     if (typeof property !== expectedType) {
         throw new ValueTypeError(property, message || `Value should be of type ${expectedType}`, input, errors, validationRule, 'type', 'Type mismatch');
     }

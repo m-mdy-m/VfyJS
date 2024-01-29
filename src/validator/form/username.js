@@ -29,8 +29,10 @@
 
 const {MAX_LENGTH,MIN_LENGTH,getFalseRequired,trimmedValue,getValidValue,isValue,getRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const createValidationOptions = require('../../utils/handleOption')
-const { ifFalsyValue,validateIfBothTruthy , ifTruthyValue,isTypeMismatch ,validatePropertyLengthAndType} = require("../../errors/HandleError");
+const { isTypeMismatch} = require("../../errors/HandleError");
+const { optionUsername } = require("./helper/genOption");
+const { validateWithCondition, throwIfFalsy, ifTruthyValue, IfBothTruthy, validateType, validationsLength } = require("../../errors/FormError");
+const { getErrorMessage } = require("./helper/getValues");
 /**
  * Validates a password based on the provided options.
  *
@@ -43,52 +45,24 @@ const { ifFalsyValue,validateIfBothTruthy , ifTruthyValue,isTypeMismatch ,valida
  * const isValid = username("StringUsername123");
  * console.log(isValid); // true
  */
-function validateUsername(username, options = {}) {
+function validateUsername(input, options = {}) {
+    let username = input.value ? input.value : input
     const validator = inputValidator(username);
-    const optionName = ['minLength', 'maxLength', 'uppercase','number','NonAlphanumeric','trim','repeat']
-    const validation = 
-    [
-        validator.hasMinLength(MIN_LENGTH),
-        validator.hasMaxLength(MAX_LENGTH),
-        validator.hasUppercase(),
-        validator.hasNumber(),
-        validator.hasNonAlphanumeric(),
-        validator.hasWhitespace(),
-        validator.hasRepeat()
-    ]
-    const messageError = 
-    [
-        'Username must be at least 8 characters long.',
-        'Username cannot exceed 64 characters.',
-        'Username must contain at least one uppercase letter.',
-        'Username must have at least one number.',
-        'Username must not contain non-alphanumeric characters.',
-        'Username cannot contain whitespace.',
-        'Username must not have consecutive repeated characters.'
-    ]
-    let objectOption = createValidationOptions(optionName,validation,messageError)
-    objectOption = {...objectOption, ...options}
-    const {minLength,
-        maxLength,
-        uppercase,
-        number,
-        NonAlphanumeric,
-        trim,
-        repeat } = objectOption
-    ifFalsyValue(uppercase.required ? validator.hasUppercase() : true  , uppercase.errorMessage)
-    ifFalsyValue(number.required , number.errorMessage)
+    const {minLength , maxLength,uppercase,number,NonAlphanumeric,trim,repeat,messageError} = optionUsername(username,options)
+    validateWithCondition(uppercase,validator.hasUppercase(),input,messageError,'hasUppercase',getErrorMessage(uppercase))
+    throwIfFalsy(number.required,input,messageError,'Required Number',getErrorMessage(number))
     let checkWhiteSpace = getRequired(trim, false)
     if(checkWhiteSpace){
-        ifFalsyValue(!checkWhiteSpace ? validator.hasWhitespace() : true, 'Invalid input. Value cannot contain leading or trailing whitespaces.');
+        throwIfFalsy(!checkWhiteSpace,validator.hasWhitespace(),messageError,'hasWhitespace', 'Invalid input. Value cannot contain leading or trailing whitespaces.')
     }  
     username = trimmedValue(username)
     const isNonAlphanumeric = getRequired(NonAlphanumeric,false)
-    ifTruthyValue(isNonAlphanumeric, 'Value must be alphanumeric. Example: ABC123');
+    ifTruthyValue( 'Value must be alphanumeric. Example: ABC123',isNonAlphanumeric,input,messageError,'isNonAlphanumeric');
 
     const isNumber = getRequired(number,validator.hasNumber())
-    validateIfBothTruthy(isNumber , !validator.hasNumber() && !validator.hasNumeric(),'Invalid input. The password must contain at least one number.')
+    IfBothTruthy(isNumber, !validator.hasNumber() && !validator.hasNumeric(),'Invalid input. The password must contain at least one number.',input,messageError,'isNumber')
     let isRepeat = getFalseRequired(repeat , validator.hasRepeat())
-    validateIfBothTruthy(isRepeat,validator.hasRepeat() , 'Invalid input. Password cannot have consecutive repeated characters.')
+    IfBothTruthy(isRepeat,validator.hasRepeat() , 'Invalid input. Password cannot have consecutive repeated characters.',input,messageError,'isRepeat')
     let minValue = getValidValue(minLength , minLength);
     let maxValue = getValidValue(maxLength , maxLength);
         
@@ -98,8 +72,8 @@ function validateUsername(username, options = {}) {
         minValue = +minValue;
         maxValue =+maxValue
     }
-    
-    validatePropertyLengthAndType(min,max,'number','number', username,`Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`)
+    validateType('number',username,getErrorMessage(username),input,messageError,'Check Type')
+    validationsLength(username,null,min,max,`Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`,input,messageError,'Validation Length')
     if(typeof max === 'number' && username.length > max){
         throw new Error('Username length exceeds the maximum allowed length.');
     }

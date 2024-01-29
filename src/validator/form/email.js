@@ -4,7 +4,7 @@ const inputValidator = require("../../utils/inputValidator");
 const { ifFalsyValue,IfNotType , validationsLen } = require("../../errors/HandleError");
 const { getValidValue } = require("../../common/validationConstants");
 const { optionEmail } = require("./helper/genOption");
-const { validationsLength, throwIfFalsy, ifTruthyValue, TypeMatches } = require("../../errors/FormError");
+const { validationsLength, throwIfFalsy, ifTruthyValue, validateType } = require("../../errors/FormError");
 const { toString } = require("./helper/dataConversion");
 
 /**
@@ -35,7 +35,7 @@ function validateEmail(input, options = {}) {
   const {maxLenDomain, maxLenLocal, maxLenSubdomain, minLenDomain, minLenLocal, minLenSubdomain, msgError } = optionEmail(options);
 
   // Check if the input is a string
-  TypeMatches('string', value, `Invalid input type. Please enter a valid email as a string.`, input, msgError, 'Check Type');
+  validateType('string', value, `Invalid input type. Please enter a valid email as a string.`, input, msgError, 'Check Type');
 
   // Convert value to string
   toString(value);
@@ -82,7 +82,7 @@ function validateEmail(input, options = {}) {
   const email = localPart + '@' + subdomain + domainPart;
   const isValidEmail = email === value;
   const isValidFormat = validator.matchesEmailFormat(value);
-  TypeMatches('boolean', isValidFormat, `Unexpected validation result. The email validation should return a boolean.`, input, msgError, 'Format email is False');
+  validateType('boolean', isValidFormat, `Unexpected validation result. The email validation should return a boolean.`, input, msgError, 'Format email is False');
   throwIfFalsy(isValidFormat, input, msgError, 'Format email is False', `The provided email address '${value}' is not valid. Please enter a valid email.`);
   const isValid = isValidFormat && hasSymbol && isValidEmail;
 

@@ -67,7 +67,7 @@ const {isTypeMismatch}= require('../../errors/HandleError');
 const { toString } = require("./helper/dataConversion");
 const {optionsPassword} = require("./helper/genOption");
 const { getReq, getErrorMessage } = require("./helper/getValues");
-const {  validateWithCondition, TypeMatches, validationsLength, IfBothTruthy } = require("../../errors/FormError");
+const {  validateWithCondition, validateType, validationsLength, IfBothTruthy } = require("../../errors/FormError");
 
 /**
  * Validates a password based on the provided options.
@@ -113,8 +113,8 @@ function validateFormPassword(input, options = {}) {
         throw new TypeError("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
     }
 
-    TypeMatches('number', min, getErrorMessage(minLength));
-    TypeMatches('number', max, getErrorMessage(maxLength));
+    validateType('number', min, getErrorMessage(minLength));
+    validateType('number', max, getErrorMessage(maxLength));
     validationsLength(value, min, max, `Password length must be between ${min} and ${max} characters.`, input, msgError, 'validations Length');
 
     const isValid = min &&

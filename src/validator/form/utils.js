@@ -51,6 +51,43 @@ function compareArrays(arr1, arr2) {
     result.isEqual = Object.values(result.values).every(val => val.inArrayOne === val.inArrayTwo);
     return result;
 }
+function compareObjects(obj1, obj2){
+    const result = {
+        keysInObj1: Object.keys(obj1),
+        keysInObj2: Object.keys(obj2),
+        isEqual: true,
+        values: {}
+    };
+
+    // Check if keys are the same
+    result.keysInObj1.sort();
+    result.keysInObj2.sort();
+    result.isEqualKeys = JSON.stringify(result.keysInObj1) === JSON.stringify(result.keysInObj2);
+
+    if (!result.isEqualKeys) {
+        result.keyComparison = "Keys are not equal";
+        result.isEqual = false;
+        return result;
+    }
+
+    // Check values for each key
+    for (let key of result.keysInObj1) {
+        result.values[key] = {
+            inObj1: obj1.hasOwnProperty(key),
+            inObj2: obj2.hasOwnProperty(key)
+        };
+        if (result.values[key].inObj1 && result.values[key].inObj2) {
+            result.values[key].isEqual = obj1[key] === obj2[key];
+            if (!result.values[key].isEqual) {
+                result.isEqual = false;
+            }
+        } else {
+            result.isEqual = false;
+        }
+    }
+
+    return result;
+}
 exports.ConfirmationFields =(fieldOne,fieldTwo)=>{
     if (typeof (fieldOne && fieldTwo) === 'string') {
         fieldOne = trimmedValue(fieldOne);
@@ -63,17 +100,7 @@ exports.ConfirmationFields =(fieldOne,fieldTwo)=>{
     } else if (typeof (fieldOne && fieldTwo) === 'boolean') {
         return fieldOne === fieldTwo;
     } else if (typeof (fieldOne && fieldTwo) === 'object') {
-        const fieldOneKeys = Object.keys(fieldOne);
-        const fieldTwoKeys = Object.keys(fieldTwo);
-        if (fieldOneKeys.length !== fieldTwoKeys.length) {
-            return false;
-        }
-        for (let key of fieldOneKeys) {
-            if (fieldOne[key] !== fieldTwo[key]) {
-                return false;
-            }
-        }
-        return true;
+        return compareObjects(fieldOne,fieldTwo)
     } else if (typeof (fieldOne && fieldTwo) === 'symbol') {
         return fieldOne === fieldTwo;
     } else if (typeof (fieldOne && fieldTwo) === 'undefined') {
@@ -81,5 +108,4 @@ exports.ConfirmationFields =(fieldOne,fieldTwo)=>{
     } else {
         return false; 
     }
-    
 }

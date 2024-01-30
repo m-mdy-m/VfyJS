@@ -44,6 +44,8 @@ const HandleError = require("./src/errors/HandleError");
 // Importing math operations module
 const MathOperations = require("./src/utils/operations/mathUtils");
 
+// Importing utility functions for validating names and confirmation fields
+const {ConfirmationFields,isName} = require('./src/validator/form/utils')
 module.exports = {
   /**
    * Validates a password based on specified criteria.
@@ -148,4 +150,25 @@ module.exports = {
    * @property {MathOperations}
    */
   mathOperations: MathOperations,
+
+  /**
+   * Validates a name based on specified criteria.
+   *
+   * @function
+   * @param {string} name - The name string to be validated.
+   * @returns {boolean} - True if the name is valid, otherwise false.
+   * @throws {Error} - Throws an error if validation fails.
+   */
+  isName : isName,
+  /**
+   * Handles confirmation fields to ensure they match.
+   *
+   * @function
+   * @param {string} field1 - The first field for confirmation.
+   * @param {string} field2 - The second field for confirmation.
+   * @returns {boolean} - True if the fields match, otherwise false.
+   * @throws {Error} - Throws an error if confirmation fails.
+   */
+  confirmationFields : ConfirmationFields
 };
+

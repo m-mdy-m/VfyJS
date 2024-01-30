@@ -15,7 +15,7 @@ exports.isName = (value) => {
     const validator = inputValidator(toString(value)); 
     
     // Check various criteria
-    const hasAlphabetic = validator.hasAlphabetic();
+    const hasAlphabetic = /^[a-zA-Z]+$/.test(value);
     const isSpecial = validator.hasSpecialCharacter();
     const hasNumber = validator.hasNumber();
     const hasUppercase = validator.hasUppercase();

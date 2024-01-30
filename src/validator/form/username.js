@@ -32,7 +32,7 @@ const {MAX_LENGTH, MIN_LENGTH, getFalseRequired, trimmedValue, getValidValue, is
 const inputValidator = require("../../utils/inputValidator");
 const {isTypeMismatch} = require("../../errors/HandleError");
 const {optionUsername} = require("./helper/genOption");
-const {validateWithCondition, throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, TypeMatches} = require("../../errors/FormError");
+const {validateWithCondition, throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, TypeMatches, validateType} = require("../../errors/FormError");
 const {getErrorMessage} = require("./helper/getValues");
 
 /**
@@ -95,7 +95,7 @@ function validateUsername(input, options = {}) {
     }
 
     // Validate type and length
-    TypeMatches(username, 'string', getErrorMessage(username), input, messageError, 'Check Type');
+    validateType('string',username,getErrorMessage(username),input,messageError,'Check Type')
     validationsLength(username, null, min, max, `Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`, input, messageError, 'Validation Length');
 
     // Check if username length exceeds maximum length

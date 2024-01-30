@@ -124,7 +124,7 @@ function compareObjects(obj1, obj2){
  * @param {*} fieldOne - The first field to compare.
  * @param {*} fieldTwo - The second field to compare.
  *
- * @returns {boolean|Object}
+ * @returns {boolean|ComparisonResult}
  *   - Returns `true` if fields are equal.
  *   - Returns a comparison result object otherwise.
  *
@@ -169,6 +169,6 @@ exports.ConfirmationFields = (fieldOne, fieldTwo) => {
     } else if (typeOne === 'undefined' && typeTwo === 'undefined') {
         return fieldOne === fieldTwo;
     } else {
-        return false; 
+        throw new Error('Incompatible types, cannot compare');  
     }
 }

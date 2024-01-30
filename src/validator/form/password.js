@@ -67,7 +67,7 @@ const {isTypeMismatch}= require('../../errors/HandleError');
 const { toString } = require("./helper/dataConversion");
 const {optionsPassword} = require("./helper/genOption");
 const { getReq, getErrorMessage } = require("./helper/getValues");
-const {  validateWithCondition, validateType, validationsLength, IfBothTruthy } = require("../../errors/FormError");
+const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, validateLengths } = require("../../errors/FormError");
 
 /**
  * Validates a password based on the provided options.
@@ -115,8 +115,7 @@ function validateFormPassword(input, options = {}) {
 
     validateType('number', min, getErrorMessage(minLength));
     validateType('number', max, getErrorMessage(maxLength));
-    validationsLength(value, min, max, `Password length must be between ${min} and ${max} characters.`, input, msgError, 'validations Length');
-
+    validationsLength(value,null, min, max, `Password length must be between ${min} and ${max} characters.`, input, msgError, 'validations Length');
     const isValid = min &&
         max &&
         (uppercase.required ? validator.hasUppercase() : true) &&
@@ -127,5 +126,5 @@ function validateFormPassword(input, options = {}) {
         !whitespaceCheck;
 
     return isValid;
-  }
+}
 module.exports = validateFormPassword;

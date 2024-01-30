@@ -21,6 +21,36 @@ exports.isName = (value) => {
         isValidName : isValid,
     }; 
 };
+function compareArrays(arr1, arr2) {
+    const result = {
+        isEqualLength: arr1.length === arr2.length,
+        values: {}
+    };
+
+    if (!result.isEqualLength) {
+        result.lengthComparison = "Lengths are not equal";
+        return result;
+    }
+
+    for (let value of arr1) {
+        result.values[value] = {
+            inArrayOne: true,
+            inArrayTwo: arr2.includes(value)
+        };
+    }
+
+    for (let value of arr2) {
+        if (!result.values.hasOwnProperty(value)) {
+            result.values[value] = {
+                inArrayOne: false,
+                inArrayTwo: true
+            };
+        }
+    }
+
+    result.isEqual = Object.values(result.values).every(val => val.inArrayOne === val.inArrayTwo);
+    return result;
+}
 exports.ConfirmationFields =(fieldOne,fieldTwo)=>{
     if (typeof (fieldOne && fieldTwo) === 'string') {
         fieldOne = trimmedValue(fieldOne);
@@ -29,9 +59,7 @@ exports.ConfirmationFields =(fieldOne,fieldTwo)=>{
         const isEqual = fieldOne === fieldTwo;
         return isEqual && isEqualLength;
     } else if (Array.isArray(fieldOne) && Array.isArray(fieldTwo)) {
-        const isEqualLength = fieldOne.length === fieldTwo.length;
-        const isEqual = JSON.stringify(fieldOne) === JSON.stringify(fieldTwo);
-        return isEqual && isEqualLength;
+        return compareArrays(fieldOne,fieldTwo)
     } else if (typeof (fieldOne && fieldTwo) === 'boolean') {
         return fieldOne === fieldTwo;
     } else if (typeof (fieldOne && fieldTwo) === 'object') {
@@ -51,7 +79,7 @@ exports.ConfirmationFields =(fieldOne,fieldTwo)=>{
     } else if (typeof (fieldOne && fieldTwo) === 'undefined') {
         return fieldOne === fieldTwo;
     } else {
-        return false; // Handle other types or invalid inputs
+        return false; 
     }
     
 }

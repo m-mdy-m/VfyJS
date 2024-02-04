@@ -44,7 +44,27 @@ class SearchBinary {
       this.root.addNode(this.root, value);
     }
   }
-  search(value){
-    return this.searchTree(this.root,value)
+  insertArray(values=Array){
+    values.forEach((value)=>{
+        this.insert(value)
+    })
   }
+  search(value){
+    return this.root.searchTree(this.root,value)
+  }
+}
+// Example Usage
+const reservedUsernames = ["admin", "root", "superuser"];
+const usernameValidator = new SearchBinary()
+
+// Insert reserved usernames into the BST
+usernameValidator.insertArray(reservedUsernames)
+// Validate a username
+const usernameToValidate = "admin";
+const isReserved = usernameValidator.search(usernameToValidate);
+
+if (isReserved) {
+  console.log(`Username '${usernameToValidate}' is reserved. Please choose another.`);
+} else {
+  console.log(`Username '${usernameToValidate}' is valid.`);
 }

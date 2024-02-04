@@ -1,6 +1,7 @@
 # vfyjs
 
 **vfyjs** is a powerful and flexible JavaScript library designed to streamline data validation, string manipulation, and error handling in your projects. Whether you're working with user input, configuration data, or API responses, vfyjs provides a comprehensive set of utilities to ensure data integrity and enhance code reliability.
+
 ## Introduction
 
 Data validation, string manipulation, and error handling are fundamental aspects of software development. vfyjs aims to simplify these tasks, allowing developers to focus on building robust applications without compromising on data integrity.
@@ -10,13 +11,14 @@ Data validation, string manipulation, and error handling are fundamental aspects
 After installing the package, you can import it into your Node.js application. Below is an example demonstrating how to use vfyjs for password validation:
 
 ```javascript
-const vfyjs = require('vfyjs');
+const vfyjs = require("vfyjs");
 
 // Example usage
-const data = '123!#@ScsA';
+const data = "123!#@ScsA";
 const validationResult = vfyjs.isPassword(data);
 console.log(validationResult);
 ```
+
 The `isPassword` function checks whether the provided string meets the criteria for a valid password. Adjust the `password` variable with your actual password data for validation.
 
 ### In Browser
@@ -26,28 +28,27 @@ To utilize vfyjs in a browser environment, include the `vfyjs.browser.js` script
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Webpage</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Include vfyjs script -->
     <script src="path/to/vfyjs.browser.js"></script>
     <script>
-        // Example usage in browser
-        const data = '123!#@ScsA';
-        const validationResult = vfyjs.isPassword(data);
-        console.log(validationResult);
+      // Example usage in browser
+      const data = "123!#@ScsA";
+      const validationResult = vfyjs.isPassword(data);
+      console.log(validationResult);
     </script>
-</body>
+  </body>
 </html>
 ```
 
 Ensure to replace `"path/to/vfyjs.browser.js"` with the correct path relative to your HTML file.
 
-
-## Features 
+## Features
 
 - [Data Validation](#DataValidation)
 - [String Manipulation](#StringManipulation)
@@ -62,9 +63,10 @@ Ensure to replace `"path/to/vfyjs.browser.js"` with the correct path relative to
 - **Passwords**: Strong password detection with customization options. [Configuration](#ConfigPassword)
 - **Emails**: Recognize and validate email addresses. [Configuration](#ConfigEmail)
 - **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](#ConfigPhone)
+- **BinaryTree**: Efficient searching and manipulation of data using a binary tree data structure [Configuration](#ConfigBinaryTree)
 - **Custom Validation Functions**: Validate various aspects of a string input. [Configuration](#ConfigValue)
 
-### StringManipulation 
+### StringManipulation
 
 - **getSubstring**: Retrieve substrings from a given string based on specified indexes. [Configuration](#ConfigSubstring)
 - **trimValue**: Trim extra spaces from the beginning and end of a string. [Configuration](#ConfigtrimValue)
@@ -82,7 +84,9 @@ npm install vfyjs
 ```
 
 ## Usage
+
 Usage Example:
+
 ```JavaScript
 const { validatePhoneNumber, getSubstring, trimValue, HandleError } = require('vfyjs');
 
@@ -115,7 +119,8 @@ try {
 
 # Configuration
 
-## ConfigColor 
+## ConfigColor
+
 The `isColor` function in vfyjs provides various methods to identify and validate different color formats. Here are the available methods:
 
 - `HEX()`: Validate if the input is a valid hexadecimal color code.
@@ -129,33 +134,34 @@ The `isColor` function in vfyjs provides various methods to identify and validat
 #### Example
 
 ```javascript
-const isColor = require('vfyjs').isColor;
+const isColor = require("vfyjs").isColor;
 
-const hasHex = '#fff';
-console.log('isColor(hasHex).HEX() =>', isColor(hasHex).HEX()); // true
+const hasHex = "#fff";
+console.log("isColor(hasHex).HEX() =>", isColor(hasHex).HEX()); // true
 
-const hasCssVar = 'var(--main-color)';
-console.log('isColor(hasCssVar).CssVar() =>', isColor(hasCssVar).CssVar()); // true
+const hasCssVar = "var(--main-color)";
+console.log("isColor(hasCssVar).CssVar() =>", isColor(hasCssVar).CssVar()); // true
 
-const hasHSL = 'hsl(120, 100%, 50%)';
-console.log('isColor(hasHSL).HSL() =>', isColor(hasHSL).HSL()); // true
+const hasHSL = "hsl(120, 100%, 50%)";
+console.log("isColor(hasHSL).HSL() =>", isColor(hasHSL).HSL()); // true
 
-const hasHWB = 'hwb(120, 100%, 50%)';
-console.log('isColor(hasHWB).HWB() =>', isColor(hasHWB).HWB()); // true
+const hasHWB = "hwb(120, 100%, 50%)";
+console.log("isColor(hasHWB).HWB() =>", isColor(hasHWB).HWB()); // true
 
-const hasNameColor = 'red';
-console.log('isColor(hasNameColor).NameColor() =>', isColor(hasNameColor).NameColor()); // true
+const hasNameColor = "red";
+console.log(
+  "isColor(hasNameColor).NameColor() =>",
+  isColor(hasNameColor).NameColor()
+); // true
 
-const hasRGB = 'rgb(255, 0, 0)';
-console.log('isColor(hasRGB).RGB() =>', isColor(hasRGB).RGB()); // true
+const hasRGB = "rgb(255, 0, 0)";
+console.log("isColor(hasRGB).RGB() =>", isColor(hasRGB).RGB()); // true
 
-const hasRGBA = 'rgba(255, 0, 0, 0.5)';
-console.log('isColor(hasRGBA).RGBA() =>', isColor(hasRGBA).RGBA()); // true
+const hasRGBA = "rgba(255, 0, 0, 0.5)";
+console.log("isColor(hasRGBA).RGBA() =>", isColor(hasRGBA).RGBA()); // true
 ```
 
-
 ---
-
 
 ## ConfigLinks
 
@@ -170,31 +176,30 @@ const { isHttp, isHttps } = require("vfyjs");
 
 // Example 1: Check if the URL is using HTTPS
 const resultHttps1 = isHttps("https://www.example.com");
-console.log('Result HTTPS Example 1 =>', resultHttps1); // Output: true
+console.log("Result HTTPS Example 1 =>", resultHttps1); // Output: true
 
 // Example 2: Try to check HTTPS for an HTTP URL, should throw an error
 try {
   const resultHttps2 = isHttps("http://www.example.com");
-  console.log('Result HTTPS Example 2 =>', resultHttps2);
+  console.log("Result HTTPS Example 2 =>", resultHttps2);
 } catch (error) {
   console.error(error.message); // Output: "The URL must contain the substring 'https'. Please provide a valid URL."
 }
 
 // Example 3: Check if the URL is using HTTP
 const resultHttp1 = isHttp("http://www.example.com");
-console.log('Result HTTP Example 1 =>', resultHttp1); // Output: true
+console.log("Result HTTP Example 1 =>", resultHttp1); // Output: true
 
 // Example 4: Try to check HTTP for an HTTPS URL, should throw an error
 try {
   const resultHttp2 = isHttp("https://www.example.com");
-  console.log('Result HTTP Example 2 =>', resultHttp2);
+  console.log("Result HTTP Example 2 =>", resultHttp2);
 } catch (error) {
   console.error(error.message); // Output: "Only HTTP URLs are allowed."
 }
 ```
 
 ---
-
 
 # ConfigPassword
 
@@ -221,13 +226,12 @@ Now, let's delve into detailed explanations and examples for each configuration.
 
 ```javascript
 const { isPassword } = require("vfyjs");
-const input = '!@3DS!@#ASdasc';
+const input = "!@3DS!@#ASdasc";
 const pass = isPassword(input); // true
 console.log(pass); // Output: true
 ```
 
 This example showcases the basic usage of the isPassword function without additional configuration, returning true for a isPassword that meets default requirements.
-
 
 ### Example 2: Custom Minimum Length
 
@@ -244,8 +248,8 @@ try {
     console.log(error.message); // Output: "Password length must be between 20 and 64 characters."
 }
 ```
-In this case, the isPassword function is configured with a custom minimum length of 20 characters, resulting in an error since the input password is shorter than the specified minimum length.
 
+In this case, the isPassword function is configured with a custom minimum length of 20 characters, resulting in an error since the input password is shorter than the specified minimum length.
 
 ### Example 3: Advanced Password Configuration
 
@@ -268,8 +272,8 @@ try {
     console.log(error.message); // Output: "Password length must be between 2 and 10 characters."
 }
 ```
-This example demonstrates various isPassword configuration options, allowing you to set custom minimum and maximum lengths, specify character requirements, and control the presence of whitespace in the password. Adjust these configurations based on your specific requirements.
 
+This example demonstrates various isPassword configuration options, allowing you to set custom minimum and maximum lengths, specify character requirements, and control the presence of whitespace in the password. Adjust these configurations based on your specific requirements.
 
 ---
 
@@ -297,18 +301,19 @@ An email address typically consists of three parts: `local@subdomain.domainPart`
 - **Subdomain Part**: The subdomain part is the section between the '@' symbol and the first dot ('.'). It may represent a subdomain of the email provider.
 
 - **Domain Part**: The domain part is the portion after the first dot ('.'). It signifies the domain name of the email provider.
+
 #### Examples
 
 ### Example 1: Minimum Length for Local Part
 
 ```javascript
 const { isEmail } = require("vfyjs");
-let email = 'je@sub.example.com';
+let email = "je@sub.example.com";
 
 try {
-    isEmail(email, { minLenLocal: 5 });
+  isEmail(email, { minLenLocal: 5 });
 } catch (error) {
-    console.log(error.message); // Output: "Length must be at least 5 characters for the local part."
+  console.log(error.message); // Output: "Length must be at least 5 characters for the local part."
 }
 ```
 
@@ -322,19 +327,16 @@ let email = 'john.doe@sub.example.com';
 let result = isEmail(email, { maxLenSubdomain: 2 });
 console.log('Result =>', result); // Output: true
 ```
+
 In this example, the isEmail function validates that the subdomain part of the email address has a maximum length of 2 characters. The email address is considered valid, and the result is true.
 
-Feel free to customize these configurations based on your specific requirements. Adjust the values as needed for your use case.
-
-
----
+## Feel free to customize these configurations based on your specific requirements. Adjust the values as needed for your use case.
 
 ## ConfigPhone
 
 ### hasPhone
 
 The hasPhone function in vfyjs is a versatile utility designed for validating and extracting detailed information about phone numbers. This function aids in understanding the origin, type (landline or mobile), and service availability of a given phone number.
-
 
 #### Parameters
 
@@ -373,10 +375,10 @@ hasPhone('98', '9112348424').then(result => {
 }
 */
 ```
+
 In this example, the hasPhone function is used to validate and extract information about an Iranian mobile number ('9112348424') with the country code '98'. The result object provides a comprehensive set of details about the phone number, including its continent, country, ISO code, and characteristics.
 
 ### Example 2: Validating and Extracting Information for a North American Phone Number
-
 
 ```javaScript
 const { hasPhone } = require("vfyjs");
@@ -407,6 +409,7 @@ hasPhone("1", "1234567890").then(result => {
 In this example, the hasPhone function is applied to validate and extract information about a North American phone number ('1234567890') with the country code '1'. The result object provides a detailed analysis, including continent, countries, ISO codes, and various characteristics of the phone number.
 
 ## Usage
+
 To use the hasPhone function, import it from the vfyjs library and invoke it with the appropriate country code and phone number as parameters. The function returns a Promise, so it should be used with asynchronous syntax, such as .then().
 
 ```javaScript
@@ -416,12 +419,84 @@ hasPhone('98', '9112348424').then(result => {
     console.log('Result =>', result);
 });
 ```
+
 Feel free to incorporate this utility into your applications to enhance phone number validation and gain valuable insights into the provided phone numbers. Adjust the parameters and utilize the information in the result object based on your specific requirements.
 
+---
+
+## ConfigBinaryTree
+
+### BinarySearchTree
+
+The `BinarySearchTree` class is a JavaScript implementation of a binary search tree (BST) data structure. It provides methods for inserting values into the tree, searching for values, and handling multiple values simultaneously. The tree is composed of nodes, each with a value and references to left and right child nodes.
+
+### Parameters
+
+- `insert(value)`: Inserts a value into the binary search tree.
+- `insertArray(values)`: Inserts multiple values from an array into the binary search tree.
+- `search(value)`: Searches for a value within the binary search tree.
+
+### Examples
+
+### Examples
+
+#### Example 1: Inserting and Searching for Values in a Binary Search Tree
+
+```javascript
+const { Binary } = require("vfyjs");
+
+// Create a new binary search tree instance
+const bst = new Binary.Search();
+
+// Insert values into the binary search tree
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+
+// Search for a value in the binary search tree
+const foundValue = bst.search(5);
+
+if (foundValue) {
+  console.log("Value 5 is found in the binary search tree.");
+} else {
+  console.log("Value 5 is not found in the binary search tree.");
+}
+```
+
+In this example, we create a new instance of the `BinarySearchTree` class and insert values `10`, `5`, and `15` into the tree using the `insert` method. Then, we search for the value `5` using the `search` method and log whether the value is found or not.
+
+#### Example 2: Inserting Reserved Usernames into a Binary Search Tree
+
+```javascript
+const { Binary } = require("vfyjs");
+
+// Create a new binary search tree instance
+const usernameValidator = new Binary.Search();
+
+// Reserved usernames to insert into the binary search tree
+const reservedUsernames = ["admin", "root", "superuser"];
+
+// Insert reserved usernames into the binary search tree
+usernameValidator.insertArray(reservedUsernames);
+
+// Validate a username
+const usernameToValidate = "admin";
+const isReserved = usernameValidator.search(usernameToValidate);
+
+if (isReserved) {
+  console.log(
+    `Username '${usernameToValidate}' is reserved. Please choose another.`
+  );
+} else {
+  console.log(`Username '${usernameToValidate}' is valid.`);
+}
+```
+
+In this example, we create a new instance of the `BinarySearchTree` class and insert reserved usernames (`"admin"`, `"root"`, `"superuser"`) into the tree using the `insertArray` method. Then, we validate a username (`"admin"`) by searching for it in the binary search tree using the `search` method. If the username is found, we log a message indicating that it is reserved; otherwise, we log a message indicating that it is valid.
 
 ---
-## ConfigValue
 
+## ConfigValue
 
 ## Validation Functions
 
@@ -449,6 +524,7 @@ const validator = inputValidator("Sample123");
 const isValid = validator.hasUppercase() && validator.hasNumber();
 console.log(isValid); // true
 ```
+
 ---
 
 ## ConfigSubstring
@@ -474,10 +550,10 @@ The `getSubstring` function allows you to precisely obtain a substring from the 
 ```javascript
 const { getSubstring } = require("vfyjs");
 
-const formatHello = getSubstring('Hello-World', [0, 4]);
-console.log('Result =>', formatHello); // Output: "hello"
-
+const formatHello = getSubstring("Hello-World", [0, 4]);
+console.log("Result =>", formatHello); // Output: "hello"
 ```
+
 In this example, the getSubstring function is used to extract the substring "hello" from the input string "Hello-World" based on the specified start index [0] and end index [4].
 
 ### Example 2: Extracting Substring "Wo" from "Hello-World"
@@ -488,6 +564,7 @@ const { getSubstring } = require("vfyjs");
 const formatHello = getSubstring('Hello-World', [6, 7]);
 console.log('Result =>', formatHello); // Output: "Wo"
 ```
+
 In this example, the getSubstring function is used to extract the substring "Wo" from the input string "Hello-World" based on the specified start index [6] and end index [7].
 
 ---
@@ -513,14 +590,14 @@ The primary purpose of the `trimValue` function is to ensure that strings are fr
 ```javascript
 const { trimValue } = require("vfyjs");
 
-let inputString = '      He  l  l  o   W  o  r  l  d';
+let inputString = "      He  l  l  o   W  o  r  l  d";
 let trimmedResult = trimValue(inputString);
-console.log('Result =>', trimmedResult); // Output: "HelloWorld"
+console.log("Result =>", trimmedResult); // Output: "HelloWorld"
 ```
+
 In this example, the trimValue function is applied to the input string, which contains extra spaces. The result is a cleaned string without leading or trailing whitespace, producing the sanitized output "HelloWorld".
 
 Feel free to utilize the trimValue function in your applications to ensure consistent and well-formatted strings, improving the overall robustness and reliability of your data processing tasks. Adjust the input parameters based on your specific requirements.
-
 
 ---
 
@@ -558,7 +635,6 @@ Specific error class for length-related errors.
 
 - **Extends:** `CustomError`
 
-
 ## Validation Functions
 
 ### `ifFalsyValue(property, message)`
@@ -566,10 +642,12 @@ Specific error class for length-related errors.
 Throws a validation error if the specified property is truthy.
 
 - **Parameters:**
+
   - `property` (any): The property or condition to be validated.
   - `message` (string, optional): The error message for the validation failure.
 
 - **Returns:**
+
   - `property` (any): Returns the input property if it is falsy.
 
 - **Throws:**
@@ -580,6 +658,7 @@ Throws a validation error if the specified property is truthy.
 Validates if the provided property is truthy.
 
 - **Parameters:**
+
   - `property` (any): The property to be validated.
   - `message` (string, optional): The error message for the validation failure.
 
@@ -591,6 +670,7 @@ Validates if the provided property is truthy.
 Validates if both the provided property and method are truthy.
 
 - **Parameters:**
+
   - `property` (any): The property to be validated.
   - `method` (any): The method or condition to be validated.
   - `message` (string, optional): The error message to be associated with the validation failure.
@@ -603,6 +683,7 @@ Validates if both the provided property and method are truthy.
 Throws a type error if the type of the specified property is not as expected.
 
 - **Parameters:**
+
   - `expectedType` (string): The expected type of the property.
   - `property` (any): The property to be validated for its type.
   - `message` (string, optional): The error message to be associated with the type validation failure.
@@ -615,6 +696,7 @@ Throws a type error if the type of the specified property is not as expected.
 Checks if the type of the specified property mismatches the expected type.
 
 - **Parameters:**
+
   - `expectedType` (string): The expected type of the property.
   - `property` (any): The property to be validated for its type.
 
@@ -626,6 +708,7 @@ Checks if the type of the specified property mismatches the expected type.
 Throws a type error if the type of the specified property matches the expected type.
 
 - **Parameters:**
+
   - `expectedType` (string): The expected type of the property.
   - `property` (any): The property to be validated for its type.
   - `message` (string, optional): The error message to be associated with the type validation failure.
@@ -638,6 +721,7 @@ Throws a type error if the type of the specified property matches the expected t
 Throws a type error if the specified property is a valid number (not NaN).
 
 - **Parameters:**
+
   - `property` (any): The property to be validated for not being a valid number.
   - `message` (string, optional): The error message to be associated with the type validation failure.
 
@@ -649,6 +733,7 @@ Throws a type error if the specified property is a valid number (not NaN).
 Validates the length of a value within the specified range.
 
 - **Parameters:**
+
   - `value` (string): The value to be validated.
   - `minLength` (number): The minimum allowed length.
   - `maxLength` (number): The maximum allowed length.
@@ -662,6 +747,7 @@ Validates the length of a value within the specified range.
 Validates the length and type of a property.
 
 - **Parameters:**
+
   - `minLength` (number): The minimum allowed length.
   - `maxLength` (number): The maximum allowed length.
   - `minLengthType` (string): The expected type for minLength.
@@ -678,6 +764,7 @@ Validates the length and type of a property.
 Throws a type error if the type of the specified property is not one of the expected types.
 
 - **Parameters:**
+
   - `property` (any): The property to be validated for its type.
   - `types` (string[]): An array of expected types.
   - `message` (string, optional): The error message to be associated with the type validation failure.
@@ -690,10 +777,12 @@ Throws a type error if the type of the specified property is not one of the expe
 Checks if a value is empty and throws an error if it is.
 
 - **Parameters:**
+
   - `value` (any): The value to be checked for emptiness.
   - `message` (string, optional): The error message to be associated with the emptiness check failure.
 
 - **Throws:**
+
   - `ValidationError`: Throws an error with the specified message if the value is empty.
 
 - **Returns:**
@@ -704,6 +793,7 @@ Checks if a value is empty and throws an error if it is.
 Validations the length of a value within the specified range.
 
 - **Parameters:**
+
   - `value` (string): The value to be validated.
   - `options` (object): The options for length validation.
     - `min` (number): The minimum allowed length.
@@ -719,6 +809,7 @@ Validations the length of a value within the specified range.
 Validates the minimum length of a value.
 
 - **Parameters:**
+
   - `value` (string): The value to be validated.
   - `options` (object): The options for minimum length validation.
     - `min` (number): The minimum allowed length.
@@ -732,6 +823,7 @@ Validates the minimum length of a value.
 Validates the maximum length of a value.
 
 - **Parameters:**
+
   - `value` (string): The value to be validated.
   - `options` (object): The options for maximum length validation.
     - `max` (number): The maximum allowed length.
@@ -746,7 +838,7 @@ Validates the maximum length of a value.
 
 ```javascript
 try {
-  ifFalsyValue('', 'Value should not be empty');
+  ifFalsyValue("", "Value should not be empty");
 } catch (error) {
   console.error(error.name); // 'ValidationError'
   console.error(error.message); // 'Value should not be empty'
@@ -763,63 +855,78 @@ try {
   console.error(error.message); // 'Invalid value'
 }
 ```
+
 ## Math Operations
 
 #### Usage
 
 To use in your JavaScript project, you can import it as follows:
+
 ```javascript
-const { mathOperations } = require('vfyjs');
+const { mathOperations } = require("vfyjs");
 ```
+
 #### Functions
 
 1. **isEven**
+
    - `isEven()` function checks if the base number is even.
    - **Returns:** `boolean` - True if the base number is even, false otherwise.
 
 2. **areAllOdd**
+
    - `areAllOdd()` function checks if all numbers (including the base number) are odd.
    - **Returns:** `boolean` - True if all numbers are odd, false otherwise.
 
 3. **isOdd**
+
    - `isOdd()` function checks if the base number is odd.
    - **Returns:** `boolean` - True if the base number is odd, false otherwise.
 
 4. **areAllEven**
+
    - `areAllEven()` function checks if all numbers (including the base number) are even.
    - **Returns:** `boolean` - True if all numbers are even, false otherwise.
 
 5. **add**
+
    - `add()` function adds all additional numbers to the base number.
    - **Returns:** `number` - The result of adding all numbers.
 
 6. **subtract**
+
    - `subtract()` function subtracts all additional numbers from the base number.
    - **Returns:** `number` - The result of subtracting all numbers.
 
 7. **isDivisibleBy**
+
    - `isDivisibleBy()` function checks if the base number is divisible by each additional number.
    - **Returns:** `Object` - An object where keys are additional numbers, and values are boolean indicating divisibility.
 
 8. **multiply**
+
    - `multiply()` function multiplies the base number by all additional numbers.
    - **Returns:** `number` - The result of multiplying all numbers.
 
 9. **divide**
+
    - `divide()` function divides the base number by all additional numbers.
    - **Throws:** `Error` - If any of the additional numbers is zero.
    - **Returns:** `number` - The result of dividing all numbers.
 
 10. **power**
+
     - `power()` function raises the base number to the power of all additional numbers.
     - **Returns:** `number` - The result of raising the base number to the power of all additional numbers.
 
 11. **generateRandomNumber**
+
     - `generateRandomNumber(min, max)` function generates a random number within the specified interval.
     - **Parameters:** `min` - The minimum value of the interval (inclusive), `max` - The maximum value of the interval (inclusive).
     - **Returns:** `number` - A random number between `min` and `max`.
 
 12. **generateRandomEvenNumber**
+
     - `generateRandomEvenNumber(min, max)` function generates a random even number within the specified interval.
     - **Parameters:** `min` - The minimum value of the interval (inclusive), `max` - The maximum value of the interval (inclusive).
     - **Returns:** `number` - A random even number between `min` and `max`.
@@ -829,13 +936,13 @@ const { mathOperations } = require('vfyjs');
     - **Parameters:** `min` - The minimum value of the interval (inclusive), `max` - The maximum value of the interval (inclusive).
     - **Returns:** `number` - A random odd number between `min` and `max`.
 14. **isEqual**
-    - `isEqual()`  function checks if all additional numbers passed are equal to the base number.
+    - `isEqual()` function checks if all additional numbers passed are equal to the base number.
     - **Returns:** `boolean ` - True if all additional numbers are equal to the base number, false otherwise.
 
 #### Example
 
 ```javascript
-const { mathOperations } = require('vfyjs');
+const { mathOperations } = require("vfyjs");
 
 const math = MathOperations(2, 3, 4, 5);
 console.log(math.isEqual()); // Output: false (since additional numbers 3, 4, 5 are not equal to the base number 2)

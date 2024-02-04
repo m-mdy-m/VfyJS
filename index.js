@@ -45,7 +45,11 @@ const HandleError = require("./src/errors/HandleError");
 const MathOperations = require("./src/utils/operations/mathUtils");
 
 // Importing utility functions for validating names and confirmation fields
-const {ConfirmationFields,isName} = require('./src/validator/form/utils')
+const { ConfirmationFields, isName } = require("./src/validator/form/utils");
+
+// Importing BinarySearch module
+const BinarySearch = require("./src/validator/BinaryTree/search");
+
 module.exports = {
   /**
    * Validates a password based on specified criteria.
@@ -159,7 +163,7 @@ module.exports = {
    * @returns {boolean} - True if the name is valid, otherwise false.
    * @throws {Error} - Throws an error if validation fails.
    */
-  isName : isName,
+  isName: isName,
   /**
    * Handles confirmation fields to ensure they match.
    *
@@ -169,6 +173,14 @@ module.exports = {
    * @returns {boolean} - True if the fields match, otherwise false.
    * @throws {Error} - Throws an error if confirmation fails.
    */
-  confirmationFields : ConfirmationFields
-};
+  confirmationFields: ConfirmationFields,
 
+  /**
+   * Namespace for binary search functionality.
+   * @namespace
+   * @property {BinarySearch} Search - Module for performing binary search operations.
+   */
+  Binary: {
+    Search: BinarySearch,
+  },
+};

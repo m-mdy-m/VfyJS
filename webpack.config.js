@@ -1,8 +1,8 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-
+const TerserWebpackPlugin = require("terser-webpack-plugin");
 module.exports = {
-  mode: "production", 
+  mode: "production",
   entry: "./index.js",
   output: {
     filename: "vfyjs.bundle.js",
@@ -39,5 +39,12 @@ module.exports = {
       fs: false,
       path: require.resolve("path-browserify"),
     },
+  },
+  optimization: {
+    minimizer: [
+      new TerserWebpackPlugin({
+        extractComments: false,
+      }),
+    ],
   },
 };

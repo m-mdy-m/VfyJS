@@ -23,7 +23,7 @@ The `isPassword` function checks whether the provided string meets the criteria 
 
 ### In Browser
 
-To utilize vfyjs in a browser environment, include the `vfyjs.browser.js` script in your HTML file:
+To utilize vfyjs in a browser environment, include the `vfyjs.bundle.js` script in your HTML file:
 
 ```html
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ To utilize vfyjs in a browser environment, include the `vfyjs.browser.js` script
   </head>
   <body>
     <!-- Include vfyjs script -->
-    <script src="path/to/vfyjs.browser.js"></script>
+    <script src="path/to/vfyjs.bundle.js"></script>
     <script>
       // Example usage in browser
       const data = "123!#@ScsA";
@@ -46,7 +46,7 @@ To utilize vfyjs in a browser environment, include the `vfyjs.browser.js` script
 </html>
 ```
 
-Ensure to replace `"path/to/vfyjs.browser.js"` with the correct path relative to your HTML file.
+Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to your HTML file.
 
 ## Features
 

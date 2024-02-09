@@ -1,7 +1,6 @@
-let model
 class TrainModel {
   constructor(train) {
-    model = {
+    this.model = {
       slope: 0,
       intercept: 0,
     };
@@ -20,12 +19,9 @@ class TrainModel {
       this.sumXY += x * y;
       this.sumXSquare += x * x;
     }
-    model.slope =
-      (trainMode.length * this.sumXY - this.sumX * this.sumY) /
-      (trainMode.length * this.sumXSquare - this.sumX * this.sumX);
-    model.intercept =
-      (this.sumY - model.slope * this.sumX) / trainMode.length;
-    return model;
+    this.model.slope     = (trainMode.length * this.sumXY - this.sumX * this.sumY) / (trainMode.length * this.sumXSquare - this.sumX * this.sumX);
+    this.model.intercept = (this.sumY - this.model.slope * this.sumX) / trainMode.length;
+    return this.model;
   }
 }
-module.exports = {TrainModel , model}
+module.exports =  TrainModel;

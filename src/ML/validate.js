@@ -1,5 +1,5 @@
 const TrainModel = require("./model");
-class Validate {
+class MlVfy {
   constructor(rule, trainingData) {
     this.result = {};
     this.rule = rule;
@@ -34,5 +34,5 @@ const inputData = {
   feature2: 40,
 };
 
-const result = new Validate(inputData, trainingData);
+const result = new MlVfy(inputData, trainingData);
 console.log("result =>", result);

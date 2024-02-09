@@ -1,10 +1,12 @@
-const model = require('')
+const TrainModel = require('./model')
 class validate{
     constructor(rule,model) {
+        new TrainModel(rule)
         this.rule = rule
         this.obj = rule.forEach(obj =>{
             this.obj = obj
         })
+        // this.value = 
     }
 }
 

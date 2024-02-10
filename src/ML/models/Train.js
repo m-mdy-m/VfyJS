@@ -22,6 +22,12 @@ class Train {
     this.model.slope = (this.length  * this.sumX-this.sumX * this.sumXY) / (this.length*this.sumXSquare - this.sumX * this.sumX)
     this.model.intercept = (this.sumX - this.model.slope * this.sumX) / this.length
   }
-  
 }
-module.exports = Train;
+class TrainValidate {
+    constructor(rule , trainingData) {
+        this.result = {}
+        this.rule = rule
+        this.trainModel = new Train(trainingData)
+        
+    }
+}

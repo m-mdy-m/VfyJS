@@ -30,7 +30,7 @@ const trainEmails = [
 class Train {
   constructor(trainingData) {
     this.features = [];
-    this.label = [];
+    this.labels = [];
     this.model = {
       weights: [0.1, 0.5, -0.2],
       bias: 0.0,
@@ -39,10 +39,30 @@ class Train {
       const { truthy, falsy, isValid } = iterator;
       const features = { truthy, falsy };
       this.features.push(features);
-      this.label.push(isValid);
+      this.labels.push(isValid);
     }
 
-   
+    const learningRate = 0.01;
+    const numIterations = 100;
+    for (let iter = 0; iter < numIterations; iter++) {
+      for (let i = 0; i < this.features.length; i++) {
+        const prediction = this.predict(this.model, this.features[i]);
+        const error = this.labels[i] - prediction;
+        for (let j = 0; j < this.model.weights.length; j++) {
+          this.model.weights[j] += learningRate * error * this.features[i][j];
+        }
+        this.model.bias += learningRate * error;
+      }
+    }
+
+    return this.model;
+  }
+  predict() {
+    let prediction = this.model.bias;
+    for (let i = 0; i < this.model.weights.length; i++) {
+        prediction += this.model.weights[i] * this.features[i];
+    }
+    return 
   }
   calculation(data) {
     let sumX = 0,

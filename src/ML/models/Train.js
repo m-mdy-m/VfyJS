@@ -1,3 +1,4 @@
+const {Binary}  = require('../../../index')
 class Train {
   constructor(trainingData) {
     this.model = {
@@ -16,11 +17,8 @@ class Train {
       sumXSquare += x * x;
     }
     this.length = data.length;
-    this.model.slope =
-      (this.length * sumXY - sumX * sumY) /
-      (this.length * sumXSquare - sumX * sumX);
-    this.model.intercept =
-      (sumX - this.model.slope * sumX) / this.length;
+    this.model.slope =(this.length * sumXY - sumX * sumY) / (this.length * sumXSquare - sumX * sumX);
+    this.model.intercept = (sumX - this.model.slope * sumX) / this.length;
 
     return this.model;
   }
@@ -34,6 +32,7 @@ class TrainValidate {
     for (const key in rules) {
       if (rules.hasOwnProperty(key)) {
         const rule = rules[key]
+        this.validation(rule)
         const predicted = this.predict(rule);
         this.result[key] = predicted >= 0 && predicted <= 100;
       }
@@ -43,6 +42,9 @@ class TrainValidate {
   predict(rule) {
     const { slope, intercept } = this.trainModel.model;
     return slope * rule + intercept;
+  }
+  validation(key){
+    // this.
   }
 }
 module.exports = TrainValidate;

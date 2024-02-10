@@ -46,7 +46,7 @@ class Train {
     const numIterations = 100;
     for (let iter = 0; iter < numIterations; iter++) {
       for (let i = 0; i < this.features.length; i++) {
-        const prediction = this.predict(this.model, this.features[i]);
+        const prediction = this.predict(this.features[i]);
         const error = this.labels[i] - prediction;
         for (let j = 0; j < this.model.weights.length; j++) {
           this.model.weights[j] += learningRate * error * this.features[i][j];
@@ -57,58 +57,15 @@ class Train {
 
     return this.model;
   }
-  predict() {
+  predict(features) {
     let prediction = this.model.bias;
     for (let i = 0; i < this.model.weights.length; i++) {
-        prediction += this.model.weights[i] * this.features[i];
+      prediction += this.model.weights[i] * features[i];
     }
-    return 
+    return this.sigmoid(prediction) >= 0.5 ? 1 : 0;
   }
-  calculation(data) {
-    let sumX = 0,
-      sumY = 0,
-      sumXY = 0,
-      sumXSquare = 0;
-    for (let i = 0; i < data.length; i++) {
-      const { x, y } = data[i];
-      sumX += x;
-      sumY += y;
-      sumXY += x * y;
-      sumXSquare += x * x;
-    }
-    this.length = data.length;
-    this.model.slope =
-      (this.length * sumXY - sumX * sumY) /
-      (this.length * sumXSquare - sumX * sumX);
-    this.model.intercept = (sumX - this.model.slope * sumX) / this.length;
-
-    return this.model;
+  sigmoid(z) {
+    return 1 / (1 + Math.exp(-z));
   }
 }
-
-new Train(trainEmails);
-class TrainValidate {
-  constructor(rules, trainingData) {
-    this.result = {};
-    this.rule = rules;
-    this.trainModel = new Train(trainingData);
-
-    // for (const key in rules) {
-    //   if (rules.hasOwnProperty(key)) {
-    //     const rule = rules[key];
-    //     this.validation(rule);
-    //     const predicted = this.predict(rule);
-    //     this.result[key] = predicted >= 0 && predicted <= 100;
-    //   }
-    // }
-    return this.result;
-  }
-  //   predict(rule) {
-  //     const { slope, intercept } = this.trainModel.model;
-  //     return slope * rule + intercept;
-  //   }
-  //   validation(key) {
-  //     // this.
-  //   }
-}
-module.exports = TrainValidate;
+module.exports = Train;

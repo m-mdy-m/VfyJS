@@ -19,8 +19,9 @@ class Train {
       this.sumXSquare += x * x;
     }
     this.length = data.length;
+    /// 40 - 4 * 600
     this.model.slope =
-      (this.length * this.sumX - this.sumX * this.sumXY) /
+      (this.length * this.sumXY - this.sumX * this.sumY) /
       (this.length * this.sumXSquare - this.sumX * this.sumX);
     this.model.intercept =
       (this.sumX - this.model.slope * this.sumX) / this.length;
@@ -32,12 +33,14 @@ class TrainValidate {
   constructor(rule, trainingData) {
     this.result = {};
     this.rule = rule;
-    this.trainModel = new Train(trainingData);
     for (const key in rule) {
       if (rule.hasOwnProperty(key)) {
-        const input = rule[key];
-        this.predicted =
-          this.trainModel.model.slope * input + this.trainModel.model.intercept;
+        this.trainModel = new Train(trainingData);
+        this.obj = rule[key];
+        this.predicted = this.trainModel.model.slope * this.obj + this.trainModel.model.intercept;
+        // console.log(this.trainModel.model.slope);
+        // console.log(this.trainModel.model.intercept);
+        // console.log(input);
         if (this.predicted >= 0 && this.predicted <= 100) {
           this.result[key] = true;
         } else {
@@ -45,6 +48,7 @@ class TrainValidate {
         }
       }
     }
+    return this.result
   }
 }
 module.exports = TrainValidate;

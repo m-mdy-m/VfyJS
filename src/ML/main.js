@@ -8,7 +8,6 @@ const trainingData = [
 ];
 const inputData = {
   feature1: 4,
-  feature2: 40,
 };
 const a = new TrainValidate(inputData, trainingData);
-console.log('a =>',a);
+console.log("a =>", a);

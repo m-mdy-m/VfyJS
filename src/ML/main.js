@@ -6,8 +6,12 @@ const trainingData = [
   { x: 3, y: 60 },
   { x: 4, y: 80 },
 ];
+
+// Example input data to be validated
 const inputData = {
-  feature1: 4,
+  name: "John Doe",
+  age: 25,
+  email: "john@example.com",
 };
 const a = new TrainValidate(inputData, trainingData);
 console.log("a =>", a);

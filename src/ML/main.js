@@ -11,3 +11,4 @@ const inputData = {
   feature2: 40,
 };
 const a = new TrainValidate(inputData, trainingData);
+console.log('a =>',a);

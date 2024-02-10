@@ -28,6 +28,17 @@ class TrainValidate {
         this.result = {}
         this.rule = rule
         this.trainModel = new Train(trainingData)
-        
+        for (const key in rule) {
+            if (Object.hasOwnProperty.call(rule, key)) {
+                const input = rule[key];
+                this.predicted = this.trainModel.model.slope * input + this.trainModel.model.intercept
+                if (this.predicted >= 0 && this.predicted <= 100) {
+                    this.result[key] = true
+                }else{
+                    this.result[key] = false
+                }
+            }
+        }
     }
 }
+module.exports = TrainValidate

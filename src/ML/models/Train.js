@@ -1,4 +1,4 @@
-const { Binary,isEmail } = require("../../../index");
+const { Binary, isEmail } = require("../../../index");
 
 const trainTrueEmail = [
   "john.doe@example.com",
@@ -23,14 +23,26 @@ const trainFalseEmail = [
   " john.doe@example..com",
   ".john.doe@example.com",
 ];
-const train = [{ email: "mahdimamashli1393@gmail.com" }];
+const trainEmails = [
+  { truthy: trainTrueEmail, isValid: 1 },
+  { falsy: trainFalseEmail, isValid: 0 },
+];
 class Train {
   constructor(trainingData) {
+    this.features = [];
+    this.label = [];
     this.model = {
-      slope: 0,
-      intercept: 0,
+      weights: [0.1, 0.5, -0.2],
+      bias: 0.0,
     };
-    this.calculation(trainingData);
+    for (const iterator of trainingData) {
+      const { truthy, falsy, isValid } = iterator;
+      const features = { truthy, falsy };
+      this.features.push(features);
+      this.label.push(isValid);
+    }
+
+   
   }
   calculation(data) {
     let sumX = 0,
@@ -53,28 +65,30 @@ class Train {
     return this.model;
   }
 }
+
+new Train(trainEmails);
 class TrainValidate {
   constructor(rules, trainingData) {
     this.result = {};
     this.rule = rules;
     this.trainModel = new Train(trainingData);
 
-    for (const key in rules) {
-      if (rules.hasOwnProperty(key)) {
-        const rule = rules[key];
-        this.validation(rule);
-        const predicted = this.predict(rule);
-        this.result[key] = predicted >= 0 && predicted <= 100;
-      }
-    }
+    // for (const key in rules) {
+    //   if (rules.hasOwnProperty(key)) {
+    //     const rule = rules[key];
+    //     this.validation(rule);
+    //     const predicted = this.predict(rule);
+    //     this.result[key] = predicted >= 0 && predicted <= 100;
+    //   }
+    // }
     return this.result;
   }
-  predict(rule) {
-    const { slope, intercept } = this.trainModel.model;
-    return slope * rule + intercept;
-  }
-  validation(key) {
-    // this.
-  }
+  //   predict(rule) {
+  //     const { slope, intercept } = this.trainModel.model;
+  //     return slope * rule + intercept;
+  //   }
+  //   validation(key) {
+  //     // this.
+  //   }
 }
 module.exports = TrainValidate;

@@ -17,7 +17,10 @@ class Train {
         this.sumY+=y
         this.sumXY+=x*y
         this.sumXSquare+=x * x
-    }
+    
+    this.length = data.length
+    this.model.slope = (this.length  * this.sumX-this.sumX * this.sumXY) / (this.length*this.sumXSquare - this.sumX * this.sumX)
+    this.model.intercept = (this.sumX - this.model.slope * this.sumX) / this.length
   }
   
 }

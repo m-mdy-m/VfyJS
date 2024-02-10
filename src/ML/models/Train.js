@@ -7,23 +7,20 @@ class Train {
     this.calculation(trainingData);
   }
   calculation(data) {
-    this.sumX = 0;
-    this.sumY = 0;
-    this.sumXY = 0;
-    this.sumXSquare = 0;
+    let sumX=0,sumY=0,sumXY=0,sumXSquare=0
     for (let i = 0; i < data.length; i++) {
       const { x, y } = data[i];
-      this.sumX += x;
-      this.sumY += y;
-      this.sumXY += x * y;
-      this.sumXSquare += x * x;
+      sumX += x;
+      sumY += y;
+      sumXY += x * y;
+      sumXSquare += x * x;
     }
     this.length = data.length;
     this.model.slope =
-      (this.length * this.sumXY - this.sumX * this.sumY) /
-      (this.length * this.sumXSquare - this.sumX * this.sumX);
+      (this.length * sumXY - sumX * sumY) /
+      (this.length * sumXSquare - sumX * sumX);
     this.model.intercept =
-      (this.sumX - this.model.slope * this.sumX) / this.length;
+      (sumX - this.model.slope * sumX) / this.length;
 
     return this.model;
   }

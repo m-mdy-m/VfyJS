@@ -37,15 +37,15 @@ class TrainValidate {
     for (const key in rules) {
       if (rules.hasOwnProperty(key)) {
         const rule = rules[key]
-        const predicted = this.predict(key, rule);
+        const predicted = this.predict(rule);
         this.result[key] = predicted >= 0 && predicted <= 100;
       }
     }
     return this.result;
   }
-  predict(key, val) {
+  predict(rule) {
     const { slope, intercept } = this.trainModel.model;
-    return slope * val + intercept;
+    return slope * rule + intercept;
   }
 }
 module.exports = TrainValidate;

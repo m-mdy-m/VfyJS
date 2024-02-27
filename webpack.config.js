@@ -1,6 +1,4 @@
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
 module.exports = {
   mode: "production",
   entry: "./index.js",
@@ -11,14 +9,7 @@ module.exports = {
     libraryTarget: "umd",
     globalObject: "this",
   },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: "LICENSE", to: "LICENSE" },
-        { from: "README.md", to: "docs" },
-      ],
-    }),
-  ],
+  plugins: [],
   module: {
     rules: [
       {
@@ -40,11 +31,5 @@ module.exports = {
       path: require.resolve("path-browserify"),
     },
   },
-  optimization: {
-    minimizer: [
-      new TerserWebpackPlugin({
-        extractComments: false,
-      }),
-    ],
-  },
+  optimization: {},
 };

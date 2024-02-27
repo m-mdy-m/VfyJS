@@ -1,17 +1,14 @@
-class SharedApp {
-  constructor() {
-    /** @private */
-    this.appInstance = null;
-  }
-  setApp(app) {
-    this.appInstance = app;
-  }
-  getApp() {
-    return this.appInstance;
-  }
+let appInstance = null;
+
+function setApp(app) {
+  appInstance = app;
 }
-const shared = new SharedApp();
+
+function getApp() {
+  return appInstance;
+}
+
 module.exports = {
-  setApp: shared.setApp.bind(shared),
-  getApp: shared.getApp.bind(shared),
+  setApp,
+  getApp,
 };

@@ -1,5 +1,5 @@
 "use strict";
-
+const {defaultOptions} = require('./global.config')
 /**
  * Validates a password based on specified criteria.
  *
@@ -67,7 +67,7 @@ const {isTypeMismatch}= require('../../errors/HandleError');
 const { toString } = require("./helper/dataConversion");
 const {optionsPassword} = require("./helper/genOption");
 const { getReq, getErrorMessage } = require("./helper/getValues");
-const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, validateLengths } = require("../../errors/FormError");
+const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, } = require("../../errors/FormError");
 
 /**
  * Validates a password based on the provided options.
@@ -82,10 +82,11 @@ const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, v
  * console.log(isValid); // true
  */
 function validateFormPassword(input, options = {}) {
+    const mergedOptions = { ...defaultOptions, ...options };
     const value = input.value ? input.value : input
     toString(value);
     const validator = inputValidator(value);
-    const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(options);
+    const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(mergedOptions);
     validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));
     validateWithCondition(getReq(lowercase), validator.hasLowerCase(), input, msgError, 'hasLowerCase', getErrorMessage(lowercase));
     validateWithCondition(getReq(number), validator.hasNumber(), input, msgError, 'hasNumber', getErrorMessage(number));

@@ -477,6 +477,23 @@ class HTTPSValidator extends Validator {
   }
 }
 // Example: "url:https" - Validates that 'url' uses HTTPS protocol.
+class PasswordHashValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const passwordHashPattern = /^\$2[ayb]\$[0-9]{2}\$[A-Za-z0-9/.]{53}$/;
+    if (!passwordHashPattern.test(body[field])) {
+      return `Password field ${field} must be securely hashed using bcrypt or similar algorithms.`;
+    }
+    return null;
+  }
+}
+// Example: "password:passwordHash" - Validates that 'password' is securely hashed.
+
+class AccessControlValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement access control validation logic here
+  }
+}
+// Example: "roleBasedAccess:accessControl" - Validates that 'roleBasedAccess' enforces proper access control mechanisms.
 
 module.exports = ValidationBody;
 

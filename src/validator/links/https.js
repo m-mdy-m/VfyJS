@@ -1,6 +1,4 @@
-const { trimmedValue } = require("../../common/validationConstants");
-const { IfNotType, IfIsNumber, ifTruthyValue, ifFalsyValue } = require("../../errors/HandleError");
-const inputValidation = require('../../utils/inputValidator');
+const validateUrl = require("./validate.url");
 
 /**
  * Validates if the given URL is an HTTPS URL.
@@ -25,42 +23,6 @@ const inputValidation = require('../../utils/inputValidator');
  * }
  */
 function isHttpsUrl(url) {
-    // Check if the URL contains the substring "https"
-    const isHttps = /(?=.*(HTTPS|https))/.test(url);
-    ifFalsyValue(isHttps, 'The URL must contain the substring "https". Please provide a valid URL.');
-
-    // Check if the URL is empty
-    if (url === "") {
-        throw new Error("URL cannot be empty. Please provide a valid URL.");
-    }
-
-    // Perform type and numeric checks
-    IfNotType('string', url, 'URL must be a string.');
-    IfIsNumber(url, 'URL must not be a number.');
-
-    // Trim the URL
-    url = trimmedValue(url);
-
-    /**
-     * The URL object representing the validated URL.
-     * @type {URL}
-     */
-    let { protocol, hostname, href } = new URL(url);
-
-    // Convert protocol to lowercase and trim
-    protocol = protocol.toLowerCase();
-    protocol = trimmedValue(protocol);
-
-    // Check HTTPS format
-    const hasHttps = /(HTTPS:|https:)\/\/[^\/]/i.test(url);
-
-    // Validate special characters in the hostname
-    const host = hostname.split('.')[1];
-    const validator = inputValidation(host);
-    const hasSpecial = validator.hasSpecialCharacter();
-    ifTruthyValue(hasSpecial, `The hostname "${hostname}" in the URL "${href}" must contain at least one special character.`);
-
-    // Check if the protocol is 'https' and the URL is in the correct format
-    return protocol && hasHttps;
+    return validateUrl(/(?=.*(HTTPS|https))/,url,'https',/(HTTPS:|https:)\/\/[^\/]/i)
 }
 module.exports = isHttpsUrl;

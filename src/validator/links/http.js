@@ -1,6 +1,4 @@
-const { trimmedValue } = require("../../common/validationConstants");
-const { IfNotType, IfIsNumber, ifTruthyValue, ifFalsyValue } = require("../../errors/HandleError");
-const inputValidation = require('../../utils/inputValidator');
+const validateUrl = require("./validate.url");
 
 /**
  * Validates if the given URL is an HTTP URL.
@@ -25,47 +23,6 @@ const inputValidation = require('../../utils/inputValidator');
  * }
  */
 function isHttp(url) {
-    // Check if the URL contains the substring "http"
-    const isHttp = /(?=.*(HTTP|http))/.test(url);
-    ifFalsyValue(isHttp, 'The URL must contain the substring "http". Please provide a valid URL.');
-
-    // Check if the URL is empty
-    if (url === "") {
-        throw new Error("URL cannot be empty. Please provide a valid URL.");
-    }
-
-    // Perform type and numeric checks
-    IfNotType('string', url, 'URL must be a string.');
-    IfIsNumber(url, 'URL must not be a number.');
-
-    // Trim the URL
-    url = trimmedValue(url);
-
-    /**
-     * The URL object representing the validated URL.
-     * @type {URL}
-     */
-    let { protocol, hostname, href } = new URL(url);
-
-    // Convert protocol to lowercase and trim
-    protocol = protocol.toLowerCase();
-    protocol = trimmedValue(protocol);
-
-    /**
-     * Validates if the URL uses the 'https' protocol and throws an error if it does.
-     */
-    ifTruthyValue(protocol.startsWith('https'), "Only HTTP URLs are allowed.");
-
-    // Check HTTP format
-    const hasHttp = /(HTTP:|http:)\/\/[^\/]/i.test(url);
-
-    // Validate special characters in the hostname
-    const host = hostname.split('.')[1];
-    const validator = inputValidation(host);
-    const hasSpecial = validator.hasSpecialCharacter();
-    ifTruthyValue(hasSpecial, `The hostname "${hostname}" in the URL "${href}" must contain at least one special character.`);
-
-    // Check if the protocol is 'http' and the URL is in the correct format
-    return hasHttp;
+    return validateUrl(/(?=.*(HTTP|http))/,url,'http',/(HTTP:|http:)\/\/[^\/]/i);
 }
 module.exports = isHttp;

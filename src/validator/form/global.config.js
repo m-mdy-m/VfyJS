@@ -1,7 +1,7 @@
 /**
  * Validates a password based on specified criteria.
  *
- * @typedef {Object} configurePassword
+ * @typedef {Object} setPasswordConfig
  * @property {Object} options - Options for customizing validation criteria.
  * @property {Object} options.minLength - Minimum length requirements for the password.
  * @property {number|string} options.minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
@@ -100,14 +100,14 @@ let defaultOptions = {
         }
     }
 };
-function configurePassword(option) {
+function setPasswordConfig(option) {
   defaultOptions = { ...defaultOptions, ...option };
 }
 
 /**
  * Options for customizing username validation criteria.
  *
- * @typedef {Object} UsernameOptions
+ * @typedef {Object} setUsernameConfig
  * @property {Object} minLength - Minimum length requirements for the username.
  * @property {(number|string)} minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
  * @property {string} minLength.errorMessage - Error message for minimum length validation failure.
@@ -142,7 +142,7 @@ function configurePassword(option) {
  * const isValid = validateUsername("StringUsername123");
  * console.log(isValid); // true
  */
-function configureUserName(option){
+function setUsernameConfig(option){
     defaultOptions = { ...defaultOptions, ...option };
 }
 
@@ -150,6 +150,6 @@ function configureUserName(option){
 // Export default options and configuration function
 module.exports = {
     defaultOptions,
-    configurePassword,
-    configureUserName
+    setPasswordConfig,
+    setUsernameConfig
 };

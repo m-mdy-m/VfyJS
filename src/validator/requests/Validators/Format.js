@@ -1,7 +1,7 @@
 const validateEmail = require("../../form/email");
 const { validateUrl, isHttp, isHttps } = require("../../links/validate.url");
+const { hasPhone } = require("../../phone/utils/GlobalValidation");
 const Validator = require("../Validator");
-
 class EmailValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
     return validateEmail(body[field], options);
@@ -84,7 +84,14 @@ class HTTPSValidator extends Validator {
 }
 class PhoneNumberValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement phone number validation logic here
+    try {
+      const isValid = hasPhone(body[field]);
+      if (isValid.hasPhone) {
+        return null;
+      }
+    } catch (error) {
+      return error.message;
+    }
   }
 }
 class IPv4Validator extends Validator {

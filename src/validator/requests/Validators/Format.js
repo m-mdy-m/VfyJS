@@ -1,8 +1,11 @@
+const validateEmail = require("../../form/email");
+const isHttp = require("../../links/http");
+const isHttpsUrl = require("../../links/https");
 const Validator = require("../Validator");
 
 class EmailValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
-    return this.isEmail(body[field], options);
+    return validateEmail(body[field], options);
   }
 }
 class DateValidator extends Validator {
@@ -24,6 +27,16 @@ class URLValidator extends Validator {
     if (!urlPattern.test(body[field])) {
       return `${field} must be a valid URL.`;
     }
+  }
+}
+class HTTPValidator extends Validator {
+  validate(field, ruleValue, body) {
+    return isHttp(body[field])
+  }
+}
+class HTTPSValidator extends Validator {
+  validate(field, ruleValue, body) {
+    return isHttpsUrl(body[field])
   }
 }
 class PhoneNumberValidator extends Validator {

@@ -1,4 +1,5 @@
 const inputValidator = require("../../utils/inputValidator");
+const validateEmail = require("../form/email");
 
 /**
  * Validator class for validating input values.
@@ -56,6 +57,9 @@ class Validator {
    */
   isLowerCase(value) {
     return /^[a-z]+$/.test(value);
+  }
+  isEmail(value, option = {}) {
+    return validateEmail(value, option);
   }
 }
 

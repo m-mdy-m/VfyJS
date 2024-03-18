@@ -1,10 +1,8 @@
+const Validator = require("../Validator");
+
 class EmailValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const emailPattern = /^\S+@\S+\.\S+$/;
-    if (!emailPattern.test(body[field])) {
-      return `${field} must be a valid email address.`;
-    }
-    return null;
+  validate(field, ruleValue, body, options = {}) {
+    return this.isEmail(body[field], options);;
   }
 }
 class DateValidator extends Validator {

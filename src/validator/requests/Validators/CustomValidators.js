@@ -1,8 +1,13 @@
+const validateFormPassword = require("../../form/password");
 const Validator = require("../Validator");
 
 class PasswordValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement password validation logic here
+  validate(field, ruleValue, body,options={}) {
+    try {
+      validateFormPassword(body[field],options)
+    } catch (error) {
+      
+    }
   }
 }
 class UsernameValidator extends Validator {

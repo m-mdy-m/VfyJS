@@ -100,7 +100,7 @@ class IPv6Validator extends Validator {
 }
 class SpecialCharacterValidator extends Validator {
   validate(field, ruleValue, body) {
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(body[field])) {
+    if (!this.isSpecialChar(body[field])) {
       return `${field} must contain at least one special character.`;
     }
     return null;

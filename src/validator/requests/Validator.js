@@ -1,8 +1,3 @@
-const inputValidator = require("../../utils/inputValidator");
-const validateEmail = require("../form/email");
-const isHttp = require("../links/http");
-const isHttpsUrl = require("../links/https");
-
 /**
  * Validator class for validating input values.
  */
@@ -13,8 +8,6 @@ class Validator {
    */
   constructor(field) {
     this.field = field;
-    // Initialize the validator with the provided field
-    this._validator = inputValidator(field);
   }
 
   /**
@@ -23,7 +16,7 @@ class Validator {
    * @returns {boolean} - True if the value contains only alphanumeric characters, otherwise false.
    */
   isAlphaNumeric(value) {
-    return this._validator.hasAlphanumeric(value);
+    return /[^a-zA-Z0-9]/.test(value)
   }
 
   /**
@@ -32,7 +25,7 @@ class Validator {
    * @returns {boolean} - True if the value contains only numeric characters, otherwise false.
    */
   isNumeric(value) {
-    return this._validator.hasNumeric(value);
+    return /(?=.*\d)/.test(value);
   }
 
   /**
@@ -59,6 +52,9 @@ class Validator {
    */
   isLowerCase(value) {
     return /^[a-z]+$/.test(value);
+  }
+  isSpecialChar(value){
+    return  /(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(value)
   }
 }
 

@@ -1,6 +1,5 @@
 const validateEmail = require("../../form/email");
-const isHttp = require("../../links/http");
-const isHttpsUrl = require("../../links/https");
+const {} = require("../../links/validate.url");
 const Validator = require("../Validator");
 
 class EmailValidator extends Validator {
@@ -20,18 +19,12 @@ class DateValidator extends Validator {
 
 class URLValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Regular expression for validating URL format
-    const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
-
-    // Check if the URL value matches the URL pattern
-    if (!urlPattern.test(body[field])) {
-      return `${field} must be a valid URL.`;
-    }
+    return validateUrl.
   }
 }
 class HTTPValidator extends Validator {
   validate(field, ruleValue, body) {
-    return isHttp(body[field])
+    return validateUrl.isHttp(body[field])
   }
 }
 class HTTPSValidator extends Validator {

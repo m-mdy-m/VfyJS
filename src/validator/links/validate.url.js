@@ -122,4 +122,4 @@ function isHttpsUrl(url) {
 function isHttp(url) {
     return validateUrl(url,'http');
 }
-module.exports = {isHttp,isHttps : isHttpsUrl};
+module.exports = {isHttp,isHttps : isHttpsUrl,validateUrl};

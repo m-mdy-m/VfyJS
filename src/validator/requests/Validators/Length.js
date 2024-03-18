@@ -34,7 +34,7 @@ class LengthRangeValidator extends Validator {
 
     // Check if ruleValue is valid
     if (isNaN(minLength) || isNaN(maxLength)) {
-      throw new Error(`Invalid rule value for ${field}. Rule value must be in the format 'minLength,maxLength'.`);
+      throw new Error(`Invalid rule value for ${field}. Please provide a valid range in the format 'minLength,maxLength'.`);
     }
 
     const fieldLength = body[field].length;

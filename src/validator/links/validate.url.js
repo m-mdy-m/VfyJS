@@ -14,19 +14,23 @@ const {
  * @throws {Error} - Throws an error if the URL is empty, not a string, or does not match the pattern.
  */
 function validateUrl(url, expectedProtocol) {
-    let patternUrl ;
-    let patternFormat;
-    if (expectedProtocol === 'http') {
-        patternUrl = /(?=.*(HTTP|http))/
-        patternFormat = /(HTTP:|http:)\/\/[^\/]/i
-    }else if(expectedProtocol === 'https'){
-        patternUrl = /(?=.*(HTTPS|https))/
-        patternFormat = /(HTTPS:|https:)\/\/[^\/]/i
-    }
+  let protocolPattern;
+  let urlPattern;
+  // Set protocol and URL patterns based on the expected protocol
+  if (expectedProtocol === "http") {
+    protocolPattern = /^(HTTP|http)$/;
+    urlPattern = /(HTTP:|http:)\/\/[^\/]/i;
+  } else if (expectedProtocol === "https") {
+    protocolPattern = /^(HTTPS|https)$/;
+    urlPattern = /(HTTPS:|https:)\/\/[^\/]/i;
+  } else {
+    throw new Error(
+      'Invalid expected protocol. Please provide "http" or "https".'
+    );
+  }
   // Check if the URL matches the expected pattern
-  const pattern = patternUrl.test(url);
   ifFalsyValue(
-    pattern,
+    urlPattern.test(url),
     `The URL must contain the substring "${expectedProtocol}". Please provide a valid URL.`
   );
 
@@ -49,23 +53,23 @@ function validateUrl(url, expectedProtocol) {
 
   // Validate the protocol
   ifTruthyValue(
-    protocol.startsWith(expectedProtocol),
+    protocolPattern.test(protocol),
     `Only ${expectedProtocol} URLs are allowed.`
   );
   // Check URL format against the expected pattern
-  const hasHttp = patternFormat.test(url);
+  const hasCorrectFormat = urlPattern.test(url);
 
   // Validate special characters in the hostname
   const host = hostname.split(".")[1];
   const validator = inputValidation(host);
-  const hasSpecial = validator.hasSpecialCharacter();
+  const hasSpecialChars = validator.hasSpecialCharacter();
   ifTruthyValue(
-    hasSpecial,
+    hasSpecialChars,
     `The hostname "${hostname}" in the URL "${href}" must contain at least one special character.`
   );
 
   // Return true if the URL has the expected format
-  return hasHttp;
+  return hasCorrectFormat;
 }
 
 module.exports = validateUrl;

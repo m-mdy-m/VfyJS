@@ -10,29 +10,48 @@ class WhitespaceValidator extends Validator {
 }
 
 class TrimValidator extends Validator {
-    validate(field, ruleValue, body) {
-      if (body[field].trim() !== body[field]) {
-        return `${field} cannot have leading or trailing whitespace.`;
-      }
-      return null;
+  validate(field, ruleValue, body) {
+    if (body[field].trim() !== body[field]) {
+      return `${field} cannot have leading or trailing whitespace.`;
     }
+    return null;
   }
+}
 
 class FileValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement file validation logic here
+    const file = body[field];
+    if (!file || !file.mimetype) {
+      return `${field} must be a file.`;
+    }
+    // Add more file validation logic here if needed
+    return null;
   }
 }
 
 class EnumValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement enum validation logic here
+    const enumValues = ruleValue.split(",");
+    if (!enumValues.includes(body[field])) {
+      return `${field} must be one of the following values: ${enumValues.join(
+        ", "
+      )}.`;
+    }
+    return null;
   }
 }
 
 class RegexValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement regex validation logic here
+    try {
+      const regex = new RegExp(ruleValue);
+      if (!regex.test(body[field])) {
+        return `${field} does not match the required pattern.`;
+      }
+      return null;
+    } catch (error) {
+      return error.message;
+    }
   }
 }
 

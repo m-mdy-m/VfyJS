@@ -7,6 +7,11 @@ class ValidationBody {
       number: new NumberTypeValidator(),
       min: new MinLengthValidator(),
       max: new MaxLengthValidator(),
+      uppercase: "",
+      lowercase: "",
+      specialCharacter: "",
+      whitespace: "",
+      trim: "",
     };
   }
 

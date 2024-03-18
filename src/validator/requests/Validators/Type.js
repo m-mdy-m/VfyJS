@@ -18,9 +18,13 @@ class NumberTypeValidator extends Validator {
 }
 class BooleanTypeValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement boolean validation logic here
+    if (typeof body[field] !== "boolean") {
+      return `${field} must be a boolean.`;
+    }
+    return null;
   }
 }
+
 class ObjectTypeValidator extends Validator {
   validate(field, ruleValue, body) {
     if (

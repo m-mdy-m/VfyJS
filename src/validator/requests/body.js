@@ -31,10 +31,10 @@ class RequestValidator  {
       required: new RequiredValidator(),
       whitespace: new WhitespaceValidator(),
       trim: new TrimValidator(),
-      array: new ArrayValidator(),
-      object: new ObjectValidator(),
+      array: new ArrayTypeValidator(),
+      object: new ObjectTypeValidator(),
       file: new FileValidator(),
-      boolean: new BooleanValidator(),
+      boolean: new BooleanTypeValidator(),
       enum: new EnumValidator(),
       regex: new RegexValidator(),
 

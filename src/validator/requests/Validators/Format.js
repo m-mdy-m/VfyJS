@@ -37,6 +37,9 @@ class URLValidator extends Validator {
     }
   }
 }
+/**
+ * Validator subclass for validating HTTP URLs.
+ */
 class HTTPValidator extends Validator {
   /**
    * Validates if the specified field value is an HTTP URL.
@@ -47,9 +50,8 @@ class HTTPValidator extends Validator {
    */
   validate(field, ruleValue, body) {
     try {
-      if (!isHttp(body[field])) {
-        throw new Error(`${field} must be an HTTP URL.`);
-      }
+      isHttp(body[field]);
+      // Return null if validation succeeds
       return null;
     } catch (error) {
       return error.message;
@@ -57,6 +59,9 @@ class HTTPValidator extends Validator {
   }
 }
 
+/**
+ * Validator subclass for validating HTTPS URLs.
+ */
 class HTTPSValidator extends Validator {
   /**
    * Validates if the specified field value is an HTTPS URL.
@@ -67,9 +72,8 @@ class HTTPSValidator extends Validator {
    */
   validate(field, ruleValue, body) {
     try {
-      if (!isHttps(body[field])) {
-        throw new Error(`${field} must be an HTTPS URL.`);
-      }
+      isHttps(body[field]);
+      // Return null if validation succeeds
       return null;
     } catch (error) {
       return error.message;

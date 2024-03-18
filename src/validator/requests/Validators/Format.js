@@ -85,12 +85,14 @@ class HTTPSValidator extends Validator {
 class PhoneNumberValidator extends Validator {
   validate(field, ruleValue, body) {
     try {
-      const isValid = hasPhone(body[field]);
-      if (isValid.hasPhone) {
-        return null;
+      const validationResult = hasPhone(body[field]);
+      if (validationResult.isValid) {
+        return null; // No error if phone number is valid
+      } else {
+        return validationResult.error; // Return error message if phone number is invalid
       }
     } catch (error) {
-      return error.message;
+      return error.message; // Return error message if an exception occurs
     }
   }
 }

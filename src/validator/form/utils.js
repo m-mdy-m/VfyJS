@@ -18,16 +18,12 @@ exports.isName = (value) => {
     const hasAlphabetic = /^[a-zA-Z]+$/.test(value);
     const isSpecial = validator.hasSpecialCharacter();
     const hasNumber = validator.hasNumber();
-    const hasUppercase = validator.hasUppercase();
-    const hasLowerCase = validator.hasLowerCase();
-    const isValid = hasAlphabetic && !isSpecial && !hasNumber && (hasUppercase || hasLowerCase);
+    const isValid = hasAlphabetic && !isSpecial && !hasNumber
     
     // Return validation results
     return {
         isSpecialCharacter: isSpecial,
         hasNumber,
-        hasUppercase,
-        hasLowerCase,
         hasAlphabetic,
         isValidName: isValid,
     }; 

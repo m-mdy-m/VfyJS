@@ -50,14 +50,36 @@ class NameValidator extends Validator {
 }
 class AlphanumericValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement alphanumeric validation logic here
+    const value = body[field];
+
+    if (typeof value !== 'string') {
+      return `${field} must be a string containing alphanumeric characters only.`;
+    }
+
+    // Example: Validate if value contains only alphanumeric characters
+    const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+    if (!alphanumericRegex.test(value)) {
+      return `${field} must contain only alphanumeric characters.`;
+    }
+
+    return null;
   }
 }
+
 class LanguageValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement language code validation logic here
+    const languageCode = body[field];
+
+    if (typeof languageCode !== 'string') {
+      return `${field} must be a string representing a language code.`;
+    }
+    if (languageCode.length !== 2 && languageCode.length !== 3) {
+      return `${field} must consist of either 2 or 3 characters.`;
+    }
+    return null;
   }
 }
+
 class GenderValidator extends Validator {
   validate(field, ruleValue, body) {
     const gender = body[field];

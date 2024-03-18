@@ -50,7 +50,8 @@ class RegexValidator extends Validator {
       }
       return null;
     } catch (error) {
-      return error.message;
+      // Handle regex compilation errors
+      return `Invalid regex pattern for ${field}: ${error.message}`;
     }
   }
 }

@@ -170,14 +170,22 @@ async function findEqualCodes(code){
  * @returns {PhoneNumberValidationResult|boolean} - An object with validated information or false if invalid.
  */
 function hasPhone(phone) {
-    // Validate the phone number using ChecKValue function
-    const validatedPhoneNumber = ChecKValue(phone, MIN_LENGTH_PHONE_NUMBER, MAX_LENGTH_PHONE_NUMBER, "Phone Number");
+    try {
+        // Validate the phone number using ChecKValue function
+        const validatedPhoneNumber = ChecKValue(phone, MIN_LENGTH_PHONE_NUMBER, MAX_LENGTH_PHONE_NUMBER, "Phone Number");
 
-    // Return information if valid, otherwise false
-    return validatedPhoneNumber ? {
-        phone: validatedPhoneNumber,
-        hasPhone: true
-    } : false;
+        // Return information if valid
+        return {
+            isValid: true,
+            phone: validatedPhoneNumber
+        };
+    } catch (error) {
+        // Return error if validation fails
+        return {
+            isValid: false,
+            error: error.message
+        };
+    }
 }
 /**
  * @typedef {Object} ContinentInfoResult

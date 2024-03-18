@@ -56,6 +56,16 @@ class ValidationBody {
       body: this._req.body,
       params: this._req.params,
       query: this._req.query,
+      headers: this._req.headers,
+      cookies: this._req.cookies,
+      method: this._req.method, 
+      path: this._req.path,
+      protocol: this._req.protocol,
+      hostname: this._req.hostname, 
+      originalUrl: this._req.originalUrl,
+      xhr: this._req.xhr, 
+      secure: this._req.secure, 
+      ip: this._req.ip,
     };
 
     for (const field in rules) {

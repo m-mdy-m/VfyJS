@@ -83,6 +83,7 @@ class RequestValidator  {
       for (const rule of fieldRules) {
         const [ruleName, ruleValue] = rule.split(":");
         const validator = this.validators[ruleName];
+        if (!validator) {
           throw new Error(`Validation rule '${ruleName}' is not supported.`);
         }
         const error = validator.validate(field, ruleValue, requestData);

@@ -36,12 +36,37 @@ class HexColorValidator extends Validator {
 }
 class IPLocationValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement IP location validation logic here
+    const ipAddress = body[field];
+    if (!ipAddress) {
+      return `${field} is required.`;
+    }
+
+    // Regular expression pattern for IPv4 and IPv6 addresses
+    const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4})$/;
+
+    // Check if the provided IP address matches the pattern
+    if (!ipPattern.test(ipAddress)) {
+      return `Invalid format for ${field}. Please provide a valid IP address.`;
+    }
+
+    // If the IP address format is valid, return null (indicating no validation errors)
+    return null;
   }
 }
 class JSONValidator extends Validator {
   validate(field, ruleValue, body) {
+    const jsonData = body[field];
+    if (!jsonData) {
+      return `${field} is required.`;
+    }
     // Implement JSON validation logic here
+    // Example: Check if jsonData is a valid JSON object
+    try {
+      JSON.parse(jsonData);
+      return null; // JSON is valid
+    } catch (error) {
+      return `${field} must be a valid JSON object.`;
+    }
   }
 }
 class NameValidator extends Validator {

@@ -6,15 +6,15 @@ function optionsPassword (options){
     const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
     const optionValidations = [MIN_LENGTH, MAX_LENGTH, true, true, true, true, true, false];
     const msgError = [
-      'Password must be at least 8 characters long.',
-      'Password cannot exceed 20 characters.',
-      'Password must contain at least one uppercase letter.',
-      'Password must contain at least one lowercase letter.',
-      'Password must have at least one number.',
-      'Password must contain at least one special character such as (@#$%^&*).',
-      'Input must contain at least one alphabetic character.',
-      'Password cannot contain whitespace.'
-    ];
+        'Must be at least 8 characters long.',
+        'Cannot exceed 20 characters.',
+        'Must contain at least one uppercase letter.',
+        'Must contain at least one lowercase letter.',
+        'Must have at least one number.',
+        'Must contain at least one special character such as (@#$%^&*).',
+        'Input must contain at least one alphabetic character.',
+        'Cannot contain whitespace.'
+    ]
     let objectOPtion =  createValidationOptions(optionName,optionValidations,msgError)
     // Merge the values from 'options' into 'objectOPtion'
     objectOPtion = { ...objectOPtion, ...options };
@@ -30,13 +30,13 @@ function optionEmail (options){
     const optionValidations = [standardMinLength,standardMinLength,2, standardMaxLength,standardMaxLength,standardMaxLength];
     const msgError = 
     [
-      `Local part must have between ${standardMinLength} and ${standardMaxLength} characters.`,
-      `Domain part must have between ${standardMinLength} and ${standardMaxLength} characters.`,
-      `Subdomain must have between 2 and ${standardMaxLength} characters.`,
-      `Local part must have at most ${standardMaxLength} characters.`,
-      `Domain part must have at most ${standardMaxLength} characters.`,
-      `Subdomain must have at most ${standardMaxLength} characters.`,
-    ];
+        `Local part must be ${standardMinLength}-${standardMaxLength} characters.`,
+        `Domain part must be ${standardMinLength}-${standardMaxLength} characters.`,
+        `Subdomain must be 2-${standardMaxLength} characters.`,
+        `Local part must be at most ${standardMaxLength} characters.`,
+        `Domain part must be at most ${standardMaxLength} characters.`,
+        `Subdomain must be at most ${standardMaxLength} characters.`,
+    ]
     var objectOPtion = createValidationOptions(optionName,optionValidations,msgError);
     
     objectOPtion = { ...objectOPtion, ...options };
@@ -63,13 +63,13 @@ function optionUsername (username,options){
     ]
     const messageError = 
     [
-        'Username must be at least 8 characters long.',
-        'Username cannot exceed 64 characters.',
-        'Username must contain at least one uppercase letter.',
-        'Username must have at least one number.',
-        'Username must not contain non-alphanumeric characters.',
-        'Username cannot contain whitespace.',
-        'Username must not have consecutive repeated characters.'
+        'Must be at least 8 characters long.',
+        'Cannot exceed 64 characters.',
+        'Must contain at least one uppercase letter.',
+        'Must have at least one number.',
+        'Must not contain non-alphanumeric characters.',
+        'Cannot contain whitespace.',
+        'Must not have consecutive repeated characters.'
     ]
     let objectOption = createValidationOptions(optionName,validation,messageError)
     objectOption = {...objectOption, ...options}

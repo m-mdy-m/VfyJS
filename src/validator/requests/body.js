@@ -33,11 +33,11 @@ class RequestValidator  {
       http : new  HTTPValidator(),
       https: new HTTPSValidator(),
       // Additional validators
-       whitespace: new WhitespaceValidator(),
-       trim: new TrimValidator(),
-       file: new FileValidator(),
-       enum: new EnumValidator(),
-       regex: new RegexValidator(),
+      whitespace: new WhitespaceValidator(),
+      trim: new TrimValidator(),
+      file: new FileValidator(),
+      enum: new EnumValidator(),
+      regex: new RegexValidator(),
 
       // Additional custom validators
       password: new PasswordValidator(),

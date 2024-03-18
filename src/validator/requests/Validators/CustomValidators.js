@@ -1,18 +1,24 @@
 const validateFormPassword = require("../../form/password");
+const validateUsername = require("../../form/username");
 const Validator = require("../Validator");
 
 class PasswordValidator extends Validator {
   validate(field, ruleValue, body,options={}) {
     try {
       validateFormPassword(body[field],options)
+      return null
     } catch (error) {
-      
+      return error.message
     }
   }
 }
 class UsernameValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement username validation logic here
+  validate(field, ruleValue, body,options) {
+   try {
+    validateUsername(body[field],options)
+  } catch (error) {
+    return error.message
+   }
   }
 }
 class HexColorValidator extends Validator {

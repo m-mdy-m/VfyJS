@@ -1,4 +1,4 @@
-class ValidationBody {
+class RequestValidator  {
   constructor(req) {
     this._req = req;
     this.validators = {
@@ -538,7 +538,7 @@ class ImageDimensionsValidator extends Validator {
 
 // Example rule: "profilePic:imageDimensions:300,300" // Max width: 300px, Max height: 300px
 
-module.exports = ValidationBody;
+module.exports = RequestValidator ;
 
 router.get("/", (req, res, nxt) => {
   const result = validation(req.body, {

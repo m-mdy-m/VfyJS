@@ -28,10 +28,9 @@
  * @property {boolean} options.whitespace.required - Whether whitespace is not allowed.
  * @property {string} options.whitespace.errorMessage - Error message for whitespace validation failure.
  */
-let defaultOptionsPassword = {};
-let defaultOptionsUsername = {};
+let defaultOptions = {};
 function configurePassword(option) {
-  defaultOptionsPassword = { ...defaultOptionsPassword, ...option };
+  defaultOptions = { ...defaultOptions, ...option };
 }
 
 /**
@@ -73,13 +72,13 @@ function configurePassword(option) {
  * console.log(isValid); // true
  */
 function configureUserName(option){
-    defaultOptionsUsername = { ...defaultOptionsUsername, ...option };
+    defaultOptions = { ...defaultOptions, ...option };
 }
 
 
 // Export default options and configuration function
 module.exports = {
-    defaultOptionsPassword,
+    defaultOptions,
     configurePassword,
     configureUserName
 };

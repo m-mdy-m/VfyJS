@@ -1,5 +1,5 @@
 "use strict";
-
+const { configureUserName, defaultOptions} = require('./global.config')
 /**
  * Options for customizing username validation criteria.
  *
@@ -48,10 +48,12 @@ const {getErrorMessage} = require("./helper/getValues");
  * console.log(isValid); // true
  */
 function validateUsername(input, options = {}) {
+    // Merge default options with provided options
+    const mergedOptions = { ...defaultOptions, ...options };
     let username = input.value ? input.value : input; // Get the username value
     const validator = inputValidator(username); // Create a validator instance
     // Extract options
-    const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, options);
+    const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, mergedOptions);
 
     // Validate uppercase requirement
     validateWithCondition(uppercase, validator.hasUppercase(), input, messageError, 'hasUppercase', getErrorMessage(uppercase));

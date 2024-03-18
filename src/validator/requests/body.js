@@ -1,5 +1,6 @@
 const Validator = require('./Validator');
 const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
+const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator } = require('./Validators/Format');
 const { MinLengthValidator, MaxLengthValidator } = require('./Validators/Length');
 const { StringTypeValidator, NumberTypeValidator } = require('./Validators/Type');
 class RequestValidator  {
@@ -26,9 +27,9 @@ class RequestValidator  {
       phoneNumber: new PhoneNumberValidator(),
       ipv4: new IPv4Validator(),
       ipv6: new IPv6Validator(),
+      http : new  HTTPValidator(),
+      http : new HTTPSValidator(),
 
-      // Other common validators
-      required: new RequiredValidator(),
       whitespace: new WhitespaceValidator(),
       trim: new TrimValidator(),
       array: new ArrayTypeValidator(),
@@ -94,18 +95,6 @@ class RequestValidator  {
     return errors;
   }
 }
-
-
-
-class RequiredValidator extends Validator {
-  validate(field, ruleValue, body) {
-    if (!body[field]) {
-      return `${field} is required.`;
-    }
-    return null;
-  }
-}
-
 class WhitespaceValidator extends Validator {
   validate(field, ruleValue, body) {
     if (/\s/.test(body[field])) {

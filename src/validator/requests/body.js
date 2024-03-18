@@ -247,6 +247,11 @@ class IPLocationValidator extends Validator {
     // Implement IP location validation logic here
   }
 }
+class JSONValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement JSON validation logic here
+  }
+}
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

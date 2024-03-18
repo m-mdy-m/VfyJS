@@ -238,10 +238,15 @@ class UsernameValidator extends Validator {
   }
 }
 class HexColorValidator extends Validator {
-    validate(field, ruleValue, body) {
-      // Implement hexadecimal color code validation logic here
-    }
+  validate(field, ruleValue, body) {
+    // Implement hexadecimal color code validation logic here
   }
+}
+class IPLocationValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement IP location validation logic here
+  }
+}
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

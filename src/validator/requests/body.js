@@ -351,8 +351,16 @@ class ObjectKeyValidator extends Validator {
     return null;
   }
 }
-
 // Example rule: "user": "objectKeys:id,name,email"
+class UniqueValueValidator extends Validator {
+  validate(field, ruleValue, body, dataset) {
+    if (dataset.includes(body[field])) {
+      return `${field} must be unique.`;
+    }
+    return null;
+  }
+}
+
 
 module.exports = ValidationBody;
 

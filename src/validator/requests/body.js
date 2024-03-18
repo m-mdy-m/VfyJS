@@ -262,6 +262,11 @@ class AlphanumericValidator extends Validator {
     // Implement alphanumeric validation logic here
   }
 }
+class LanguageValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement language code validation logic here
+  }
+}
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

@@ -1,6 +1,6 @@
 class ValidationBody {
   constructor(req) {
-    this._body = req.body;
+    this._req = req;
     this.validators = {
       // Type validators
       string: new StringTypeValidator(),
@@ -52,6 +52,12 @@ class ValidationBody {
   validate(rules, options = {}) {
     const { customMessages = {} } = options;
     const errors = {};
+    const requestData = {
+      body: this._req.body,
+      params: this._req.params,
+      query: this._req.query,
+    };
+
     for (const field in rules) {
       const fieldRules = rules[field].split("|");
       for (const rule of fieldRules) {
@@ -60,7 +66,7 @@ class ValidationBody {
         if (!validator) {
           throw new Error(`Validation rule '${ruleName}' is not supported.`);
         }
-        const error = validator.validate(field, ruleValue, this._body);
+        const error = validator.validate(field, ruleValue, requestData);
         if (error) {
           errors[field] = customMessages[field] ? customMessages[field] : error;
           break;
@@ -506,18 +512,18 @@ class SameValidator extends Validator {
 }
 // Example rule: "confirmPassword: 'required|same:password'"
 class ImageDimensionsValidator extends Validator {
-    validate(field, ruleValue, body) {
-      const [maxWidth, maxHeight] = ruleValue.split(",");
-      const { width, height } = body[field].dimensions; // Assuming dimensions are available in the request body
-      if (width > parseInt(maxWidth) || height > parseInt(maxHeight)) {
-        return `${field} dimensions exceed the maximum allowed dimensions.`;
-      }
-      return null;
+  validate(field, ruleValue, body) {
+    const [maxWidth, maxHeight] = ruleValue.split(",");
+    const { width, height } = body[field].dimensions; // Assuming dimensions are available in the request body
+    if (width > parseInt(maxWidth) || height > parseInt(maxHeight)) {
+      return `${field} dimensions exceed the maximum allowed dimensions.`;
     }
+    return null;
   }
-  
-  // Example rule: "profilePic:imageDimensions:300,300" // Max width: 300px, Max height: 300px
-  
+}
+
+// Example rule: "profilePic:imageDimensions:300,300" // Max width: 300px, Max height: 300px
+
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

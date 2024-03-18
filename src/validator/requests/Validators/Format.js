@@ -5,10 +5,10 @@ const Validator = require("../Validator");
 class EmailValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
     try {
-      validateEmail(body[field], options)
-      return null
+      validateEmail(body[field], options);
+      return null;
     } catch (error) {
-        return error.message
+      return error.message;
     }
   }
 }

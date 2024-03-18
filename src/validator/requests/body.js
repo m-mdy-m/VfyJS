@@ -274,6 +274,12 @@ class AgeValidator extends Validator {
     // Implement age validation logic here
   }
 }
+
+class DocumentIDValidator extends Validator {
+    validate(field, ruleValue, body) {
+      // Implement document ID validation logic here
+    }
+  }
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

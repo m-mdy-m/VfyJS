@@ -49,7 +49,7 @@ const {getErrorMessage} = require("./helper/getValues");
  */
 function validateUsername(input, options = {}) {
     // Merge default options with provided options
-    const mergedOptions = { ...defaultOptions, ...options };
+    const mergedOptions = { ...defaultOptions.username, ...options };
     let username = input.value ? input.value : input; // Get the username value
     const validator = inputValidator(username); // Create a validator instance
     // Extract options

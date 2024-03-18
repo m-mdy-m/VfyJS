@@ -82,7 +82,7 @@ const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, }
  * console.log(isValid); // true
  */
 function validateFormPassword(input, options = {}) {
-    const mergedOptions = { ...defaultOptions, ...options };
+    const mergedOptions = { ...defaultOptions.password, ...options };
     const value = input.value ? input.value : input
     toString(value);
     const validator = inputValidator(value);

@@ -495,7 +495,6 @@ class AccessControlValidator extends Validator {
 }
 // Example: "roleBasedAccess:accessControl" - Validates that 'roleBasedAccess' enforces proper access control mechanisms.
 
-// Example rule: "confirmPassword: 'required|same:password'"
 class SameValidator extends Validator {
   validate(field, ruleValue, body) {
     const otherField = ruleValue.trim();
@@ -505,7 +504,7 @@ class SameValidator extends Validator {
     return null;
   }
 }
-
+// Example rule: "confirmPassword: 'required|same:password'"
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

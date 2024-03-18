@@ -7,11 +7,11 @@ class ValidationBody {
       number: new NumberTypeValidator(),
       min: new MinLengthValidator(),
       max: new MaxLengthValidator(),
-      uppercase: "",
-      lowercase: "",
-      specialCharacter: "",
-      whitespace: "",
-      trim: "",
+      uppercase: new UppercaseValidator(),
+      lowercase: new LowercaseValidator(),
+      specialCharacter: new SpecialCharacterValidator(),
+      whitespace: new WhitespaceValidator(),
+      trim: new TrimValidator(),
     };
   }
 
@@ -87,6 +87,50 @@ class MaxLengthValidator extends Validator {
   }
 }
 
+class UppercaseValidator extends Validator {
+    validate(field, ruleValue, body) {
+      if (!/[A-Z]/.test(body[field])) {
+        return `${field} must contain at least one uppercase letter.`;
+      }
+      return null;
+    }
+  }
+  
+  class LowercaseValidator extends Validator {
+    validate(field, ruleValue, body) {
+      if (!/[a-z]/.test(body[field])) {
+        return `${field} must contain at least one lowercase letter.`;
+      }
+      return null;
+    }
+  }
+  
+  class SpecialCharacterValidator extends Validator {
+    validate(field, ruleValue, body) {
+      if (!/[!@#$%^&*(),.?":{}|<>]/.test(body[field])) {
+        return `${field} must contain at least one special character.`;
+      }
+      return null;
+    }
+  }
+  
+  class WhitespaceValidator extends Validator {
+    validate(field, ruleValue, body) {
+      if (/\s/.test(body[field])) {
+        return `${field} cannot contain whitespace.`;
+      }
+      return null;
+    }
+  }
+  
+  class TrimValidator extends Validator {
+    validate(field, ruleValue, body) {
+      if (body[field].trim() !== body[field]) {
+        return `${field} cannot have leading or trailing whitespace.`;
+      }
+      return null;
+    }
+  }
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

@@ -21,6 +21,9 @@ class BooleanTypeValidator extends Validator {
     if (typeof body[field] !== "boolean") {
       return `${field} must be a boolean.`;
     }
+    if (body[field] !== true && body[field] !== false) {
+      return `${field} must be either true or false.`;
+    }
     return null;
   }
 }

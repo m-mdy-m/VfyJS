@@ -233,8 +233,13 @@ class PasswordValidator extends Validator {
   }
 }
 class UsernameValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement username validation logic here
+  }
+}
+class HexColorValidator extends Validator {
     validate(field, ruleValue, body) {
-      // Implement username validation logic here
+      // Implement hexadecimal color code validation logic here
     }
   }
 module.exports = ValidationBody;

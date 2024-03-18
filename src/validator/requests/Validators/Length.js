@@ -28,7 +28,7 @@ class MaxLengthValidator extends Validator {
   }
 }
 
-class LengthRangeValidator extends Validator {
+class RangeLengthValidator extends Validator {
   validate(field, ruleValue, body) {
     const [minLength, maxLength] = ruleValue.split(",").map(value => parseInt(value));
 
@@ -45,4 +45,4 @@ class LengthRangeValidator extends Validator {
   }
 }
 
-module.exports = { MaxLengthValidator, MinLengthValidator };
+module.exports = { MaxLengthValidator, MinLengthValidator,RangeLengthValidator };

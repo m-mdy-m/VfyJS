@@ -2,7 +2,7 @@ const Validator = require('./Validator');
 const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
 const { PasswordValidator, UsernameValidator, HexColorValidator, IPLocationValidator, JSONValidator, NameValidator, AlphanumericValidator, LanguageValidator, GenderValidator, AgeValidator } = require('./Validators/CustomValidators');
 const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator } = require('./Validators/Format');
-const { MinLengthValidator, MaxLengthValidator } = require('./Validators/Length');
+const { MinLengthValidator, MaxLengthValidator, RangeLengthValidator } = require('./Validators/Length');
 const { StringTypeValidator, NumberTypeValidator, ArrayTypeValidator, ObjectTypeValidator, BooleanTypeValidator } = require('./Validators/Type');
 const { WhitespaceValidator, TrimValidator, FileValidator, EnumValidator, RegexValidator } = require('./utils/AdditionalValidators');
 class RequestValidator  {
@@ -19,6 +19,7 @@ class RequestValidator  {
       // Length validators
       min: new MinLengthValidator(),
       max: new MaxLengthValidator(),
+      range : new RangeLengthValidator(),
 
       // Case validators
       uppercase: new UppercaseValidator(),
@@ -101,10 +102,6 @@ class CustomValidator extends Validator {
     // Implement custom validation logic here based on ruleValue
   }
 }
-
-
-
-// Example rule: "age": "lengthRange:18,100"
 class DateRangeValidator extends Validator {
   validate(field, ruleValue, body) {
     const [startDate, endDate] = ruleValue.split(",");

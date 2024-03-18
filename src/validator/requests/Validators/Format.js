@@ -2,7 +2,7 @@ const Validator = require("../Validator");
 
 class EmailValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
-    return this.isEmail(body[field], options);;
+    return this.isEmail(body[field], options);
   }
 }
 class DateValidator extends Validator {

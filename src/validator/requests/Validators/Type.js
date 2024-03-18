@@ -16,14 +16,37 @@ class NumberTypeValidator extends Validator {
     return null;
   }
 }
-class BooleanValidator extends Validator {
+class BooleanTypeValidator extends Validator {
   validate(field, ruleValue, body) {
     // Implement boolean validation logic here
   }
 }
-class ObjectValidator extends Validator {
+class ObjectTypeValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement object validation logic here
+    if (
+      typeof body[field] !== "object" ||
+      body[field] === null ||
+      Array.isArray(body[field])
+    ) {
+      return `${field} must be an object.`;
+    }
+    return null;
+  }
+}
+class ArrayTypeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    if (!Array.isArray(body[field])) {
+      return `${field} must be an array.`;
+    }
+    return null;
+  }
+}
+class FunctionTypeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    if (typeof body[field] !== "function") {
+      return `${field} must be a function.`;
+    }
+    return null;
   }
 }
 module.exports = { StringTypeValidator, NumberTypeValidator };

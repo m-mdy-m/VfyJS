@@ -123,20 +123,6 @@ class TrimValidator extends Validator {
     return null;
   }
 }
-// Example EmailValidator
-
-
-
-class ArrayValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement array validation logic here
-  }
-}
-
-
-
-
-
 class FileValidator extends Validator {
   validate(field, ruleValue, body) {
     // Implement file validation logic here

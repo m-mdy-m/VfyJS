@@ -2,28 +2,50 @@ class ValidationBody {
   constructor(req) {
     this._body = req.body;
     this.validators = {
-      required: new RequiredValidator(),
+      // Type validators
       string: new StringTypeValidator(),
       number: new NumberTypeValidator(),
+
+      // Length validators
       min: new MinLengthValidator(),
       max: new MaxLengthValidator(),
+
+      // Case validators
       uppercase: new UppercaseValidator(),
       lowercase: new LowercaseValidator(),
+
+      // Format validators
       specialCharacter: new SpecialCharacterValidator(),
-      whitespace: new WhitespaceValidator(),
-      trim: new TrimValidator(),
       email: new EmailValidator(),
       date: new DateValidator(),
       url: new URLValidator(),
+      phoneNumber: new PhoneNumberValidator(),
+      ipv4: new IPv4Validator(),
+      ipv6: new IPv6Validator(),
+
+      // Other common validators
+      required: new RequiredValidator(),
+      whitespace: new WhitespaceValidator(),
+      trim: new TrimValidator(),
       array: new ArrayValidator(),
       object: new ObjectValidator(),
-      phoneNumber: new PhoneNumberValidator(),
       file: new FileValidator(),
       boolean: new BooleanValidator(),
       enum: new EnumValidator(),
       regex: new RegexValidator(),
-      ipv4: new IPv4Validator(),
-      ipv6: new IPv6Validator(),
+
+      // Additional custom validators
+      password: new PasswordValidator(),
+      username: new UsernameValidator(),
+      hexColor: new HexColorValidator(),
+      ipLocation: new IPLocationValidator(),
+      json: new JSONValidator(),
+      name: new NameValidator(),
+      alphanumeric: new AlphanumericValidator(),
+      language: new LanguageValidator(),
+      gender: new GenderValidator(),
+      age: new AgeValidator(),
+      documentID: new DocumentIDValidator(),
     };
   }
 
@@ -276,10 +298,10 @@ class AgeValidator extends Validator {
 }
 
 class DocumentIDValidator extends Validator {
-    validate(field, ruleValue, body) {
-      // Implement document ID validation logic here
-    }
+  validate(field, ruleValue, body) {
+    // Implement document ID validation logic here
   }
+}
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

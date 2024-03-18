@@ -7,13 +7,23 @@ class EmailValidator extends Validator {
 }
 class DateValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement URL validation logic here
+    // Check if the date value is a valid date
+    if (isNaN(Date.parse(body[field]))) {
+      return `${field} must be a valid date.`;
+    }
+    return null;
   }
 }
 
 class URLValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement URL validation logic here
+    // Regular expression for validating URL format
+    const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+
+    // Check if the URL value matches the URL pattern
+    if (!urlPattern.test(body[field])) {
+      return `${field} must be a valid URL.`;
+    }
   }
 }
 class PhoneNumberValidator extends Validator {

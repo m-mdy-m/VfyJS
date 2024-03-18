@@ -360,7 +360,28 @@ class UniqueValueValidator extends Validator {
     return null;
   }
 }
-
+class FileTypeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const allowedTypes = ruleValue.split(",");
+    const fileType = body[field].mimetype;
+    if (!allowedTypes.includes(fileType)) {
+      return `${field} must be of type ${allowedTypes.join(", ")}.`;
+    }
+    return null;
+  }
+}
+// Example: "avatar:fileType:image/jpeg,image/png" - Validates that 'avatar' file type is either JPEG or PNG.
+class FileSizeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const maxSize = parseInt(ruleValue); // Max size in bytes
+    const fileSize = body[field].size;
+    if (fileSize > maxSize) {
+      return `${field} exceeds the maximum file size of ${maxSize} bytes.`;
+    }
+    return null;
+  }
+}
+// Example: "avatar:fileSize:1048576" - Validates that 'avatar' file size does not exceed 1MB.
 
 module.exports = ValidationBody;
 

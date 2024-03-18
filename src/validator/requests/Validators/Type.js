@@ -4,7 +4,7 @@ class StringTypeValidator extends Validator {
     if (typeof body[field] !== "string") {
       return `${field} must be a string.`;
     }
-    if (!this.isAlpha(body[field])) {
+    if (!this.isAlphaNumeric(body[field])) {
       return `${field} must contain only alphanumeric characters.`;
     }
 
@@ -17,7 +17,6 @@ class NumberTypeValidator extends Validator {
     if (typeof body[field] !== "number") {
       return `${field} must be a number.`;
     }
-    // Convert the number to a string for alphanumeric validation
     const valueAsString = body[field].toString();
     if (!this.isNumeric(valueAsString)) {
       return `${field} must contain only numeric characters.`;

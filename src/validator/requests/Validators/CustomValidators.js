@@ -1,3 +1,4 @@
+const { validateLength } = require("../../../errors/HandleError");
 const checkValueColor = require("../../colors/isColor");
 const validateFormPassword = require("../../form/password");
 const validateUsername = require("../../form/username");
@@ -63,8 +64,21 @@ class GenderValidator extends Validator {
   }
 }
 class AgeValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement age validation logic here
+  validate(field, ruleValue, body, options = {}) {
+    const age = body[field];
+
+    if (typeof age !== 'number' || isNaN(age)) {
+      return `${field} must be a valid number representing age.`;
+    }
+
+    const minAge = options.min || 0;
+    const maxAge = options.max || Number.POSITIVE_INFINITY;
+
+    if (age < minAge || age > maxAge) {
+      return `${field} must be between ${minAge} and ${maxAge} years old.`;
+    }
+
+    return null; // Indicates no validation error
   }
 }
 

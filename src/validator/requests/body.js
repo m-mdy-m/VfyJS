@@ -383,15 +383,16 @@ class FileSizeValidator extends Validator {
 }
 // Example: "avatar:fileSize:1048576" - Validates that 'avatar' file size does not exceed 1MB.
 class SQLInjectionValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const sqlInjectionPattern =
-      /(\b(SELECT|UPDATE|DELETE|INSERT|ALTER|DROP|CREATE|TRUNCATE)\b)/i;
-    if (sqlInjectionPattern.test(body[field])) {
-      return `Potential SQL injection detected in ${field}.`;
+    validate(field, ruleValue, body) {
+      const sqlInjectionPattern = /(\b(SELECT|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER)\b)|(--.*)/i;
+      if (sqlInjectionPattern.test(body[field])) {
+        return `Potential SQL injection detected in ${field}.`;
+      }
+      return null;
     }
-    return null;
   }
-}
+  // Example: "query:NoSQLSQLInjection" - Validates that 'query' does not contain SQL injection patterns in a NoSQL context.
+  
 class NoSQLInjectionValidator extends Validator {
   validate(field, ruleValue, body) {
     const nosqlInjectionPattern = /\$where|javascript:/i;
@@ -445,6 +446,7 @@ class AuthTokenValidator extends Validator {
     return null;
   }
 }
+
 // Example: "token:authToken" - Validates the format and integrity of the 'token' input.
 class EncryptionValidator extends Validator {
   validate(field, ruleValue, body) {
@@ -463,7 +465,17 @@ class RBACValidator extends Validator {
   }
 }
 // Example: "adminOnly:rbac" - Validates that 'adminOnly' field is accessible only to admins.
-
+class HTTPSValidator extends Validator {
+    validate(field, ruleValue, body) {
+      const httpsPattern = /^https:\/\//;
+      if (!httpsPattern.test(body[field])) {
+        return `URL ${field} must use HTTPS for secure communication.`;
+      }
+      return null;
+    }
+  }
+  // Example: "url:https" - Validates that 'url' uses HTTPS protocol.
+  
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

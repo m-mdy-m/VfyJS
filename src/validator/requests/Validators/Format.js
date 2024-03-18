@@ -4,7 +4,12 @@ const { hasPhone } = require("../../phone/utils/GlobalValidation");
 const Validator = require("../Validator");
 class EmailValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
-    return validateEmail(body[field], options);
+    try {
+      validateEmail(body[field], options)
+      return null
+    } catch (error) {
+        return error.message
+    }
   }
 }
 class DateValidator extends Validator {
@@ -99,7 +104,8 @@ class PhoneNumberValidator extends Validator {
 class IPv4Validator extends Validator {
   validate(field, ruleValue, body) {
     // Regular expression pattern for IPv4 validation
-    const ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    const ipv4Pattern =
+      /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
     // Get the IP address value from the body
     const ipAddress = body[field];
@@ -113,20 +119,20 @@ class IPv4Validator extends Validator {
 }
 
 class IPv6Validator extends Validator {
-    validate(field, ruleValue, body) {
-      // Regular expression pattern for IPv6 validation
-      const ipv6Pattern = /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i;
-  
-      // Get the IP address value from the body
-      const ipAddress = body[field];
-  
-      // Check if the IP address matches the IPv6 pattern
-      const isValidIPv6 = ipv6Pattern.test(ipAddress);
-  
-      // Return null if validation succeeds, otherwise return an error message
-      return isValidIPv6 ? null : "Invalid IPv6 address format.";
-    }
+  validate(field, ruleValue, body) {
+    // Regular expression pattern for IPv6 validation
+    const ipv6Pattern = /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i;
+
+    // Get the IP address value from the body
+    const ipAddress = body[field];
+
+    // Check if the IP address matches the IPv6 pattern
+    const isValidIPv6 = ipv6Pattern.test(ipAddress);
+
+    // Return null if validation succeeds, otherwise return an error message
+    return isValidIPv6 ? null : "Invalid IPv6 address format.";
   }
+}
 
 class SpecialCharacterValidator extends Validator {
   validate(field, ruleValue, body) {

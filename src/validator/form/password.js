@@ -63,7 +63,7 @@ const {defaultOptions} = require('./global.config')
 
 const { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue, getFalseRequired } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {isTypeMismatch}= require('../../errors/HandleError');
+const {isTypeMismatch, isEmpty}= require('../../errors/HandleError');
 const { toString } = require("./helper/dataConversion");
 const {optionsPassword} = require("./helper/genOption");
 const { getReq, getErrorMessage } = require("./helper/getValues");
@@ -84,7 +84,8 @@ const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, }
 function validateFormPassword(input, options = {}) {
     const mergedOptions = { ...defaultOptions.password, ...options };
     const value = input.value ? input.value : input
-    toString(value);
+    isEmpty(value,)
+    toString(value,'Password is required.');
     const validator = inputValidator(value);
     const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(mergedOptions);
     validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));

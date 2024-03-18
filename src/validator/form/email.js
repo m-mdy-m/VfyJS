@@ -30,7 +30,7 @@ const { toString } = require("./helper/dataConversion");
 function validateEmail(input, options = {}) {
   // Extracting value from input or using input directly if it's a string
   const value = input.value ? input.value : input;
-  isEmpty(value,'Email address cannot be empty.')
+  isEmpty(value,'Email is required')
   // Extracting options and error messages
   const {maxLenDomain, maxLenLocal, maxLenSubdomain, minLenDomain, minLenLocal, minLenSubdomain, msgError } = optionEmail(options);
 

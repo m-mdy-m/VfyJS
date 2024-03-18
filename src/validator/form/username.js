@@ -30,7 +30,7 @@ const { configureUserName, defaultOptions} = require('./global.config')
 // Import necessary modules and constants
 const {MAX_LENGTH, MIN_LENGTH, getFalseRequired, trimmedValue, getValidValue, isValue, getRequired} = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {isTypeMismatch} = require("../../errors/HandleError");
+const {isTypeMismatch, isEmpty} = require("../../errors/HandleError");
 const {optionUsername} = require("./helper/genOption");
 const {validateWithCondition, throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, TypeMatches, validateType} = require("../../errors/FormError");
 const {getErrorMessage} = require("./helper/getValues");
@@ -51,6 +51,7 @@ function validateUsername(input, options = {}) {
     // Merge default options with provided options
     const mergedOptions = { ...defaultOptions.username, ...options };
     let username = input.value ? input.value : input; // Get the username value
+    isEmpty(username,'Username is required.')
     const validator = inputValidator(username); // Create a validator instance
     // Extract options
     const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, mergedOptions);
@@ -66,7 +67,7 @@ function validateUsername(input, options = {}) {
     if (checkWhiteSpace) {
         throwIfFalsy(!checkWhiteSpace, validator.hasWhitespace(), messageError, 'hasWhitespace', 'cannot contain leading or trailing whitespaces.');
     }
-
+    
     // Trim username value
     username = trimmedValue(username);
 

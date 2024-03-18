@@ -28,7 +28,7 @@ class MaxLengthValidator extends Validator {
   }
 }
 
-class RangeLengthValidator extends Validator {
+class LengthRangeValidator extends Validator {
   validate(field, ruleValue, body) {
     const [minLength, maxLength] = ruleValue.split(",").map(value => parseInt(value));
 
@@ -44,5 +44,20 @@ class RangeLengthValidator extends Validator {
     return null;
   }
 }
+class DateRangeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const [startDate, endDate] = ruleValue.split(",").map(date => new Date(date));
+    const fieldValue = new Date(body[field]);
 
-module.exports = { MaxLengthValidator, MinLengthValidator,RangeLengthValidator };
+    // Check if ruleValue is valid dates
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      throw new Error(`Invalid rule value for ${field}. Please provide valid start and end dates.`);
+    }
+
+    if (fieldValue < startDate || fieldValue > endDate) {
+      return `${field} must be between ${startDate.toDateString()} and ${endDate.toDateString()}.`;
+    }
+    return null;
+  }
+}
+module.exports = { MaxLengthValidator, MinLengthValidator,LengthRangeValidator,DateRangeValidator };

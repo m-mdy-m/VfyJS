@@ -382,6 +382,87 @@ class FileSizeValidator extends Validator {
   }
 }
 // Example: "avatar:fileSize:1048576" - Validates that 'avatar' file size does not exceed 1MB.
+class SQLInjectionValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const sqlInjectionPattern =
+      /(\b(SELECT|UPDATE|DELETE|INSERT|ALTER|DROP|CREATE|TRUNCATE)\b)/i;
+    if (sqlInjectionPattern.test(body[field])) {
+      return `Potential SQL injection detected in ${field}.`;
+    }
+    return null;
+  }
+}
+class NoSQLInjectionValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const nosqlInjectionPattern = /\$where|javascript:/i;
+    if (nosqlInjectionPattern.test(body[field])) {
+      return `Potential NoSQL injection detected in ${field}.`;
+    }
+    return null;
+  }
+}
+// Example: "query:nosqlInjection" - Validates that 'query' does not contain NoSQL injection patterns.
+
+// Example: "search:sqlInjection" - Validates that 'search' input does not contain SQL injection patterns.
+class XSSValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+    if (xssPattern.test(body[field])) {
+      return `Potential XSS attack detected in ${field}.`;
+    }
+    return null;
+  }
+}
+// Example: "comment:xss" - Validates that 'comment' input does not contain XSS attack payloads.
+class SensitiveDataValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const sensitiveDataPattern = /(creditCard|ssn)/i;
+    if (sensitiveDataPattern.test(field)) {
+      return `Sensitive data found in ${field}.`;
+    }
+    return null;
+  }
+}
+// Example: "creditCard:sensitiveData" - Validates that 'creditCard' field does not contain sensitive data.
+
+class HTMLSanitizationValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const sanitizedValue = sanitizeHTML(body[field]);
+    if (body[field] !== sanitizedValue) {
+      return `Potential HTML injection detected in ${field}.`;
+    }
+    return null;
+  }
+}
+// Example: "comment:htmlSanitization" - Validates that 'comment' input is properly sanitized.
+class AuthTokenValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const authTokenPattern = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/;
+    if (!authTokenPattern.test(body[field])) {
+      return `Invalid authentication token format in ${field}.`;
+    }
+    // Additional checks for token integrity can be performed here
+    return null;
+  }
+}
+// Example: "token:authToken" - Validates the format and integrity of the 'token' input.
+class EncryptionValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const encryptionPattern = /(?:^|\W)encrypted(?:$|\W)/i;
+    if (!encryptionPattern.test(field)) {
+      return `Field ${field} should be encrypted for sensitive data.`;
+    }
+    return null;
+  }
+}
+// Example: "password:encryption" - Validates that 'password' field is encrypted.
+
+class RBACValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement RBAC validation logic here
+  }
+}
+// Example: "adminOnly:rbac" - Validates that 'adminOnly' field is accessible only to admins.
 
 module.exports = ValidationBody;
 

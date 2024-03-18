@@ -11,7 +11,7 @@ class Validator {
   constructor(field) {
     this.field = field;
     // Initialize the validator with the provided field
-    this.validator = inputValidator(field);
+    this._validator = inputValidator(field);
   }
 
   /**
@@ -20,10 +20,10 @@ class Validator {
    * @returns {boolean} - True if the value contains only alphanumeric characters, otherwise false.
    */
   isAlphaNumeric(value) {
-    if (!this.validator || typeof this.validator.hasAlphanumeric !== 'function') {
+    if (!this._validator || typeof this._validator.hasAlphanumeric !== 'function') {
       throw new Error('Input validator or hasAlphanumeric method not available.');
     }
-    return this.validator.hasAlphanumeric(value);
+    return this._validator.hasAlphanumeric(value);
   }
 
   /**
@@ -32,10 +32,10 @@ class Validator {
    * @returns {boolean} - True if the value contains only numeric characters, otherwise false.
    */
   isNumeric(value) {
-    if (!this.validator || typeof this.validator.hasNumeric !== 'function') {
+    if (!this._validator || typeof this._validator.hasNumeric !== 'function') {
       throw new Error('Input validator or hasNumeric method not available.');
     }
-    return this.validator.hasNumeric(value);
+    return this._validator.hasNumeric(value);
   }
 
   /**

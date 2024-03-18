@@ -1,4 +1,3 @@
-const { validateLength } = require("../../../errors/HandleError");
 const checkValueColor = require("../../colors/isColor");
 const validateFormPassword = require("../../form/password");
 const validateUsername = require("../../form/username");
@@ -148,9 +147,14 @@ class AgeValidator extends Validator {
     return null; // Indicates no validation error
   }
 }
-
-class DocumentIDValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement document ID validation logic here
-  }
+module.exports = {PasswordValidator,
+  UsernameValidator,
+  HexColorValidator,
+  IPLocationValidator,
+  JSONValidator,
+  NameValidator,
+  AlphanumericValidator,
+  LanguageValidator,
+  GenderValidator,
+  AgeValidator,
 }

@@ -51,7 +51,6 @@ class RequestValidator  {
       language: new LanguageValidator(),
       gender: new GenderValidator(),
       age: new AgeValidator(),
-      documentID: new DocumentIDValidator(),
     };
   }
 

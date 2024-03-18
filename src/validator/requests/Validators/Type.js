@@ -4,10 +4,6 @@ class StringTypeValidator extends Validator {
     if (typeof body[field] !== "string") {
       return `${field} must be a string.`;
     }
-    if (!this.isAlphaNumeric(body[field])) {
-      return `${field} must contain only alphanumeric characters.`;
-    }
-
     return null;
   }
 }
@@ -17,11 +13,17 @@ class NumberTypeValidator extends Validator {
     if (typeof body[field] !== "number") {
       return `${field} must be a number.`;
     }
-    const valueAsString = body[field].toString();
-    if (!this.isNumeric(valueAsString)) {
-      return `${field} must contain only numeric characters.`;
-    }
     return null;
+  }
+}
+class BooleanValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement boolean validation logic here
+  }
+}
+class ObjectValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement object validation logic here
   }
 }
 module.exports = { StringTypeValidator, NumberTypeValidator };

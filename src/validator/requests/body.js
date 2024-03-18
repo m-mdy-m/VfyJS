@@ -1,4 +1,5 @@
 const Validator = require('./Validator');
+const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
 const { MinLengthValidator, MaxLengthValidator } = require('./Validators/Length');
 const { StringTypeValidator, NumberTypeValidator } = require('./Validators/Type');
 class RequestValidator  {
@@ -105,18 +106,6 @@ class RequiredValidator extends Validator {
   }
 }
 
-
-
-
-class SpecialCharacterValidator extends Validator {
-  validate(field, ruleValue, body) {
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(body[field])) {
-      return `${field} must contain at least one special character.`;
-    }
-    return null;
-  }
-}
-
 class WhitespaceValidator extends Validator {
   validate(field, ruleValue, body) {
     if (/\s/.test(body[field])) {
@@ -135,26 +124,8 @@ class TrimValidator extends Validator {
   }
 }
 // Example EmailValidator
-class EmailValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const emailPattern = /^\S+@\S+\.\S+$/;
-    if (!emailPattern.test(body[field])) {
-      return `${field} must be a valid email address.`;
-    }
-    return null;
-  }
-}
-class DateValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement URL validation logic here
-  }
-}
 
-class URLValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement URL validation logic here
-  }
-}
+
 
 class ArrayValidator extends Validator {
   validate(field, ruleValue, body) {
@@ -162,17 +133,9 @@ class ArrayValidator extends Validator {
   }
 }
 
-class ObjectValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement object validation logic here
-  }
-}
 
-class PhoneNumberValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement phone number validation logic here
-  }
-}
+
+
 
 class FileValidator extends Validator {
   validate(field, ruleValue, body) {
@@ -180,11 +143,7 @@ class FileValidator extends Validator {
   }
 }
 
-class BooleanValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement boolean validation logic here
-  }
-}
+
 
 class EnumValidator extends Validator {
   validate(field, ruleValue, body) {
@@ -198,17 +157,7 @@ class RegexValidator extends Validator {
   }
 }
 
-class IPv4Validator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement IPv4 validation logic here
-  }
-}
 
-class IPv6Validator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement IPv6 validation logic here
-  }
-}
 class CustomValidator extends Validator {
   validate(field, ruleValue, body) {
     // Implement custom validation logic here based on ruleValue

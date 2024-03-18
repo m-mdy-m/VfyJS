@@ -13,6 +13,17 @@ class ValidationBody {
       whitespace: new WhitespaceValidator(),
       trim: new TrimValidator(),
       email: new EmailValidator(),
+      date: new DateValidator(),
+      url: new URLValidator(),
+      array: new ArrayValidator(),
+      object: new ObjectValidator(),
+      phoneNumber: new PhoneNumberValidator(),
+      file: new FileValidator(),
+      boolean: new BooleanValidator(),
+      enum: new EnumValidator(),
+      regex: new RegexValidator(),
+      ipv4: new IPv4Validator(),
+      ipv6: new IPv6Validator(),
     };
   }
 

@@ -67,6 +67,7 @@ class ValidationBody {
       secure: this._req.secure,
       ip: this._req.ip,
       sessionID: this._req.sessionID,
+      fileUploads: this._req.files,
       authenticationInfo: this._req.user,
       errorInfo: this._req.error,
     };

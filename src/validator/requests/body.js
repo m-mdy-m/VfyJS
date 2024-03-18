@@ -383,16 +383,17 @@ class FileSizeValidator extends Validator {
 }
 // Example: "avatar:fileSize:1048576" - Validates that 'avatar' file size does not exceed 1MB.
 class SQLInjectionValidator extends Validator {
-    validate(field, ruleValue, body) {
-      const sqlInjectionPattern = /(\b(SELECT|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER)\b)|(--.*)/i;
-      if (sqlInjectionPattern.test(body[field])) {
-        return `Potential SQL injection detected in ${field}.`;
-      }
-      return null;
+  validate(field, ruleValue, body) {
+    const sqlInjectionPattern =
+      /(\b(SELECT|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER)\b)|(--.*)/i;
+    if (sqlInjectionPattern.test(body[field])) {
+      return `Potential SQL injection detected in ${field}.`;
     }
+    return null;
   }
-  // Example: "query:NoSQLSQLInjection" - Validates that 'query' does not contain SQL injection patterns in a NoSQL context.
-  
+}
+// Example: "query:NoSQLSQLInjection" - Validates that 'query' does not contain SQL injection patterns in a NoSQL context.
+
 class NoSQLInjectionValidator extends Validator {
   validate(field, ruleValue, body) {
     const nosqlInjectionPattern = /\$where|javascript:/i;
@@ -407,14 +408,15 @@ class NoSQLInjectionValidator extends Validator {
 // Example: "search:sqlInjection" - Validates that 'search' input does not contain SQL injection patterns.
 class XSSValidator extends Validator {
   validate(field, ruleValue, body) {
-    const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+    const xssPattern =
+      /<script>|<\/script>|<img\s+src\s*=\s*".*?"|onerror\s*=\s*".*?"/i;
     if (xssPattern.test(body[field])) {
       return `Potential XSS attack detected in ${field}.`;
     }
     return null;
   }
 }
-// Example: "comment:xss" - Validates that 'comment' input does not contain XSS attack payloads.
+// Example: "input:xss" - Validates that 'input' does not contain XSS attack payloads.
 class SensitiveDataValidator extends Validator {
   validate(field, ruleValue, body) {
     const sensitiveDataPattern = /(creditCard|ssn)/i;
@@ -466,16 +468,16 @@ class RBACValidator extends Validator {
 }
 // Example: "adminOnly:rbac" - Validates that 'adminOnly' field is accessible only to admins.
 class HTTPSValidator extends Validator {
-    validate(field, ruleValue, body) {
-      const httpsPattern = /^https:\/\//;
-      if (!httpsPattern.test(body[field])) {
-        return `URL ${field} must use HTTPS for secure communication.`;
-      }
-      return null;
+  validate(field, ruleValue, body) {
+    const httpsPattern = /^https:\/\//;
+    if (!httpsPattern.test(body[field])) {
+      return `URL ${field} must use HTTPS for secure communication.`;
     }
+    return null;
   }
-  // Example: "url:https" - Validates that 'url' uses HTTPS protocol.
-  
+}
+// Example: "url:https" - Validates that 'url' uses HTTPS protocol.
+
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

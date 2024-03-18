@@ -46,8 +46,12 @@ class JSONValidator extends Validator {
 }
 class NameValidator extends Validator {
   validate(field, ruleValue, body) {
-    const value = body[field]
-    isName(value)
+    const value = body[field];
+    const validationResults = isName(value); 
+    if (!validationResults.isValid) {
+      return `${field} must be a valid name.`;
+    }
+    return null;
   }
 }
 class AlphanumericValidator extends Validator {

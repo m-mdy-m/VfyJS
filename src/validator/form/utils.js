@@ -28,7 +28,7 @@ exports.isName = (value) => {
         isSpecialCharacter: isSpecial,
         hasNumber,
         hasAlphabetic,
-        isValidName: isValid,
+        isValid,
     }; 
 };
 

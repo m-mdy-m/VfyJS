@@ -23,6 +23,6 @@ const validateUrl = require("./validate.url");
  * }
  */
 function isHttp(url) {
-    return validateUrl(/(?=.*(HTTP|http))/,url,'http',/(HTTP:|http:)\/\/[^\/]/i);
+    return validateUrl(url,'http');
 }
 module.exports = isHttp;

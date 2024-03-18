@@ -8,16 +8,23 @@ const {
 } = require("../../errors/HandleError");
 /**
  * Validates a URL against a specified pattern.
- * @param {RegExp} expectedPattern - The regular expression pattern to match against the URL.
  * @param {string} url - The URL to validate.
  * @param {string} expectedProtocol - The expected protocol name (e.g., "http", "https").
- * @param {RegExp} patternFormat - The pattern to match the expected protocol.
  * @returns {boolean} - True if the URL matches the pattern and protocol, otherwise false.
  * @throws {Error} - Throws an error if the URL is empty, not a string, or does not match the pattern.
  */
-function validateUrl(expectedPattern, url, expectedProtocol, patternFormat) {
+function validateUrl(url, expectedProtocol) {
+    let patternUrl ;
+    let patternFormat;
+    if (expectedProtocol === 'http') {
+        patternUrl = /(?=.*(HTTP|http))/
+        patternFormat = /(HTTP:|http:)\/\/[^\/]/i
+    }else if(expectedProtocol === 'https'){
+        patternUrl = /(?=.*(HTTPS|https))/
+        patternFormat = /(HTTPS:|https:)\/\/[^\/]/i
+    }
   // Check if the URL matches the expected pattern
-  const pattern = expectedPattern.test(url);
+  const pattern = patternUrl.test(url);
   ifFalsyValue(
     pattern,
     `The URL must contain the substring "${expectedProtocol}". Please provide a valid URL.`

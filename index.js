@@ -49,6 +49,10 @@ const { ConfirmationFields, isName } = require("./src/validator/form/utils");
 
 // Importing BinarySearch module
 const BinarySearch = require("./src/validator/BinaryTree/search");
+const {
+  setUsernameConfig,
+  setPasswordConfig,
+} = require("./src/validator/form/global.config");
 
 module.exports = {
   /**
@@ -183,4 +187,44 @@ module.exports = {
   Binary: {
     Search: BinarySearch,
   },
+  /**
+   * Sets the configuration options for username validation.
+   *
+   * @function
+   * @param {Object} options - Options object for customizing username validation criteria.
+   * @throws {Error} Throws an error if the provided options are invalid.
+   * @example
+   * // Set custom username validation options
+   * setUsernameConfig({
+   *   minLength: { value: 4 },
+   *   maxLength: { value: 20 },
+   *   uppercase: { required: true },
+   *   number: { required: true },
+   *   nonAlphanumeric: { required: true },
+   *   trim: { required: true },
+   *   repeat: { required: true }
+   * });
+   */
+  setUsernameConfig: setUsernameConfig,
+
+  /**
+   * Sets the configuration options for password validation.
+   *
+   * @function
+   * @param {Object} options - Options object for customizing password validation criteria.
+   * @throws {Error} Throws an error if the provided options are invalid.
+   * @example
+   * // Set custom password validation options
+   * setPasswordConfig({
+   *   minLength: { value: 8 },
+   *   maxLength: { value: 50 },
+   *   uppercase: { required: true },
+   *   lowercase: { required: true },
+   *   number: { required: true },
+   *   specialCharacter: { required: true },
+   *   alphabetic: { required: false },
+   *   whitespace: { required: false }
+   * });
+   */
+  setPasswordConfig: setPasswordConfig,
 };

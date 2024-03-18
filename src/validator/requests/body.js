@@ -252,6 +252,16 @@ class JSONValidator extends Validator {
     // Implement JSON validation logic here
   }
 }
+class NameValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement name validation logic here
+  }
+}
+class AlphanumericValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement alphanumeric validation logic here
+  }
+}
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

@@ -2,7 +2,7 @@ const Validator = require('./Validator');
 const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
 const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator } = require('./Validators/Format');
 const { MinLengthValidator, MaxLengthValidator } = require('./Validators/Length');
-const { StringTypeValidator, NumberTypeValidator } = require('./Validators/Type');
+const { StringTypeValidator, NumberTypeValidator, ArrayTypeValidator, ObjectTypeValidator, BooleanTypeValidator } = require('./Validators/Type');
 class RequestValidator  {
   constructor(req) {
     this._req = req;
@@ -10,6 +10,9 @@ class RequestValidator  {
       // Type validators
       string: new StringTypeValidator(),
       number: new NumberTypeValidator(),
+      array: new ArrayTypeValidator(),
+      object: new ObjectTypeValidator(),
+      boolean: new BooleanTypeValidator(),
 
       // Length validators
       min: new MinLengthValidator(),
@@ -32,10 +35,7 @@ class RequestValidator  {
 
       whitespace: new WhitespaceValidator(),
       trim: new TrimValidator(),
-      array: new ArrayTypeValidator(),
-      object: new ObjectTypeValidator(),
       file: new FileValidator(),
-      boolean: new BooleanTypeValidator(),
       enum: new EnumValidator(),
       regex: new RegexValidator(),
 

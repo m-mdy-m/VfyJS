@@ -53,4 +53,7 @@ class FunctionTypeValidator extends Validator {
     return null;
   }
 }
-module.exports = { StringTypeValidator, NumberTypeValidator };
+module.exports = { StringTypeValidator, NumberTypeValidator,BooleanTypeValidator,
+  ObjectTypeValidator,
+  ArrayTypeValidator,
+  FunctionTypeValidator };

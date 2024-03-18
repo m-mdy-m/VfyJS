@@ -411,11 +411,3 @@ class ImageDimensionsValidator extends Validator {
 // Example rule: "profilePic:imageDimensions:300,300" // Max width: 300px, Max height: 300px
 
 module.exports = RequestValidator ;
-
-router.get("/", (req, res, nxt) => {
-  const result = validation(req.body, {
-    username: "required|string|min:2|max:10",
-    password: "required|number|min:8|max:20|",
-    email: "required",
-  });
-});

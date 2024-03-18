@@ -28,7 +28,78 @@
  * @property {boolean} options.whitespace.required - Whether whitespace is not allowed.
  * @property {string} options.whitespace.errorMessage - Error message for whitespace validation failure.
  */
-let defaultOptions = {};
+/**
+ * Default options for password and username validation.
+ */
+let defaultOptions = {
+    // Default options for password validation
+    password: {
+        minLength: {
+            value: 8,
+            errorMessage: "Password must be at least 8 characters long."
+        },
+        maxLength: {
+            value: 50,
+            errorMessage: "Password cannot exceed 50 characters."
+        },
+        uppercase: {
+            required: true,
+            errorMessage: "Password must contain at least one uppercase letter."
+        },
+        lowercase: {
+            required: true,
+            errorMessage: "Password must contain at least one lowercase letter."
+        },
+        number: {
+            required: true,
+            errorMessage: "Password must contain at least one numeric digit."
+        },
+        specialCharacter: {
+            required: true,
+            errorMessage: "Password must contain at least one special character."
+        },
+        alphabetic: {
+            required: false,
+            errorMessage: "Password may not contain alphabetic characters."
+        },
+        whitespace: {
+            required: false,
+            errorMessage: "Whitespace is not allowed in the password."
+        }
+    },
+
+    // Default options for username validation
+    username: {
+        minLength: {
+            value: 4,
+            errorMessage: "Username must be at least 4 characters long."
+        },
+        maxLength: {
+            value: 20,
+            errorMessage: "Username cannot exceed 20 characters."
+        },
+        uppercase: {
+            required: false,
+            errorMessage: "Uppercase letters are not allowed in the username."
+        },
+        number: {
+            required: false,
+            errorMessage: "Numeric digits are not allowed in the username."
+        },
+        nonAlphanumeric: {
+            required: false,
+            errorMessage: "Non-alphanumeric characters are not allowed in the username."
+        },
+        trim: {
+            required: true,
+            errorMessage: "Leading or trailing whitespace is not allowed in the username."
+        },
+        repeat: {
+            required: true,
+            errorMessage: "Consecutive characters are not allowed in the username."
+        }
+    }
+};
 function configurePassword(option) {
   defaultOptions = { ...defaultOptions, ...option };
 }

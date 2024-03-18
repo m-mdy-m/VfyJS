@@ -1,5 +1,5 @@
 const validateEmail = require("../../form/email");
-const {} = require("../../links/validate.url");
+const { validateUrl, isHttp, isHttps } = require("../../links/validate.url");
 const Validator = require("../Validator");
 
 class EmailValidator extends Validator {
@@ -18,18 +18,62 @@ class DateValidator extends Validator {
 }
 
 class URLValidator extends Validator {
+  /**
+   * Validates the URL field in the body.
+   * @param {string} field - The field name to validate.
+   * @param {string} ruleValue - The expected protocol ("http" or "https").
+   * @param {object} body - The body object containing the field to validate.
+   * @returns {string|null} - Returns an error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
-    return validateUrl.
+    try {
+      // Call the validateUrl function with the provided field value and expected protocol
+      validateUrl(body[field], ruleValue);
+      // Return null if validation succeeds
+      return null;
+    } catch (error) {
+      // Return the error message if validation fails
+      return error.message;
+    }
   }
 }
 class HTTPValidator extends Validator {
+  /**
+   * Validates if the specified field value is an HTTP URL.
+   * @param {string} field - The field name to validate.
+   * @param {string} ruleValue - The expected rule value (not used in this validator).
+   * @param {object} body - The object containing the field to validate.
+   * @returns {string|null} - Returns an error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
-    return validateUrl.isHttp(body[field])
+    try {
+      if (!isHttp(body[field])) {
+        throw new Error(`${field} must be an HTTP URL.`);
+      }
+      return null;
+    } catch (error) {
+      return error.message;
+    }
   }
 }
+
 class HTTPSValidator extends Validator {
+  /**
+   * Validates if the specified field value is an HTTPS URL.
+   * @param {string} field - The field name to validate.
+   * @param {string} ruleValue - The expected rule value (not used in this validator).
+   * @param {object} body - The object containing the field to validate.
+   * @returns {string|null} - Returns an error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
-    return isHttpsUrl(body[field])
+    try {
+      if (!isHttps(body[field])) {
+        throw new Error(`${field} must be an HTTPS URL.`);
+      }
+      return null;
+    } catch (error) {
+      return error.message;
+    }
   }
 }
 class PhoneNumberValidator extends Validator {

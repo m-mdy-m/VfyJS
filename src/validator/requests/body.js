@@ -102,19 +102,7 @@ class CustomValidator extends Validator {
   }
 }
 
-class LengthRangeValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const [minLength, maxLength] = ruleValue.split(",");
-    const fieldLength = body[field].length;
-    if (
-      fieldLength < parseInt(minLength) ||
-      fieldLength > parseInt(maxLength)
-    ) {
-      return `${field} must be between ${minLength} and ${maxLength} characters long.`;
-    }
-    return null;
-  }
-}
+
 
 // Example rule: "age": "lengthRange:18,100"
 class DateRangeValidator extends Validator {

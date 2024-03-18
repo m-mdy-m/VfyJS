@@ -27,4 +27,22 @@ class MaxLengthValidator extends Validator {
     return null;
   }
 }
+
+class LengthRangeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const [minLength, maxLength] = ruleValue.split(",").map(value => parseInt(value));
+
+    // Check if ruleValue is valid
+    if (isNaN(minLength) || isNaN(maxLength)) {
+      throw new Error(`Invalid rule value for ${field}. Rule value must be in the format 'minLength,maxLength'.`);
+    }
+
+    const fieldLength = body[field].length;
+    if (fieldLength < minLength || fieldLength > maxLength) {
+      return `${field} must be between ${minLength} and ${maxLength} characters long.`;
+    }
+    return null;
+  }
+}
+
 module.exports = { MaxLengthValidator, MinLengthValidator };

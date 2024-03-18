@@ -1,3 +1,4 @@
+const checkValueColor = require("../../colors/isColor");
 const validateFormPassword = require("../../form/password");
 const validateUsername = require("../../form/username");
 const Validator = require("../Validator");
@@ -23,7 +24,12 @@ class UsernameValidator extends Validator {
 }
 class HexColorValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement hexadecimal color code validation logic here
+    try {
+      checkValueColor(body[field])
+      return null
+    } catch (error) {
+      return error.message
+    }
   }
 }
 class IPLocationValidator extends Validator {

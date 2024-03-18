@@ -156,10 +156,7 @@ class EmailValidator extends Validator {
 }
 class DateValidator extends Validator {
   validate(field, ruleValue, body) {
-    if (!moment(body[field], ruleValue, true).isValid()) {
-      return `${field} must be a valid date in format ${ruleValue}.`;
-    }
-    return null;
+    // Implement URL validation logic here
   }
 }
 
@@ -265,6 +262,16 @@ class AlphanumericValidator extends Validator {
 class LanguageValidator extends Validator {
   validate(field, ruleValue, body) {
     // Implement language code validation logic here
+  }
+}
+class GenderValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement gender validation logic here
+  }
+}
+class AgeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement age validation logic here
   }
 }
 module.exports = ValidationBody;

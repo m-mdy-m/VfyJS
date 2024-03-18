@@ -66,6 +66,6 @@ function isHttp(url) {
     ifTruthyValue(hasSpecial, `The hostname "${hostname}" in the URL "${href}" must contain at least one special character.`);
 
     // Check if the protocol is 'http' and the URL is in the correct format
-    return protocol && hasHttp;
+    return hasHttp;
 }
 module.exports = isHttp;

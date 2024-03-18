@@ -1,3 +1,5 @@
+const Validator = require('./Validator');
+const { StringTypeValidator, NumberTypeValidator } = require('./Validators/Type');
 class RequestValidator  {
   constructor(req) {
     this._req = req;
@@ -91,11 +93,7 @@ class RequestValidator  {
   }
 }
 
-class Validator {
-  validate(field, ruleValue, body) {
-    throw new Error("Method not implemented.");
-  }
-}
+
 
 class RequiredValidator extends Validator {
   validate(field, ruleValue, body) {
@@ -106,41 +104,6 @@ class RequiredValidator extends Validator {
   }
 }
 
-class StringTypeValidator extends Validator {
-  validate(field, ruleValue, body) {
-    if (typeof body[field] !== "string") {
-      return `${field} must be a string.`;
-    }
-    return null;
-  }
-}
-
-class NumberTypeValidator extends Validator {
-  validate(field, ruleValue, body) {
-    if (typeof body[field] !== "number") {
-      return `${field} must be a number.`;
-    }
-    return null;
-  }
-}
-
-class MinLengthValidator extends Validator {
-  validate(field, ruleValue, body) {
-    if (body[field].length < parseInt(ruleValue)) {
-      return `${field} must be at least ${ruleValue} characters long.`;
-    }
-    return null;
-  }
-}
-
-class MaxLengthValidator extends Validator {
-  validate(field, ruleValue, body) {
-    if (body[field].length > parseInt(ruleValue)) {
-      return `${field} cannot exceed ${ruleValue} characters.`;
-    }
-    return null;
-  }
-}
 
 class UppercaseValidator extends Validator {
   validate(field, ruleValue, body) {

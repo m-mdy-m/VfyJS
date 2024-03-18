@@ -31,13 +31,13 @@ class RequestValidator  {
       ipv4: new IPv4Validator(),
       ipv6: new IPv6Validator(),
       http : new  HTTPValidator(),
-      http : new HTTPSValidator(),
-
-      whitespace: new WhitespaceValidator(),
-      trim: new TrimValidator(),
-      file: new FileValidator(),
-      enum: new EnumValidator(),
-      regex: new RegexValidator(),
+      https: new HTTPSValidator(),
+      // Additional validators
+       whitespace: new WhitespaceValidator(),
+       trim: new TrimValidator(),
+       file: new FileValidator(),
+       enum: new EnumValidator(),
+       regex: new RegexValidator(),
 
       // Additional custom validators
       password: new PasswordValidator(),

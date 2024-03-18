@@ -302,6 +302,58 @@ class DocumentIDValidator extends Validator {
     // Implement document ID validation logic here
   }
 }
+class LengthRangeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const [minLength, maxLength] = ruleValue.split(",");
+    const fieldLength = body[field].length;
+    if (
+      fieldLength < parseInt(minLength) ||
+      fieldLength > parseInt(maxLength)
+    ) {
+      return `${field} must be between ${minLength} and ${maxLength} characters long.`;
+    }
+    return null;
+  }
+}
+
+// Example rule: "age": "lengthRange:18,100"
+class DateRangeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const [startDate, endDate] = ruleValue.split(",");
+    const fieldValue = new Date(body[field]);
+    if (fieldValue < new Date(startDate) || fieldValue > new Date(endDate)) {
+      return `${field} must be between ${startDate} and ${endDate}.`;
+    }
+    return null;
+  }
+}
+// Example rule: "birthdate": "dateRange:1900-01-01,2022-12-31"
+
+class ArrayLengthValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const expectedLength = parseInt(ruleValue);
+    if (!Array.isArray(body[field]) || body[field].length !== expectedLength) {
+      return `${field} must contain exactly ${expectedLength} elements.`;
+    }
+    return null;
+  }
+}
+
+// Example rule: "grades": "arrayLength:5"
+class ObjectKeyValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const expectedKeys = ruleValue.split(",");
+    const actualKeys = Object.keys(body[field]);
+    const missingKeys = expectedKeys.filter((key) => !actualKeys.includes(key));
+    if (missingKeys.length > 0) {
+      return `Missing keys in ${field}: ${missingKeys.join(", ")}.`;
+    }
+    return null;
+  }
+}
+
+// Example rule: "user": "objectKeys:id,name,email"
+
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

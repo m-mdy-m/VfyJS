@@ -64,7 +64,7 @@ function validateUsername(input, options = {}) {
     // Check for whitespace if required
     let checkWhiteSpace = getRequired(trim, false);
     if (checkWhiteSpace) {
-        throwIfFalsy(!checkWhiteSpace, validator.hasWhitespace(), messageError, 'hasWhitespace', 'Invalid input. Value cannot contain leading or trailing whitespaces.');
+        throwIfFalsy(!checkWhiteSpace, validator.hasWhitespace(), messageError, 'hasWhitespace', 'cannot contain leading or trailing whitespaces.');
     }
 
     // Trim username value
@@ -72,15 +72,15 @@ function validateUsername(input, options = {}) {
 
     // Validate non-alphanumeric requirement
     const isNonAlphanumeric = getRequired(nonAlphanumeric, false);
-    ifTruthyValue('Value must be alphanumeric. Example: ABC123', isNonAlphanumeric, input, messageError, 'isNonAlphanumeric');
+    ifTruthyValue('must be alphanumeric.', isNonAlphanumeric, input, messageError, 'isNonAlphanumeric');
 
     // Validate number requirement
     const isNumber = getRequired(number, validator.hasNumber());
-    IfBothTruthy(isNumber, !validator.hasNumber() && !validator.hasNumeric(), 'Invalid input. The password must contain at least one number.', input, messageError, 'isNumber');
+    IfBothTruthy(isNumber, !validator.hasNumber() && !validator.hasNumeric(), 'must contain at least one number.', input, messageError, 'isNumber');
 
     // Validate repeat requirement
     let isRepeat = getFalseRequired(repeat, validator.hasRepeat());
-    IfBothTruthy(isRepeat, validator.hasRepeat(), 'Invalid input. Password cannot have consecutive repeated characters.', input, messageError, 'isRepeat');
+    IfBothTruthy(isRepeat, validator.hasRepeat(), 'cannot have consecutive repeated characters.', input, messageError, 'isRepeat');
 
     // Validate length requirements
     let minValue = getValidValue(minLength, minLength);
@@ -98,11 +98,11 @@ function validateUsername(input, options = {}) {
 
     // Validate type and length
     validateType('string',username,getErrorMessage(username),input,messageError,'Check Type')
-    validationsLength(username, null, min, max, `Invalid configuration for minimum and maximum length. Ensure that ${min} and ${max} are either set to true, false, or numeric values or strings.`, input, messageError, 'Validation Length');
+    validationsLength(username, null, min, max, `${min} and ${max} must be numeric values or strings.`, input, messageError, 'Validation Length');
 
     // Check if username length exceeds maximum length
     if (typeof max === 'number' && username.length > max) {
-        throw new Error('Username length exceeds the maximum allowed length.');
+        throw new Error('too long.');
     }
 
     // Type mismatch validations

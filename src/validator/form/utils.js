@@ -8,6 +8,9 @@ const { toString } = require("./helper/dataConversion");
  * @returns {Object} An object containing validation results.
  */
 exports.isName = (value) => {
+    if (typeof value !== 'string') {
+        throw new Error('Value must be a string.');
+      }
     // Trim the value
     value = trimmedValue(value);
     

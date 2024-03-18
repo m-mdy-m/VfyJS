@@ -32,7 +32,7 @@ function optionEmail (options){
     [
         `Local part must be ${standardMinLength}-${standardMaxLength} characters.`,
         `Domain part must be ${standardMinLength}-${standardMaxLength} characters.`,
-        `Subdomain must be 2-${standardMaxLength} characters.`,
+        `Subdomain must be ${standardMaxLength} characters.`,
         `Local part must be at most ${standardMaxLength} characters.`,
         `Domain part must be at most ${standardMaxLength} characters.`,
         `Subdomain must be at most ${standardMaxLength} characters.`,

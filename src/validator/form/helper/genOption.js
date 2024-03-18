@@ -6,13 +6,13 @@ function optionsPassword (options){
     const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
     const optionValidations = [MIN_LENGTH, MAX_LENGTH, true, true, true, true, true, false];
     const msgError = [
-        'Must be at least 8 characters long.',
+        'Must be 8-20 characters long.',
         'Cannot exceed 20 characters.',
         'Must contain at least one uppercase letter.',
         'Must contain at least one lowercase letter.',
         'Must have at least one number.',
         'Must contain at least one special character such as (@#$%^&*).',
-        'Input must contain at least one alphabetic character.',
+        'Must contain at least one alphabetic character.',
         'Cannot contain whitespace.'
     ]
     let objectOPtion =  createValidationOptions(optionName,optionValidations,msgError)
@@ -63,7 +63,7 @@ function optionUsername (username,options){
     ]
     const messageError = 
     [
-        'Must be at least 8 characters long.',
+        'Must be 8-64 characters long.',
         'Cannot exceed 64 characters.',
         'Must contain at least one uppercase letter.',
         'Must have at least one number.',

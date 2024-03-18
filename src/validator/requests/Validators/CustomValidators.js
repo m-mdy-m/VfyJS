@@ -60,9 +60,23 @@ class LanguageValidator extends Validator {
 }
 class GenderValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement gender validation logic here
+    const gender = body[field];
+
+    if (typeof gender !== 'string') {
+      return `${field} must be a string representing gender.`;
+    }
+
+    // Assuming gender must be one of these values: 'male', 'female'
+    const validGenders = ['male', 'female'];
+
+    if (!validGenders.includes(gender.toLowerCase())) {
+      return `${field} must be one of the following values: ${validGenders.join(', ')}.`;
+    }
+
+    return null; // Indicates no validation error
   }
 }
+
 class AgeValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
     const age = body[field];

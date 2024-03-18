@@ -46,11 +46,22 @@ class Validator {
   validate() {
     throw new Error("Method not implemented.");
   }
-  isUppercase(value){
-    return /[A-Z]/.test(value)
+  /**
+   * Checks if the input value is entirely uppercase.
+   * @param {string} value - The value to be checked.
+   * @returns {boolean} - True if the value is entirely uppercase, otherwise false.
+   */
+  isUppercase(value) {
+    return /^[A-Z]+$/.test(value);
   }
-  isLowerCase(value){
-    return /[a-z]/.test(value)
+
+  /**
+   * Checks if the input value is entirely lowercase.
+   * @param {string} value - The value to be checked.
+   * @returns {boolean} - True if the value is entirely lowercase, otherwise false.
+   */
+  isLowerCase(value) {
+    return /^[a-z]+$/.test(value);
   }
 }
 

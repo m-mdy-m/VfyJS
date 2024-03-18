@@ -2,6 +2,7 @@ const { validateLength } = require("../../../errors/HandleError");
 const checkValueColor = require("../../colors/isColor");
 const validateFormPassword = require("../../form/password");
 const validateUsername = require("../../form/username");
+const { isName } = require("../../form/utils");
 const Validator = require("../Validator");
 
 class PasswordValidator extends Validator {
@@ -45,7 +46,8 @@ class JSONValidator extends Validator {
 }
 class NameValidator extends Validator {
   validate(field, ruleValue, body) {
-    // Implement name validation logic here
+    const value = body[field]
+    isName(value)
   }
 }
 class AlphanumericValidator extends Validator {

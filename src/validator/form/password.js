@@ -93,7 +93,7 @@ function validateFormPassword(input, options = {}) {
     validateWithCondition(getReq(specialCharacter), validator.hasSpecialCharacter(), input, msgError, 'hasSpecialCharacter', getErrorMessage(specialCharacter));
     validateWithCondition(getReq(alphabetic), validator.hasAlphabetic(), input, msgError, 'hasAlphabetic', getErrorMessage(alphabetic));
     let whitespaceCheck = getFalseRequired(whitespace);
-    IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), "Whitespace is not allowed. Please remove any leading or trailing spaces.",input,msgError,'hasWhitespace');
+    IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), "Whitespace is not allowed. Remove any leading or trailing spaces.",input,msgError,'hasWhitespace');
 
     const minValidLength = getValidValue(minLength, MIN_LENGTH);
     const maxValidLength = getValidValue(maxLength, MAX_LENGTH);
@@ -116,7 +116,7 @@ function validateFormPassword(input, options = {}) {
 
     validateType('number', min, getErrorMessage(minLength));
     validateType('number', max, getErrorMessage(maxLength));
-    validationsLength(value,null, min, max, `Password length must be between ${min} and ${max} characters.`, input, msgError, 'validations Length');
+    validationsLength(value,null, min, max, `length must be between ${min} and ${max} characters.`, input, msgError, 'validations Length');
     const isValid = min &&
         max &&
         (uppercase.required ? validator.hasUppercase() : true) &&

@@ -222,7 +222,21 @@ class IPv6Validator extends Validator {
     // Implement IPv6 validation logic here
   }
 }
-
+class CustomValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement custom validation logic here based on ruleValue
+  }
+}
+class PasswordValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement password validation logic here
+  }
+}
+class UsernameValidator extends Validator {
+    validate(field, ruleValue, body) {
+      // Implement username validation logic here
+    }
+  }
 module.exports = ValidationBody;
 
 router.get("/", (req, res, nxt) => {

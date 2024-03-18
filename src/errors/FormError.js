@@ -97,9 +97,3 @@ exports.IfBothTruthy = (property, method, message,input,errors,validationRule) =
         throw new ValueTypeError(property, message || `Value should be of type ${expectedType}`,input,errors,validationRule,'Type','Type Match');
       }
   }
-
-//   exports.validateLengths=(value, minLength, maxLength, message, input, errors, validationRule)=>{
-    // if (length < minLength || length > maxLength) {
-        // throw new StringLengthError(message || `Value must be between ${minLength} and ${maxLength} characters long`, value, input, errors, validationRule, 'length', 'Length out of range');
-    // }
-//   }

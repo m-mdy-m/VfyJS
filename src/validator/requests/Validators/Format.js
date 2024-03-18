@@ -16,7 +16,9 @@ class DateValidator extends Validator {
     return null;
   }
 }
-
+/**
+ * Validator subclass for validating URL fields in the body object.
+ */
 class URLValidator extends Validator {
   /**
    * Validates the URL field in the body.

@@ -35,17 +35,17 @@ function validateEmail(input, options = {}) {
   const {maxLenDomain, maxLenLocal, maxLenSubdomain, minLenDomain, minLenLocal, minLenSubdomain, msgError } = optionEmail(options);
 
   // Check if the input is a string
-  validateType('string', value, `Invalid input type. Please enter a valid email as a string.`, input, msgError, 'Check Type');
+  validateType('string', value, `Please enter a valid email as a string.`, input, msgError, 'Check Type');
 
   // Convert value to string
   toString(value);
   
   // Basic email format validation
   const hasSymbol = /^(?!.*@.*@)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  throwIfFalsy(hasSymbol, input, msgError, 'hasSymbol', 'Email address must contain the "@" symbol.');
+  throwIfFalsy(hasSymbol, input, msgError, 'hasSymbol', 'Email must contain "@".');
   
   const hasOneDot = /(?=.*(\.)\1)/.test(value);
-  ifTruthyValue('The value must have at most one dot.', hasOneDot, input, msgError, 'hasOneDot');
+  ifTruthyValue('Must have at most one dot.', hasOneDot, input, msgError, 'hasOneDot');
 
   // Local part length validation
   const localPart = value.split('@')[0];
@@ -82,8 +82,8 @@ function validateEmail(input, options = {}) {
   const email = localPart + '@' + subdomain + domainPart;
   const isValidEmail = email === value;
   const isValidFormat = validator.matchesEmailFormat(value);
-  validateType('boolean', isValidFormat, `Unexpected validation result. The email validation should return a boolean.`, input, msgError, 'Format email is False');
-  throwIfFalsy(isValidFormat, input, msgError, 'Format email is False', `The provided email address '${value}' is not valid. Please enter a valid email.`);
+  validateType('boolean', isValidFormat, 'Unexpected validation result for email format.', input, msgError, 'Email Format');
+  throwIfFalsy(isValidFormat, input, msgError, 'Email Format', `The provided email address '${value}' is not valid. Please enter a valid email.`);
   const isValid = isValidFormat && hasSymbol && isValidEmail;
 
   // If the input is a string and has a valid email format, return true

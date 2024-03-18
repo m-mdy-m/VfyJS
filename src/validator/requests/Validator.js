@@ -46,6 +46,12 @@ class Validator {
   validate() {
     throw new Error("Method not implemented.");
   }
+  isUppercase(value){
+    return /[A-Z]/.test(value)
+  }
+  isLowerCase(value){
+    return /[a-z]/.test(value)
+  }
 }
 
 module.exports = Validator;

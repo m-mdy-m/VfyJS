@@ -1,7 +1,7 @@
 "use strict";
 
 const inputValidator = require("../../utils/inputValidator");
-const { ifFalsyValue,IfNotType , validationsLen } = require("../../errors/HandleError");
+const { ifFalsyValue,IfNotType , validationsLen, isEmpty } = require("../../errors/HandleError");
 const { getValidValue } = require("../../common/validationConstants");
 const { optionEmail } = require("./helper/genOption");
 const { validationsLength, throwIfFalsy, ifTruthyValue, validateType } = require("../../errors/FormError");
@@ -30,7 +30,7 @@ const { toString } = require("./helper/dataConversion");
 function validateEmail(input, options = {}) {
   // Extracting value from input or using input directly if it's a string
   const value = input.value ? input.value : input;
-
+  isEmpty(value,'Email address cannot be empty.')
   // Extracting options and error messages
   const {maxLenDomain, maxLenLocal, maxLenSubdomain, minLenDomain, minLenLocal, minLenSubdomain, msgError } = optionEmail(options);
 

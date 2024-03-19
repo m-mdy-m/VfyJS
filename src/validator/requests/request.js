@@ -64,7 +64,9 @@ class RequestValidator {
    * @param {Object} req - The request object containing the data to be validated.
    */
   constructor(req) {
+    /** @private */
     this._req = req;
+    /** @private */
     this.validators = {
       // Type validators
       string: new StringTypeValidator(),

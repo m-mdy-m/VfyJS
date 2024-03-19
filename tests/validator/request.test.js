@@ -30,10 +30,10 @@ describe("RequestValidator", () => {
   });
   it("should return validation errors for invalid data", () => {
     const invalidReq = {
-        username: "john@doe", // Invalid username
-        password: "pass", // Invalid password
-        age: "twenty-five", // Invalid age
-        email: "invalid_email", // Invalid email
+      username: "john@doe", // Invalid username
+      password: "pass", // Invalid password
+      age: "twenty-five", // Invalid age
+      email: "invalid_email", // Invalid email
     };
     const invalidValidator = new RequestValidator(invalidReq);
     const rules = {
@@ -45,11 +45,10 @@ describe("RequestValidator", () => {
     const errors = invalidValidator.validate(rules);
 
     expect(errors).toEqual({
-      username:
-        "username must be a string containing alphanumeric characters only, with a length between 5 and 20 characters.",
+      username: "username must contain only alphanumeric characters.",
       password: "password must be at least 8 characters long.",
       age: "age must be a valid number.",
-      email: "email must be a valid email address.",
+      email: "Email must contain '@'.",
     });
   });
 

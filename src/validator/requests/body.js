@@ -127,40 +127,14 @@ class FileTypeValidator extends Validator {
   }
 }
 // Example: "avatar:fileType:image/jpeg,image/png" - Validates that 'avatar' file type is either JPEG or PNG.
-class SQLInjectionValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const sqlInjectionPattern =
-      /(\b(SELECT|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER)\b)|(--.*)/i;
-    if (sqlInjectionPattern.test(body[field])) {
-      return `Potential SQL injection detected in ${field}.`;
-    }
-    return null;
-  }
-}
+
 // Example: "query:NoSQLSQLInjection" - Validates that 'query' does not contain SQL injection patterns in a NoSQL context.
 
-class NoSQLInjectionValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const nosqlInjectionPattern = /\$where|javascript:/i;
-    if (nosqlInjectionPattern.test(body[field])) {
-      return `Potential NoSQL injection detected in ${field}.`;
-    }
-    return null;
-  }
-}
+
 // Example: "query:nosqlInjection" - Validates that 'query' does not contain NoSQL injection patterns.
 
 // Example: "search:sqlInjection" - Validates that 'search' input does not contain SQL injection patterns.
-class XSSValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const xssPattern =
-      /<script>|<\/script>|<img\s+src\s*=\s*".*?"|onerror\s*=\s*".*?"/i;
-    if (xssPattern.test(body[field])) {
-      return `Potential XSS attack detected in ${field}.`;
-    }
-    return null;
-  }
-}
+
 // Example: "input:xss" - Validates that 'input' does not contain XSS attack payloads.
 class SensitiveDataValidator extends Validator {
   validate(field, ruleValue, body) {

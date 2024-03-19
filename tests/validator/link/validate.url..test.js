@@ -28,7 +28,7 @@ describe("validateUrl function", () => {
     expect(() => {
       validateUrl("https://www.example.com", "http");
     }).toThrow(
-      'The URL must contain the substring "http". Please provide a valid URL.'
+      'Only http URLs are allowed.'
     );
   });
 });

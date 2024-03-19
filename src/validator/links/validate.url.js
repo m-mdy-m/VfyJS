@@ -35,7 +35,7 @@ function validateUrl(url, expectedProtocol) {
   // Check if the URL matches the expected pattern
   ifFalsyValue(
     urlPattern.test(url),
-    `The URL must contain the substring "${expectedProtocol}". Please provide a valid URL.`
+    `Only ${expectedProtocol} URLs are allowed.`
   );
 
   // Perform type and numeric checks
@@ -126,7 +126,7 @@ function isHttp(url) {
   try {
     return validateUrl(url, "http");
   } catch (error) {
-    throw new Error("Invalid URL.");
+    throw new Error(error.message);
   }
 }
 module.exports = { isHttp, isHttps, validateUrl };

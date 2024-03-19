@@ -15,12 +15,12 @@ describe('isHttp and isHttps functions', () => {
   it('should throw an error for invalid HTTP URL', () => {
     expect(() => {
       isHttp('https://www.example.com');
-    }).toThrow('Only HTTP URLs are allowed.');
+    }).toThrow('Only http URLs are allowed.');
   });
 
   it('should throw an error for invalid HTTPS URL', () => {
     expect(() => {
       isHttps('http://www.example.com');
-    }).toThrow('Only HTTPS URLs are allowed.');
+    }).toThrow('Only https URLs are allowed.');
   });
 });

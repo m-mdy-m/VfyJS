@@ -86,7 +86,59 @@ try {
 
 ---
 
-Based on the provided code and documentation, the `validateFormPassword` function in `vfyjs` allows you to validate passwords based on customizable criteria. Let's update and improve the documentation to provide comprehensive explanations and examples for each configuration option.
+### ConfigUsername
+
+# Username Validation Documentation
+
+## Overview
+
+The `isUsername` function is designed to validate usernames based on customizable criteria. It offers a range of validation options to ensure that usernames meet specific requirements, including length constraints, character composition, and format restrictions.
+
+## Function Signature
+
+```javascript
+isUsername(input, options = {})
+```
+
+- **Parameters:**
+  - `input`: The username string to be validated.
+  - `options`: Options object for customizing validation criteria (optional).
+
+- **Returns:** 
+  - `boolean`: True if the username is valid according to the specified criteria, otherwise false.
+
+- **Throws:** 
+  - `Error`: Throws an error if validation fails.
+
+## Validation Options
+
+The `options` parameter allows customization of the validation criteria. Below are the available options:
+
+- `minLength`: Minimum length requirements for the username.
+- `maxLength`: Maximum length requirements for the username.
+- `uppercase`: Uppercase letter requirements for the username.
+- `number`: Numeric digit requirements for the username.
+- `nonAlphanumeric`: Non-alphanumeric character requirements for the username.
+- `trim`: Whitespace requirements for the username.
+- `repeat`: Consecutive character requirements for the username.
+
+Each option includes a `required` property to specify whether the corresponding criteria are mandatory, along with an `errorMessage` property to define the error message for validation failures.
+
+## Example Usage
+
+```javascript
+const { isUsername } = require("vfyjs");
+
+const username = "StringUsername123";
+const isValid = isUsername(username);
+
+console.log(isValid); // true
+```
+
+
+
+
+
 
 ### ConfigPassword
 

@@ -1,6 +1,17 @@
 const Validator = require("../Validator");
 
+/**
+ * ObjectKeyValidator class for validating the presence of specific keys in an object field.
+ * @extends Validator
+ */
 class ObjectKeyValidator extends Validator {
+  /**
+   * Validates the presence of specific keys in the specified object field.
+   * @param {string} field - The name of the field to validate.
+   * @param {string} ruleValue - A comma-separated string of keys expected to be present in the object field.
+   * @param {Object} body - The request body object containing the field to validate.
+   * @returns {string|null} - Returns a validation error message if any expected keys are missing, otherwise returns null.
+   */
   validate(field, ruleValue, body) {
     try {
       // Ensure that the field exists in the body

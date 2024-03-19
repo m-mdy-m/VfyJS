@@ -139,26 +139,6 @@ class RequestValidator {
   validate(rules, options = {}) {
     const { customMessages = {} } = options;
     const errors = {};
-    const requestData = {
-      body: this._req.body,
-      params: this._req.params,
-      query: this._req.query,
-      headers: this._req.headers,
-      cookies: this._req.cookies,
-      method: this._req.method,
-      path: this._req.path,
-      protocol: this._req.protocol,
-      hostname: this._req.hostname,
-      originalUrl: this._req.originalUrl,
-      xhr: this._req.xhr,
-      secure: this._req.secure,
-      ip: this._req.ip,
-      sessionID: this._req.sessionID,
-      fileUploads: this._req.files,
-      authenticationInfo: this._req.user,
-      errorInfo: this._req.error,
-    };
-
     try {
       for (const field in rules) {
         const fieldRules = rules[field].split("|");
@@ -168,7 +148,7 @@ class RequestValidator {
           if (!validator) {
             throw new Error(`Validation rule '${ruleName}' is not supported.`);
           }
-          const error = validator.validate(field, ruleValue, requestData);
+          const error = validator.validate(field, ruleValue, this._req);
           if (error) {
             errors[field] = customMessages[field]
               ? customMessages[field]
@@ -185,3 +165,18 @@ class RequestValidator {
 }
 
 module.exports = RequestValidator;
+const body = {
+  username: "m__mdy__m",
+  password: "password123",
+  age: 25,
+  email: "john@example.com",
+};
+const validator = new RequestValidator(body);
+const rule = {
+  username: "username",
+  password: "min:8|max:20",
+  age: "number|min:18|max:100",
+  email: "email",
+};
+const error = validator.validate(rule);
+console.log("er =>", error);

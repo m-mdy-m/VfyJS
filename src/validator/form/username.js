@@ -56,9 +56,6 @@ function validateUsername(input, options = {}) {
     // Extract options
     const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, mergedOptions);
 
-    // Validate uppercase requirement
-    validateWithCondition(uppercase, validator.hasUppercase(), input, messageError, 'hasUppercase', getErrorMessage(uppercase));
-
     // Validate number requirement
     throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));
         

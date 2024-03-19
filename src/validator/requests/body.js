@@ -157,16 +157,6 @@ class HTMLSanitizationValidator extends Validator {
   }
 }
 // Example: "comment:htmlSanitization" - Validates that 'comment' input is properly sanitized.
-class AuthTokenValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const authTokenPattern = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/;
-    if (!authTokenPattern.test(body[field])) {
-      return `Invalid authentication token format in ${field}.`;
-    }
-    // Additional checks for token integrity can be performed here
-    return null;
-  }
-}
 
 // Example: "token:authToken" - Validates the format and integrity of the 'token' input.
 class EncryptionValidator extends Validator {
@@ -196,15 +186,7 @@ class HTTPSValidator extends Validator {
   }
 }
 // Example: "url:https" - Validates that 'url' uses HTTPS protocol.
-class PasswordHashValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const passwordHashPattern = /^\$2[ayb]\$[0-9]{2}\$[A-Za-z0-9/.]{53}$/;
-    if (!passwordHashPattern.test(body[field])) {
-      return `Password field ${field} must be securely hashed using bcrypt or similar algorithms.`;
-    }
-    return null;
-  }
-}
+
 // Example: "password:passwordHash" - Validates that 'password' is securely hashed.
 
 class AccessControlValidator extends Validator {

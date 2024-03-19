@@ -180,7 +180,6 @@ const options = {
   maxLength: { value: 20, errorMessage: "Username cannot exceed 20 characters." },
   uppercase: { required: true, errorMessage: "Username must contain at least one uppercase letter." },
   number: { required: true, errorMessage: "Username must contain at least one number." },
-  nonAlphanumeric: { required: true, errorMessage: "Username must contain at least one non-alphanumeric character." },
   trim: { required: true, errorMessage: "Username cannot contain leading or trailing whitespaces." },
   repeat: { required: true, errorMessage: "Username cannot have consecutive repeated characters." }
 };

@@ -51,7 +51,7 @@ function validateUsername(input, options = {}) {
     isEmpty(username,'Username is required.')
     const validator = inputValidator(username); // Create a validator instance
     // Extract options
-    const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, options);
+    const {minLength, maxLength, uppercase, number, trim, repeat, messageError} = optionUsername(username, options);
     // Validate number requirement
     throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));
         
@@ -64,10 +64,6 @@ function validateUsername(input, options = {}) {
     
     // Trim username value
     username = trimmedValue(username);
-
-    // Validate non-alphanumeric requirement
-    const isNonAlphanumeric = getRequired(nonAlphanumeric, false);
-    IfBothTruthy(!isNonAlphanumeric, validator.hasNonAlphanumeric(), nonAlphanumeric.errorMessage, input, messageError, 'isNonAlphanumeric');
 
     // Validate number requirement
     const isNumber = getRequired(number, validator.hasNumber());
@@ -107,15 +103,8 @@ function validateUsername(input, options = {}) {
     isTypeMismatch('boolean', maxValue, "boolean 2");
     isTypeMismatch('number', min, "number 1");
     isTypeMismatch('number', max, "number 2");
-    console.log('min=>',min);
-    console.log('max=>',max);
-    console.log('(uppercase.required ? validator.hasUppercase() : true)=>',(uppercase.required ? validator.hasUppercase() : true));
-    console.log('isNumber=>',isNumber);
-    console.log('!isNonAlphanumeric=>',isNonAlphanumeric);
-    console.log('!checkWhiteSpace=>',checkWhiteSpace);
-    console.log('(!isRepeat.required?!isRepeat.required : !isRepeat)=>',(isRepeat.required?isRepeat.required : isRepeat));
     // Check if the username is valid
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && checkWhiteSpace && (isRepeat.required ? isRepeat.required : isRepeat);
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && checkWhiteSpace && (isRepeat.required ? isRepeat.required : isRepeat);
     return isValid;
 }
 

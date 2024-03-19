@@ -236,6 +236,44 @@ module.exports = {
    * @memberof module:Validator
    * @constructor
    * @param {Object} req - The request object containing the data to be validated.
+   * @example
+   * const express = require('express');
+   * const { RequestValidator } = require('your-validator-module');
+   *
+   * const app = express();
+   * app.use(express.json());
+   *
+   * // Endpoint for user registration
+   * app.post('/register', (req, res) => {
+   *   // Instantiate RequestValidator with the request body
+   *   const validator = new RequestValidator(req.body);
+   *
+   *   // Define validation rules for the registration data
+   *   const rules = {
+   *     username: 'string|min:5|max:20|alphanumeric',
+   *     email: 'email',
+   *     password: 'string|min:8|max:20',
+   *     confirmPassword: 'string|equals:' + req.body.password,
+   *   };
+   *
+   *   // Validate the request data against the defined rules
+   *   const errors = validator.validate(rules);
+   *
+   *   // Check if there are validation errors
+   *   if (Object.keys(errors).length === 0) {
+   *     // Data is valid, proceed with registration
+   *     res.status(200).json({ message: 'Registration successful!' });
+   *   } else {
+   *     // Validation errors, return error response
+   *     res.status(400).json({ errors });
+   *   }
+   * });
+   *
+   * // Start the Express server
+   * const PORT = process.env.PORT || 3000;
+   * app.listen(PORT, () => {
+   *   console.log(`Server is running on port ${PORT}`);
+   * });
    */
   RequestValidator,
 };

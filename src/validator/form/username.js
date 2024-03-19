@@ -67,7 +67,7 @@ function validateUsername(input, options = {}) {
 
     // Validate non-alphanumeric requirement
     const isNonAlphanumeric = getRequired(NonAlphanumeric, false);
-    ifTruthyValue('must be alphanumeric.', isNonAlphanumeric, input, messageError, 'isNonAlphanumeric');
+    ifTruthyValue(NonAlphanumeric.errorMessage, isNonAlphanumeric, input, messageError, 'isNonAlphanumeric');
 
     // Validate number requirement
     const isNumber = getRequired(number, validator.hasNumber());

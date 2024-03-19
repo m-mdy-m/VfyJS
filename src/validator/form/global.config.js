@@ -50,16 +50,16 @@ let defaultOptions = {
     },
     uppercase: {
       required: false,
-      errorMessage: "Uppercase letters are not allowed in the username.",
+      errorMessage: "letters are not allowed in the username.",
     },
     number: {
       required: false,
-      errorMessage: "Numeric digits are not allowed in the username.",
+      errorMessage: "digits are not allowed in the username.",
     },
     nonAlphanumeric: {
       required: false,
       errorMessage:
-        "Non-alphanumeric characters are not allowed in the username.",
+        "characters are not allowed in the username.",
     },
     trim: {
       required: true,

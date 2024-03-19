@@ -1,18 +1,8 @@
-/**
- * Module for generating validation options for passwords, email addresses, and usernames.
- * @module genOption
- */
-
 const { MIN_LENGTH, MAX_LENGTH } = require("../../../common/validationConstants");
 const { defaultOptions } = require("../global.config");
 const createValidationOptions = require("../../../utils/handleOption");
 const inputValidator = require("../../../utils/inputValidator");
 
-/**
- * Generates validation options for passwords.
- * @param {Object} options - Additional options to customize password validation.
- * @returns {Object} - Validation options for passwords.
- */
 function optionsPassword (options){
     const { password } = defaultOptions;
     const { minLength, maxLength, uppercase, lowercase, number, specialCharacter, alphabetic, whitespace } = password;
@@ -38,38 +28,29 @@ function optionsPassword (options){
     return objectOption;
 }
 
-/**
- * Generates validation options for email addresses.
- * @param {Object} options - Additional options to customize email validation.
- * @returns {Object} - Validation options for email addresses.
- */
 function optionEmail (options){
     // Set standard length
-    const standardMaxLength = 255;
-    const standardMinLength = 3;
-    const optionName = ['minLenLocal', 'minLenDomain', 'minLenSubdomain', 'maxLenLocal', 'maxLenDomain', 'maxLenSubdomain'];
-    const optionValidations = [standardMinLength,standardMinLength,2, standardMaxLength,standardMaxLength,standardMaxLength];
-    const msgError = [
-        `Local part must be ${standardMinLength}-${standardMaxLength} characters.`,
-        `Domain part must be ${standardMinLength}-${standardMaxLength} characters.`,
-        `Subdomain must be ${standardMaxLength} characters.`,
-        `Local part must be at most ${standardMaxLength} characters.`,
-        `Domain part must be at most ${standardMaxLength} characters.`,
-        `Subdomain must be at most ${standardMaxLength} characters.`,
-    ];
-    
-    let objectOption = createValidationOptions(optionName, optionValidations, msgError);
-    objectOption = { ...objectOption, ...options };
-    
-    return objectOption;
+  const standardMaxLength = 255;
+  const standardMinLength = 3
+  const optionName = ['minLenLocal', 'minLenDomain', 'minLenSubdomain', 'maxLenLocal', 'maxLenDomain', 'maxLenSubdomain'];
+  const optionValidations = [standardMinLength,standardMinLength,2, standardMaxLength,standardMaxLength,standardMaxLength];
+  const msgError = 
+  [
+      `Local part must be ${standardMinLength}-${standardMaxLength} characters.`,
+      `Domain part must be ${standardMinLength}-${standardMaxLength} characters.`,
+      `Subdomain must be ${standardMaxLength} characters.`,
+      `Local part must be at most ${standardMaxLength} characters.`,
+      `Domain part must be at most ${standardMaxLength} characters.`,
+      `Subdomain must be at most ${standardMaxLength} characters.`,
+  ]
+  var objectOPtion = createValidationOptions(optionName,optionValidations,msgError);
+  
+  objectOPtion = { ...objectOPtion, ...options };
+
+  const { minLenLocal, minLenDomain, minLenSubdomain, maxLenLocal, maxLenDomain, maxLenSubdomain } = objectOPtion;
+  return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
 }
 
-/**
- * Generates validation options for usernames.
- * @param {string} username - The username to validate.
- * @param {Object} options - Additional options to customize username validation.
- * @returns {Object} - Validation options for usernames.
- */
 function optionUsername (username, options){
     const { username: usernameConfig } = defaultOptions;
     const { minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat } = usernameConfig;
@@ -78,11 +59,11 @@ function optionUsername (username, options){
     const validation = [
         validator.hasMinLength(minLength.value || MIN_LENGTH),
         validator.hasMaxLength(maxLength.value || MAX_LENGTH),
-        uppercase.required ? validator.hasUppercase() : false,
-        number.required ? validator.hasNumber() : false,
-        nonAlphanumeric.required ? validator.hasNonAlphanumeric() : false,
-        trim.required ? validator.hasWhitespace() : false,
-        repeat.required ? validator.hasRepeat() : false
+        uppercase.required ,
+        number.required,
+        nonAlphanumeric.required,
+        trim.required ,
+        repeat.required 
     ];
     const messageError = [
         `Must be ${minLength.value || MIN_LENGTH}-${maxLength.value || MAX_LENGTH} characters long.`,
@@ -96,6 +77,7 @@ function optionUsername (username, options){
 
     let objectOption = createValidationOptions(optionName, validation, messageError);
     objectOption = { ...objectOption, ...options };
+
     return objectOption;
 }
 

@@ -156,9 +156,6 @@ class HTMLSanitizationValidator extends Validator {
     return null;
   }
 }
-// Example: "comment:htmlSanitization" - Validates that 'comment' input is properly sanitized.
-
-// Example: "token:authToken" - Validates the format and integrity of the 'token' input.
 class EncryptionValidator extends Validator {
   validate(field, ruleValue, body) {
     const encryptionPattern = /(?:^|\W)encrypted(?:$|\W)/i;
@@ -170,12 +167,6 @@ class EncryptionValidator extends Validator {
 }
 // Example: "password:encryption" - Validates that 'password' field is encrypted.
 
-class RBACValidator extends Validator {
-  validate(field, ruleValue, body) {
-    // Implement RBAC validation logic here
-  }
-}
-// Example: "adminOnly:rbac" - Validates that 'adminOnly' field is accessible only to admins.
 class HTTPSValidator extends Validator {
   validate(field, ruleValue, body) {
     const httpsPattern = /^https:\/\//;

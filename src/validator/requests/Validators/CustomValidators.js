@@ -151,13 +151,18 @@ class AgeValidator extends Validator {
 class SameValidator extends Validator {
   validate(field, ruleValue, body) {
     const otherField = ruleValue.trim();
-    
-    // Check if the fields match
+
+    // Check if the other field exists in the body
+    if (!(otherField in body)) {
+      throw new Error(`Validation rule error: Field '${otherField}' specified in 'same' rule does not exist in the request body.`);
+    }
+
+    // Compare the values of the current field and the other field
     if (body[field] !== body[otherField]) {
       return `${field} must match ${otherField}.`;
     }
-    
-    return null; // Return null if the fields match
+
+    return null; // Return null if validation passes
   }
 }
 // Example rule: "confirmPassword: 'required|same:password'"

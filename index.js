@@ -46,10 +46,12 @@ const { ConfirmationFields, isName } = require("./src/validator/form/utils");
 
 // Importing BinarySearch module
 const BinarySearch = require("./src/validator/BinaryTree/search");
+// import global config password and username
 const {
   setUsernameConfig,
   setPasswordConfig,
 } = require("./src/validator/form/global.config");
+// Importing RequestValidator module
 const RequestValidator = require("./src/validator/requests/request");
 
 module.exports = {

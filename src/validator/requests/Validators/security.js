@@ -23,11 +23,17 @@ class SQLInjectionValidator extends Validator {
 }
 class NoSQLInjectionValidator extends Validator {
   validate(field, ruleValue, body) {
-    const nosqlInjectionPattern = /\$where|javascript:/i;
+    // Regular expression pattern to detect NoSQL injection attempts
+    const nosqlInjectionPattern = new RegExp(
+      `\\$where|javascript:|\\$\\$\\(.*\\)|\\$eq|\\$ne|\\$gt|\\$gte|\\$lt|\\$lte|\\$in|\\$nin|\\$regex|\\$expr`, "i"
+    );
+
+    // Check if the input contains any NoSQL injection patterns
     if (nosqlInjectionPattern.test(body[field])) {
-      return `Potential NoSQL injection detected in ${field}.`;
+      return `Potential NoSQL injection detected in '${field}'.`;
     }
-    return null;
+
+    return null; // Return null if no NoSQL injection patterns found
   }
 }
 class XSSValidator extends Validator {

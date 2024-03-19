@@ -3,28 +3,39 @@ const { defaultOptions } = require("../global.config");
 const createValidationOptions = require("../../../utils/handleOption");
 const inputValidator = require("../../../utils/inputValidator");
 
-function optionsPassword (options){
+function optionsPassword(options) {
     const { password } = defaultOptions;
     const { minLength, maxLength, uppercase, lowercase, number, specialCharacter, alphabetic, whitespace } = password;
+
     const defaultMinLength = minLength.value || MIN_LENGTH;
     const defaultMaxLength = maxLength.value || MAX_LENGTH;
 
     const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
-    const optionValidations = [defaultMinLength, defaultMaxLength, uppercase.required, lowercase.required, number.required, specialCharacter.required, alphabetic.required, whitespace.required];
-    const msgError = [
-        `Must be ${defaultMinLength}-${defaultMaxLength} characters long.`,
-        `Cannot exceed ${defaultMaxLength} characters.`,
-        uppercase.errorMessage,
-        lowercase.errorMessage,
-        number.errorMessage,
-        specialCharacter.errorMessage,
-        alphabetic.errorMessage,
-        whitespace.errorMessage
+
+    const optionValidations = [
+        options.minLength?.value || defaultMinLength,
+        options.maxLength?.value || defaultMaxLength,
+        options.uppercase?.required ?? uppercase.required,
+        options.lowercase?.required ?? lowercase.required,
+        options.number?.required ?? number.required,
+        options.specialCharacter?.required ?? specialCharacter.required,
+        options.alphabetic?.required ?? alphabetic.required,
+        options.whitespace?.required ?? whitespace.required
     ];
-    
-    let objectOption =  createValidationOptions(optionName, optionValidations, msgError);
-    objectOption = {  ...objectOption,...options, };
-    return objectOption;
+
+    const msgError = [
+        options.minLength?.errorMessage || `Must be ${defaultMinLength}-${defaultMaxLength} characters long.`,
+        options.maxLength?.errorMessage || `Cannot exceed ${defaultMaxLength} characters.`,
+        options.uppercase?.errorMessage || uppercase.errorMessage,
+        options.lowercase?.errorMessage || lowercase.errorMessage,
+        options.number?.errorMessage || number.errorMessage,
+        options.specialCharacter?.errorMessage || specialCharacter.errorMessage,
+        options.alphabetic?.errorMessage || alphabetic.errorMessage,
+        options.whitespace?.errorMessage || whitespace.errorMessage
+    ];
+
+    const objectOption = createValidationOptions(optionName, optionValidations, msgError);
+    return { ...objectOption, ...options };
 }
 
 function optionEmail (options){
@@ -75,7 +86,7 @@ function optionUsername(username, options) {
     ];
 
     const objectOption = createValidationOptions(optionName, validation, messageError);
-    return { ...objectOption, ...options };
+    return { ...objectOption, ...options }
 }
 module.exports = {
     optionsPassword: optionsPassword,

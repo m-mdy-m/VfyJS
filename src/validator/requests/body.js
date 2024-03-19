@@ -138,17 +138,6 @@ class FileTypeValidator extends Validator {
   }
 }
 // Example: "avatar:fileType:image/jpeg,image/png" - Validates that 'avatar' file type is either JPEG or PNG.
-class FileSizeValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const maxSize = parseInt(ruleValue); // Max size in bytes
-    const fileSize = body[field].size;
-    if (fileSize > maxSize) {
-      return `${field} exceeds the maximum file size of ${maxSize} bytes.`;
-    }
-    return null;
-  }
-}
-// Example: "avatar:fileSize:1048576" - Validates that 'avatar' file size does not exceed 1MB.
 class SQLInjectionValidator extends Validator {
   validate(field, ruleValue, body) {
     const sqlInjectionPattern =

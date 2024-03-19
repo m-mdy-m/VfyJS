@@ -5,7 +5,7 @@ const req = {
   body: {
     username: "m__mdy__m",
     password: "password123",
-    age: "25",
+    age: 25,
     email: "john@example.com",
   },
   params: {},

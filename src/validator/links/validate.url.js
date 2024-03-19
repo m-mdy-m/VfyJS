@@ -15,15 +15,13 @@ const {
  * @throws {Error} - Throws an error if the URL is empty, not a string, or does not match the pattern.
  */
 function validateUrl(url, expectedProtocol) {
-  console.log("expectedProtocol=>", expectedProtocol);
   let protocolPattern = "";
   let urlPattern = "";
   // Set protocol and URL patterns based on the expected protocol
   if (expectedProtocol === "http") {
     protocolPattern = /^(HTTP|http)$/;
     urlPattern = /(HTTP:|http:)\/\/[^\/]/i;
-  }
-  if (expectedProtocol === "https") {
+  } else if (expectedProtocol === "https") {
     protocolPattern = /^(HTTPS|https)$/;
     urlPattern = /(HTTPS:|https:)\/\/[^\/]/i;
   } else {

@@ -9,7 +9,7 @@ let defaultOptions = {
       errorMessage: "must be at least 8 characters long.",
     },
     maxLength: {
-      value: 50,
+      value: 64,
       errorMessage: "cannot exceed 50 characters.",
     },
     uppercase: {
@@ -33,7 +33,7 @@ let defaultOptions = {
       errorMessage: "may not contain alphabetic characters.",
     },
     whitespace: {
-      required: false,
+      required: true,
       errorMessage: "Whitespace is not allowed in the password.",
     },
   },

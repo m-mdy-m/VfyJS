@@ -60,4 +60,47 @@ class DateRangeValidator extends Validator {
     return null;
   }
 }
-module.exports = { MaxLengthValidator, MinLengthValidator,LengthRangeValidator,DateRangeValidator };
+class ArrayLengthValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const expectedLength = parseInt(ruleValue);
+
+    // Check if the field is an array
+    if (!Array.isArray(body[field])) {
+      return `${field} must be an array.`;
+    }
+
+    // Check if the array length matches the expected length
+    if (body[field].length !== expectedLength) {
+      return `${field} must contain exactly ${expectedLength} elements.`;
+    }
+
+    return null;
+  }
+}
+class ArrayRangeValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const [minLength, maxLength] = ruleValue.split(",").map(value => parseInt(value));
+
+    // Check if ruleValue is valid
+    if (isNaN(minLength) || isNaN(maxLength) || minLength < 0 || maxLength < 0 || minLength > maxLength) {
+      throw new Error(`Invalid rule value for ${field}. Please provide a valid range in the format 'minLength,maxLength'.`);
+    }
+
+    const array = body[field];
+
+    // Check if the field is an array
+    if (!Array.isArray(array)) {
+      return `${field} must be an array.`;
+    }
+
+    const arrayLength = array.length;
+
+    // Check if the array length is within the specified range
+    if (arrayLength < minLength || arrayLength > maxLength) {
+      return `${field} must contain between ${minLength} and ${maxLength} elements.`;
+    }
+
+    return null;
+  }
+}
+module.exports = { MaxLengthValidator, MinLengthValidator,LengthRangeValidator,DateRangeValidator,ArrayLengthValidator,ArrayRangeValidator };

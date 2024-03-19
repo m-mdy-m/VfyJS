@@ -2,7 +2,7 @@ const Validator = require('./Validator');
 const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
 const { PasswordValidator, UsernameValidator, HexColorValidator, IPLocationValidator, JSONValidator, NameValidator, AlphanumericValidator, LanguageValidator, GenderValidator, AgeValidator } = require('./Validators/CustomValidators');
 const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator } = require('./Validators/Format');
-const { MinLengthValidator, MaxLengthValidator, LengthRangeValidator,  } = require('./Validators/Length');
+const { MinLengthValidator, MaxLengthValidator, LengthRangeValidator, DateRangeValidator, ArrayLengthValidator, ArrayRangeValidator,  } = require('./Validators/Length');
 const { StringTypeValidator, NumberTypeValidator, ArrayTypeValidator, ObjectTypeValidator, BooleanTypeValidator } = require('./Validators/Type');
 const { WhitespaceValidator, TrimValidator, FileValidator, EnumValidator, RegexValidator } = require('./utils/AdditionalValidators');
 class RequestValidator  {
@@ -21,6 +21,8 @@ class RequestValidator  {
       max: new MaxLengthValidator(),
       lengthRange : new LengthRangeValidator(),
       dateRange : new DateRangeValidator(),
+      arrayLength : new ArrayLengthValidator(),
+      arrayRange : ArrayRangeValidator(),
 
       // Case validators
       uppercase: new UppercaseValidator(),
@@ -103,29 +105,8 @@ class CustomValidator extends Validator {
     // Implement custom validation logic here based on ruleValue
   }
 }
-class DateRangeValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const [startDate, endDate] = ruleValue.split(",");
-    const fieldValue = new Date(body[field]);
-    if (fieldValue < new Date(startDate) || fieldValue > new Date(endDate)) {
-      return `${field} must be between ${startDate} and ${endDate}.`;
-    }
-    return null;
-  }
-}
-// Example rule: "birthdate": "dateRange:1900-01-01,2022-12-31"
 
-class ArrayLengthValidator extends Validator {
-  validate(field, ruleValue, body) {
-    const expectedLength = parseInt(ruleValue);
-    if (!Array.isArray(body[field]) || body[field].length !== expectedLength) {
-      return `${field} must contain exactly ${expectedLength} elements.`;
-    }
-    return null;
-  }
-}
 
-// Example rule: "grades": "arrayLength:5"
 class ObjectKeyValidator extends Validator {
   validate(field, ruleValue, body) {
     const expectedKeys = ruleValue.split(",");

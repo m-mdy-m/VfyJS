@@ -112,20 +112,25 @@ class RequestValidator {
       errorInfo: this._req.error,
     };
 
-    for (const field in rules) {
-      const fieldRules = rules[field].split("|");
-      for (const rule of fieldRules) {
-        const [ruleName, ruleValue] = rule.split(":");
-        const validator = this.validators[ruleName];
-        if (!validator) {
-          throw new Error(`Validation rule '${ruleName}' is not supported.`);
-        }
-        const error = validator.validate(field, ruleValue, requestData);
-        if (error) {
-          errors[field] = customMessages[field] ? customMessages[field] : error;
-          break;
+    try {
+      for (const field in rules) {
+        const fieldRules = rules[field].split("|");
+        for (const rule of fieldRules) {
+          const [ruleName, ruleValue] = rule.split(":");
+          const validator = this.validators[ruleName];
+          if (!validator) {
+            throw new Error(`Validation rule '${ruleName}' is not supported.`);
+          }
+          const error = validator.validate(field, ruleValue, requestData);
+          if (error) {
+            errors[field] = customMessages[field] ? customMessages[field] : error;
+            break;
+          }
         }
       }
+    } catch (err) {
+      errors['__global__'] = 'An unexpected error occurred during validation.';
+      console.error('Validation error:', err);
     }
     return errors;
   }

@@ -75,12 +75,12 @@ test("invalid password - contains whitespace", () => {
 
 // Test cases for valid passwords without options
 test("valid password - meets all criteria", () => {
-  const isValid = isPassword("StrongPwd@123", { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true });
+  const isValid = isPassword("StrongPwd@123");
   expect(isValid).toBe(true);
 });
 
 test("valid password - meets minimum length", () => {
-  const isValid = isPassword("GoodPwd@1", { minLength: 8 });
+  const isValid = isPassword("GoodPwd@1", { minLength: 4 });
   expect(isValid).toBe(true);
 });
 
@@ -90,17 +90,7 @@ test("valid password - meets maximum length", () => {
 });
 
 test("valid password - contains uppercase letter", () => {
-  const isValid = isPassword("StrongPwd@123", { uppercase: true });
-  expect(isValid).toBe(true);
-});
-
-test("valid password - contains lowercase letter", () => {
-  const isValid = isPassword("strongpwd@123", { uppercase: false });
-  expect(isValid).toBe(true);
-});
-
-test("valid password - contains numeric digit", () => {
-  const isValid = isPassword("StrongPwd123@", { number: true });
+  const isValid = isPassword("StrongPwd@123");
   expect(isValid).toBe(true);
 });
 

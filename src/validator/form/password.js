@@ -1,5 +1,4 @@
 "use strict";
-const {defaultOptions} = require('./global.config')
 /**
  * Validates a password based on specified criteria.
  *
@@ -82,12 +81,11 @@ const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, }
  * console.log(isValid); // true
  */
 function validateFormPassword(input, options = {}) {
-    const mergedOptions = { ...defaultOptions.password, ...options };
     const value = input.value ? input.value : input
     isEmpty(value,)
     toString(value,'Password is required.');
     const validator = inputValidator(value);
-    const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(mergedOptions);
+    const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(options);
     validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));
     validateWithCondition(getReq(lowercase), validator.hasLowerCase(), input, msgError, 'hasLowerCase', getErrorMessage(lowercase));
     validateWithCondition(getReq(number), validator.hasNumber(), input, msgError, 'hasNumber', getErrorMessage(number));

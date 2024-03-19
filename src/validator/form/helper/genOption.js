@@ -10,7 +10,7 @@ function optionsPassword (options){
     const defaultMaxLength = maxLength.value || MAX_LENGTH;
 
     const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
-    const optionValidations = [defaultMinLength, defaultMaxLength, uppercase.required, lowercase.required, number.required, specialCharacter.required, alphabetic.required, !whitespace.required];
+    const optionValidations = [defaultMinLength, defaultMaxLength, uppercase.required, lowercase.required, number.required, specialCharacter.required, alphabetic.required, whitespace.required];
     const msgError = [
         `Must be ${defaultMinLength}-${defaultMaxLength} characters long.`,
         `Cannot exceed ${defaultMaxLength} characters.`,

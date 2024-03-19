@@ -86,13 +86,15 @@ try {
 
 ---
 
-# ConfigPassword
+Based on the provided code and documentation, the `validateFormPassword` function in `vfyjs` allows you to validate passwords based on customizable criteria. Let's update and improve the documentation to provide comprehensive explanations and examples for each configuration option.
 
-### isPassword
+### ConfigPassword
 
-The `isPassword` function in vfyjs allows you to validate and configure password requirements.
+### validateFormPassword
 
-#### Configurations
+The `validateFormPassword` function in vfyjs allows you to validate passwords based on customizable criteria.
+
+#### Configuration Options
 
 - `minLength`: Specifies the minimum length for the password.
 - `maxLength`: Specifies the maximum length for the password.
@@ -110,65 +112,63 @@ Now, let's delve into detailed explanations and examples for each configuration.
 ### Example 1: Basic Password Validation
 
 ```javascript
-const { isPassword } = require("vfyjs");
-const input = "!@3DS!@#ASdasc";
-const pass = isPassword(input); // true
-console.log(pass); // Output: true
+const { validateFormPassword } = require("vfyjs");
+
+const password = "StrongPwd@123";
+const isValid = validateFormPassword(password);
+console.log(isValid); // Output: true
 ```
 
-This example showcases the basic usage of the isPassword function without additional configuration, returning true for a isPassword that meets default requirements.
+This example showcases the basic usage of the `validateFormPassword` function without additional configuration, returning `true` for a password that meets default requirements.
 
 ### Example 2: Custom Minimum Length
 
-```javaScript
-const { isPassword } = require("vfyjs");
-const input = '!@3DS!@#ASdasc';
-let pass2;
+```javascript
+const { validateFormPassword } = require("vfyjs");
 
+const password = "!@3DS!@#ASdasc";
 try {
-    pass2 = isPassword(input, {
-        minLength: 20,
+    const isValid = validateFormPassword(password, {
+        minLength: { value: 20, errorMessage: 'Password must be at least 20 characters long.' },
     });
 } catch (error) {
-    console.log(error.message); // Output: "Password length must be between 20 and 64 characters."
+    console.error(error.message); // Output: "Password must be at least 20 characters long."
 }
 ```
 
-In this case, the isPassword function is configured with a custom minimum length of 20 characters, resulting in an error since the input password is shorter than the specified minimum length.
+In this case, the `validateFormPassword` function is configured with a custom minimum length of 20 characters, resulting in an error since the input password is shorter than the specified minimum length.
 
 ### Example 3: Advanced Password Configuration
 
-```javaScript
-const { isPassword } = require("vfyjs");
-const input = '!@3DS!@#ASdasc';
+```javascript
+const { validateFormPassword } = require("vfyjs");
 
+const password = "!@3DS!@#ASdasc";
 try {
-    const pass3 = isPassword(input, {
-        minLength: { value: 2, errorMessage: 'Password minLength 2' },
-        maxLength: { value: 10, errorMessage: 'Password maxLength 10' },
-        alphabetic: { required: true, errorMessage: 'The password must be alphabetic' },
+    const isValid = validateFormPassword(password, {
+        minLength: { value: 2, errorMessage: 'Password must be at least 2 characters long.' },
+        maxLength: { value: 10, errorMessage: 'Password must not exceed 10 characters.' },
+        alphabetic: { required: true, errorMessage: 'The password must contain alphabetic characters.' },
         lowercase: false,
-        number: { required: false, errorMessage: 'Number is false' },
+        number: { required: false, errorMessage: 'The password must not contain numeric characters.' },
         specialCharacter: false,
         uppercase: true,
         whitespace: false,
     });
 } catch (error) {
-    console.log(error.message); // Output: "Password length must be between 2 and 10 characters."
+    console.error(error.message); // Output: "Password must be at least 2 characters long."
 }
 ```
 
-This example demonstrates various isPassword configuration options, allowing you to set custom minimum and maximum lengths, specify character requirements, and control the presence of whitespace in the password. Adjust these configurations based on your specific requirements.
-
 ---
 
-# ConfigEmail
+## ConfigEmail
 
-### isEmail
+### validateEmail
 
-The `isEmail` function in vfyjs allows you to validate and configure email address requirements.
+The `validateEmail` function in vfyjs allows you to validate email addresses based on customizable criteria.
 
-#### Configurations
+#### Configuration Options
 
 - `minLenLocal`: Specifies the minimum length for the local part of the email address.
 - `maxLenLocal`: Specifies the maximum length for the local part of the email address.
@@ -192,36 +192,40 @@ An email address typically consists of three parts: `local@subdomain.domainPart`
 ### Example 1: Minimum Length for Local Part
 
 ```javascript
-const { isEmail } = require("vfyjs");
+const { validateEmail } = require("vfyjs");
 let email = "je@sub.example.com";
 
 try {
-  isEmail(email, { minLenLocal: 5 });
+  validateEmail(email, { minLenLocal: 5 });
 } catch (error) {
   console.log(error.message); // Output: "Length must be at least 5 characters for the local part."
 }
 ```
 
-In this example, the isEmail function checks if the local part of the email address has a minimum length of 5 characters and throws an error if it doesn't meet this requirement.
+In this example, the `validateEmail` function checks if the local part of the email address has a minimum length of 5 characters and throws an error if it doesn't meet this requirement.
 
 ### Example 2: Maximum Length for Subdomain Part
 
 ```javaScript
-const { isEmail } = require("vfyjs");
+const { validateEmail } = require("vfyjs");
 let email = 'john.doe@sub.example.com';
-let result = isEmail(email, { maxLenSubdomain: 2 });
+let result = validateEmail(email, { maxLenSubdomain: 2 });
 console.log('Result =>', result); // Output: true
 ```
 
-In this example, the isEmail function validates that the subdomain part of the email address has a maximum length of 2 characters. The email address is considered valid, and the result is true.
+In this example, the `validateEmail` function validates that the subdomain part of the email address has a maximum length of 2 characters. The email address is considered valid, and the result is true.
 
-## Feel free to customize these configurations based on your specific requirements. Adjust the values as needed for your use case.
+**Feel free to customize these configurations based on your specific requirements. Adjust the values as needed for your use case.**
 
-## ConfigPhone
+---
+
+With these updates, the documentation provides clear explanations and examples for configuring and using the `validateEmail` function to validate email addresses in different scenarios.
+
+# ConfigPhone
 
 ### hasPhone
 
-The hasPhone function in vfyjs is a versatile utility designed for validating and extracting detailed information about phone numbers. This function aids in understanding the origin, type (landline or mobile), and service availability of a given phone number.
+The `hasPhone` function in vfyjs is a powerful utility crafted for thorough validation and detailed analysis of phone numbers. It offers insights into the origin, type (landline or mobile), and service availability of the provided phone number.
 
 #### Parameters
 
@@ -230,13 +234,13 @@ The hasPhone function in vfyjs is a versatile utility designed for validating an
 
 ### Explanation
 
-The primary purpose of the hasPhone function is to offer comprehensive validation and analysis of phone numbers. It verifies the input phone number against the specified country code, providing detailed information in the result object. The result includes data such as the continent, country, ISO code, validation status, duplicate code presence, service availability, and phone type (landline or mobile).
+The `hasPhone` function serves the dual purpose of validating and extracting comprehensive information about phone numbers. It rigorously verifies the input phone number against the specified country code, furnishing an exhaustive result object. This object contains crucial data points including the continent, country, ISO code, validation status, presence of duplicate codes, service availability, and phone type (landline or mobile).
 
 #### Examples
 
 ### Example 1: Validating and Extracting Information for an Iranian Mobile Number
 
-```javaScript
+```javascript
 const { hasPhone } = require("vfyjs");
 
 hasPhone('98', '9112348424').then(result => {
@@ -261,11 +265,11 @@ hasPhone('98', '9112348424').then(result => {
 */
 ```
 
-In this example, the hasPhone function is used to validate and extract information about an Iranian mobile number ('9112348424') with the country code '98'. The result object provides a comprehensive set of details about the phone number, including its continent, country, ISO code, and characteristics.
+In this example, the `hasPhone` function is utilized to validate and extract information about an Iranian mobile number ('9112348424') with the country code '98'. The resulting object provides a comprehensive array of details regarding the phone number, encompassing its continent, country, ISO code, and various characteristics.
 
 ### Example 2: Validating and Extracting Information for a North American Phone Number
 
-```javaScript
+```javascript
 const { hasPhone } = require("vfyjs");
 
 hasPhone("1", "1234567890").then(result => {
@@ -291,13 +295,13 @@ hasPhone("1", "1234567890").then(result => {
 */
 ```
 
-In this example, the hasPhone function is applied to validate and extract information about a North American phone number ('1234567890') with the country code '1'. The result object provides a detailed analysis, including continent, countries, ISO codes, and various characteristics of the phone number.
+In this example, the `hasPhone` function is employed to validate and extract information about a North American phone number ('1234567890') with the country code '1'. The resulting object furnishes a detailed analysis, encompassing the continent, countries, ISO codes, and various characteristics of the phone number.
 
 ## Usage
 
-To use the hasPhone function, import it from the vfyjs library and invoke it with the appropriate country code and phone number as parameters. The function returns a Promise, so it should be used with asynchronous syntax, such as .then().
+To leverage the capabilities of the `hasPhone` function, import it from the vfyjs library and invoke it with the appropriate country code and phone number as parameters. Since the function returns a Promise, it should be utilized with asynchronous syntax, such as `.then()`.
 
-```javaScript
+```javascript
 const { hasPhone } = require("vfyjs");
 
 hasPhone('98', '9112348424').then(result => {
@@ -305,11 +309,11 @@ hasPhone('98', '9112348424').then(result => {
 });
 ```
 
-Feel free to incorporate this utility into your applications to enhance phone number validation and gain valuable insights into the provided phone numbers. Adjust the parameters and utilize the information in the result object based on your specific requirements.
+Feel empowered to integrate this utility into your applications to elevate phone number validation and acquire valuable insights into the provided phone numbers. Customize the parameters and harness the information in the result object to suit your specific requirements.
 
 ---
 
-## ConfigBinaryTree
+# ConfigBinaryTree
 
 ### BinarySearchTree
 
@@ -381,7 +385,7 @@ In this example, we create a new instance of the `BinarySearchTree` class and in
 
 ---
 
-## ConfigValue
+# ConfigValue
 
 ## Validation Functions
 

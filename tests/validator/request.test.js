@@ -48,7 +48,7 @@ describe("RequestValidator", () => {
       username: "username must contain only alphanumeric characters.",
       password: "password must be at least 8 characters long.",
       age: "age must be a valid number.",
-      email: "Email must contain '@'.",
+      email: "Email must contain @",
     });
   });
 

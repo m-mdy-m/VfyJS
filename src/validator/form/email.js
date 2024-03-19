@@ -42,7 +42,7 @@ function validateEmail(input, options = {}) {
   
   // Basic email format validation
   const hasSymbol = /^(?!.*@.*@)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  throwIfFalsy(hasSymbol, input, msgError, 'hasSymbol', 'Email must contain "@".');
+  throwIfFalsy(hasSymbol, input, msgError, 'hasSymbol', 'Email must contain @');
   
   const hasOneDot = /(?=.*(\.)\1)/.test(value);
   ifTruthyValue('Must have at most one dot.', hasOneDot, input, msgError, 'hasOneDot');

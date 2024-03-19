@@ -51,8 +51,7 @@ function validateUsername(input, options = {}) {
     isEmpty(username,'Username is required.')
     const validator = inputValidator(username); // Create a validator instance
     // Extract options
-    const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, options);
-
+    const {minLength, maxLength, uppercase, number, NonAlphanumeric, trim, repeat, messageError} = optionUsername(username, options);
     // Validate number requirement
     throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));
         
@@ -67,7 +66,7 @@ function validateUsername(input, options = {}) {
     username = trimmedValue(username);
 
     // Validate non-alphanumeric requirement
-    const isNonAlphanumeric = getRequired(nonAlphanumeric, false);
+    const isNonAlphanumeric = getRequired(NonAlphanumeric, false);
     ifTruthyValue('must be alphanumeric.', isNonAlphanumeric, input, messageError, 'isNonAlphanumeric');
 
     // Validate number requirement

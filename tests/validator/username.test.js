@@ -3,7 +3,7 @@ const { isUsername } = require("../../index");
 describe("validateUsername function", () => {
     // Test case for a valid username
     test("valid username", () => {
-        const isValid = isUsername("StringUsername123");
+        const isValid = isUsername("StringUsername");
         expect(isValid).toBe(true);
     });
 

@@ -60,13 +60,8 @@ function validateUsername(input, options = {}) {
     validateWithCondition(uppercase, validator.hasUppercase(), input, messageError, 'hasUppercase', getErrorMessage(uppercase));
 
     // Validate number requirement
-    try {
-        throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));
+    throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));
         
-    } catch (error) {
-        console.log('error =>',error.message);
-        console.log('error =>',error);
-    }
 
     // Check for whitespace if required
     let checkWhiteSpace = getRequired(trim, false);

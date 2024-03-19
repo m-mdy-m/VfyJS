@@ -54,17 +54,16 @@ function optionEmail (options){
 function optionUsername (username, options){
     const { username: usernameConfig } = defaultOptions;
     const { minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat } = usernameConfig;
-
     const validator = inputValidator(username);
     const optionName = ['minLength', 'maxLength', 'uppercase', 'number', 'NonAlphanumeric', 'trim', 'repeat'];
     const validation = [
         validator.hasMinLength(minLength.value || MIN_LENGTH),
         validator.hasMaxLength(maxLength.value || MAX_LENGTH),
-        uppercase.required ? validator.hasUppercase() : true,
-        number.required ? validator.hasNumber() : true,
-        nonAlphanumeric.required ? validator.hasNonAlphanumeric() : true,
-        trim.required ? validator.hasWhitespace() : true,
-        repeat.required ? validator.hasRepeat() : true
+        uppercase.required ? validator.hasUppercase() : false,
+        number.required ? validator.hasNumber() : false,
+        nonAlphanumeric.required ? validator.hasNonAlphanumeric() : false,
+        trim.required ? validator.hasWhitespace() : false,
+        repeat.required ? validator.hasRepeat() : false
     ];
     const messageError = [
         `Must be ${minLength.value || MIN_LENGTH}-${maxLength.value || MAX_LENGTH} characters long.`,
@@ -78,7 +77,6 @@ function optionUsername (username, options){
 
     let objectOption = createValidationOptions(optionName, validation, messageError);
     objectOption = { ...objectOption, ...options };
-
     return objectOption;
 }
 

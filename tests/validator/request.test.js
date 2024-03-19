@@ -28,7 +28,12 @@ const req = {
 
 describe("RequestValidator", () => {
   it("should validate request data according to the provided rules", () => {
-    const validator = new RequestValidator(req.body);
+    const validator = new RequestValidator({
+      username: "m__mdy__m",
+      password: "password123",
+      age: 25,
+      email: "john@example.com",
+    });
     const rules = {
       username: "username",
       password: "min:8|max:20",
@@ -74,11 +79,9 @@ describe("RequestValidator", () => {
     const rules = {
       username: "unsupported|alphanumeric|min:5|max:20",
     };
-      try {
-        expect(validator.validate(rules)).rejects.toThrow("Validation rule 'unsupported' is not supported.");
-        
-      } catch (error) {
-        console.log('error =>',error.message);
-      }
+    // Act & Assert
+    expect(() => validator.validate(rules)).rejects.toThrow(
+      "Validation rule 'unsupported' is not supported."
+    );
   });
 });

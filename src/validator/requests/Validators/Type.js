@@ -32,6 +32,9 @@ class NumberTypeValidator extends Validator {
    * @returns {string|null} - Returns an error message if validation fails, otherwise null.
    */
   validate(field, ruleValue, body) {
+    console.log('field=>',field);
+    console.log('body[field]=>',body[field]);
+    console.log('ruleValue=>',ruleValue);
     if (typeof body[field] !== "number") {
       return `${field} must be a number.`;
     }

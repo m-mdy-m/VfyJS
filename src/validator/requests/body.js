@@ -7,7 +7,16 @@ const { StringTypeValidator, NumberTypeValidator, ArrayTypeValidator, ObjectType
 const { ObjectKeyValidator } = require('./Validators/object');
 const { SQLInjectionValidator, NoSQLInjectionValidator, XSSValidator, PasswordHashValidator, AuthTokenValidator } = require('./Validators/security');
 const { WhitespaceValidator, TrimValidator, FileValidator, EnumValidator, RegexValidator } = require('./utils/AdditionalValidators');
-class RequestValidator  {
+/**
+ * RequestValidator class for validating incoming request data based on specified rules.
+ * @constructor
+ * @param {Object} req - The request object containing the data to be validated.
+ */
+class RequestValidator {
+  /**
+   * Creates an instance of RequestValidator.
+   * @param {Object} req - The request object containing the data to be validated.
+   */
   constructor(req) {
     this._req = req;
     this.validators = {
@@ -21,11 +30,11 @@ class RequestValidator  {
       // Length validators
       min: new MinLengthValidator(),
       max: new MaxLengthValidator(),
-      lengthRange : new LengthRangeValidator(),
-      dateRange : new DateRangeValidator(),
-      arrayLength : new ArrayLengthValidator(),
-      arrayRange : ArrayRangeValidator(),
-      objectKeys : new ObjectKeyValidator(),
+      lengthRange: new LengthRangeValidator(),
+      dateRange: new DateRangeValidator(),
+      arrayLength: new ArrayLengthValidator(),
+      arrayRange: ArrayRangeValidator(),
+      objectKeys: new ObjectKeyValidator(),
 
       // Case validators
       uppercase: new UppercaseValidator(),
@@ -39,8 +48,9 @@ class RequestValidator  {
       phoneNumber: new PhoneNumberValidator(),
       ipv4: new IPv4Validator(),
       ipv6: new IPv6Validator(),
-      http : new  HTTPValidator(),
+      http: new HTTPValidator(),
       https: new HTTPSValidator(),
+
       // Additional validators
       whitespace: new WhitespaceValidator(),
       trim: new TrimValidator(),
@@ -70,10 +80,16 @@ class RequestValidator  {
       xss: new XSSValidator(),
       passwordHash: new PasswordHashValidator(),
       authToken: new AuthTokenValidator(),
-
     };
   }
 
+  /**
+   * Validates the request data based on the specified rules.
+   * @param {Object} rules - The validation rules for the request data.
+   * @param {Object} [options={}] - Additional options for validation.
+   * @param {Object} [options.customMessages={}] - Custom error messages for specific fields.
+   * @returns {Object} - An object containing validation errors, if any.
+   */
   validate(rules, options = {}) {
     const { customMessages = {} } = options;
     const errors = {};

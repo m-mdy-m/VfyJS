@@ -50,36 +50,33 @@ function optionEmail (options){
   return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
 }
 
-function optionUsername (username, options){
+function optionUsername(username, options) {
     const { username: usernameConfig } = defaultOptions;
     const { minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat } = usernameConfig;
     const validator = inputValidator(username);
-    const optionName = ['minLength', 'maxLength', 'uppercase', 'number', 'NonAlphanumeric', 'trim', 'repeat'];
+    const optionName = ['minLength', 'maxLength', 'uppercase', 'number', 'nonAlphanumeric', 'trim', 'repeat'];
     const validation = [
-        validator.hasMinLength(minLength.value || MIN_LENGTH),
-        validator.hasMaxLength(maxLength.value || MAX_LENGTH),
-        uppercase.required ? validator.hasUppercase() : true,
-        number.required ? validator.hasNumber() : true,
-        nonAlphanumeric.required ? validator.hasNonAlphanumeric() : false,
-        trim.required ? validator.hasWhitespace() : true,
-        repeat.required ? validator.hasRepeat() : true
+        validator.hasMinLength(options.minLength?.value || minLength.value || MIN_LENGTH),
+        validator.hasMaxLength(options.maxLength?.value || maxLength.value || MAX_LENGTH),
+        options.uppercase?.required ? validator.hasUppercase() : true,
+        options.number?.required ? validator.hasNumber() : true,
+        options.nonAlphanumeric?.required ? validator.hasNonAlphanumeric() : false,
+        options.trim?.required ? validator.hasWhitespace() : true,
+        options.repeat?.required ? validator.hasRepeat() : true
     ];
     const messageError = [
-        `Must be ${minLength.value || MIN_LENGTH}-${maxLength.value || MAX_LENGTH} characters long.`,
-        `Cannot exceed ${maxLength.value || MAX_LENGTH} characters.`,
-        uppercase.errorMessage,
-        number.errorMessage,
-        nonAlphanumeric.errorMessage,
-        trim.errorMessage,
-        repeat.errorMessage
+        options.minLength?.errorMessage || `Must be ${options.minLength?.value || minLength.value || MIN_LENGTH}-${options.maxLength?.value || maxLength.value || MAX_LENGTH} characters long.`,
+        options.maxLength?.errorMessage || `Cannot exceed ${options.maxLength?.value || maxLength.value || MAX_LENGTH} characters.`,
+        options.uppercase?.errorMessage || uppercase.errorMessage,
+        options.number?.errorMessage || number.errorMessage,
+        options.nonAlphanumeric?.errorMessage || nonAlphanumeric.errorMessage,
+        options.trim?.errorMessage || trim.errorMessage,
+        options.repeat?.errorMessage || repeat.errorMessage
     ];
 
-    let objectOption = createValidationOptions(optionName, validation, messageError);
-    objectOption = {  ...objectOption,...options, };
-
-    return objectOption;
+    const objectOption = createValidationOptions(optionName, validation, messageError);
+    return { ...objectOption, ...options };
 }
-
 module.exports = {
     optionsPassword: optionsPassword,
     optionEmail: optionEmail,

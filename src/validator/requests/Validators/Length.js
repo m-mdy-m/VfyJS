@@ -2,6 +2,10 @@ const Validator = require("../Validator");
 
 class MinLengthValidator extends Validator {
   validate(field, ruleValue, body) {
+    if (!body[field]) {
+      return `${field} is required.`;
+    }
+
     if (body[field].length < parseInt(ruleValue)) {
       return `${field} must be at least ${ruleValue} characters long.`;
     }
@@ -12,6 +16,10 @@ class MinLengthValidator extends Validator {
 
 class MaxLengthValidator extends Validator {
   validate(field, ruleValue, body) {
+    if (!body[field]) {
+      return `${field} is required.`;
+    }
+
     if (body[field].length > parseInt(ruleValue)) {
       return `${field} cannot exceed ${ruleValue} characters.`;
     }

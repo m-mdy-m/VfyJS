@@ -129,8 +129,7 @@ class RequestValidator {
         }
       }
     } catch (err) {
-      errors['__global__'] = 'An unexpected error occurred during validation.';
-      console.error('Validation error:', err);
+      throw new Error(err)
     }
     return errors;
   }

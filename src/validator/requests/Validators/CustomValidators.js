@@ -17,7 +17,7 @@ class PasswordValidator extends Validator {
 class UsernameValidator extends Validator {
   validate(field, ruleValue, body, options) {
     try {
-      validateUsername(body.body[field], options);
+      validateUsername(body[field], options);
       return null;
     } catch (error) {
       return error.message;

@@ -17,7 +17,7 @@ const emailValidate = require("./src/validator/form/email");
 const userValidate = require("./src/validator/form/username");
 
 // Importing HTTP link validation function
-const {isHttp,isHttps} = require("./src/validator/links/validate.url");
+const { isHttp, isHttps } = require("./src/validator/links/validate.url");
 
 // Importing color validation function
 const colorValidate = require("./src/validator/colors/isColor");
@@ -50,6 +50,7 @@ const {
   setUsernameConfig,
   setPasswordConfig,
 } = require("./src/validator/form/global.config");
+const RequestValidator = require("./src/validator/requests/request");
 
 module.exports = {
   /**
@@ -224,4 +225,17 @@ module.exports = {
    * });
    */
   setPasswordConfig: setPasswordConfig,
+  /**
+   * RequestValidator class provides a comprehensive set of functions for validating incoming request data
+   * based on specified rules. It offers a flexible and extensible solution for ensuring the integrity
+   * and correctness of various types of input data, including strings, numbers, arrays, and objects.
+   * Additionally, it includes utility functions for input validation and error handling.
+   *
+   * @class
+   * @name RequestValidator
+   * @memberof module:Validator
+   * @constructor
+   * @param {Object} req - The request object containing the data to be validated.
+   */
+  RequestValidator,
 };

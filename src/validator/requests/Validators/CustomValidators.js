@@ -3,8 +3,19 @@ const validateFormPassword = require("../../form/password");
 const validateUsername = require("../../form/username");
 const { isName } = require("../../form/utils");
 const Validator = require("../Validator");
-
+/**
+ * Validator for validating password fields.
+ * @extends Validator
+ */
 class PasswordValidator extends Validator {
+  /**
+   * Validates a password field based on specified options.
+   * @param {string} field - The name of the password field.
+   * @param {string} ruleValue - The rule value associated with the password validation.
+   * @param {Object} body - The request body object containing the password field.
+   * @param {Object} [options={}] - Additional options for password validation.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body, options = {}) {
     try {
       validateFormPassword(body[field], options);
@@ -14,7 +25,20 @@ class PasswordValidator extends Validator {
     }
   }
 }
+
+/**
+ * Validator for validating username fields.
+ * @extends Validator
+ */
 class UsernameValidator extends Validator {
+  /**
+   * Validates a username field based on specified options.
+   * @param {string} field - The name of the username field.
+   * @param {string} ruleValue - The rule value associated with the username validation.
+   * @param {Object} body - The request body object containing the username field.
+   * @param {Object} [options={}] - Additional options for username validation.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body, options) {
     try {
       validateUsername(body[field], options);
@@ -24,7 +48,19 @@ class UsernameValidator extends Validator {
     }
   }
 }
+
+/**
+ * Validator for validating hexadecimal color values.
+ * @extends Validator
+ */
 class HexColorValidator extends Validator {
+  /**
+   * Validates a hexadecimal color field.
+   * @param {string} field - The name of the color field.
+   * @param {string} ruleValue - The rule value associated with the color validation.
+   * @param {Object} body - The request body object containing the color field.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
     try {
       checkValueColor(body[field]);
@@ -34,7 +70,19 @@ class HexColorValidator extends Validator {
     }
   }
 }
+
+/**
+ * Validator for validating IP location fields.
+ * @extends Validator
+ */
 class IPLocationValidator extends Validator {
+  /**
+   * Validates an IP location field.
+   * @param {string} field - The name of the IP location field.
+   * @param {string} ruleValue - The rule value associated with the IP location validation.
+   * @param {Object} body - The request body object containing the IP location field.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
     const ipAddress = body[field];
     if (!ipAddress) {
@@ -54,7 +102,18 @@ class IPLocationValidator extends Validator {
     return null;
   }
 }
+/**
+ * Validator for validating JSON fields.
+ * @extends Validator
+ */
 class JSONValidator extends Validator {
+  /**
+   * Validates a JSON field.
+   * @param {string} field - The name of the JSON field.
+   * @param {string} ruleValue - The rule value associated with the JSON validation.
+   * @param {Object} body - The request body object containing the JSON field.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
     const jsonData = body[field];
     if (!jsonData) {
@@ -70,7 +129,18 @@ class JSONValidator extends Validator {
     }
   }
 }
+/**
+ * Validator for validating names.
+ * @extends Validator
+ */
 class NameValidator extends Validator {
+  /**
+   * Validates a name field.
+   * @param {string} field - The name of the field to validate.
+   * @param {string} ruleValue - The rule value associated with the name validation.
+   * @param {Object} body - The request body object containing the name field.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
     const value = body[field];
     const validationResults = isName(value);
@@ -80,7 +150,18 @@ class NameValidator extends Validator {
     return null;
   }
 }
+/**
+ * Validator for validating alphanumeric strings.
+ * @extends Validator
+ */
 class AlphanumericValidator extends Validator {
+  /**
+   * Validates an alphanumeric field.
+   * @param {string} field - The name of the field to validate.
+   * @param {string} ruleValue - The rule value associated with the alphanumeric validation.
+   * @param {Object} body - The request body object containing the alphanumeric field.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
     const value = body[field];
     if (typeof value !== "string") {
@@ -97,7 +178,19 @@ class AlphanumericValidator extends Validator {
   }
 }
 
+
+/**
+ * Validator for validating language codes.
+ * @extends Validator
+ */
 class LanguageValidator extends Validator {
+  /**
+   * Validates a language code field.
+   * @param {string} field - The name of the field to validate.
+   * @param {string} ruleValue - The rule value associated with the language code validation.
+   * @param {Object} body - The request body object containing the language code field.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
     const languageCode = body[field];
     if (typeof languageCode !== "string") {
@@ -110,7 +203,18 @@ class LanguageValidator extends Validator {
   }
 }
 
+/**
+ * Validator for validating gender values.
+ * @extends Validator
+ */
 class GenderValidator extends Validator {
+  /**
+   * Validates a gender field.
+   * @param {string} field - The name of the field to validate.
+   * @param {string} ruleValue - The rule value associated with the gender validation.
+   * @param {Object} body - The request body object containing the gender field.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body) {
     const gender = body[field];
 
@@ -131,7 +235,19 @@ class GenderValidator extends Validator {
   }
 }
 
+/**
+ * Validator for validating age values.
+ * @extends Validator
+ */
 class AgeValidator extends Validator {
+  /**
+   * Validates an age field.
+   * @param {string} field - The name of the field to validate.
+   * @param {string} ruleValue - The rule value associated with the age validation.
+   * @param {Object} body - The request body object containing the age field.
+   * @param {Object} [options={}] - Additional options for validation.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   */
   validate(field, ruleValue, body, options = {}) {
     const age = body[field];
     if (typeof age !== "number" || isNaN(age)) {
@@ -149,7 +265,19 @@ class AgeValidator extends Validator {
   }
 }
 
+/**
+ * Validator for ensuring that two fields have the same value.
+ * @extends Validator
+ */
 class SameValidator extends Validator {
+  /**
+   * Validates if the current field matches another field.
+   * @param {string} field - The name of the field to validate.
+   * @param {string} ruleValue - The name of the other field to compare with.
+   * @param {Object} body - The request body object containing the fields to compare.
+   * @returns {string|null} - A validation error message if validation fails, otherwise null.
+   * @throws {Error} - Throws an error if the specified other field does not exist in the body.
+   */
   validate(field, ruleValue, body) {
     const otherField = ruleValue.trim();
 

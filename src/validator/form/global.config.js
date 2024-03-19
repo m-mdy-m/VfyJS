@@ -10,7 +10,7 @@ let defaultOptions = {
     },
     maxLength: {
       value: 64,
-      errorMessage: "cannot exceed 50 characters.",
+      errorMessage: "cannot exceed 64 characters.",
     },
     uppercase: {
       required: true,

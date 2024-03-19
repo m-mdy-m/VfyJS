@@ -81,8 +81,8 @@ const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, }
  * console.log(isValid); // true
  */
 function validateFormPassword(input, options = {}) {
+    isEmpty(input)
     const value = input.value ? input.value : input
-    isEmpty(value,)
     toString(value,'Password is required.');
     const validator = inputValidator(value);
     const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(options);

@@ -12,7 +12,7 @@ describe('isPassword', () => {
     test('Invalid password with insufficient length', () => {
         const input = 'Weak';
         const options = { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
-        expect(() => isPassword(input, options)).toThrowError('length must be between 8 and 50 characters.');
+        expect(() => isPassword(input, options)).toThrowError('length must be between 8 and 64 characters.');
     });
 
     test('Invalid password missing uppercase letter', () => {
@@ -25,12 +25,12 @@ describe('isPassword', () => {
     test('Empty password', () => {
         const input = '';
         const options = { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
-        expect(() => isPassword(input, options)).toThrowError('Password is required.');
+        expect(() => isPassword(input, options)).toThrowError('Value should not be empty');
     });
 
     test('Null password', () => {
         const input = null;
         const options = { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
-        expect(() => isPassword(input, options)).toThrowError('Password is required.');
+        expect(() => isPassword(input, options)).toThrowError('Value should not be empty');
     });
 });

@@ -64,9 +64,9 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 - **Usernames**: Validate usernames with customizable criteria. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configusername)
 - **Passwords**: Strong password detection with customization options. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configpassword)
 - **Emails**: Recognize and validate email addresses. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configemail)
-- **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration]()
-- **BinaryTree**: Efficient searching and manipulation of data using a binary tree data structure [Configuration](#ConfigBinaryTree)
-- **Custom Validation Functions**: Validate various aspects of a string input. [Configuration]()
+- **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configphone)
+- **BinaryTree**: Efficient searching and manipulation of data using a binary tree data structure [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configbinarytree)
+- **Custom Validation Functions**: Validate various aspects of a string input. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configvalue)
 
 ### StringManipulation
 

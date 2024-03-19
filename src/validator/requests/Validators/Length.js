@@ -17,7 +17,7 @@ class MinLengthValidator extends Validator {
       return `${field} is required.`;
     }
 
-    if (body[field].length < parseInt(ruleValue)) {
+    if ((body[field].length || body[field])  < parseInt(ruleValue)) {
       return `${field} must be at least ${ruleValue} characters long.`;
     }
 
@@ -42,7 +42,7 @@ class MaxLengthValidator extends Validator {
       return `${field} is required.`;
     }
 
-    if (body[field].length > parseInt(ruleValue)) {
+    if ((body[field].length || body[field]) > parseInt(ruleValue)) {
       return `${field} cannot exceed ${ruleValue} characters.`;
     }
 

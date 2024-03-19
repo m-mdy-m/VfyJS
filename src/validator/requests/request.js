@@ -117,9 +117,6 @@ class RequestValidator {
       age: new AgeValidator(),
       same: new SameValidator(),
 
-      // Object validators
-      objectKeys: new ObjectKeyValidator(),
-
       // Security validators
       sqlInjection: new SQLInjectionValidator(),
       noSQLInjection: new NoSQLInjectionValidator(),
@@ -135,6 +132,20 @@ class RequestValidator {
    * @param {Object} [options={}] - Additional options for validation.
    * @param {Object} [options.customMessages={}] - Custom error messages for specific fields.
    * @returns {Object} - An object containing validation errors, if any.
+   * @example
+   * const req = { body: { username: 'john_doe', age: 30 } };
+   * const validator = new RequestValidator(req);
+   * const rules = {
+   *   username: 'string|alphanumeric|min:5|max:20',
+   *   age: 'number|min:18',
+   * };
+   * const options = {
+   *   customMessages: {
+   *     age: 'The age must be at least 18.',
+   *   },
+   * };
+   * const errors = validator.validate(rules, options);
+   * console.log(errors); // Output: { age: 'The age must be at least 18.' }
    */
   validate(rules, options = {}) {
     const { customMessages = {} } = options;
@@ -163,5 +174,8 @@ class RequestValidator {
     return errors;
   }
 }
+
+module.exports = RequestValidator;
+
 
 module.exports = RequestValidator;

@@ -71,7 +71,7 @@ function validateUsername(input, options = {}) {
 
     // Validate number requirement
     const isNumber = getRequired(number, validator.hasNumber());
-    IfBothTruthy(isNumber, !validator.hasNumber() && !validator.hasNumeric(), 'must contain at least one number.', input, messageError, 'isNumber');
+    IfBothTruthy(isNumber, validator.hasNumber() && !validator.hasNumeric(), 'must contain at least one number.', input, messageError, 'isNumber');
 
     // Validate repeat requirement
     let isRepeat = getFalseRequired(repeat, validator.hasRepeat());

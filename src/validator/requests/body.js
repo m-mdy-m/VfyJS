@@ -196,7 +196,6 @@ class SameValidator extends Validator {
     return null;
   }
 }
-// Example rule: "confirmPassword: 'required|same:password'"
 class ImageDimensionsValidator extends Validator {
   validate(field, ruleValue, body) {
     const [maxWidth, maxHeight] = ruleValue.split(",");

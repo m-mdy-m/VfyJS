@@ -147,6 +147,21 @@ class AgeValidator extends Validator {
     return null; // Indicates no validation error
   }
 }
+
+class SameValidator extends Validator {
+  validate(field, ruleValue, body) {
+    const otherField = ruleValue.trim();
+    
+    // Check if the fields match
+    if (body[field] !== body[otherField]) {
+      return `${field} must match ${otherField}.`;
+    }
+    
+    return null; // Return null if the fields match
+  }
+}
+// Example rule: "confirmPassword: 'required|same:password'"
+
 module.exports = {PasswordValidator,
   UsernameValidator,
   HexColorValidator,

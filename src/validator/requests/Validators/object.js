@@ -4,13 +4,17 @@ class ObjectKeyValidator extends Validator {
   validate(field, ruleValue, body) {
     const expectedKeys = ruleValue.split(",");
     const actualKeys = Object.keys(body[field]);
+
+    // Find missing keys
     const missingKeys = expectedKeys.filter((key) => !actualKeys.includes(key));
+
+    // If missing keys are found, return an error message
     if (missingKeys.length > 0) {
-      return `Missing keys in ${field}: ${missingKeys.join(", ")}.`;
+      return `Missing keys in '${field}': ${missingKeys.join(", ")}.`;
     }
-    return null;
+
+    return null; // Return null if all keys are present
   }
 }
-// Example rule: "user": "objectKeys:id,name,email"
 
 module.exports = { ObjectKeyValidator };

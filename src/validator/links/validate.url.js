@@ -14,8 +14,8 @@ const {
  * @throws {Error} - Throws an error if the URL is empty, not a string, or does not match the pattern.
  */
 function validateUrl(url, expectedProtocol) {
-  let protocolPattern;
-  let urlPattern;
+  let protocolPattern = "";
+  let urlPattern = "";
   // Set protocol and URL patterns based on the expected protocol
   if (expectedProtocol === "http") {
     protocolPattern = /^(HTTP|http)$/;
@@ -28,6 +28,7 @@ function validateUrl(url, expectedProtocol) {
       'Invalid expected protocol. Please provide "http" or "https".'
     );
   }
+  console.log("urlPattern=>", urlPattern);
   // Check if the URL matches the expected pattern
   ifFalsyValue(
     urlPattern.test(url),
@@ -94,7 +95,7 @@ function validateUrl(url, expectedProtocol) {
  * }
  */
 function isHttpsUrl(url) {
-    return validateUrl(url,'https')
+  return validateUrl(url, "https");
 }
 
 /**
@@ -120,6 +121,6 @@ function isHttpsUrl(url) {
  * }
  */
 function isHttp(url) {
-    return validateUrl(url,'http');
+  return validateUrl(url, "http");
 }
-module.exports = {isHttp,isHttps : isHttpsUrl,validateUrl};
+module.exports = { isHttp, isHttps: isHttpsUrl, validateUrl };

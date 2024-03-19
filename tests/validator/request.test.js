@@ -8,22 +8,6 @@ const req = {
     age: 25,
     email: "john@example.com",
   },
-  params: {},
-  query: {},
-  headers: {},
-  cookies: {},
-  method: "GET",
-  path: "/",
-  protocol: "http",
-  hostname: "example.com",
-  originalUrl: "/api",
-  xhr: false,
-  secure: false,
-  ip: "127.0.0.1",
-  sessionID: "abc123",
-  files: [],
-  user: { id: 1, username: "m__mdy__m" },
-  error: null,
 };
 
 describe("RequestValidator", () => {
@@ -46,13 +30,10 @@ describe("RequestValidator", () => {
   });
   it("should return validation errors for invalid data", () => {
     const invalidReq = {
-      ...req,
-      body: {
         username: "john@doe", // Invalid username
         password: "pass", // Invalid password
         age: "twenty-five", // Invalid age
         email: "invalid_email", // Invalid email
-      },
     };
     const invalidValidator = new RequestValidator(invalidReq);
     const rules = {

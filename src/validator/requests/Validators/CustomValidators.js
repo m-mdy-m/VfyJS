@@ -85,7 +85,9 @@ class NameValidator extends Validator {
 class AlphanumericValidator extends Validator {
   validate(field, ruleValue, body) {
     const value = body[field];
-
+    console.log('field=>',field);
+    console.log('ruleValue=>',ruleValue);
+    console.log('body=>',body);
     if (typeof value !== "string") {
       return `${field} must be a string containing alphanumeric characters only.`;
     }
@@ -103,7 +105,6 @@ class AlphanumericValidator extends Validator {
 class LanguageValidator extends Validator {
   validate(field, ruleValue, body) {
     const languageCode = body[field];
-
     if (typeof languageCode !== "string") {
       return `${field} must be a string representing a language code.`;
     }

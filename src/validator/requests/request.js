@@ -32,7 +32,7 @@ class RequestValidator {
       lengthRange: new LengthRangeValidator(),
       dateRange: new DateRangeValidator(),
       arrayLength: new ArrayLengthValidator(),
-      arrayRange: ArrayRangeValidator(),
+      arrayRange: new ArrayRangeValidator(),
       objectKeys: new ObjectKeyValidator(),
 
       // Case validators

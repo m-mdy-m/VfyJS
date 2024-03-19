@@ -38,12 +38,17 @@ class NoSQLInjectionValidator extends Validator {
 }
 class XSSValidator extends Validator {
   validate(field, ruleValue, body) {
-    const xssPattern =
-      /<script>|<\/script>|<img\s+src\s*=\s*".*?"|onerror\s*=\s*".*?"/i;
+    // Regular expression pattern to detect XSS attack payloads
+    const xssPattern = new RegExp(
+      `<script>|<\\/script>|<\\s*img\\s+[^>]*src\\s*=\\s*("|')?[^\\s>"']*("|')?|onerror\\s*=\\s*("|')[^"]*("|')`, "i"
+    );
+
+    // Check if the input contains any XSS attack payloads
     if (xssPattern.test(body[field])) {
-      return `Potential XSS attack detected in ${field}.`;
+      return `Potential XSS attack detected in '${field}'.`;
     }
-    return null;
+
+    return null; // Return null if no XSS attack payloads found
   }
 }
 class AuthTokenValidator extends Validator {

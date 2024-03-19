@@ -1,5 +1,4 @@
 "use strict";
-const { configureUserName, defaultOptions} = require('./global.config')
 /**
  * Options for customizing username validation criteria.
  *
@@ -32,7 +31,7 @@ const {MAX_LENGTH, MIN_LENGTH, getFalseRequired, trimmedValue, getValidValue, is
 const inputValidator = require("../../utils/inputValidator");
 const {isTypeMismatch, isEmpty} = require("../../errors/HandleError");
 const {optionUsername} = require("./helper/genOption");
-const {validateWithCondition, throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, TypeMatches, validateType} = require("../../errors/FormError");
+const { throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, TypeMatches, validateType} = require("../../errors/FormError");
 const {getErrorMessage} = require("./helper/getValues");
 
 /**
@@ -48,13 +47,11 @@ const {getErrorMessage} = require("./helper/getValues");
  * console.log(isValid); // true
  */
 function validateUsername(input, options = {}) {
-    // Merge default options with provided options
-    const mergedOptions = { ...defaultOptions.username, ...options };
     let username = input.value ? input.value : input; // Get the username value
     isEmpty(username,'Username is required.')
     const validator = inputValidator(username); // Create a validator instance
     // Extract options
-    const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, mergedOptions);
+    const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, options);
 
     // Validate number requirement
     throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));

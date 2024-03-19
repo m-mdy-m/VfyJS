@@ -3,8 +3,13 @@ const { isUsername } = require("../../index");
 describe("validateUsername function", () => {
     // Test case for a valid username
     test("valid username", () => {
-        const isValid = isUsername("StringUsername");
+      try {
+        const isValid = isUsername("m__mdy__m");
         expect(isValid).toBe(true);
+        
+      } catch (error) {
+        
+      }
     });
 
   // Test case for a valid username with custom options

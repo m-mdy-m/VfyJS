@@ -59,11 +59,11 @@ function optionUsername (username, options){
     const validation = [
         validator.hasMinLength(minLength.value || MIN_LENGTH),
         validator.hasMaxLength(maxLength.value || MAX_LENGTH),
-        uppercase.required ,
-        number.required,
-        nonAlphanumeric.required,
-        trim.required ,
-        repeat.required 
+        uppercase.required ? validator.hasUppercase() : true,
+        number.required ? validator.hasNumber() : true,
+        nonAlphanumeric.required ? validator.hasNonAlphanumeric() : false,
+        trim.required ? validator.hasWhitespace() : true,
+        repeat.required ? validator.hasRepeat() : true
     ];
     const messageError = [
         `Must be ${minLength.value || MIN_LENGTH}-${maxLength.value || MAX_LENGTH} characters long.`,

@@ -118,7 +118,6 @@ function validateFormPassword(input, options = {}) {
     // Validate whitespace
     const whitespaceCheck = getFalseRequired(whitespace);
     IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), "Whitespace is not allowed. Remove any leading or trailing spaces.", input, msgError, 'hasWhitespace');
- 
     // Check if all validations passed
     const isValid = min &&
         max &&

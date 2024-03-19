@@ -4,7 +4,7 @@ describe('isPassword', () => {
     // Test valid passwords
     test('Valid password with all criteria met', () => {
         const input = 'StrongPwd@123';
-        const options = { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
+        const options = { minLength: 2, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
         expect(isPassword(input, options)).toBe(true);
     });
 

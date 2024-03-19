@@ -23,7 +23,7 @@ function optionsPassword (options){
     ];
     
     let objectOption =  createValidationOptions(optionName, optionValidations, msgError);
-    objectOption = { ...options, ...objectOption };
+    objectOption = {  ...objectOption,...options, };
     return objectOption;
 }
 
@@ -44,7 +44,7 @@ function optionEmail (options){
   ]
   var objectOption = createValidationOptions(optionName,optionValidations,msgError);
   
-  objectOption = {  ...options,...objectOption };
+  objectOption = {  ...objectOption,...options, };
 
   const { minLenLocal, minLenDomain, minLenSubdomain, maxLenLocal, maxLenDomain, maxLenSubdomain } = objectOption;
   return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
@@ -75,7 +75,7 @@ function optionUsername (username, options){
     ];
 
     let objectOption = createValidationOptions(optionName, validation, messageError);
-    objectOption = {  ...options,...objectOption };
+    objectOption = {  ...objectOption,...options, };
 
     return objectOption;
 }

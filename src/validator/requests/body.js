@@ -1,4 +1,3 @@
-const Validator = require('./Validator');
 const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
 const { PasswordValidator, UsernameValidator, HexColorValidator, IPLocationValidator, JSONValidator, NameValidator, AlphanumericValidator, LanguageValidator, GenderValidator, AgeValidator, SameValidator } = require('./Validators/CustomValidators');
 const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator, HTTPSValidator } = require('./Validators/Format');

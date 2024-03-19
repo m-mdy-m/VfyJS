@@ -1,11 +1,24 @@
+const Validator = require("../Validator");
+
 class SQLInjectionValidator extends Validator {
   validate(field, ruleValue, body) {
-    const sqlInjectionPattern =
-      /(\b(SELECT|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER)\b)|(--.*)/i;
+    // List of common SQL keywords used in injection attacks
+    const sqlKeywords = [
+      "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER",
+      "EXECUTE", "TRUNCATE", "DECLARE", "USE", "MERGE", "RENAME", "GRANT", "REVOKE"
+    ];
+
+    // Regular expression pattern to detect SQL injection attempts
+    const sqlInjectionPattern = new RegExp(
+      `\\b(${sqlKeywords.join("|")})(?:\\s|\\b)|--.*|\\/\\*.*\\*\\/`, "i"
+    );
+
+    // Check if the input contains any SQL injection patterns
     if (sqlInjectionPattern.test(body[field])) {
-      return `Potential SQL injection detected in ${field}.`;
+      return `Potential SQL injection detected in '${field}'.`;
     }
-    return null;
+
+    return null; // Return null if no SQL injection patterns found
   }
 }
 class NoSQLInjectionValidator extends Validator {

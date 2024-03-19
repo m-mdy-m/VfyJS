@@ -1,4 +1,4 @@
-const { isHttp, isHttps } = require('../../../src/validator/links/validate.ur');
+const { isHttp, isHttps } = require('../../../src/validator/links/validate.url');
 const { expect } = require('@jest/globals');
 
 describe('isHttp and isHttps functions', () => {

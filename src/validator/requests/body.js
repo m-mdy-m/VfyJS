@@ -5,6 +5,7 @@ const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, 
 const { MinLengthValidator, MaxLengthValidator, LengthRangeValidator, DateRangeValidator, ArrayLengthValidator, ArrayRangeValidator,  } = require('./Validators/Length');
 const { StringTypeValidator, NumberTypeValidator, ArrayTypeValidator, ObjectTypeValidator, BooleanTypeValidator } = require('./Validators/Type');
 const { ObjectKeyValidator } = require('./Validators/object');
+const { SQLInjectionValidator, NoSQLInjectionValidator, XSSValidator, PasswordHashValidator, AuthTokenValidator } = require('./Validators/security');
 const { WhitespaceValidator, TrimValidator, FileValidator, EnumValidator, RegexValidator } = require('./utils/AdditionalValidators');
 class RequestValidator  {
   constructor(req) {
@@ -61,7 +62,12 @@ class RequestValidator  {
       same: new SameValidator(),
 
       /// security
-      sqlInjection : new Sql
+      sql : new SQLInjectionValidator(),
+      nosql:new NoSQLInjectionValidator(),
+      xss : new XSSValidator(),
+      hasPassword : new PasswordHashValidator(),
+      authToken :  new AuthTokenValidator(),
+
     };
   }
 

@@ -292,7 +292,7 @@ async function GlobalVal(code, phone) {
                 phone: validatedPhone.phone,
                 patterns: ContinentInfo.patterns,
                 hasCode: validatedCode.hasCode,
-                hasPhone: validatedPhone.hasPhone,
+                isValid: validatedPhone.isValid,
                 duplicateCodes : false,
             };
         }

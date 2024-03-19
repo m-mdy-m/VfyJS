@@ -76,3 +76,4 @@ class PasswordHashValidator extends Validator {
     return null; // Return null if the password hash is valid
   }
 }
+module.exports = {SQLInjectionValidator,NoSQLInjectionValidator,AuthTokenValidator,PasswordHashValidator,XSSValidator}

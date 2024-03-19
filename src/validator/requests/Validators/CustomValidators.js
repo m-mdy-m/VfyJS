@@ -181,4 +181,5 @@ module.exports = {PasswordValidator,
   LanguageValidator,
   GenderValidator,
   AgeValidator,
+  SameValidator,
 }

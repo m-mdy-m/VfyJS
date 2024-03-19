@@ -1,9 +1,10 @@
 const Validator = require('./Validator');
 const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
-const { PasswordValidator, UsernameValidator, HexColorValidator, IPLocationValidator, JSONValidator, NameValidator, AlphanumericValidator, LanguageValidator, GenderValidator, AgeValidator } = require('./Validators/CustomValidators');
-const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator } = require('./Validators/Format');
+const { PasswordValidator, UsernameValidator, HexColorValidator, IPLocationValidator, JSONValidator, NameValidator, AlphanumericValidator, LanguageValidator, GenderValidator, AgeValidator, SameValidator } = require('./Validators/CustomValidators');
+const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator, HTTPSValidator } = require('./Validators/Format');
 const { MinLengthValidator, MaxLengthValidator, LengthRangeValidator, DateRangeValidator, ArrayLengthValidator, ArrayRangeValidator,  } = require('./Validators/Length');
 const { StringTypeValidator, NumberTypeValidator, ArrayTypeValidator, ObjectTypeValidator, BooleanTypeValidator } = require('./Validators/Type');
+const { ObjectKeyValidator } = require('./Validators/object');
 const { WhitespaceValidator, TrimValidator, FileValidator, EnumValidator, RegexValidator } = require('./utils/AdditionalValidators');
 class RequestValidator  {
   constructor(req) {
@@ -23,6 +24,7 @@ class RequestValidator  {
       dateRange : new DateRangeValidator(),
       arrayLength : new ArrayLengthValidator(),
       arrayRange : ArrayRangeValidator(),
+      objectKeys : new ObjectKeyValidator(),
 
       // Case validators
       uppercase: new UppercaseValidator(),
@@ -56,6 +58,10 @@ class RequestValidator  {
       language: new LanguageValidator(),
       gender: new GenderValidator(),
       age: new AgeValidator(),
+      same: new SameValidator(),
+
+      /// security
+      sqlInjection : new Sql
     };
   }
 

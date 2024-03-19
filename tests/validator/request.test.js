@@ -39,7 +39,7 @@ describe("RequestValidator", () => {
     const rules = {
       username: "alphanumeric|min:5|max:20",
       password: "min:8|max:20",
-      age: "number|min:18|max:100",
+      age: "number|min:14|max:100",
       email: "email",
     };
     const errors = invalidValidator.validate(rules);
@@ -47,7 +47,7 @@ describe("RequestValidator", () => {
     expect(errors).toEqual({
       username: "username must contain only alphanumeric characters.",
       password: "password must be at least 8 characters long.",
-      age: "age must be a valid number.",
+      age: "age must be at least 14 characters long.",
       email: "Email must contain @",
     });
   });

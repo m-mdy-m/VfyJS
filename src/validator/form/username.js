@@ -31,7 +31,7 @@ const {MAX_LENGTH, MIN_LENGTH, getFalseRequired, trimmedValue, getValidValue, is
 const inputValidator = require("../../utils/inputValidator");
 const {isTypeMismatch, isEmpty} = require("../../errors/HandleError");
 const {optionUsername} = require("./helper/genOption");
-const { throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, TypeMatches, validateType} = require("../../errors/FormError");
+const { throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, validateType} = require("../../errors/FormError");
 const {getErrorMessage} = require("./helper/getValues");
 
 /**
@@ -51,30 +51,30 @@ function validateUsername(input, options = {}) {
     isEmpty(username,'Username is required.')
     const validator = inputValidator(username); // Create a validator instance
     // Extract options
-    const {minLength, maxLength, uppercase, number, NonAlphanumeric, trim, repeat, messageError} = optionUsername(username, options);
+    const {minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat, messageError} = optionUsername(username, options);
     // Validate number requirement
     throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));
         
 
     // Check for whitespace if required
-    let checkWhiteSpace = getRequired(trim, false);
+    let checkWhiteSpace = getRequired(trim,trim);
     if (checkWhiteSpace) {
-        throwIfFalsy(!checkWhiteSpace, validator.hasWhitespace(), messageError, 'hasWhitespace', 'cannot contain leading or trailing whitespaces.');
+        throwIfFalsy(checkWhiteSpace, !validator.hasWhitespace(), messageError, 'hasWhitespace', 'cannot contain leading or trailing whitespaces.');
     }
     
     // Trim username value
     username = trimmedValue(username);
 
     // Validate non-alphanumeric requirement
-    const isNonAlphanumeric = getRequired(NonAlphanumeric, false);
-    ifTruthyValue(NonAlphanumeric.errorMessage, isNonAlphanumeric, input, messageError, 'isNonAlphanumeric');
+    const isNonAlphanumeric = getRequired(nonAlphanumeric, false);
+    IfBothTruthy(isNonAlphanumeric,validator.hasNonAlphanumeric(), nonAlphanumeric.errorMessage, input, messageError, 'isNonAlphanumeric');
 
     // Validate number requirement
     const isNumber = getRequired(number, validator.hasNumber());
     IfBothTruthy(isNumber, validator.hasNumber() && !validator.hasNumeric(), 'must contain at least one number.', input, messageError, 'isNumber');
 
     // Validate repeat requirement
-    let isRepeat = getFalseRequired(repeat, validator.hasRepeat());
+    let isRepeat = getFalseRequired(repeat);
     IfBothTruthy(isRepeat, validator.hasRepeat(), 'cannot have consecutive repeated characters.', input, messageError, 'isRepeat');
 
     // Validate length requirements
@@ -107,9 +107,8 @@ function validateUsername(input, options = {}) {
     isTypeMismatch('boolean', maxValue, "boolean 2");
     isTypeMismatch('number', min, "number 1");
     isTypeMismatch('number', max, "number 2");
-
     // Check if the username is valid
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && !checkWhiteSpace && !isRepeat;
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && isNonAlphanumeric && checkWhiteSpace && (isRepeat.required?isRepeat.required : isRepeat);
     return isValid;
 }
 

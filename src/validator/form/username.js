@@ -115,7 +115,7 @@ function validateUsername(input, options = {}) {
     console.log('!checkWhiteSpace=>',checkWhiteSpace);
     console.log('(!isRepeat.required?!isRepeat.required : !isRepeat)=>',(isRepeat.required?isRepeat.required : isRepeat));
     // Check if the username is valid
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && isNonAlphanumeric && checkWhiteSpace && (isRepeat.required ? isRepeat.required : isRepeat);
+    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && !isNonAlphanumeric && checkWhiteSpace && (isRepeat.required ? isRepeat.required : isRepeat);
     return isValid;
 }
 

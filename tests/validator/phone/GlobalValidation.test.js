@@ -32,7 +32,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
     const result = hasPhone('9115291407');
     expect(result).toEqual({
       phone: '9115291407',
-      hasPhone: true,
+      isValid: true,
     });
   });
   
@@ -78,7 +78,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
         { type: 'landline', pattern: "^0\\d{2}?\\d{8}$" },
       ],
       hasCode: true,
-      hasPhone: true,
+      isValid: true,
       duplicateCodes: false
     });
   });
@@ -104,7 +104,7 @@ const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../
     const result = hasPhone('123456');
     expect(result).toEqual({
       phone: '123456',
-      hasPhone: true,
+      isValid: true,
     });
   });
   

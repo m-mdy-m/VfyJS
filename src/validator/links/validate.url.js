@@ -97,10 +97,7 @@ function isHttps(url) {
   try {
     return validateUrl(url, "https");
   } catch (error) {
-    if (error.message.startsWith("Invalid expected protocol")) {
-      throw new Error(error.message);
-    }
-    throw new Error("Invalid URL.");
+    throw new Error(error.message);
   }
 }
 
@@ -129,10 +126,7 @@ function isHttps(url) {
 function isHttp(url) {
   try {
     return validateUrl(url, "http");
-  }  catch (error) {
-    if (error.message.startsWith("Invalid expected protocol")) {
-      throw new Error(error.message);
-    }
+  } catch (error) {
     throw new Error("Invalid URL.");
   }
 }

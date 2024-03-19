@@ -112,33 +112,87 @@ isUsername(input, options = {})
 
 ## Validation Options
 
-The `options` parameter allows customization of the validation criteria. Below are the available options:
+- **Parameters:**
+  - `input`: The username string to be validated.
+  - `options`: An optional object for customizing validation criteria.
 
-- `minLength`: Minimum length requirements for the username.
-- `maxLength`: Maximum length requirements for the username.
-- `uppercase`: Uppercase letter requirements for the username.
-- `number`: Numeric digit requirements for the username.
-- `nonAlphanumeric`: Non-alphanumeric character requirements for the username.
-- `trim`: Whitespace requirements for the username.
-- `repeat`: Consecutive character requirements for the username.
+- **Returns:** 
+  - `boolean`: Indicates whether the username is valid according to the specified criteria.
+
+- **Throws:** 
+  - `Error`: Throws an error if validation fails.
+
+## Validation Options
+
+The function provides various options to configure the validation process according to specific requirements.
+
+### `minLength`
+
+Specifies the minimum length requirements for the username.
+
+### `maxLength`
+
+Specifies the maximum length requirements for the username.
+
+### `uppercase`
+
+Defines whether uppercase letters are required in the username.
+
+### `number`
+
+Specifies whether numeric digits are required in the username.
+
+### `nonAlphanumeric`
+
+Defines whether non-alphanumeric characters are required in the username.
+
+### `trim`
+
+Specifies whether leading or trailing whitespaces are disallowed in the username.
+
+### `repeat`
+
+Defines whether consecutive character sequences are disallowed in the username.
 
 Each option includes a `required` property to specify whether the corresponding criteria are mandatory, along with an `errorMessage` property to define the error message for validation failures.
 
 ## Example Usage
 
+Let's explore some examples to demonstrate how to use the `isUsername` function with different configurations.
+
+### Example 1: Basic Username Validation
+
 ```javascript
 const { isUsername } = require("vfyjs");
 
-const username = "StringUsername123";
+const username = "JohnDoe123";
 const isValid = isUsername(username);
 
 console.log(isValid); // true
 ```
 
+In this example, the function validates the username `"JohnDoe123"` without any specific customization.
 
+### Example 2: Customized Username Validation
 
+```javascript
+const { isUsername } = require("vfyjs");
 
+const username = "Admin123";
+const options = {
+  minLength: { value: 6, errorMessage: "Username must be at least 6 characters long." },
+  maxLength: { value: 20, errorMessage: "Username cannot exceed 20 characters." },
+  uppercase: { required: true, errorMessage: "Username must contain at least one uppercase letter." },
+  number: { required: true, errorMessage: "Username must contain at least one number." },
+  nonAlphanumeric: { required: true, errorMessage: "Username must contain at least one non-alphanumeric character." },
+  trim: { required: true, errorMessage: "Username cannot contain leading or trailing whitespaces." },
+  repeat: { required: true, errorMessage: "Username cannot have consecutive repeated characters." }
+};
 
+const isValid = isUsername(username, options);
+
+console.log(isValid); // true
+```
 
 ### ConfigPassword
 

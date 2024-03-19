@@ -6,7 +6,7 @@ let defaultOptions = {
   password: {
     minLength: {
       value: 8,
-      errorMessage: "must be at least 8 characters long.",
+      errorMessage: "Must be at least 8 characters long.",
     },
     maxLength: {
       value: 64,
@@ -14,19 +14,19 @@ let defaultOptions = {
     },
     uppercase: {
       required: true,
-      errorMessage: "must contain at least one uppercase letter.",
+      errorMessage: "Must contain at least one uppercase letter.",
     },
     lowercase: {
       required: true,
-      errorMessage: "must contain at least one lowercase letter.",
+      errorMessage: "Must contain at least one lowercase letter.",
     },
     number: {
       required: true,
-      errorMessage: "must contain at least one numeric digit.",
+      errorMessage: "Must contain at least one numeric digit.",
     },
     specialCharacter: {
       required: true,
-      errorMessage: "must contain at least one special character.",
+      errorMessage: "Must contain at least one special character.",
     },
     alphabetic: {
       required: false,

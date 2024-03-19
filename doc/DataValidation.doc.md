@@ -142,10 +142,6 @@ Defines whether uppercase letters are required in the username.
 
 Specifies whether numeric digits are required in the username.
 
-### `nonAlphanumeric`
-
-Defines whether non-alphanumeric characters are required in the username.
-
 ### `trim`
 
 Specifies whether leading or trailing whitespaces are disallowed in the username.

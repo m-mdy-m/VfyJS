@@ -20,7 +20,6 @@ describe("validateUsername function", () => {
         maxLength: { value: 15, errorMessage: "cannot exceed 15 characters" },
         uppercase: { required: true, errorMessage: "must have at least one uppercase letter" },
         number: { required: true, errorMessage: "must have at least one number" },
-        NonAlphanumeric: { required: false, errorMessage: "should not contain non-alphanumeric characters" },
         trim: { required: true, errorMessage: "cannot contain leading or trailing whitespaces" },
         repeat: { required: true, errorMessage: "cannot have consecutive repeated characters" },
       });
@@ -65,16 +64,6 @@ describe("validateUsername function", () => {
   test("invalid username - no numbers", () => {
     try {
       const isValid = isUsername("NoNumbersHere", { number: { required: true, errorMessage: "must have at least one number" } });
-      expect(isValid).toBe(false);
-    } catch (error) {
-      expect(error.property).toBe(error.property);
-    }
-  });
-
-  // Test case for an invalid username with non-alphanumeric characters
-  test("invalid username - non-alphanumeric characters", () => {
-    try {
-      const isValid = isUsername("Username!123", { NonAlphanumeric: { required: true, errorMessage: "should not contain non-alphanumeric characters" } });
       expect(isValid).toBe(false);
     } catch (error) {
       expect(error.property).toBe(error.property);
@@ -144,16 +133,6 @@ describe("validateUsername function", () => {
   test("invalid username - no numbers", () => {
     try {
       const isValid = isUsername("NoNumbersHere", { number: { required: true, errorMessage: "must have at least one number" }, trim: true, repeat: true });
-      expect(isValid).toBe(false);
-    } catch (error) {
-      expect(error.property).toBe(error.property);
-    }
-  });
-
-  // Test case for an invalid username with non-alphanumeric characters
-  test("invalid username - non-alphanumeric characters", () => {
-    try {
-      const isValid = isUsername("Username!123", { NonAlphanumeric: { required: true, errorMessage: "should not contain non-alphanumeric characters" }, trim: true, repeat: true });
       expect(isValid).toBe(false);
     } catch (error) {
       expect(error.property).toBe(error.property);

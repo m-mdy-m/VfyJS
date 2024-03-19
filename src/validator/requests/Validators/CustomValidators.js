@@ -5,31 +5,31 @@ const { isName } = require("../../form/utils");
 const Validator = require("../Validator");
 
 class PasswordValidator extends Validator {
-  validate(field, ruleValue, body,options={}) {
+  validate(field, ruleValue, body, options = {}) {
     try {
-      validateFormPassword(body[field],options)
-      return null
+      validateFormPassword(body[field], options);
+      return null;
     } catch (error) {
-      return error.message
+      return error.message;
     }
   }
 }
 class UsernameValidator extends Validator {
-  validate(field, ruleValue, body,options) {
-   try {
-    validateUsername(body[field],options)
-  } catch (error) {
-    return error.message
-   }
+  validate(field, ruleValue, body, options) {
+    try {
+      validateUsername(body[field], options);
+    } catch (error) {
+      return error.message;
+    }
   }
 }
 class HexColorValidator extends Validator {
   validate(field, ruleValue, body) {
     try {
-      checkValueColor(body[field])
-      return null
+      checkValueColor(body[field]);
+      return null;
     } catch (error) {
-      return error.message
+      return error.message;
     }
   }
 }
@@ -41,7 +41,8 @@ class IPLocationValidator extends Validator {
     }
 
     // Regular expression pattern for IPv4 and IPv6 addresses
-    const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4})$/;
+    const ipPattern =
+      /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4})$/;
 
     // Check if the provided IP address matches the pattern
     if (!ipPattern.test(ipAddress)) {
@@ -71,7 +72,7 @@ class JSONValidator extends Validator {
 class NameValidator extends Validator {
   validate(field, ruleValue, body) {
     const value = body[field];
-    const validationResults = isName(value); 
+    const validationResults = isName(value);
     if (!validationResults.isValid) {
       return `${field} must be a valid name.`;
     }
@@ -82,7 +83,7 @@ class AlphanumericValidator extends Validator {
   validate(field, ruleValue, body) {
     const value = body[field];
 
-    if (typeof value !== 'string') {
+    if (typeof value !== "string") {
       return `${field} must be a string containing alphanumeric characters only.`;
     }
 
@@ -100,7 +101,7 @@ class LanguageValidator extends Validator {
   validate(field, ruleValue, body) {
     const languageCode = body[field];
 
-    if (typeof languageCode !== 'string') {
+    if (typeof languageCode !== "string") {
       return `${field} must be a string representing a language code.`;
     }
     if (languageCode.length !== 2 && languageCode.length !== 3) {
@@ -114,15 +115,17 @@ class GenderValidator extends Validator {
   validate(field, ruleValue, body) {
     const gender = body[field];
 
-    if (typeof gender !== 'string') {
+    if (typeof gender !== "string") {
       return `${field} must be a string representing gender.`;
     }
 
     // Assuming gender must be one of these values: 'male', 'female'
-    const validGenders = ['male', 'female'];
+    const validGenders = ["male", "female"];
 
     if (!validGenders.includes(gender.toLowerCase())) {
-      return `${field} must be one of the following values: ${validGenders.join(', ')}.`;
+      return `${field} must be one of the following values: ${validGenders.join(
+        ", "
+      )}.`;
     }
 
     return null; // Indicates no validation error
@@ -133,7 +136,7 @@ class AgeValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
     const age = body[field];
 
-    if (typeof age !== 'number' || isNaN(age)) {
+    if (typeof age !== "number" || isNaN(age)) {
       return `${field} must be a valid number representing age.`;
     }
 
@@ -154,7 +157,9 @@ class SameValidator extends Validator {
 
     // Check if the other field exists in the body
     if (!(otherField in body)) {
-      throw new Error(`Validation rule error: Field '${otherField}' specified in 'same' rule does not exist in the request body.`);
+      throw new Error(
+        `Validation rule error: Field '${otherField}' specified in 'same' rule does not exist in the request body.`
+      );
     }
 
     // Compare the values of the current field and the other field
@@ -171,7 +176,8 @@ class CustomValidator extends Validator {
   }
 }
 
-module.exports = {PasswordValidator,
+module.exports = {
+  PasswordValidator,
   UsernameValidator,
   HexColorValidator,
   IPLocationValidator,
@@ -182,4 +188,4 @@ module.exports = {PasswordValidator,
   GenderValidator,
   AgeValidator,
   SameValidator,
-}
+};

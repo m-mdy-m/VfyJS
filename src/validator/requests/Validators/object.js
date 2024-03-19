@@ -3,6 +3,11 @@ const Validator = require("../Validator");
 class ObjectKeyValidator extends Validator {
   validate(field, ruleValue, body) {
     try {
+      // Ensure that the field exists in the body
+      if (!body.hasOwnProperty(field)) {
+        throw new Error(`Field '${field}' does not exist in the body.`);
+      }
+
       const expectedKeys = ruleValue.split(",");
       const actualKeys = Object.keys(body[field]);
 
@@ -18,6 +23,7 @@ class ObjectKeyValidator extends Validator {
 
       return null; // Return null if all keys are present
     } catch (error) {
+      // Handle exceptions gracefully
       return error.message; // Return error message if an exception occurs
     }
   }

@@ -27,8 +27,13 @@ const req = {
 };
 
 describe("RequestValidator", () => {
+  let validator;
+
+  beforeEach(() => {
+    validator = new RequestValidator(req.body);
+  });
+
   it("should validate request data according to the provided rules", () => {
-    const validator = new RequestValidator(req.body);
     const rules = {
       username: "username",
       password: "min:8|max:20",
@@ -60,26 +65,22 @@ describe("RequestValidator", () => {
     const errors = invalidValidator.validate(rules);
 
     expect(errors).toEqual({
-      age: "age must be a number.",
-      email: "Cannot read properties of undefined (reading 'value')",
-      password: "password must be a string.",
+      age: "age must be a valid number.",
+      email: "email must be a valid email address.",
+      password: "password must be at least 8 characters long.",
       username:
-        "username must be a string containing alphanumeric characters only.",
+        "username must be a string containing alphanumeric characters only, with a length between 5 and 20 characters.",
     });
   });
 
   it("should throw an error for unsupported validation rules", () => {
-    // Arrange
-    const validator = new RequestValidator(req.body);
     const rules = {
       username: "unsupported|alphanumeric|min:5|max:20",
     };
-    // Act & Assert
-    try {
-    } catch (error) {
-      expect(validator.validate(rules)).rejects.toThrow(
-        "Validation rule 'unsupported' is not supported."
-      );
-    }
+
+    expect(() => {
+      validator.validate(rules);
+    }).toThrowError("Validation rule 'unsupported' is not supported.");
   });
 });
+

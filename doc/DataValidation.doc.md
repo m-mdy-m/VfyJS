@@ -85,6 +85,69 @@ try {
 ```
 
 ---
+### Global Configuration for Username and Password Validation
+
+This module provides functions for configuring default options for username and password validation.
+
+#### defaultOptions
+
+An object containing the default options for password and username validation.
+
+##### Password Validation Options:
+
+- `minLength`: Minimum length requirements for the password.
+- `maxLength`: Maximum length requirements for the password.
+- `uppercase`: Uppercase letter requirements for the password.
+- `lowercase`: Lowercase letter requirements for the password.
+- `number`: Numeric digit requirements for the password.
+- `specialCharacter`: Special character requirements for the password.
+- `alphabetic`: Alphabetic character requirements for the password.
+- `whitespace`: Whitespace requirements for the password.
+
+##### Username Validation Options:
+
+- `minLength`: Minimum length requirements for the username.
+- `maxLength`: Maximum length requirements for the username.
+- `uppercase`: Uppercase letter requirements for the username.
+- `number`: Numeric digit requirements for the username.
+- `trim`: Whitespace requirements for the username.
+- `repeat`: Consecutive character requirements for the username.
+
+#### setPasswordConfig(option)
+
+Sets the configuration options for password validation.
+
+- `option` (Object): Options object for customizing password validation criteria.
+
+#### setUsernameConfig(option)
+
+Sets the configuration options for username validation.
+
+- `option` (Object): Options object for customizing username validation criteria.
+
+#### Example Using
+```javascript
+const { setPasswordConfig, setUsernameConfig } = require('vfyjs');
+
+// Set custom options for password validation
+setPasswordConfig({
+  minLength: { value: 10, errorMessage: "Must be at least 10 characters long." },
+  maxLength: { value: 50, errorMessage: "Cannot exceed 50 characters." },
+  uppercase: { required: true, errorMessage: "At least one uppercase letter is required." },
+  lowercase: { required: true, errorMessage: "At least one lowercase letter is required." },
+  number: { required: true, errorMessage: "At least one numeric digit is required." },
+  specialCharacter: { required: true, errorMessage: "At least one special character is required." },
+});
+
+// Set custom options for username validation
+setUsernameConfig({
+  minLength: { value: 5, errorMessage: "Username must be at least 5 characters long." },
+  maxLength: { value: 20, errorMessage: "Username cannot exceed 20 characters." },
+  uppercase: { required: false, errorMessage: "Uppercase letters are not allowed in the username." },
+  number: { required: false, errorMessage: "Digits are not allowed in the username." },
+  nonAlphanumeric: { required: false, errorMessage: "Non-alphanumeric characters are not allowed in the username." },
+});
+```
 
 ### ConfigUsername
 

@@ -278,7 +278,7 @@ async function GlobalVal(code, phone) {
                 patterns: ContinentInfo.patterns,
                 hasCode: true,
                 duplicateCodes : true,
-                hasPhone: validatedPhone.hasPhone,
+                isValid: validatedPhone.isValid,
             }
             // return uniqueValues
         }else{

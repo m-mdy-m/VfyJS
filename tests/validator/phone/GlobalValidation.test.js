@@ -1,4 +1,4 @@
-const {hasCode,hasPhone,GlobalVal,getContinentInfo,ChecKValue} = require('../../../src/validator/phone/utils/GlobalValidation')
+const {hasCode,hasPhone,GlobalVal,getContinentInfo} = require('../../../src/validator/phone/utils/GlobalValidation')
   test("invalid country code - invalid format with custom error message", async () => {
     try {
       const result = await hasCode('invalid');

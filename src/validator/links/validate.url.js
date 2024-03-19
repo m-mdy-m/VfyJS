@@ -15,6 +15,9 @@ const {
  * @throws {Error} - Throws an error if the URL is empty, not a string, or does not match the pattern.
  */
 function validateUrl(url, expectedProtocol) {
+  expectedProtocol.trim();
+  // Check if the URL is empty
+  isEmpty(url, "URL cannot be empty. Please provide a valid URL.");
   let protocolPattern = "";
   let urlPattern = "";
   // Set protocol and URL patterns based on the expected protocol
@@ -34,8 +37,6 @@ function validateUrl(url, expectedProtocol) {
     urlPattern.test(url),
     `The URL must contain the substring "${expectedProtocol}". Please provide a valid URL.`
   );
-  // Check if the URL is empty
-  isEmpty(url, "URL cannot be empty. Please provide a valid URL.");
 
   // Perform type and numeric checks
   IfNotType("string", url, "URL must be a string.");

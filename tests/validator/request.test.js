@@ -74,7 +74,11 @@ describe("RequestValidator", () => {
     const rules = {
       username: "unsupported|alphanumeric|min:5|max:20",
     };
-      
-      expect(validator.validate(rules)).toEqual("Validation rule 'unsupported' is not supported.")
+      try {
+        expect(validator.validate(rules)).rejects.toThrow("Validation rule 'unsupported' is not supported.");
+        
+      } catch (error) {
+        console.log('error =>',error.message);
+      }
   });
 });

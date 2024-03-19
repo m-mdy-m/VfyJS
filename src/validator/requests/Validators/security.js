@@ -53,20 +53,26 @@ class XSSValidator extends Validator {
 }
 class AuthTokenValidator extends Validator {
   validate(field, ruleValue, body) {
+    // Regular expression pattern to validate authentication token format
     const authTokenPattern = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/;
+
+    // Check if the input matches the authentication token pattern
     if (!authTokenPattern.test(body[field])) {
-      return `Invalid authentication token format in ${field}.`;
+      return `Invalid authentication token format in '${field}'. The token must consist of three parts separated by periods.`;
     }
-    // Additional checks for token integrity can be performed here
-    return null;
+    return null; // Return null if the token is valid
   }
 }
 class PasswordHashValidator extends Validator {
   validate(field, ruleValue, body) {
+    // Regular expression pattern to validate password hash format
     const passwordHashPattern = /^\$2[ayb]\$[0-9]{2}\$[A-Za-z0-9/.]{53}$/;
+
+    // Check if the input matches the password hash pattern
     if (!passwordHashPattern.test(body[field])) {
-      return `Password field ${field} must be securely hashed using bcrypt or similar algorithms.`;
+      return `The password field '${field}' must be securely hashed using bcrypt or similar algorithms.`;
     }
-    return null;
+
+    return null; // Return null if the password hash is valid
   }
 }

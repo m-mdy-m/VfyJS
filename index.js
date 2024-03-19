@@ -17,10 +17,7 @@ const emailValidate = require("./src/validator/form/email");
 const userValidate = require("./src/validator/form/username");
 
 // Importing HTTP link validation function
-const isHttp = require("./src/validator/links/http");
-
-// Importing HTTPS link validation function
-const isHttps = require("./src/validator/links/https");
+const {isHttp,isHttps} = require("./src/validator/links/validate.url");
 
 // Importing color validation function
 const colorValidate = require("./src/validator/colors/isColor");

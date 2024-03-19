@@ -11,15 +11,16 @@ describe('isPassword', () => {
     // Test invalid passwords
     test('Invalid password with insufficient length', () => {
         const input = 'Weak';
-        const options = { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
+        const options = { minLength: 8 };
         expect(() => isPassword(input, options)).toThrowError('length must be between 8 and 64 characters.');
     });
 
     test('Invalid password missing uppercase letter', () => {
-        const input = 'weakpassword@123';
-        const options = { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
-        expect(() => isPassword(input, options)).toThrowError('Must contain at least one uppercase letter.');
+      const input = 'weakpassword@123';
+      const options = { minLength: 8, uppercase: true, lowercase: true, number: true, specialCharacter: true, alphabetic: true, whitespace: false };
+      expect(() => isPassword(input, options)).toThrowError('Must contain at least one uppercase letter.');
     });
+  
 
     // Test edge cases
     test('Empty password', () => {

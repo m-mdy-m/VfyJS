@@ -138,7 +138,6 @@ class GenderValidator extends Validator {
 class AgeValidator extends Validator {
   validate(field, ruleValue, body, options = {}) {
     const age = body[field];
-
     if (typeof age !== "number" || isNaN(age)) {
       return `${field} must be a valid number representing age.`;
     }

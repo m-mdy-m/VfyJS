@@ -165,18 +165,3 @@ class RequestValidator {
 }
 
 module.exports = RequestValidator;
-const body = {
-  username: "m__mdy__m",
-  password: "password123",
-  age: 25,
-  email: "john@example.com",
-};
-const validator = new RequestValidator(body);
-const rule = {
-  username: "username",
-  password: "min:8|max:20",
-  age: "number|min:18|max:100",
-  email: "email",
-};
-const error = validator.validate(rule);
-console.log("er =>", error);

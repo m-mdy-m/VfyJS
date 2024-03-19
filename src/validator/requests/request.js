@@ -133,7 +133,7 @@ class RequestValidator {
    * @param {Object} [options.customMessages={}] - Custom error messages for specific fields.
    * @returns {Object} - An object containing validation errors, if any.
    * @example
-   * const req = { body: { username: 'john_doe', age: 30 } };
+   * const req = { username: 'john_doe', age: 30  };
    * const validator = new RequestValidator(req);
    * const rules = {
    *   username: 'string|alphanumeric|min:5|max:20',
@@ -174,8 +174,5 @@ class RequestValidator {
     return errors;
   }
 }
-
-module.exports = RequestValidator;
-
 
 module.exports = RequestValidator;

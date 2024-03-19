@@ -61,12 +61,15 @@ class RequestValidator  {
       age: new AgeValidator(),
       same: new SameValidator(),
 
-      /// security
-      sql : new SQLInjectionValidator(),
-      nosql:new NoSQLInjectionValidator(),
-      xss : new XSSValidator(),
-      hasPassword : new PasswordHashValidator(),
-      authToken :  new AuthTokenValidator(),
+      // Object validators
+      objectKeys: new ObjectKeyValidator(),
+
+      // Security validators
+      sqlInjection: new SQLInjectionValidator(),
+      noSQLInjection: new NoSQLInjectionValidator(),
+      xss: new XSSValidator(),
+      passwordHash: new PasswordHashValidator(),
+      authToken: new AuthTokenValidator(),
 
     };
   }

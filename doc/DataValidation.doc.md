@@ -128,11 +128,14 @@ const { validateFormPassword } = require("vfyjs");
 
 const password = "!@3DS!@#ASdasc";
 try {
-    const isValid = validateFormPassword(password, {
-        minLength: { value: 20, errorMessage: 'Password must be at least 20 characters long.' },
-    });
+  const isValid = validateFormPassword(password, {
+    minLength: {
+      value: 20,
+      errorMessage: "Password must be at least 20 characters long.",
+    },
+  });
 } catch (error) {
-    console.error(error.message); // Output: "Password must be at least 20 characters long."
+  console.error(error.message); // Output: "Password must be at least 20 characters long."
 }
 ```
 
@@ -145,18 +148,30 @@ const { validateFormPassword } = require("vfyjs");
 
 const password = "!@3DS!@#ASdasc";
 try {
-    const isValid = validateFormPassword(password, {
-        minLength: { value: 2, errorMessage: 'Password must be at least 2 characters long.' },
-        maxLength: { value: 10, errorMessage: 'Password must not exceed 10 characters.' },
-        alphabetic: { required: true, errorMessage: 'The password must contain alphabetic characters.' },
-        lowercase: false,
-        number: { required: false, errorMessage: 'The password must not contain numeric characters.' },
-        specialCharacter: false,
-        uppercase: true,
-        whitespace: false,
-    });
+  const isValid = validateFormPassword(password, {
+    minLength: {
+      value: 2,
+      errorMessage: "Password must be at least 2 characters long.",
+    },
+    maxLength: {
+      value: 10,
+      errorMessage: "Password must not exceed 10 characters.",
+    },
+    alphabetic: {
+      required: true,
+      errorMessage: "The password must contain alphabetic characters.",
+    },
+    lowercase: false,
+    number: {
+      required: false,
+      errorMessage: "The password must not contain numeric characters.",
+    },
+    specialCharacter: false,
+    uppercase: true,
+    whitespace: false,
+  });
 } catch (error) {
-    console.error(error.message); // Output: "Password must be at least 2 characters long."
+  console.error(error.message); // Output: "Password must be at least 2 characters long."
 }
 ```
 
@@ -243,8 +258,8 @@ The `hasPhone` function serves the dual purpose of validating and extracting com
 ```javascript
 const { hasPhone } = require("vfyjs");
 
-hasPhone('98', '9112348424').then(result => {
-    console.log('Result =>', result);
+hasPhone("98", "9112348424").then((result) => {
+  console.log("Result =>", result);
 });
 
 // Output:
@@ -272,8 +287,8 @@ In this example, the `hasPhone` function is utilized to validate and extract inf
 ```javascript
 const { hasPhone } = require("vfyjs");
 
-hasPhone("1", "1234567890").then(result => {
-    console.log('Result =>', result);
+hasPhone("1", "1234567890").then((result) => {
+  console.log("Result =>", result);
 });
 
 // Output:
@@ -304,8 +319,8 @@ To leverage the capabilities of the `hasPhone` function, import it from the vfyj
 ```javascript
 const { hasPhone } = require("vfyjs");
 
-hasPhone('98', '9112348424').then(result => {
-    console.log('Result =>', result);
+hasPhone("98", "9112348424").then((result) => {
+  console.log("Result =>", result);
 });
 ```
 
@@ -317,15 +332,13 @@ Feel empowered to integrate this utility into your applications to elevate phone
 
 ### BinarySearchTree
 
-The `BinarySearchTree` class is a JavaScript implementation of a binary search tree (BST) data structure. It provides methods for inserting values into the tree, searching for values, and handling multiple values simultaneously. The tree is composed of nodes, each with a value and references to left and right child nodes.
+The `BinarySearchTree` class in vfyjs offers a robust JavaScript implementation of a binary search tree (BST) data structure. It facilitates operations such as inserting values into the tree, searching for specific values, and managing multiple values simultaneously. Each node in the tree contains a value along with references to its left and right child nodes.
 
 ### Parameters
 
-- `insert(value)`: Inserts a value into the binary search tree.
+- `insert(value)`: Inserts a single value into the binary search tree.
 - `insertArray(values)`: Inserts multiple values from an array into the binary search tree.
-- `search(value)`: Searches for a value within the binary search tree.
-
-### Examples
+- `search(value)`: Searches for a specific value within the binary search tree.
 
 ### Examples
 
@@ -334,7 +347,7 @@ The `BinarySearchTree` class is a JavaScript implementation of a binary search t
 ```javascript
 const { Binary } = require("vfyjs");
 
-// Create a new binary search tree instance
+// Create a new instance of BinarySearchTree
 const bst = new Binary.Search();
 
 // Insert values into the binary search tree
@@ -352,14 +365,14 @@ if (foundValue) {
 }
 ```
 
-In this example, we create a new instance of the `BinarySearchTree` class and insert values `10`, `5`, and `15` into the tree using the `insert` method. Then, we search for the value `5` using the `search` method and log whether the value is found or not.
+In this example, we instantiate a new `BinarySearchTree` object and insert values `10`, `5`, and `15` into the tree using the `insert` method. Then, we search for the value `5` within the tree using the `search` method and log whether the value is found or not.
 
 #### Example 2: Inserting Reserved Usernames into a Binary Search Tree
 
 ```javascript
 const { Binary } = require("vfyjs");
 
-// Create a new binary search tree instance
+// Create a new instance of BinarySearchTree
 const usernameValidator = new Binary.Search();
 
 // Reserved usernames to insert into the binary search tree
@@ -381,7 +394,7 @@ if (isReserved) {
 }
 ```
 
-In this example, we create a new instance of the `BinarySearchTree` class and insert reserved usernames (`"admin"`, `"root"`, `"superuser"`) into the tree using the `insertArray` method. Then, we validate a username (`"admin"`) by searching for it in the binary search tree using the `search` method. If the username is found, we log a message indicating that it is reserved; otherwise, we log a message indicating that it is valid.
+In this example, we create a new `BinarySearchTree` instance and insert reserved usernames (`"admin"`, `"root"`, `"superuser"`) into the tree using the `insertArray` method. Subsequently, we validate a username (`"admin"`) by searching for it within the binary search tree using the `search` method. If the username is found, we log a message indicating that it is reserved; otherwise, we log a message indicating that it is valid.
 
 ---
 
@@ -389,22 +402,22 @@ In this example, we create a new instance of the `BinarySearchTree` class and in
 
 ## Validation Functions
 
-The `inputValidator` function returns an object with various validation functions for string inputs. Here are the available functions:
+The `inputValidator` function provides an object with a comprehensive set of validation functions tailored for string inputs. Each function targets specific criteria, enabling thorough validation of input strings. Here are the available validation functions:
 
-- `hasUppercase`: Checks if the input has at least one uppercase letter.
-- `hasLowerCase`: Checks if the input has at least one lowercase letter.
-- `hasNumber`: Checks if the input has at least one numeric digit.
-- `hasSpecialCharacter`: Checks if the input has at least one special character.
-- `hasAlphabetic`: Checks if the input contains at least one alphabetic character.
-- `hasNumeric`: Checks if the input contains at least one numeric digit.
-- `hasAlphanumeric`: Checks if the input contains only alphanumeric characters.
-- `hasWhitespace`: Checks if the input contains any whitespace character.
-- `hasNonAlphanumeric`: Checks if the input contains any non-alphanumeric character.
-- `hasMinLength(minLength)`: Checks if the input has a minimum length.
-- `hasMaxLength(maxLength)`: Checks if the input has a maximum length.
-- `matchesCustomPattern(pattern)`: Checks if the input matches a custom regex pattern.
-- `matchesEmailFormat`: Checks if the input matches the standard email format.
-- `hasRepeat(repeatCount)`: Checks if the input contains consecutive repeated characters.
+- `hasUppercase`: Validates if the input contains at least one uppercase letter.
+- `hasLowerCase`: Validates if the input contains at least one lowercase letter.
+- `hasNumber`: Validates if the input contains at least one numeric digit.
+- `hasSpecialCharacter`: Validates if the input contains at least one special character.
+- `hasAlphabetic`: Validates if the input contains at least one alphabetic character.
+- `hasNumeric`: Validates if the input contains at least one numeric digit.
+- `hasAlphanumeric`: Validates if the input contains only alphanumeric characters.
+- `hasWhitespace`: Validates if the input contains any whitespace character.
+- `hasNonAlphanumeric`: Validates if the input contains any non-alphanumeric character.
+- `hasMinLength(minLength)`: Validates if the input meets a minimum length requirement.
+- `hasMaxLength(maxLength)`: Validates if the input meets a maximum length requirement.
+- `matchesCustomPattern(pattern)`: Validates if the input matches a custom regex pattern.
+- `matchesEmailFormat`: Validates if the input matches the standard email format.
+- `hasRepeat(repeatCount)`: Validates if the input contains consecutive repeated characters.
 
 ## Usage Example
 
@@ -414,4 +427,4 @@ const isValid = validator.hasUppercase() && validator.hasNumber();
 console.log(isValid); // true
 ```
 
----
+This comprehensive set of validation functions allows developers to easily validate various aspects of string inputs, ensuring data integrity and security in their applications.

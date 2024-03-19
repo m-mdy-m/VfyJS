@@ -1,11 +1,58 @@
-const { UppercaseValidator, LowercaseValidator } = require('./Validators/Case');
-const { PasswordValidator, UsernameValidator, HexColorValidator, IPLocationValidator, JSONValidator, NameValidator, AlphanumericValidator, LanguageValidator, GenderValidator, AgeValidator, SameValidator } = require('./Validators/CustomValidators');
-const { SpecialCharacterValidator, EmailValidator, DateValidator, URLValidator, PhoneNumberValidator, IPv4Validator, IPv6Validator, HTTPValidator, HTTPSValidator } = require('./Validators/Format');
-const { MinLengthValidator, MaxLengthValidator, LengthRangeValidator, DateRangeValidator, ArrayLengthValidator, ArrayRangeValidator,  } = require('./Validators/Length');
-const { StringTypeValidator, NumberTypeValidator, ArrayTypeValidator, ObjectTypeValidator, BooleanTypeValidator } = require('./Validators/Type');
-const { ObjectKeyValidator } = require('./Validators/object');
-const { SQLInjectionValidator, NoSQLInjectionValidator, XSSValidator, PasswordHashValidator, AuthTokenValidator } = require('./Validators/security');
-const { WhitespaceValidator, TrimValidator, FileValidator, EnumValidator, RegexValidator } = require('./utils/AdditionalValidators');
+const { UppercaseValidator, LowercaseValidator } = require("./Validators/Case");
+const {
+  PasswordValidator,
+  UsernameValidator,
+  HexColorValidator,
+  IPLocationValidator,
+  JSONValidator,
+  NameValidator,
+  AlphanumericValidator,
+  LanguageValidator,
+  GenderValidator,
+  AgeValidator,
+  SameValidator,
+} = require("./Validators/CustomValidators");
+const {
+  SpecialCharacterValidator,
+  EmailValidator,
+  DateValidator,
+  URLValidator,
+  PhoneNumberValidator,
+  IPv4Validator,
+  IPv6Validator,
+  HTTPValidator,
+  HTTPSValidator,
+} = require("./Validators/Format");
+const {
+  MinLengthValidator,
+  MaxLengthValidator,
+  LengthRangeValidator,
+  DateRangeValidator,
+  ArrayLengthValidator,
+  ArrayRangeValidator,
+} = require("./Validators/Length");
+const {
+  StringTypeValidator,
+  NumberTypeValidator,
+  ArrayTypeValidator,
+  ObjectTypeValidator,
+  BooleanTypeValidator,
+} = require("./Validators/Type");
+const { ObjectKeyValidator } = require("./Validators/object");
+const {
+  SQLInjectionValidator,
+  NoSQLInjectionValidator,
+  XSSValidator,
+  PasswordHashValidator,
+  AuthTokenValidator,
+} = require("./Validators/security");
+const {
+  WhitespaceValidator,
+  TrimValidator,
+  FileValidator,
+  EnumValidator,
+  RegexValidator,
+} = require("./utils/AdditionalValidators");
 /**
  * RequestValidator class for validating incoming request data based on specified rules.
  * @constructor
@@ -123,16 +170,18 @@ class RequestValidator {
           }
           const error = validator.validate(field, ruleValue, requestData);
           if (error) {
-            errors[field] = customMessages[field] ? customMessages[field] : error;
+            errors[field] = customMessages[field]
+              ? customMessages[field]
+              : error;
             break;
           }
         }
       }
     } catch (err) {
-      throw new Error(err)
+      throw err;
     }
     return errors;
   }
 }
 
-module.exports = RequestValidator ;
+module.exports = RequestValidator;

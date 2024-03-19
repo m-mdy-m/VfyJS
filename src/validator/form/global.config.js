@@ -6,31 +6,31 @@ let defaultOptions = {
   password: {
     minLength: {
       value: 8,
-      errorMessage: "Password must be at least 8 characters long.",
+      errorMessage: "must be at least 8 characters long.",
     },
     maxLength: {
       value: 50,
-      errorMessage: "Password cannot exceed 50 characters.",
+      errorMessage: "cannot exceed 50 characters.",
     },
     uppercase: {
       required: true,
-      errorMessage: "Password must contain at least one uppercase letter.",
+      errorMessage: "must contain at least one uppercase letter.",
     },
     lowercase: {
       required: true,
-      errorMessage: "Password must contain at least one lowercase letter.",
+      errorMessage: "must contain at least one lowercase letter.",
     },
     number: {
       required: true,
-      errorMessage: "Password must contain at least one numeric digit.",
+      errorMessage: "must contain at least one numeric digit.",
     },
     specialCharacter: {
       required: true,
-      errorMessage: "Password must contain at least one special character.",
+      errorMessage: "must contain at least one special character.",
     },
     alphabetic: {
       required: false,
-      errorMessage: "Password may not contain alphabetic characters.",
+      errorMessage: "may not contain alphabetic characters.",
     },
     whitespace: {
       required: false,
@@ -42,11 +42,11 @@ let defaultOptions = {
   username: {
     minLength: {
       value: 4,
-      errorMessage: "Username must be at least 4 characters long.",
+      errorMessage: "must be at least 4 characters long.",
     },
     maxLength: {
       value: 20,
-      errorMessage: "Username cannot exceed 20 characters.",
+      errorMessage: "cannot exceed 20 characters.",
     },
     uppercase: {
       required: false,

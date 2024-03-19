@@ -29,26 +29,26 @@ function optionsPassword (options){
 }
 
 function optionEmail (options){
-    const { username } = defaultOptions;
-    const { minLength, maxLength } = username;
-    const standardMaxLength = maxLength.value || MAX_LENGTH;
-    const standardMinLength = minLength.value || MIN_LENGTH;
+    // Set standard length
+  const standardMaxLength = 255;
+  const standardMinLength = 3
+  const optionName = ['minLenLocal', 'minLenDomain', 'minLenSubdomain', 'maxLenLocal', 'maxLenDomain', 'maxLenSubdomain'];
+  const optionValidations = [standardMinLength,standardMinLength,2, standardMaxLength,standardMaxLength,standardMaxLength];
+  const msgError = 
+  [
+      `Local part must be ${standardMinLength}-${standardMaxLength} characters.`,
+      `Domain part must be ${standardMinLength}-${standardMaxLength} characters.`,
+      `Subdomain must be ${standardMaxLength} characters.`,
+      `Local part must be at most ${standardMaxLength} characters.`,
+      `Domain part must be at most ${standardMaxLength} characters.`,
+      `Subdomain must be at most ${standardMaxLength} characters.`,
+  ]
+  var objectOPtion = createValidationOptions(optionName,optionValidations,msgError);
+  
+  objectOPtion = { ...objectOPtion, ...options };
 
-    const optionName = ['minLenLocal', 'minLenDomain', 'minLenSubdomain', 'maxLenLocal', 'maxLenDomain', 'maxLenSubdomain'];
-    const optionValidations = [standardMinLength, standardMinLength, 2, standardMaxLength, standardMaxLength, standardMaxLength];
-    const msgError = [
-        `Local part must be ${standardMinLength}-${standardMaxLength} characters.`,
-        `Domain part must be ${standardMinLength}-${standardMaxLength} characters.`,
-        `Subdomain must be ${standardMaxLength} characters.`,
-        `Local part must be at most ${standardMaxLength} characters.`,
-        `Domain part must be at most ${standardMaxLength} characters.`,
-        `Subdomain must be at most ${standardMaxLength} characters.`,
-    ];
-    
-    let objectOption = createValidationOptions(optionName, optionValidations, msgError);
-    objectOption = { ...objectOption, ...options };
-    
-    return objectOption;
+  const { minLenLocal, minLenDomain, minLenSubdomain, maxLenLocal, maxLenDomain, maxLenSubdomain } = objectOPtion;
+  return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
 }
 
 function optionUsername (username, options){

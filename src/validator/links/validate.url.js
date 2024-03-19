@@ -5,6 +5,7 @@ const {
   IfNotType,
   IfIsNumber,
   ifTruthyValue,
+  isEmpty,
 } = require("../../errors/HandleError");
 /**
  * Validates a URL against a specified pattern.
@@ -14,14 +15,14 @@ const {
  * @throws {Error} - Throws an error if the URL is empty, not a string, or does not match the pattern.
  */
 function validateUrl(url, expectedProtocol) {
-  console.log('expectedProtocol=>',expectedProtocol);
+  console.log("expectedProtocol=>", expectedProtocol);
   let protocolPattern = "";
   let urlPattern = "";
   // Set protocol and URL patterns based on the expected protocol
   if (expectedProtocol === "http") {
     protocolPattern = /^(HTTP|http)$/;
     urlPattern = /(HTTP:|http:)\/\/[^\/]/i;
-  } 
+  }
   if (expectedProtocol === "https") {
     protocolPattern = /^(HTTPS|https)$/;
     urlPattern = /(HTTPS:|https:)\/\/[^\/]/i;
@@ -35,11 +36,8 @@ function validateUrl(url, expectedProtocol) {
     urlPattern.test(url),
     `The URL must contain the substring "${expectedProtocol}". Please provide a valid URL.`
   );
-
   // Check if the URL is empty
-  if (url === "") {
-    throw new Error("URL cannot be empty. Please provide a valid URL.");
-  }
+  isEmpty(url, "URL cannot be empty. Please provide a valid URL.");
 
   // Perform type and numeric checks
   IfNotType("string", url, "URL must be a string.");
@@ -96,7 +94,14 @@ function validateUrl(url, expectedProtocol) {
  * }
  */
 function isHttps(url) {
-  return validateUrl(url, "https");
+  try {
+    return validateUrl(url, "https");
+  } catch (error) {
+    if (error.message.startsWith("Invalid expected protocol")) {
+      throw new Error(error.message);
+    }
+    throw new Error("Invalid URL.");
+  }
 }
 
 /**
@@ -122,6 +127,13 @@ function isHttps(url) {
  * }
  */
 function isHttp(url) {
-  return validateUrl(url, "http");
+  try {
+    return validateUrl(url, "http");
+  }  catch (error) {
+    if (error.message.startsWith("Invalid expected protocol")) {
+      throw new Error(error.message);
+    }
+    throw new Error("Invalid URL.");
+  }
 }
 module.exports = { isHttp, isHttps, validateUrl };

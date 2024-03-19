@@ -85,7 +85,7 @@ try {
 ```
 
 ---
-### Global Configuration for Username and Password Validation
+# Global Configuration for Username and Password Validation
 
 This module provides functions for configuring default options for username and password validation.
 
@@ -149,9 +149,7 @@ setUsernameConfig({
 });
 ```
 
-### ConfigUsername
-
-# Username Validation Documentation
+# ConfigUsername
 
 ## Overview
 
@@ -252,7 +250,7 @@ const isValid = isUsername(username, options);
 console.log(isValid); // true
 ```
 
-### ConfigPassword
+# ConfigPassword
 
 ### validateFormPassword
 
@@ -341,7 +339,7 @@ try {
 
 ---
 
-## ConfigEmail
+# ConfigEmail
 
 ### validateEmail
 
@@ -590,5 +588,3 @@ const validator = inputValidator("Sample123");
 const isValid = validator.hasUppercase() && validator.hasNumber();
 console.log(isValid); // true
 ```
-
-This comprehensive set of validation functions allows developers to easily validate various aspects of string inputs, ensuring data integrity and security in their applications.

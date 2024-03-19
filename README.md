@@ -58,15 +58,15 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 
 ### DataValidation
 
-- **Colors**: Validate various color formats, including hex, name, RGB, RGBA, and CssVarHwb. [Configuration](#ConfigColor)
-- **Links**: Detect and validate HTTP or HTTPS links. [Configuration](#ConfigLinks)
-- **Global Configuration**: Set default options for username and password validation. [Configuration](#ConfigPassword)
-- **Usernames**: Validate usernames with customizable criteria. [Configuration](#ConfigPassword)
-- **Passwords**: Strong password detection with customization options. [Configuration](#ConfigPassword)
-- **Emails**: Recognize and validate email addresses. [Configuration](#ConfigEmail)
-- **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](#ConfigPhone)
+- **Colors**: Validate various color formats, including hex, name, RGB, RGBA, and CssVarHwb. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configcolor)
+- **Links**: Detect and validate HTTP or HTTPS links. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configlinks)
+- **Global Configuration**: Set default options for username and password validation. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#global-configuration-for-username-and-password-validation)
+- **Usernames**: Validate usernames with customizable criteria. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#username-validation-documentation)
+- **Passwords**: Strong password detection with customization options. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configpassword)
+- **Emails**: Recognize and validate email addresses. [Configuration]()
+- **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration]()
 - **BinaryTree**: Efficient searching and manipulation of data using a binary tree data structure [Configuration](#ConfigBinaryTree)
-- **Custom Validation Functions**: Validate various aspects of a string input. [Configuration](#ConfigValue)
+- **Custom Validation Functions**: Validate various aspects of a string input. [Configuration]()
 
 ### StringManipulation
 
@@ -118,6 +118,7 @@ try {
 }
 
 ```
+
 ## License
 
 VfyJS is released under the MIT License. For more information, see the [LICENSE](./LICENSE) file.

@@ -33,19 +33,19 @@ The `validate` method is used to validate the request data based on the specifie
 #### Example:
 
 ```javascript
-const req = { username: 'john_doe', age: 30  };
+const req = { username: 'mahdi', age: 19};
 const validator = new RequestValidator(req);
 const rules = {
   username: 'string|alphanumeric|min:5|max:20',
-  age: 'number|min:18',
+  age: 'number|min:20',
 };
 const options = {
   customMessages: {
-    age: 'The age must be at least 18.',
+    age: 'The age must be at least 20.',
   },
 };
 const errors = validator.validate(rules, options);
-console.log(errors); // Output: { age: 'The age must be at least 18.' }
+console.log(errors); // Output: { age: 'The age must be at least 20.' }
 ```
 
 ## Available Validators

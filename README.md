@@ -60,6 +60,8 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 
 - **Colors**: Validate various color formats, including hex, name, RGB, RGBA, and CssVarHwb. [Configuration](#ConfigColor)
 - **Links**: Detect and validate HTTP or HTTPS links. [Configuration](#ConfigLinks)
+- **Global Configuration**: Set default options for username and password validation. [Configuration](#ConfigPassword)
+- **Usernames**: Validate usernames with customizable criteria. [Configuration](#ConfigPassword)
 - **Passwords**: Strong password detection with customization options. [Configuration](#ConfigPassword)
 - **Emails**: Recognize and validate email addresses. [Configuration](#ConfigEmail)
 - **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](#ConfigPhone)

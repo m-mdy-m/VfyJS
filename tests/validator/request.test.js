@@ -41,13 +41,6 @@ describe('RequestValidator', () => {
   });
 
   it('should return validation errors for invalid data', () => {
-    const validator = new RequestValidator(req);
-    const rules = {
-      username: 'alphanumeric|min:5|max:20',
-      password: 'min:8|max:20',
-      age: 'number|min:18|max:100',
-      email: 'email',
-    };
     const invalidReq = {
       ...req,
       body: {
@@ -58,6 +51,12 @@ describe('RequestValidator', () => {
       },
     };
     const invalidValidator = new RequestValidator(invalidReq);
+    const rules = {
+      username: 'alphanumeric|min:5|max:20',
+      password: 'min:8|max:20',
+      age: 'number|min:18|max:100',
+      email: 'email',
+    };
     const errors = invalidValidator.validate(rules);
 
     expect(errors).toEqual({

@@ -84,6 +84,8 @@ function validateFormPassword(input, options = {}) {
     const { lowercase, uppercase, number, specialCharacter, alphabetic, whitespace, minLength, maxLength, msgError } = optionsPassword(options);
     isEmpty(input)
     const value = input.value ? input.value : input
+    const validator = inputValidator(value);
+    // Validate password length
     const minValidLength = getValidValue(minLength, MIN_LENGTH);
     const maxValidLength = getValidValue(maxLength, MAX_LENGTH);
     let min = isValue(minLength, minValidLength);
@@ -107,15 +109,17 @@ function validateFormPassword(input, options = {}) {
     validateType('number', max, getErrorMessage(maxLength));
     validationsLength(value,null, min, max, `length must be between ${min} and ${max} characters.`, input, msgError, 'validations Length');
     toString(value,'Password is required.');
-    const validator = inputValidator(value);
+    // Validate individual criteria
     validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));
     validateWithCondition(getReq(lowercase), validator.hasLowerCase(), input, msgError, 'hasLowerCase', getErrorMessage(lowercase));
     validateWithCondition(getReq(number), validator.hasNumber(), input, msgError, 'hasNumber', getErrorMessage(number));
     validateWithCondition(getReq(specialCharacter), validator.hasSpecialCharacter(), input, msgError, 'hasSpecialCharacter', getErrorMessage(specialCharacter));
     validateWithCondition(getReq(alphabetic), validator.hasAlphabetic(), input, msgError, 'hasAlphabetic', getErrorMessage(alphabetic));
-    let whitespaceCheck = getFalseRequired(whitespace);
-    IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), "Whitespace is not allowed. Remove any leading or trailing spaces.",input,msgError,'hasWhitespace');
-
+    // Validate whitespace
+    const whitespaceCheck = getFalseRequired(whitespace);
+    IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), "Whitespace is not allowed. Remove any leading or trailing spaces.", input, msgError, 'hasWhitespace');
+ 
+    // Check if all validations passed
     const isValid = min &&
         max &&
         (uppercase.required ? validator.hasUppercase() : true) &&

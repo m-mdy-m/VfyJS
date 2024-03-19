@@ -50,11 +50,10 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 
 ## Features
 
-- [Data Validation](#DataValidation)
-- [String Manipulation](#StringManipulation)
-- [Error Handling](#ErrorHandling)
-- [Math Operations](#MathOperations)
-- [Configuration](#configuration)
+- [Data Validation](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md)
+- [String Manipulation](https://github.com/m-mdy-m/VfyJS/blob/main/doc/StringManipulation.doc.md)
+- [Error Handling](https://github.com/m-mdy-m/VfyJS/blob/main/doc/ErrorHandling.doc.md)
+- [Math Operations](https://github.com/m-mdy-m/VfyJS/blob/main/doc/MathOperations.md.doc.md)
 
 ### DataValidation
 
@@ -70,12 +69,12 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 
 ### StringManipulation
 
-- **getSubstring**: Retrieve substrings from a given string based on specified indexes. [Configuration](#ConfigSubstring)
-- **trimValue**: Trim extra spaces from the beginning and end of a string. [Configuration](#ConfigtrimValue)
+- **getSubstring**: Retrieve substrings from a given string based on specified indexes. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/StringManipulation.doc.md#getsubstring)
+- **trimValue**: Trim extra spaces from the beginning and end of a string. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/StringManipulation.doc.md#trimvalue)
 
 ### ErrorHandling
 
-- **HandleError**: A utility for consistent error handling and type validation. [Configuration](#ConfigErrors)
+- **HandleError**: A utility for consistent error handling and type validation. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/ErrorHandling.doc.md#configerrors)
 
 ## Installation
 

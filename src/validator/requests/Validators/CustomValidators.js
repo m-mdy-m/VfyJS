@@ -165,7 +165,11 @@ class SameValidator extends Validator {
     return null; // Return null if validation passes
   }
 }
-// Example rule: "confirmPassword: 'required|same:password'"
+class CustomValidator extends Validator {
+  validate(field, ruleValue, body) {
+    // Implement custom validation logic here based on ruleValue
+  }
+}
 
 module.exports = {PasswordValidator,
   UsernameValidator,

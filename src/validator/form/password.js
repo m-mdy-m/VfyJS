@@ -129,12 +129,3 @@ function validateFormPassword(input, options = {}) {
     return isValid;
 }
 module.exports = validateFormPassword;
-
-// mas242sxza2ASx@
-
-try {
-    const isValid = validateFormPassword('mas42sx  za2ASx@')
-    console.log('isValid =>',isValid);
-} catch (error) {
-    console.log('error =>',error);
-}

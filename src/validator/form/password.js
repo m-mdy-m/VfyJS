@@ -117,8 +117,7 @@ function validateFormPassword(input, options = {}) {
     validateWithCondition(getReq(alphabetic), validator.hasAlphabetic(), input, msgError, 'hasAlphabetic', getErrorMessage(alphabetic));
     // Validate whitespace
     const whitespaceCheck = getFalseRequired(whitespace);
-    IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), "Whitespace is not allowed. Remove any leading or trailing spaces.", input, msgError, 'hasWhitespace');
-    // Check if all validations passed
+    IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), whitespace.errorMessage, input, msgError, 'hasWhitespace');
     const isValid = min &&
         max &&
         (uppercase.required ? validator.hasUppercase() : true) &&
@@ -126,8 +125,17 @@ function validateFormPassword(input, options = {}) {
         (number.required ? validator.hasNumber() : true) &&
         (specialCharacter.required ? validator.hasSpecialCharacter() : true) &&
         (alphabetic.required ? validator.hasAlphabetic() : true) &&
-        !whitespaceCheck;
+        !whitespaceCheck ? whitespaceCheck : true
 
     return isValid;
 }
 module.exports = validateFormPassword;
+
+// mas242sxza2ASx@
+
+try {
+    const isValid = validateFormPassword('mas242sxza2ASx@')
+    console.log('isValid =>',isValid);
+} catch (error) {
+    console.log('error =>',error.message);
+}

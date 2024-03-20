@@ -53,7 +53,7 @@ function validateUsername(input, options = {}) {
     // Extract options
     const {minLength, maxLength, uppercase, number, trim, repeat, messageError} = optionUsername(username, options);
     // Validate number requirement
-    throwIfFalsy(number.required, input, messageError, 'Required Number', getErrorMessage(number));
+    throwIfFalsy(!number.required, input, messageError, 'Required Number', getErrorMessage(number));
         
 
     // Check for whitespace if required
@@ -67,7 +67,7 @@ function validateUsername(input, options = {}) {
 
     // Validate number requirement
     const isNumber = getRequired(number, validator.hasNumber());
-    IfBothTruthy(isNumber, validator.hasNumber() && !validator.hasNumeric(), 'must contain at least one number.', input, messageError, 'isNumber');
+    IfBothTruthy(isNumber, validator.hasNumber(), 'must contain at least one number.', input, messageError, 'isNumber');
 
     // Validate repeat requirement
     let isRepeat = getFalseRequired(repeat);
@@ -109,3 +109,10 @@ function validateUsername(input, options = {}) {
 }
 
 module.exports = validateUsername;
+try {
+    const isValid = validateUsername('m__mdy__m')
+    console.log('is =>',isValid);
+} catch (error) {
+    console.log('err +>',error.message);
+    
+}

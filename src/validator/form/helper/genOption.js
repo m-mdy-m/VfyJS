@@ -68,13 +68,13 @@ function optionUsername(username, options) {
     const validator = inputValidator(username);
     const optionName = ['minLength', 'maxLength', 'uppercase', 'number', 'nonAlphanumeric', 'trim', 'repeat'];
     const validation = [
-        validator.hasMinLength(options.minLength?.value || minLength.value || MIN_LENGTH),
-        validator.hasMaxLength(options.maxLength?.value || maxLength.value || MAX_LENGTH),
-        options.uppercase?.required ? validator.hasUppercase() : true,
-        options.number?.required ? validator.hasNumber() : true,
-        options.nonAlphanumeric?.required ? validator.hasNonAlphanumeric() : false,
-        options.trim?.required ? validator.hasWhitespace() : true,
-        options.repeat?.required ? validator.hasRepeat() : true
+        (options.minLength?.value || minLength.value || MIN_LENGTH),
+        (options.maxLength?.value || maxLength.value || MAX_LENGTH),
+        options.uppercase?.required ? validator.hasUppercase() : uppercase.required,
+        options.number?.required ? validator.hasNumber() : number.required,
+        options.nonAlphanumeric?.required ? validator.hasNonAlphanumeric() : nonAlphanumeric.required,
+        options.trim?.required ? validator.hasWhitespace() : trim.required,
+        options.repeat?.required ? validator.hasRepeat() : repeat.required
     ];
     const messageError = [
         options.minLength?.errorMessage || `Must be ${options.minLength?.value || minLength.value || MIN_LENGTH}-${options.maxLength?.value || maxLength.value || MAX_LENGTH} characters long.`,

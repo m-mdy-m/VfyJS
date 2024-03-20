@@ -60,13 +60,13 @@
  * @property {string} whitespace.errorMessage - Error message for whitespace validation failure.
  */
 
-const { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue, getFalseRequired } = require("../../common/validationConstants");
+const { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue, } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {isTypeMismatch, isEmpty}= require('../../errors/HandleError');
+const {isTypeMismatch, isEmpty,}= require('../../errors/HandleError');
 const { toString } = require("./helper/dataConversion");
 const {optionsPassword} = require("./helper/genOption");
 const { getReq, getErrorMessage } = require("./helper/getValues");
-const {  validateWithCondition, validateType, validationsLength, IfBothTruthy, } = require("../../errors/FormError");
+const {  validateWithCondition, validateType, validationsLength,ifTruthyValue } = require("../../errors/FormError");
 
 /**
  * Validates a password based on the provided options.
@@ -116,8 +116,7 @@ function validateFormPassword(input, options = {}) {
     validateWithCondition(getReq(specialCharacter), validator.hasSpecialCharacter(), input, msgError, 'hasSpecialCharacter', getErrorMessage(specialCharacter));
     validateWithCondition(getReq(alphabetic), validator.hasAlphabetic(), input, msgError, 'hasAlphabetic', getErrorMessage(alphabetic));
     // Validate whitespace
-    const whitespaceCheck = getFalseRequired(whitespace);
-    IfBothTruthy(!whitespaceCheck, validator.hasWhitespace(), whitespace.errorMessage, input, msgError, 'hasWhitespace');
+    ifTruthyValue(whitespace.errorMessage,validator.hasWhitespace(),input,msgError,'hasWhitespace');
     const isValid = min &&
         max &&
         (uppercase.required ? validator.hasUppercase() : true) &&
@@ -125,7 +124,7 @@ function validateFormPassword(input, options = {}) {
         (number.required ? validator.hasNumber() : true) &&
         (specialCharacter.required ? validator.hasSpecialCharacter() : true) &&
         (alphabetic.required ? validator.hasAlphabetic() : true) &&
-        !whitespaceCheck ? whitespaceCheck : true
+        whitespace.required ? !validator.hasWhitespace() : true
 
     return isValid;
 }
@@ -134,8 +133,8 @@ module.exports = validateFormPassword;
 // mas242sxza2ASx@
 
 try {
-    const isValid = validateFormPassword('mas242sxza2ASx@')
+    const isValid = validateFormPassword('mas42sx  za2ASx@')
     console.log('isValid =>',isValid);
 } catch (error) {
-    console.log('error =>',error.message);
+    console.log('error =>',error);
 }

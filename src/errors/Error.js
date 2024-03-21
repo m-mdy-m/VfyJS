@@ -47,60 +47,60 @@ class TypeError extends ValidationError {}
 class BooleanError extends ValidationError {}
 class LengthError extends ValidationError {}
   
-export function ThrowFalsy(property,message) {
+exports.ThrowFalsy=(property,message) => {
   if (!property) {
     throw new BooleanError(message || 'Value cannot be falsy', property, 'Falsy');
   }
 }
 
-export function ThrowTruthy(property,message) {
+exports.ThrowTruthy=(property,message) => {
   if (property) {
     throw new BooleanError(message || 'Value must be falsy', property,"Truthy");
   }
 }
-export function NotType(property,expectedType,message){
+exports.NotType=(property,expectedType,message) =>{
     if (typeof property !== expectedType) {
         throw new TypeError(message,property,'Type Not Match')
     }
 }
-export function TypeMatches(property,expectedType,message){
+exports.TypeMatches=(property,expectedType,message)=> {
     if (typeof property === expectedType) {
         throw new TypeError (message,property,'Match Type')
     }
 }
 
-export function validateLengthRange(property,min,max,message){
+exports.validateLengthRange = (property,min,max,message)=>{
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (length < min || length > max) {
         throw new LengthError(message,property,'Length');
       }
 }
-export function validateMinLength(property,min,message){
+exports.validateMinLength = (property,min,message)=>{
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (property < min) {
         throw new LengthError(message,property,'Length')
     }
 }
-export function validateMaxLength(property,max,message){
+exports.validateMaxLength = (property,max,message)=>{
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (property < max) {
         throw new LengthError(message,property,'Length')
     }
 }
-export function isEmpty(value, message = 'Value should not be empty'){
+exports.isEmpty = (value, message = 'Value should not be empty')=>{
     if (value === null || value === undefined || value === "" || value === 0) {
       throw new ValidationError(message,value,'Empty');
     }
     return value;
 };
-export function validateDate(dateString) {
+exports.validateDate = (dateString) =>{
     const isValidDate = !isNaN(Date.parse(dateString));
     if (!isValidDate) {
         throw new ValidationError('Invalid date format', dateString, 'Date');
     }
     return dateString;
 }
-export function validationsLength(value,options){
+exports.validationsLength = (value,options) =>{
   const length = typeof value === 'string' ? value.length : `${value}`.length;
   if (options.min && length < options.min) {
     throw new LengthError(options.minError || `Length must be at least ${options.min} characters.`,value,"Length" );
@@ -110,7 +110,7 @@ export function validationsLength(value,options){
     throw new LengthError( options.maxError || `Length must be at most ${options.max} characters.`,value,"Length");
   }
 }
-export function TypesCheck(property,types,message=`${property} is not of type ${types.join(' or ')}`){
+exports.TypesCheck= (property,types,message=`${property} is not of type ${types.join(' or ')}`)=>{
     if (!types.includes(typeof property)) {
         throw new TypeError(message,property,"Type")
     }   

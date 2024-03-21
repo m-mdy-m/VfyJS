@@ -1,9 +1,15 @@
 "use strict";
 
-import inputValidator  from "../../utils/inputValidator"
-import { optionEmail }  from "./helper/genOption.mjs"
-import { NotType, ThrowFalsy, ThrowTruthy, isEmpty, validationsLength }  from "../../errors/Error.mjs"
-import { validateCommon } from "./validation.mjs";
+const inputValidator = require("../../utils/inputValidator.js");
+const { optionEmail } = require("./helper/genOption.mjs");
+const {
+  NotType,
+  ThrowFalsy,
+  ThrowTruthy,
+  isEmpty,
+  validationsLength,
+} = require("../../errors/Error.js");
+const { validateCommon } = require("./validation.js");
 
 /**
  * Validates whether the provided value is a valid email.
@@ -27,42 +33,50 @@ import { validateCommon } from "./validation.mjs";
  */
 function ValidationEmail(input, options = {}) {
   // Extracting value from input or using input directly if it's a string
-  const value = validateCommon(input,'email','min','max')
+  const value = validateCommon(input, "email", "min", "max");
   // Extracting options and error messages
-  const {maxLenDomain, maxLenLocal, maxLenSubdomain, minLenDomain, minLenLocal, minLenSubdomain, msgError } = optionEmail(options);
+  const {
+    maxLenDomain,
+    maxLenLocal,
+    maxLenSubdomain,
+    minLenDomain,
+    minLenLocal,
+    minLenSubdomain,
+    msgError,
+  } = optionEmail(options);
 
   // Basic email format validation
   const hasSymbol = /^(?!.*@.*@)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  ThrowFalsy(hasSymbol,'Email must contain @')
-  
+  ThrowFalsy(hasSymbol, "Email must contain @");
+
   const hasOneDot = /(?=.*(\.)\1)/.test(value);
-  ThrowTruthy(hasOneDot,'Must have at most one dot.')
-  
+  ThrowTruthy(hasOneDot, "Must have at most one dot.");
+
   // Local part length validation
-  const localPart = value.split('@')[0];
-  validationsLength(localPart,{
+  const localPart = value.split("@")[0];
+  validationsLength(localPart, {
     min: minLenLocal.value,
     max: maxLenLocal.value,
     minError: minLenLocal.message,
-    maxError: maxLenLocal.message
-  })
+    maxError: maxLenLocal.message,
+  });
 
   // Domain and subdomain length validation
-  const ArrayDomain = value.split('@')[1].split('.');
-  const domain = value.split('@')[1].trim();
+  const ArrayDomain = value.split("@")[1].split(".");
+  const domain = value.split("@")[1].trim();
   const domainPart = ArrayDomain[ArrayDomain.length - 1];
   const subdomain = domain.split(domainPart)[0].trim();
   const hasSpecialChar = inputValidator(domainPart).hasSpecialCharacter();
-  ThrowTruthy(hasSpecialChar, 'Subdomains cannot contain special characters.')
+  ThrowTruthy(hasSpecialChar, "Subdomains cannot contain special characters.");
   validationsLength(subdomain, {
     min: minLenSubdomain.value,
     max: maxLenSubdomain.value,
     minError: minLenSubdomain.message,
     maxError: maxLenSubdomain.message,
-  })
+  });
 
   validationsLength(domainPart, {
-    min:minLenDomain.value,
+    min: minLenDomain.value,
     max: minLenDomain.value,
     minError: minLenDomain.message,
     maxError: maxLenDomain.message,
@@ -70,14 +84,18 @@ function ValidationEmail(input, options = {}) {
 
   // Email format validation using inputValidator
   const validator = inputValidator(value);
-  const email = localPart + '@' + subdomain + domainPart;
+  const email = localPart + "@" + subdomain + domainPart;
   const isValidEmail = email === value;
   const isValidFormat = validator.matchesEmailFormat(value);
-  NotType(isValidEmail,'boolean','Unexpected validation result for email format.')
-  ThrowFalsy(isValidEmail,'Email is not valid. Please enter a valid email.')
+  NotType(
+    isValidEmail,
+    "boolean",
+    "Unexpected validation result for email format."
+  );
+  ThrowFalsy(isValidEmail, "Email is not valid. Please enter a valid email.");
   const isValid = isValidFormat && hasSymbol && isValidEmail;
 
   // If the input is a string and has a valid email format, return true
   return isValid;
 }
-export default ValidationEmail
+export default ValidationEmail;

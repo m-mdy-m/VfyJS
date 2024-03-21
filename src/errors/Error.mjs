@@ -50,31 +50,37 @@ class LengthError extends ValidationError {}
   
 export function throwFalsy(message, property) {
   if (!property) {
-    throw new BooleanError(message || 'Value cannot be falsy', property, typeof property);
+    throw new BooleanError(message || 'Value cannot be falsy', property, 'Falsy');
   }
   return property;
 }
 
 export function throwTruthy(message, property) {
   if (property) {
-    throw new BooleanError(message || 'Value must be falsy', property, typeof property);
+    throw new BooleanError(message || 'Value must be falsy', property,"Truthy");
   }
   return property;
 }
 export function notType(message,expectedType,property){
     if (typeof property !== expectedType) {
-        throw new TypeError(message,property,typeof property)
+        throw new TypeError(message,property,'Type Not Match')
     }
 }
 export function TypeMatches(message,expectedType,property){
     if (typeof property === expectedType) {
-        throw new TypeError (message,property,typeof property)
+        throw new TypeError (message,property,'Match Type')
     }
 }
 
 export function validateLength(message,min,max,property){
     const length = typeof value === 'string' ? value.length : `${value}`.length;
     if (length < min || length > max) {
-        throw new LengthError(message,property,typeof property);
+        throw new LengthError(message,property,'Length');
       }
 }
+export function isEmpty(value, message = 'Value should not be empty'){
+    if (value === null || value === undefined || value === "" || value === 0) {
+      throw new ValidationError(value, message,'Empty');
+    }
+    return value;
+  };

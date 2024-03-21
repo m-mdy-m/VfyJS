@@ -113,6 +113,6 @@ export function validationsLength(value,options){
 }
 export function TypesCheck(types,property,message=`${property} is not of type ${types.join(' or ')}`){
     if (!types.includes(typeof property)) {
-        throw new TypeError(message,property,"Length")
+        throw new TypeError(message,property,"Type")
     }   
 }

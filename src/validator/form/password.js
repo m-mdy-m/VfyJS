@@ -55,23 +55,11 @@ function validateFormPassword(input, options = {}) {
     const value = validateCommon(input,'password',8,64)
     const validator = inputValidator(value);
     // Validate password length
-    const minValidLength = getValidValue(minLength, MIN_LENGTH);
-    const maxValidLength = getValidValue(maxLength, MAX_LENGTH);
-    let min = isValue(minLength, minValidLength);
-    let max = isValue(maxLength, maxValidLength);
-
+    let min = minLength?.value ?? MIN_LENGTH;
+    let max = maxLength?.value ?? MAX_LENGTH;
     if (typeof min === 'string' || typeof min === 'string') {
         min = +min;
         max = +max;
-    }
-
-    if (isTypeMismatch('undefined', min) &&
-        isTypeMismatch('undefined', max) &&
-        isTypeMismatch('boolean', min) &&
-        isTypeMismatch('boolean', max) &&
-        isTypeMismatch('number', min) &&
-        isTypeMismatch('number', max)) {
-        throw new TypeError("Invalid configuration for minLength or maxLength. They must be either true, false, or a numeric value or string.");
     }
 
     validateType('number', min, getErrorMessage(minLength));

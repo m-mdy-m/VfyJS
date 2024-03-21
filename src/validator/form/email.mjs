@@ -23,10 +23,10 @@ import { NotType, ThrowFalsy, ThrowTruthy, isEmpty, validationsLength }  from ".
  * @throws {ValidationError} - Throws a ValidationError if the email format is invalid.
  * @example
  * const { validateEmail } = require('vfyjs');
- * const isValid = validateEmail('mahdimamashli1383@gmail.com', { minLenLocal: 3, maxLenLocal: 255 });
+ * const isValid = ValidationEmail('mahdimamashli1383@gmail.com', { minLenLocal: 3, maxLenLocal: 255 });
  * console.log(isValid); // true
  */
-function validateEmail(input, options = {}) {
+function ValidationEmail(input, options = {}) {
   // Extracting value from input or using input directly if it's a string
   const value = input.value ? input.value : input;
   isEmpty(value,'Email is required')
@@ -78,11 +78,11 @@ function validateEmail(input, options = {}) {
   const email = localPart + '@' + subdomain + domainPart;
   const isValidEmail = email === value;
   const isValidFormat = validator.matchesEmailFormat(value);
-  validateType('boolean', isValidFormat, 'Unexpected validation result for email format.', input, msgError, 'Email Format');
-  throwIfFalsy(isValidFormat, input, msgError, 'Email Format', `The provided email address '${value}' is not valid. Please enter a valid email.`);
+  NotType(isValidEmail,'boolean','Unexpected validation result for email format.')
+  ThrowFalsy(isValidEmail,'Email is not valid. Please enter a valid email.')
   const isValid = isValidFormat && hasSymbol && isValidEmail;
 
   // If the input is a string and has a valid email format, return true
   return isValid;
 }
-module.exports = validateEmail;
+export default ValidationEmail

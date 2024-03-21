@@ -52,14 +52,12 @@ export function ThrowFalsy(message, property) {
   if (!property) {
     throw new BooleanError(message || 'Value cannot be falsy', property, 'Falsy');
   }
-  return property;
 }
 
 export function ThrowTruthy(message, property) {
   if (property) {
     throw new BooleanError(message || 'Value must be falsy', property,"Truthy");
   }
-  return property;
 }
 export function NotType(message,expectedType,property){
     if (typeof property !== expectedType) {

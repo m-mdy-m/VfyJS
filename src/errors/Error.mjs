@@ -59,30 +59,30 @@ export function ThrowTruthy(property,message) {
     throw new BooleanError(message || 'Value must be falsy', property,"Truthy");
   }
 }
-export function NotType(expectedType,property,message){
+export function NotType(property,expectedType,message){
     if (typeof property !== expectedType) {
         throw new TypeError(message,property,'Type Not Match')
     }
 }
-export function TypeMatches(expectedType,property,message){
+export function TypeMatches(property,expectedType,message){
     if (typeof property === expectedType) {
         throw new TypeError (message,property,'Match Type')
     }
 }
 
-export function CheckLengths(min,max,property,message){
+export function CheckLengths(property,min,max,message){
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (length < min || length > max) {
         throw new LengthError(message,property,'Length');
       }
 }
-export function MinCheck(min,property,message){
+export function MinCheck(property,min,message){
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (property < min) {
         throw new LengthError(message,property,'Length')
     }
 }
-export function MaxCheck(max,property,message){
+export function MaxCheck(property,max,message){
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (property < max) {
         throw new LengthError(message,property,'Length')
@@ -111,7 +111,7 @@ export function validationsLength(value,options){
     throw new LengthError( options.maxError || `Length must be at most ${options.max} characters.`,value,"Length");
   }
 }
-export function TypesCheck(types,property,message=`${property} is not of type ${types.join(' or ')}`){
+export function TypesCheck(property,types,message=`${property} is not of type ${types.join(' or ')}`){
     if (!types.includes(typeof property)) {
         throw new TypeError(message,property,"Type")
     }   

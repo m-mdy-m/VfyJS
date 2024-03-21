@@ -72,11 +72,23 @@ export function TypeMatches(message,expectedType,property){
     }
 }
 
-export function checkLength(message,min,max,property){
-    const length = typeof value === 'string' ? value.length : `${value}`.length;
+export function checkLengths(message,min,max,property){
+    const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (length < min || length > max) {
         throw new LengthError(message,property,'Length');
       }
+}
+export function minLength(message,min,property){
+    const length = typeof property === 'string' ? property.length : `${property}`.length;
+    if (property < min) {
+        throw new LengthError(message,property,'Length')
+    }
+}
+export function maxLength(message,max,property){
+    const length = typeof property === 'string' ? property.length : `${property}`.length;
+    if (property < max) {
+        throw new LengthError(message,property,'Length')
+    }
 }
 export function isEmpty(value, message = 'Value should not be empty'){
     if (value === null || value === undefined || value === "" || value === 0) {

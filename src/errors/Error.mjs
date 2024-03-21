@@ -38,8 +38,8 @@ class ValidationError extends CustomError {
    * @param {*} value - The value causing the validation error.
    * @param {string} fieldType - The type of the field causing the validation error.
    */
-  constructor(message, property, value, fieldType) {
-    super(message, { property, value, fieldType });
+  constructor(message, property, fieldType) {
+    super(message, { property, fieldType });
   }
 }
 
@@ -48,16 +48,21 @@ class TypeError extends ValidationError {}
 class BooleanError extends ValidationError {}
 class LengthError extends ValidationError {}
   
-export function throwFalsy(message, property, value) {
-  if (!value) {
-    throw new BooleanError(message || 'Value cannot be falsy', property, value, typeof value);
+export function throwFalsy(message, property) {
+  if (!property) {
+    throw new BooleanError(message || 'Value cannot be falsy', property, typeof property);
   }
-  return value;
+  return property;
 }
 
-export function throwTruthy(message, property, value) {
-  if (value) {
-    throw new BooleanError(message || 'Value must be falsy', property, value, typeof value);
+export function throwTruthy(message, property) {
+  if (property) {
+    throw new BooleanError(message || 'Value must be falsy', property, typeof property);
   }
-  return value;
+  return property;
+}
+export function notType(message,expectedType,property){
+    if (typeof property !== expectedType) {
+        throw new TypeError(message,property,'Type Error')
+    }
 }

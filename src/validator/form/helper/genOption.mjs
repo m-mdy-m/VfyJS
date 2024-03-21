@@ -1,7 +1,22 @@
-const { MIN_LENGTH, MAX_LENGTH } = require("../../../common/validationConstants");
-const { defaultOptions } = require("../global.config");
-const createValidationOptions = require("../../../utils/handleOption");
-const inputValidator = require("../../../utils/inputValidator");
+import { MIN_LENGTH, MAX_LENGTH }  from "../../../common/validationimportants"
+import { defaultOptions }  from "../global.config"
+import createValidationOptions  from "../../../utils/handleOption"
+import inputValidator  from "../../../utils/inputValidator"
+
+
+
+function genOption(){
+    
+}
+
+
+
+
+
+
+
+
+
 
 function optionsPassword(options) {
     const { password } = defaultOptions;

@@ -98,14 +98,7 @@ validateWithCondition = (
     errorMessage
   );
 };
-validateType = (
-  expectedType,
-  property,
-  message,
-  input,
-  errors,
-  validationRule
-) => {
+validateType = (expectedType,property,message,input,errors,validationRule) => {
   if (typeof property !== expectedType) {
     throw new ValueTypeError(
       property,

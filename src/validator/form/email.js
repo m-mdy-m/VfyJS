@@ -1,7 +1,7 @@
 "use strict";
 
 const inputValidator = require("../../utils/inputValidator.js");
-const { optionEmail } = require("./helper/genOption.mjs");
+const { optionEmail } = require("./helper/genOption.js");
 const {
   NotType,
   ThrowFalsy,

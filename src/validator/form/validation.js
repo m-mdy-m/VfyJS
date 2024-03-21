@@ -8,7 +8,7 @@ const  { NotType, isEmpty, validationsLength } =require( "../../errors/Error.js"
  * @param {number} [max=8] - The maximum length allowed for the value.
  * @throws {ValidationError} Throws a validation error if the value does not meet the criteria.
  */
-expo function validateCommon(input, format, min = 8, max = 64) {
+function validateCommon(input, format, min = 8, max = 64) {
   try {
     const value = input.value ? input.value : input;
     // Common validation: Value should not be empty
@@ -34,3 +34,4 @@ expo function validateCommon(input, format, min = 8, max = 64) {
     throw error;
   }
 }
+module.exports= validateCommon

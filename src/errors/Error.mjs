@@ -72,7 +72,7 @@ export function TypeMatches(message,expectedType,property){
     }
 }
 
-export function validateLength(message,min,max,property){
+export function checkLength(message,min,max,property){
     const length = typeof value === 'string' ? value.length : `${value}`.length;
     if (length < min || length > max) {
         throw new LengthError(message,property,'Length');
@@ -83,4 +83,4 @@ export function isEmpty(value, message = 'Value should not be empty'){
       throw new ValidationError(value, message,'Empty');
     }
     return value;
-  };
+};

@@ -31,13 +31,10 @@
 
 const { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue, } = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {isTypeMismatch,}= require('../../errors/HandleError');
-const { toString } = require("./helper/dataConversion");
 const {optionsPassword} = require("./helper/genOption");
-const { getReq, getErrorMessage } = require("./helper/getValues");
 const {  validateWithCondition, validateType, validationsLength,ifTruthyValue } = require("../../errors/FormError");
 const { validateCommon } = require("./validation.mjs");
-const { validateLengthRange } = require("../../errors/Error.mjs");
+const { validateLengthRange, ThrowFalsy } = require("../../errors/Error.mjs");
 
 /**
  * Validates a password based on the provided options.
@@ -60,11 +57,14 @@ function validateFormPassword(input, options = {}) {
     let max = maxLength?.value ?? MAX_LENGTH;
     validateLengthRange(value,min,max,`length must be between ${min} and ${max} characters.`)
     // Validate individual criteria
-    validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));
-    validateWithCondition(getReq(lowercase), validator.hasLowerCase(), input, msgError, 'hasLowerCase', getErrorMessage(lowercase));
-    validateWithCondition(getReq(number), validator.hasNumber(), input, msgError, 'hasNumber', getErrorMessage(number));
-    validateWithCondition(getReq(specialCharacter), validator.hasSpecialCharacter(), input, msgError, 'hasSpecialCharacter', getErrorMessage(specialCharacter));
-    validateWithCondition(getReq(alphabetic), validator.hasAlphabetic(), input, msgError, 'hasAlphabetic', getErrorMessage(alphabetic));
+    const isUppercase = uppercase?.required?? uppercase
+    const isLowercase = lowercase?.required ?? lowercase
+    const isNumber = number?.required ?? number
+    const hasSpecialChar = specialCharacter?.required ?? specialCharacter
+    ThrowFalsy(isUppercase,uppercase.message)
+    ThrowFalsy(isLowercase,lowercase.message)
+    ThrowFalsy(isNumber,number.message)
+    ThrowFalsy(hasSpecialChar,specialCharacter.message)
     // Validate whitespace
     ifTruthyValue(whitespace.errorMessage,validator.hasWhitespace(),input,msgError,'hasWhitespace');
     const isValid = min &&

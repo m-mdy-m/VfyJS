@@ -82,14 +82,7 @@ ifTruthyValue = (message, property, input, errors, validationRule) => {
     );
   }
 };
-validateWithCondition = (
-  condition,
-  validatorFunction,
-  input,
-  msgError,
-  validationRule,
-  errorMessage
-) => {
+validateWithCondition = (condition,validatorFunction,input,msgError,validationRule,errorMessage) => {
   this.throwIfFalsy(
     condition ? validatorFunction : true,
     input,

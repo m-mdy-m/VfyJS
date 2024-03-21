@@ -20,9 +20,8 @@ class CustomError extends Error {
    * Formats the error message.
    * @returns {string} The formatted error message.
    */
-  static formatMessage() {
-    return `${this.name}: ${this.message}` + (this.details ? ` (${this.details})` : '');
-  }
+  static formatMessage = `${this.name}: ${this.message}` + (this.details ? ` (${this.details})` : '');
+  
 }
 
 /**

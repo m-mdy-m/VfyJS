@@ -1,40 +1,37 @@
 "use strict";
 /**
- * Options for customizing password validation criteria.
- *
- * @typedef {Object} options
- * @property {Object} minLength - Minimum length requirements for the password.
- * @property {number|string} minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
- * @property {string} minLength.message - Error message for minimum length validation failure.
- * @property {Object} maxLength - Maximum length requirements for the password.
- * @property {number|string} maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
- * @property {string} maxLength.message - Error message for maximum length validation failure.
- * @property {Object} uppercase - Uppercase letter requirements for the password.
- * @property {boolean} uppercase.required - Whether uppercase letters are required.
- * @property {string} uppercase.message - Error message for uppercase letter validation failure.
- * @property {Object} lowercase - Lowercase letter requirements for the password.
- * @property {boolean} lowercase.required - Whether lowercase letters are required.
- * @property {string} lowercase.message - Error message for lowercase letter validation failure.
- * @property {Object} number - Numeric digit requirements for the password.
- * @property {boolean} number.required - Whether numeric digits are required.
- * @property {string} number.message - Error message for numeric digit validation failure.
- * @property {Object} specialCharacter - Special character requirements for the password.
- * @property {boolean} specialCharacter.required - Whether special characters are required.
- * @property {string} specialCharacter.message - Error message for special character validation failure.
- * @property {Object} alphabetic - Alphabetic character requirements for the password.
- * @property {boolean} alphabetic.required - Whether alphabetic characters are required.
- * @property {string} alphabetic.message - Error message for alphabetic character validation failure.
- * @property {Object} whitespace - Whitespace requirements for the password.
- * @property {boolean} whitespace.required - Whether whitespace is not allowed.
- * @property {string} whitespace.message - Error message for whitespace validation failure.
+ * Validates a password input based on specified criteria for enhanced security.
+ * @param {string} input - The password input to be validated.
+ * @param {Object} options - Options for password validation criteria.
+ * @param {Object} options.lowercase - Criteria for lowercase letters.
+ * @param {boolean} options.lowercase.required - Whether lowercase letters are required.
+ * @param {string} options.lowercase.message - Error message for missing lowercase letters.
+ * @param {Object} options.uppercase - Criteria for uppercase letters.
+ * @param {boolean} options.uppercase.required - Whether uppercase letters are required.
+ * @param {string} options.uppercase.message - Error message for missing uppercase letters.
+ * @param {Object} options.number - Criteria for numbers.
+ * @param {boolean} options.number.required - Whether numbers are required.
+ * @param {string} options.number.message - Error message for missing numbers.
+ * @param {Object} options.specialCharacter - Criteria for special characters.
+ * @param {boolean} options.specialCharacter.required - Whether special characters are required.
+ * @param {string} options.specialCharacter.message - Error message for missing special characters.
+ * @param {Object} options.whitespace - Criteria for whitespace characters.
+ * @param {boolean} options.whitespace.required - Whether whitespace characters are required.
+ * @param {string} options.whitespace.message - Error message for missing whitespace characters.
+ * @param {Object} options.minLength - Minimum length criteria.
+ * @param {number} options.minLength.value - Minimum length value.
+ * @param {string} options.minLength.message - Error message for minimum length requirement.
+ * @param {Object} options.maxLength - Maximum length criteria.
+ * @param {number} options.maxLength.value - Maximum length value.
+ * @param {string} options.maxLength.message - Error message for maximum length requirement.
+ * @returns {boolean} True if the password input meets all criteria for enhanced security, otherwise false.
  */
 
-const  { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue }= require ( "../../utils/utils.js")
-const  inputValidator= require ( "../../utils/inputValidator.js")
-const  { optionsPassword }= require ( "./helper/genOption.js")
-const  { ifTruthyValue }= require ( "../../errors/FormError.js")
-const  { validateCommon }= require ( "./validation.js")
-const  { validateLengthRange, ThrowFalsy }= require ( "../../errors/Error.js")
+const { MAX_LENGTH, MIN_LENGTH } = require("../../utils/utils.js");
+const inputValidator = require("../../utils/inputValidator.js");
+const { optionsPassword } = require("./helper/genOption.js");
+const { validateCommon } = require("./validation.js");
+const { validateLengthRange, ThrowFalsy } = require("../../errors/Error.js");
 
 /**
  * Validates a password based on the provided options.
@@ -58,9 +55,9 @@ function validateFormPassword(input, options = {}) {
     minLength,
     maxLength,
   } = optionsPassword(options);
+  // Common validation for password
   const value = validateCommon(input, "password");
-  const validator = inputValidator(value);
-  // Validate password length
+  // Password length requirements
   let min = minLength?.value ?? MIN_LENGTH;
   let max = maxLength?.value ?? MAX_LENGTH;
   validateLengthRange(
@@ -69,30 +66,23 @@ function validateFormPassword(input, options = {}) {
     max,
     `length must be between ${min} and ${max} characters.`
   );
-  // Validate individual criteria
-  const isUppercase = uppercase?.required ?? uppercase;
-  const isLowercase = lowercase?.required ?? lowercase;
-  const isNumber = number?.required ?? number;
-  const hasSpecialChar = specialCharacter?.required ?? specialCharacter;
-  const isWhiteSpace = whitespace?.required ?? whitespace;
-  if (isUppercase) {
+  // Criteria for enhanced password security
+  const validator = inputValidator(value);
+  if (uppercase?.required) {
     ThrowFalsy(validator.hasUppercase(), uppercase.message);
   }
-  if (isLowercase) {
+  if (lowercase?.required) {
     ThrowFalsy(validator.hasLowerCase(), lowercase.message);
   }
-  if (isNumber) {
+  if (number?.required) {
     ThrowFalsy(validator.hasNumber, number.message);
   }
-  if (hasSpecialChar) {
+  if (specialCharacter?.required) {
     ThrowFalsy(validator.hasSpecialCharacter(), specialCharacter.message);
   }
-  if (isWhiteSpace) {
+  if (whitespace?.required) {
     ThrowFalsy(validator.hasWhitespace(), whitespace.message);
   }
-  const isValid =''
-    
-
-  return isValid;
+  return true;
 }
 module.exports = validateFormPassword;

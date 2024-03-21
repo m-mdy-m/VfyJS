@@ -29,12 +29,12 @@
  * @property {string} whitespace.message - Error message for whitespace validation failure.
  */
 
-import { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue } from "./utils.js";
-import inputValidator from "../../utils/inputValidator.js";
-import { optionsPassword } from "./helper/genOption.js";
-import { ifTruthyValue } from "../../errors/FormError.js";
-import { validateCommon } from "./validation.js";
-import { validateLengthRange, ThrowFalsy } from "../../errors/Error.js";
+const  { MAX_LENGTH, MIN_LENGTH, getValidValue, isValue }= require ( "../../utils/utils.js")
+const  inputValidator= require ( "../../utils/inputValidator.js")
+const  { optionsPassword }= require ( "./helper/genOption.js")
+const  { ifTruthyValue }= require ( "../../errors/FormError.js")
+const  { validateCommon }= require ( "./validation.js")
+const  { validateLengthRange, ThrowFalsy }= require ( "../../errors/Error.js")
 
 /**
  * Validates a password based on the provided options.
@@ -54,11 +54,9 @@ function validateFormPassword(input, options = {}) {
     uppercase,
     number,
     specialCharacter,
-    alphabetic,
     whitespace,
     minLength,
     maxLength,
-    msgError,
   } = optionsPassword(options);
   const value = validateCommon(input, "password");
   const validator = inputValidator(value);
@@ -77,35 +75,24 @@ function validateFormPassword(input, options = {}) {
   const isNumber = number?.required ?? number;
   const hasSpecialChar = specialCharacter?.required ?? specialCharacter;
   const isWhiteSpace = whitespace?.required ?? whitespace;
-  ThrowFalsy(isUppercase, uppercase.message);
-  ThrowFalsy(isLowercase, lowercase.message);
-  ThrowFalsy(isNumber, number.message);
-  ThrowFalsy(hasSpecialChar, specialCharacter.message);
-  ThrowFalsy(isWhiteSpace, whitespace.message);
-  // Validate whitespace
-  ifTruthyValue(
-    whitespace.errorMessage,
-    validator.hasWhitespace(),
-    input,
-    msgError,
-    "hasWhitespace"
-  );
-  const isValid =
-    min &&
-    max &&
-    (uppercase.required ? validator.hasUppercase() : true) &&
-    (lowercase.required ? validator.hasLowerCase() : true) &&
-    (number.required ? validator.hasNumber() : true) &&
-    (specialCharacter.required ? validator.hasSpecialCharacter() : true) &&
-    (alphabetic.required ? validator.hasAlphabetic() : true) &&
-    whitespace.required
-      ? !validator.hasWhitespace()
-      : true;
+  if (isUppercase) {
+    ThrowFalsy(validator.hasUppercase(), uppercase.message);
+  }
+  if (isLowercase) {
+    ThrowFalsy(validator.hasLowerCase(), lowercase.message);
+  }
+  if (isNumber) {
+    ThrowFalsy(validator.hasNumber, number.message);
+  }
+  if (hasSpecialChar) {
+    ThrowFalsy(validator.hasSpecialCharacter(), specialCharacter.message);
+  }
+  if (isWhiteSpace) {
+    ThrowFalsy(validator.hasWhitespace(), whitespace.message);
+  }
+  const isValid =''
+    
 
   return isValid;
 }
 module.exports = validateFormPassword;
-
-const a = " hello world ";
-const validator = inputValidator(a).hasWhitespace();
-console.log(" =>", validator);

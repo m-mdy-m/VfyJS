@@ -1,10 +1,8 @@
 "use strict";
 
 const inputValidator = require("../../utils/inputValidator");
-const { ifFalsyValue,IfNotType , validationsLen, isEmpty } = require("../../errors/HandleError");
 const { getValidValue } = require("../../common/validationConstants");
 const { optionEmail } = require("./helper/genOption");
-const { validationsLength, throwIfFalsy, ifTruthyValue, validateType } = require("../../errors/FormError");
 const { toString } = require("./helper/dataConversion");
 
 /**

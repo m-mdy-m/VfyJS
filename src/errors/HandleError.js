@@ -50,7 +50,7 @@ class LengthError extends CustomError {}
  *   console.error(error.message); // 'Value should not be empty'
  * }
  */
-exports.ifFalsyValue = (property, message) => {
+ function ifFalsyValue = (property, message) => {
   if (!property) {
     throw new ValidationError(property, message || 'Invalid value');
   }
@@ -73,7 +73,7 @@ exports.ifFalsyValue = (property, message) => {
  *   console.error(error.message); // 'Invalid value'
  * }
  */
-exports.ifTruthyValue = (property, message) => {
+ function ifTruthyValue = (property, message) => {
   if (property) {
     throw new ValidationError(property, message || 'Invalid value');
   }
@@ -102,7 +102,7 @@ exports.ifTruthyValue = (property, message) => {
  *   console.error(error.message); // 'Invalid password. It must contain at least one number and should not be empty.'
  * }
  */
-exports.validateIfBothTruthy = (property, method, message) => {
+ function validateIfBothTruthy = (property, method, message) => {
   if (property) {
     if (method) {
       this.ifTruthyValue(property, message || 'Invalid Input');
@@ -128,7 +128,7 @@ exports.validateIfBothTruthy = (property, method, message) => {
  *   console.error(error.message); // 'Age should be a number'
  * }
  */
-exports.IfNotType = (expectedType, property, message) => {
+ function IfNotType = (expectedType, property, message) => {
   if (typeof property !== expectedType) {
     throw new TypeError(property, message || `Property should be of type ${expectedType}`);
   }
@@ -144,7 +144,7 @@ exports.IfNotType = (expectedType, property, message) => {
  *   // Handle the type mismatch
  * }
  */
-exports.isTypeMismatch = (expectedType, property) => {
+ function isTypeMismatch = (expectedType, property) => {
   if (typeof property !== expectedType) {
     return;
   }
@@ -168,7 +168,7 @@ exports.isTypeMismatch = (expectedType, property) => {
  *   console.error(error.message); // 'Value should be a string'
  * }
  */
-exports.IfTypeMatches = (expectedType, property, message) => {
+ function IfTypeMatches = (expectedType, property, message) => {
   if (typeof property === expectedType) {
     throw new TypeError(property, message || `Value should be of type ${expectedType}`);
   }
@@ -194,7 +194,7 @@ exports.IfTypeMatches = (expectedType, property, message) => {
  *   console.error(error.message); // 'Value should not be a number'
  * }
  */
-exports.IfIsNumber = (property, message) => {
+ function IfIsNumber = (property, message) => {
   if (!isNaN(property)) {
     throw new TypeError(property, message || 'Value should not be a number');
   }
@@ -222,7 +222,7 @@ exports.IfIsNumber = (property, message) => {
  *   console.error(error.message); // 'Length should be between 2 and 5 characters.'
  * }
  */
-exports.validateLength = (value, minLength, maxLength, message) => {
+ function validateLength = (value, minLength, maxLength, message) => {
   const length = typeof value === 'string' ? value.length : `${value}`.length;
   if (length < minLength || length > maxLength) {
     throw new LengthError(value, message || `Length must be between ${minLength} and ${maxLength || value} characters.`);
@@ -253,7 +253,7 @@ exports.validateLength = (value, minLength, maxLength, message) => {
  *   console.error(error.message); // 'Invalid value' or 'Length must be between 2 and 5 characters.'
  * }
  */
-exports.validatePropertyLengthAndType = (minLength,maxLength,minLengthType,maxLengthType,property,message) => {
+ function validatePropertyLengthAndType = (minLength,maxLength,minLengthType,maxLengthType,property,message) => {
   this.IfTypeMatches(minLengthType, property, message);
   this.IfTypeMatches(maxLengthType, property, message);
   this.validateLength(property, minLength, maxLength, message);
@@ -279,7 +279,7 @@ exports.validatePropertyLengthAndType = (minLength,maxLength,minLengthType,maxLe
  *   console.error(error.message); // 'Value should be a number or a string'
  * }
  */
-exports.TypesCheck = (property, types, message) => {
+ function TypesCheck = (property, types, message) => {
   if (!types.includes(typeof property)) {
     throw new TypeError(property, message || `${property} is not of type ${types.join(' or ')}`);
   }
@@ -303,7 +303,7 @@ exports.TypesCheck = (property, types, message) => {
  *   console.error(error.message); // 'The value must not be empty'
  * }
  */
-exports.isEmpty = (value, message = 'Value should not be empty') => {
+ function isEmpty = (value, message = 'Value should not be empty') => {
   if (value === null || value === undefined || value === "" || value === 0) {
     throw new ValidationError(value, message);
   }
@@ -337,7 +337,7 @@ exports.isEmpty = (value, message = 'Value should not be empty') => {
  *
  * @throws {LengthError} Throws a LengthError with a specified message if length validation fails.
  */
-exports.validationsLen = (value, options) => {
+ function validationsLen = (value, options) => {
   const length = typeof value === 'string' ? value.length : `${value}`.length;
   if (options.min && length < options.min) {
     throw new LengthError(value, options.minMessage || `Length must be at least ${options.min} characters.`);
@@ -370,7 +370,7 @@ exports.validationsLen = (value, options) => {
  *   console.error(error.message); // 'Length should be at least 2 characters.'
  * }
  */
-exports.validateMinLen = (value, options) => {
+ function validateMinLen = (value, options) => {
   this.validationsLen(value, { min: options.min, minMessage: options.minMessage || `Value must be at least ${options.min} characters long.` });
 };
 
@@ -396,7 +396,7 @@ exports.validateMinLen = (value, options) => {
  *   console.error(error.message); // 'Length should be at least 2 characters.'
  * }
  */
-exports.validateMinLen = (value, options) => {
+ function validateMinLen = (value, options) => {
   this.validationsLen(value, { min: options.min, minMessage: options.minMessage || `Value must be at least ${options.min} characters long.` });
 };
 
@@ -422,6 +422,6 @@ exports.validateMinLen = (value, options) => {
  *   console.error(error.message); // 'Length should be at most 5 characters.'
  * }
  */
-exports.validateMaxLen = (value, options) => {
+ function validateMaxLen = (value, options) => {
   this.validationsLen(value, { max: options.max, maxMessage: options.maxMessage || `Value must be at most ${options.max} characters long.` });
 };

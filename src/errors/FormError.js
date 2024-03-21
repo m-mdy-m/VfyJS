@@ -54,7 +54,7 @@ class StringLengthError extends ValidationError {}
 
 class BooleanValueError extends ValidationError {}
 
-exports.throwIfFalsy = (property, input, errors, validationRule, message) => {
+throwIfFalsy = (property, input, errors, validationRule, message) => {
   if (!property) {
     throw new BooleanValueError(
       message || "Invalid value (Falsy)",
@@ -69,7 +69,7 @@ exports.throwIfFalsy = (property, input, errors, validationRule, message) => {
   return property;
 };
 
-exports.ifTruthyValue = (message, property, input, errors, validationRule) => {
+ifTruthyValue = (message, property, input, errors, validationRule) => {
   if (property) {
     throw new BooleanValueError(
       message || "Invalid value (Truthy)",
@@ -82,7 +82,7 @@ exports.ifTruthyValue = (message, property, input, errors, validationRule) => {
     );
   }
 };
-exports.validateWithCondition = (
+validateWithCondition = (
   condition,
   validatorFunction,
   input,
@@ -98,7 +98,7 @@ exports.validateWithCondition = (
     errorMessage
   );
 };
-exports.validateType = (
+validateType = (
   expectedType,
   property,
   message,
@@ -119,7 +119,7 @@ exports.validateType = (
   }
 };
 
-exports.validationsLength = (
+validationsLength = (
   value,
   options = {},
   minLength,
@@ -172,7 +172,7 @@ exports.validationsLength = (
     }
   }
 };
-exports.IfBothTruthy = (
+IfBothTruthy = (
   property,
   method,
   message,
@@ -192,7 +192,7 @@ exports.IfBothTruthy = (
     }
   }
 };
-exports.TypeMatches = (
+TypeMatches = (
   property,
   expectedType,
   message,

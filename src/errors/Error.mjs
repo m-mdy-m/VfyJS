@@ -75,13 +75,13 @@ export function CheckLengths(property,min,max,message){
         throw new LengthError(message,property,'Length');
       }
 }
-export function MinCheck(property,min,message){
+export function validateMinLength(property,min,message){
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (property < min) {
         throw new LengthError(message,property,'Length')
     }
 }
-export function MaxCheck(property,max,message){
+export function validateMaxLength(property,max,message){
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (property < max) {
         throw new LengthError(message,property,'Length')

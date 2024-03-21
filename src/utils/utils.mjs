@@ -2,13 +2,13 @@
  * Minimum length requirement for passwords.
  * @constant {number}
  */
-const MIN_LENGTH = 8;
+export const MIN_LENGTH = 8;
 
 /**
  * Maximum length requirement for passwords.
  * @constant {number}
  */
-const MAX_LENGTH = 64;
+export const MAX_LENGTH = 64;
 
 /**
  * Removes leading and trailing whitespaces from a string.
@@ -24,24 +24,23 @@ const MAX_LENGTH = 64;
  * console.log(result);
  * // Output: 'Hello,World!'
  */
-const trimmedValue = (value) => value.replace(/\s/g, '').trim();
+export const trimmedValue = (value) => value.replace(/\s/g, "").trim();
 /**
  * Module exports containing constants and functions related to password validation.
  * @module validationConstants
- */ 
-function getRequired(value, defaultValue) {
-    return value && value.required ? value.required : defaultValue;
+ */
+export function getRequired(value, defaultValue) {
+  return value && value.required ? value.required : defaultValue;
 }
-function getFalseRequired(value){
-    return value && !value.required ? value.required : value;
+export function getFalseRequired(value) {
+  return value && !value.required ? value.required : value;
 }
-function getValidValue(value, defaultValue ){
-    return value && value.value ? value.value : defaultValue;
+export function getValidValue(value, defaultValue) {
+  return value && value.value ? value.value : defaultValue;
 }
-function isValue(value, defaultValue){
-    if(typeof value === 'object'){
-        return defaultValue
-    }
-    return value ? value : defaultValue
+export function isValue(value, defaultValue) {
+  if (typeof value === "object") {
+    return defaultValue;
+  }
+  return value ? value : defaultValue;
 }
-module.exports = { MIN_LENGTH, MAX_LENGTH,getFalseRequired, trimmedValue,getValidValue,isValue,getRequired };

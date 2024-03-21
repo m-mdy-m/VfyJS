@@ -69,7 +69,7 @@ export function TypeMatches(property,expectedType,message){
     }
 }
 
-export function CheckLengths(property,min,max,message){
+export function validateLengthRange(property,min,max,message){
     const length = typeof property === 'string' ? property.length : `${property}`.length;
     if (length < min || length > max) {
         throw new LengthError(message,property,'Length');

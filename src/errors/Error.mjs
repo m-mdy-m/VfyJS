@@ -92,7 +92,7 @@ export function MaxCheck(message,max,property){
 }
 export function isEmpty(value, message = 'Value should not be empty'){
     if (value === null || value === undefined || value === "" || value === 0) {
-      throw new ValidationError(value, message,'Empty');
+      throw new ValidationError(message,value,'Empty');
     }
     return value;
 };

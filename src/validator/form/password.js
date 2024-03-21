@@ -37,6 +37,7 @@ const {optionsPassword} = require("./helper/genOption");
 const { getReq, getErrorMessage } = require("./helper/getValues");
 const {  validateWithCondition, validateType, validationsLength,ifTruthyValue } = require("../../errors/FormError");
 const { validateCommon } = require("./validation.mjs");
+const { validateLengthRange } = require("../../errors/Error.mjs");
 
 /**
  * Validates a password based on the provided options.
@@ -57,15 +58,7 @@ function validateFormPassword(input, options = {}) {
     // Validate password length
     let min = minLength?.value ?? MIN_LENGTH;
     let max = maxLength?.value ?? MAX_LENGTH;
-    if (typeof min === 'string' || typeof min === 'string') {
-        min = +min;
-        max = +max;
-    }
-
-    validateType('number', min, getErrorMessage(minLength));
-    validateType('number', max, getErrorMessage(maxLength));
-    validationsLength(value,null, min, max, `length must be between ${min} and ${max} characters.`, input, msgError, 'validations Length');
-    toString(value,'Password is required.');
+    validateLengthRange(value,min,max,`length must be between ${min} and ${max} characters.`)
     // Validate individual criteria
     validateWithCondition(getReq(uppercase), validator.hasUppercase(), input, msgError, 'hasUppercase', getErrorMessage(uppercase));
     validateWithCondition(getReq(lowercase), validator.hasLowerCase(), input, msgError, 'hasLowerCase', getErrorMessage(lowercase));

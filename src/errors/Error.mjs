@@ -63,6 +63,11 @@ export function throwTruthy(message, property) {
 }
 export function notType(message,expectedType,property){
     if (typeof property !== expectedType) {
-        throw new TypeError(message,property,'Type Error')
+        throw new TypeError(message,property,typeof property)
+    }
+}
+export function TypeMatches(message,expectedType,property){
+    if (typeof property === expectedType) {
+        throw new TypeError (message,property,typeof property)
     }
 }

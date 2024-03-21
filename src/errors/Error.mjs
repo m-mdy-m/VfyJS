@@ -101,3 +101,18 @@ export function validateDate(dateString) {
     }
     return dateString;
 }
+export function validationsLength(value,options){
+  const length = typeof value === 'string' ? value.length : `${value}`.length;
+  if (options.min && length < options.min) {
+    throw new LengthError(options.minError || `Length must be at least ${options.min} characters.`,value,"Length" );
+  }
+
+  if (options.max && length > options.max) {
+    throw new LengthError( options.maxError || `Length must be at most ${options.max} characters.`,value,"Length");
+  }
+}
+export function TypesCheck(types,property,message=`${property} is not of type ${types.join(' or ')}`){
+    if (!types.includes(typeof property)) {
+        throw new TypeError(message,property,"Length")
+    }   
+}

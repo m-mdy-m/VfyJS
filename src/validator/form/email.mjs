@@ -3,6 +3,7 @@
 import inputValidator  from "../../utils/inputValidator"
 import { optionEmail }  from "./helper/genOption.mjs"
 import { NotType, ThrowFalsy, ThrowTruthy, isEmpty, validationsLength }  from "../../errors/Error.mjs"
+import { validateCommon } from "./validation.mjs";
 
 /**
  * Validates whether the provided value is a valid email.
@@ -26,14 +27,10 @@ import { NotType, ThrowFalsy, ThrowTruthy, isEmpty, validationsLength }  from ".
  */
 function ValidationEmail(input, options = {}) {
   // Extracting value from input or using input directly if it's a string
-  const value = input.value ? input.value : input;
-  isEmpty(value,'Email is required')
+  const value = validateCommon(input,'email','min','max')
   // Extracting options and error messages
   const {maxLenDomain, maxLenLocal, maxLenSubdomain, minLenDomain, minLenLocal, minLenSubdomain, msgError } = optionEmail(options);
 
-  // Check if the input is a string
-  NotType(value,'string','Please enter a valid email as a string.')
-  
   // Basic email format validation
   const hasSymbol = /^(?!.*@.*@)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   ThrowFalsy(hasSymbol,'Email must contain @')

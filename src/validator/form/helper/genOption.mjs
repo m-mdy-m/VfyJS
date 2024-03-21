@@ -1,12 +1,12 @@
 import { MIN_LENGTH, MAX_LENGTH }  from "../../../common/validationimportants"
-import { defaultOptions }  from "../global.config"
+import { defaultOptions }  from "../global.config.js"
 import createValidationOptions  from "../../../utils/handleOption"
 import inputValidator  from "../../../utils/inputValidator"
 
 
 
 function genOption(){
-    
+
 }
 
 

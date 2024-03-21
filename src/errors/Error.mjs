@@ -71,3 +71,10 @@ export function TypeMatches(message,expectedType,property){
         throw new TypeError (message,property,typeof property)
     }
 }
+
+export function validateLength(message,min,max,property){
+    const length = typeof value === 'string' ? value.length : `${value}`.length;
+    if (length < min || length > max) {
+        throw new LengthError(message,property,typeof property);
+      }
+}

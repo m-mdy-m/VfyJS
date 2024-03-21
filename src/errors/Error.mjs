@@ -94,3 +94,10 @@ export function isEmpty(value, message = 'Value should not be empty'){
     }
     return value;
 };
+export function validateDate(dateString) {
+    const isValidDate = !isNaN(Date.parse(dateString));
+    if (!isValidDate) {
+        throw new ValidationError('Invalid date format', dateString, 'Date');
+    }
+    return dateString;
+}

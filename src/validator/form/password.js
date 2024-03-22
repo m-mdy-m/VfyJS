@@ -67,7 +67,7 @@ function validateFormPassword(input, options = {}) {
     ThrowFalsy(validator.hasLowerCase(), lowercase.message);
   }
   if (number?.required) {
-    ThrowFalsy(validator.hasNumber, number.message);
+    ThrowFalsy(validator.hasNumber(), number.message);
   }
   if (specialCharacter?.required) {
     ThrowFalsy(validator.hasSpecialCharacter(), specialCharacter.message);

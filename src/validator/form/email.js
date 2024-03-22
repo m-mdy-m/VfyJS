@@ -32,8 +32,8 @@ const { validateCommon } = require("./validation.js");
  * console.log(isValid); // true
  */
 function ValidationEmail(input, options = {}) {
-  // Extracting value from input or using input directly if it's a string
-  const value = validateCommon(input, "email", "min", "max");
+  
+  const value = validateCommon(input, "email",  5, 320);
   // Extracting options and error messages
   const {
     maxLenDomain,
@@ -43,7 +43,6 @@ function ValidationEmail(input, options = {}) {
     minLenLocal,
     minLenSubdomain,
   } = optionEmail(options);
-
   // Basic email format validation
   const hasSymbol = /^(?!.*@.*@)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   ThrowFalsy(hasSymbol, "Email must contain @");

@@ -48,16 +48,20 @@ let defaultOptions = {
       required: false,
       message: "letters are not allowed in the username.",
     },
+    lowercase:{
+      required:false,
+      message: "",
+    },
     number: {
       required: false,
       message: "digits are not allowed in the username.",
     },
-    nonAlphanumeric: {
+    specialCharacter: {
       required: false,
       message:
         "characters are not allowed in the username.",
     },
-    trim: {
+    whitespace: {
       required: true,
       message:
         "Leading or trailing whitespace is not allowed in the username.",

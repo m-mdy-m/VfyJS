@@ -69,7 +69,7 @@ function optionEmail (options){
   return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
 }
 
-function optionUsername(username, options) {
+function optionUsername(options) {
     const { username: usernameConfig } = defaultOptions;
     const { minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat } = usernameConfig;
     const validator = inputValidator(username);

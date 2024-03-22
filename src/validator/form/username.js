@@ -29,11 +29,12 @@
 // Import necessary modules and constants
 const {MAX_LENGTH, MIN_LENGTH, getFalseRequired, trimmedValue, getValidValue, isValue, getRequired} = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {isTypeMismatch, isEmpty} = require("../../errors/HandleError");
+const {isTypeMismatch} = require("../../errors/HandleError");
 const {optionUsername} = require("./helper/genOption");
-const { throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, validateType} = require("../../errors/FormError");
+const { throwIfFalsy, IfBothTruthy, validationsLength, validateType} = require("../../errors/FormError");
 const {getErrorMessage} = require("./helper/getValues");
 const validateCommon = require("./validation");
+const { ThrowFalsy } = require("../../errors/Error");
 
 /**
  * Validates a username based on the provided options.
@@ -48,60 +49,29 @@ const validateCommon = require("./validation");
  * console.log(isValid); // true
  */
 function validateUsername(input, options = {}) {
-    const value = validateCommon(input,'username',2,64)
-    // Extract options
-    const {minLength, maxLength, uppercase, number, trim, repeat, messageError} = optionUsername(value, options);
-    // Validate number requirement
-    throwIfFalsy(!number.required, input, messageError, 'Required Number', getErrorMessage(number));
-        
-
-    // Check for whitespace if required
-    let checkWhiteSpace = getRequired(trim,trim);
-    if (checkWhiteSpace) {
-        throwIfFalsy(checkWhiteSpace, !validator.hasWhitespace(), messageError, 'hasWhitespace', 'cannot contain leading or trailing whitespaces.');
+    const {minLength, maxLength, uppercase, number,lowercase,specialCharacter, whitespace, repeat} = optionUsername(options);
+    const value = validateCommon(input,'username',minLength?.value,maxLength?.value)
+    const validator = inputValidator(value);
+    if (uppercase?.required) {
+      ThrowFalsy(validator.hasUppercase(), uppercase.message);
     }
-
-    // Validate number requirement
-    const isNumber = getRequired(number, !validator.hasNumber());
-    IfBothTruthy(isNumber, validator.hasNumber(), 'must contain at least one number.', input, messageError, 'isNumber');
-
-    // Validate repeat requirement
-    let isRepeat = getFalseRequired(repeat);
-    IfBothTruthy(isRepeat, validator.hasRepeat(), 'cannot have consecutive repeated characters.', input, messageError, 'isRepeat');
-
-    // Validate length requirements
-    let minValue = getValidValue(minLength, minLength);
-    let maxValue = getValidValue(maxLength, maxLength);
-    
-    // Get min and max lengths
-    const min = isValue(minValue, MIN_LENGTH);
-    const max = isValue(maxValue, MAX_LENGTH);
-
-    // Convert string lengths to numbers
-    if (typeof minValue === 'string' || typeof maxValue === 'string') {
-        minValue = +minValue;
-        maxValue = +maxValue;
+    if (lowercase?.required) {
+      ThrowFalsy(validator.hasLowerCase(), lowercase.message);
     }
-
-    // Validate type and length
-    validateType('string',username,getErrorMessage(username),input,messageError,'Check Type')
-    validationsLength(username, null, min, max, `${min} and ${max} must be numeric values or strings.`, input, messageError, 'Validation Length');
-
-    // Check if username length exceeds maximum length
-    if (typeof max === 'number' && username.length > max) {
-        throw new Error('too long.');
+    if (whitespace?.required) {
+      ThrowFalsy(validator.hasWhitespace(), whitespace.message);
     }
-
-    // Type mismatch validations
-    isTypeMismatch('undefined', minValue, "undefined 1");
-    isTypeMismatch('undefined', maxValue, "undefined 2");
-    isTypeMismatch('boolean', minValue, "boolean 1");
-    isTypeMismatch('boolean', maxValue, "boolean 2");
-    isTypeMismatch('number', min, "number 1");
-    isTypeMismatch('number', max, "number 2");
+    if (repeat?.required) {
+      ThrowFalsy(validator.hasRepeat(), repeat.message);
+    }
+    if (number?.required) {
+      ThrowFalsy(validator.hasNumber(), number.message);
+    }
+    if (specialCharacter?.required) {
+      ThrowFalsy(validator.hasSpecialCharacter(), specialCharacter.message);
+    }
     // Check if the username is valid
-    const isValid = min && max && (uppercase.required ? validator.hasUppercase() : true) && isNumber && checkWhiteSpace && (isRepeat.required ? isRepeat.required : isRepeat);
-    return isValid;
+    return true;
 }
 
 module.exports = validateUsername;

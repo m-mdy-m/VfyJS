@@ -51,7 +51,7 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 ## Features
 
 - [Data Validation](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md)
-- [Request Validation]()
+- [Request Validation](https://github.com/m-mdy-m/VfyJS/blob/main/doc/request.validate.md)
 ### DataValidation
 
 - **Colors**: Validate various color formats, including hex, name, RGB, RGBA, and CssVarHwb. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configcolor)
@@ -60,8 +60,55 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 - **Usernames**: Validate usernames with customizable criteria. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configusername)
 - **Passwords**: Strong password detection with customization options. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configpassword)
 - **Emails**: Recognize and validate email addresses. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configemail)
-- **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configphone)
 - **Custom Validation Functions**: Validate various aspects of a string input. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configvalue)
+
+## Request Validation
+
+Request validation is a crucial aspect of web development, ensuring that the data sent to your server meets specific criteria before processing it further. The `RequestValidator` class provided by VfyJS simplifies this process by offering a comprehensive set of validation methods tailored for Node.js applications.
+
+### Features
+
+- **Flexible Validation**: Define rules for each field in the request data to ensure its validity.
+- **Custom Error Messages**: Provide custom error messages for individual fields to improve clarity in error reporting.
+- **Wide Range of Validators**: Choose from a variety of built-in validators covering common validation scenarios.
+- **Custom Validators**: Define custom validators to address specific validation requirements unique to your application.
+
+### Example
+
+Consider a scenario where you have an endpoint `/signup` in your Express application to handle user registrations. You want to ensure that the incoming data for `username`, `password`, and `email` fields adheres to certain criteria before processing the signup request.
+
+```javascript
+const express = require('express');
+const {RequestValidator} = require('vfyjs');
+
+const app = express();
+app.use(express.json());
+
+app.post('/signup', (req, res) => {
+  const validator = new RequestValidator(req.body);
+  const rules = {
+    username: 'string|alphanumeric|min:5|max:20',
+    password: 'string|min:8',
+    email: 'email',
+  };
+  const errors = validator.validate(rules);
+  if (Object.keys(errors).length === 0) {
+    // Data is valid, proceed with signup
+    res.status(200).json({ message: 'Signup successful!' });
+  } else {
+    // Validation errors, return error response
+    res.status(400).json({ errors });
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+```
+
+In this example, when a POST request is made to `/signup` endpoint with JSON data containing `username`, `password`, and `email` fields, the `RequestValidator` class is utilized to validate the request body against specified rules. If there are validation errors, the server responds with a 400 status code and the error messages; otherwise, it responds with a 200 status code indicating successful signup.
+
 
 ## Installation
 

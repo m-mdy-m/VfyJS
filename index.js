@@ -27,9 +27,6 @@ const colorValidate = require("./src/validator/colors/isColor");
 // Importing utility functions for input validation
 const inputValidations = require("./src/utils/inputValidator");
 
-// Importing error handling module
-const HandleError = require("./src/errors/Error");
-
 // import global config password and username
 const {
   setUsernameConfig,

@@ -3,7 +3,6 @@
  */
 let defaultOptions = {
   // Default options for password validation
-  password: {
     minLength: {
       value: 8,
       message: "Must be at least 8 characters long.",
@@ -32,45 +31,10 @@ let defaultOptions = {
       required: true,
       message: "Whitespace is not allowed in the password.",
     },
-  },
-
-  // Default options for username validation
-  username: {
-    minLength: {
-      value: 4,
-      message: "must be at least 4 characters long.",
-    },
-    maxLength: {
-      value: 20,
-      message: "cannot exceed 20 characters.",
-    },
-    uppercase: {
-      required: false,
-      message: "letters are not allowed in the username.",
-    },
-    lowercase:{
-      required:false,
-      message: "",
-    },
-    number: {
-      required: false,
-      message: "digits are not allowed in the username.",
-    },
-    specialCharacter: {
-      required: false,
-      message:
-        "characters are not allowed in the username.",
-    },
-    whitespace: {
-      required: true,
-      message:
-        "Leading or trailing whitespace is not allowed in the username.",
-    },
     repeat: {
       required: true,
       message: "Consecutive characters are not allowed in the username.",
     },
-  },
 };
 /**
  * Sets the configuration options for password validation.
@@ -126,9 +90,9 @@ function setPasswordConfig(option) {
  * @param {Object} option.nonAlphanumeric - Non-alphanumeric character requirements for the username.
  * @param {boolean} option.nonAlphanumeric.required - Whether non-alphanumeric characters are required.
  * @param {string} option.nonAlphanumeric.message - Error message for non-alphanumeric character validation failure.
- * @param {Object} option.trim - Whitespace requirements for the username.
- * @param {boolean} option.trim.required - Whether leading or trailing whitespaces are disallowed.
- * @param {string} option.trim.message - Error message for whitespace validation failure.
+ * @param {Object} option.whitespace - Whitespace requirements for the username.
+ * @param {boolean} option.whitespace.required - Whether leading or trailing whitespaces are disallowed.
+ * @param {string} option.whitespace.message - Error message for whitespace validation failure.
  * @param {Object} option.repeat - Consecutive character requirements for the username.
  * @param {boolean} option.repeat.required - Whether consecutive characters are disallowed.
  * @param {string} option.repeat.message - Error message for consecutive character validation failure.

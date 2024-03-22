@@ -93,4 +93,4 @@ function ValidationEmail(input, options = {}) {
   // If the input is a string and has a valid email format, return true
   return isValid;
 }
-export default ValidationEmail;
+module.exports =ValidationEmail

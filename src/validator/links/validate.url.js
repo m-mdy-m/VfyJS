@@ -122,19 +122,3 @@ function isHttp(url) {
   }
 }
 module.exports = { isHttp, isHttps, validateUrl };
-const validUrl = "https://example.com";
-const invalidUrl = "ftp://example.com";
-
-try {
-  validateUrl(validUrl, "https");
-  console.log("Validation");
-} catch (error) {
-  console.error("Validation failed for valid URL:", validUrl, error.message);
-}
-
-try {
-  validateUrl(invalidUrl, "https");
-  console.log("Validation passed for invalid URL:", invalidUrl);
-} catch (error) {
-  console.error("Validation failed for invalid URL:", invalidUrl, error.message);
-}

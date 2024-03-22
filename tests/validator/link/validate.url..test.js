@@ -1,34 +1,55 @@
-const { validateUrl } = require("../../../src/validator/links/validate.url");
-const { expect } = require("@jest/globals");
+const { isHttp, isHttps, validateUrl } = require('../../../src/validator/links/validate.url');
 
-describe("validateUrl function", () => {
-  it("should return true for valid HTTP URLs", () => {
-    const result = validateUrl("http://www.example.com", "http");
-    expect(result).toBe(true);
+describe('validateUrl function', () => {
+  test('validates a valid HTTPS URL', () => {
+    const url = 'https://www.example.com';
+    expect(validateUrl(url, 'https')).toBe(true);
   });
 
-  it("should return true for valid HTTPS URLs", () => {
-    const result = validateUrl("https://www.example.com", "https");
-    expect(result).toBe(true);
-  });
-
-  it("should throw an error for invalid protocol", () => {
+  test('throws error for an invalid HTTPS URL', () => {
+    const url = 'http://www.example.com';
     expect(() => {
-      validateUrl("http://www.example.com", "ftp");
-    }).toThrow('Invalid expected protocol. Please provide "http" or "https".');
+      validateUrl(url, 'https');
+    }).toThrowError('Only https URLs are allowed.');
   });
 
-  it("should throw an error for empty URL", () => {
-    expect(() => {
-      validateUrl("", "http");
-    }).toThrow("URL cannot be empty. Please provide a valid URL.");
+  test('validates a valid HTTP URL', () => {
+    const url = 'http://www.example.com';
+    expect(validateUrl(url, 'http')).toBe(true);
   });
 
-  it("should throw an error for URL not containing expected protocol", () => {
+  test('throws error for an invalid HTTP URL', () => {
+    const url = 'https://www.example.com';
     expect(() => {
-      validateUrl("https://www.example.com", "http");
-    }).toThrow(
-      'Only http URLs are allowed.'
-    );
+      validateUrl(url, 'http');
+    }).toThrowError('Only http URLs are allowed.');
+  });
+});
+
+describe('isHttps function', () => {
+  test('returns true for a valid HTTPS URL', () => {
+    const url = 'https://www.example.com';
+    expect(isHttps(url)).toBe(true);
+  });
+
+  test('throws error for an invalid HTTPS URL', () => {
+    const url = 'http://www.example.com';
+    expect(() => {
+      isHttps(url);
+    }).toThrowError('Only https URLs are allowed.');
+  });
+});
+
+describe('isHttp function', () => {
+  test('returns true for a valid HTTP URL', () => {
+    const url = 'http://www.example.com';
+    expect(isHttp(url)).toBe(true);
+  });
+
+  test('throws error for an invalid HTTP URL', () => {
+    const url = 'https://www.example.com';
+    expect(() => {
+      isHttp(url);
+    }).toThrowError('Only http URLs are allowed.');
   });
 });

@@ -89,11 +89,11 @@ try {
 
 This module provides functions for configuring default options for username and password validation.
 
-#### defaultOptions
+## Default Options
 
 An object containing the default options for password and username validation.
 
-##### Password Validation Options:
+### Password Validation Options:
 
 - `minLength`: Minimum length requirements for the password.
 - `maxLength`: Maximum length requirements for the password.
@@ -101,54 +101,52 @@ An object containing the default options for password and username validation.
 - `lowercase`: Lowercase letter requirements for the password.
 - `number`: Numeric digit requirements for the password.
 - `specialCharacter`: Special character requirements for the password.
-- `alphabetic`: Alphabetic character requirements for the password.
 - `whitespace`: Whitespace requirements for the password.
 
-##### Username Validation Options:
+### Username Validation Options:
 
 - `minLength`: Minimum length requirements for the username.
 - `maxLength`: Maximum length requirements for the username.
-- `uppercase`: Uppercase letter requirements for the username.
-- `number`: Numeric digit requirements for the username.
-- `trim`: Whitespace requirements for the username.
-- `repeat`: Consecutive character requirements for the username.
+- `alphanumeric`: Alphanumeric character requirements for the username.
+- `whitespace`: Whitespace requirements for the username.
 
-#### setPasswordConfig(option)
+## Functions
+
+### setPasswordConfig(option)
 
 Sets the configuration options for password validation.
 
 - `option` (Object): Options object for customizing password validation criteria.
 
-#### setUsernameConfig(option)
+### setUsernameConfig(option)
 
 Sets the configuration options for username validation.
 
 - `option` (Object): Options object for customizing username validation criteria.
 
-#### Example Using
+## Example Usage
+
 ```javascript
 const { setPasswordConfig, setUsernameConfig } = require('vfyjs');
 
 // Set custom options for password validation
 setPasswordConfig({
-  minLength: { value: 10, errorMessage: "Must be at least 10 characters long." },
-  maxLength: { value: 50, errorMessage: "Cannot exceed 50 characters." },
-  uppercase: { required: true, errorMessage: "At least one uppercase letter is required." },
-  lowercase: { required: true, errorMessage: "At least one lowercase letter is required." },
-  number: { required: true, errorMessage: "At least one numeric digit is required." },
-  specialCharacter: { required: true, errorMessage: "At least one special character is required." },
+  minLength: { value: 10, message: "Must be at least 10 characters long." },
+  maxLength: { value: 50, message: "Cannot exceed 50 characters." },
+  uppercase: { required: true, message: "At least one uppercase letter is required." },
+  lowercase: { required: true, message: "At least one lowercase letter is required." },
+  number: { required: true, message: "At least one numeric digit is required." },
+  specialCharacter: { required: true, message: "At least one special character is required." },
 });
 
 // Set custom options for username validation
 setUsernameConfig({
-  minLength: { value: 5, errorMessage: "Username must be at least 5 characters long." },
-  maxLength: { value: 20, errorMessage: "Username cannot exceed 20 characters." },
-  uppercase: { required: false, errorMessage: "Uppercase letters are not allowed in the username." },
-  number: { required: false, errorMessage: "Digits are not allowed in the username." },
-  nonAlphanumeric: { required: false, errorMessage: "Non-alphanumeric characters are not allowed in the username." },
+  minLength: { value: 5, message: "Username must be at least 5 characters long." },
+  maxLength: { value: 20, message: "Username cannot exceed 20 characters." },
+  alphanumeric: { required: true, message: "Only alphanumeric characters are allowed in the username." },
+  whitespace: { required: false, message: "Leading or trailing whitespaces are allowed in the username." },
 });
 ```
-
 # ConfigUsername
 
 ## Overview

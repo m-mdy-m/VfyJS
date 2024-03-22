@@ -51,12 +51,14 @@ exports.ThrowFalsy=(property,message) => {
   if (!property) {
     throw new BooleanError(message || 'Value cannot be falsy', property, 'Falsy');
   }
+  return property
 }
 
 exports.ThrowTruthy=(property,message) => {
   if (property) {
     throw new BooleanError(message || 'Value must be falsy', property,"Truthy");
   }
+  return property
 }
 exports.NotType=(property,expectedType,message) =>{
     if (typeof property !== expectedType) {

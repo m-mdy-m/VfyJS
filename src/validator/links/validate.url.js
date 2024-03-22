@@ -13,24 +13,23 @@ const {
  * @throws {Error} - Throws an error if the URL is empty, not a string, or does not match the pattern.
  */
 function validateUrl(url, expectedProtocol) {
-  expectedProtocol.trim();
+  // Trim the expected protocol
+  expectedProtocol = expectedProtocol.trim();
   // Check if the URL is empty
   isEmpty(url, "URL cannot be empty. Please provide a valid URL.");
-  let protocolPattern = "";
-  let urlPattern = "";
+  let protocolPattern = "",urlPattern = "";
   // Set protocol and URL patterns based on the expected protocol
   if (expectedProtocol === "http") {
-    protocolPattern = /^(HTTP|http)$/;
+    protocolPattern = /^(HTTP:|http:)$/;
     urlPattern = /(HTTP:|http:)\/\/[^\/]/i;
   } else if (expectedProtocol === "https") {
-    protocolPattern = /^(HTTPS|https)$/;
+    protocolPattern = /^(HTTPS:|https:)$/;
     urlPattern = /(HTTPS:|https:)\/\/[^\/]/i;
   } else {
     throw new Error(
       'Invalid expected protocol. Please provide "http" or "https".'
     );
   }
-  // Check if the URL matches the expected pattern
   ThrowFalsy(
     urlPattern.test(url),
     `Only ${expectedProtocol} URLs are allowed.`
@@ -39,21 +38,17 @@ function validateUrl(url, expectedProtocol) {
   // Perform type and numeric checks
   NotType(url, "string", "URL must be a string.");
   // Parse the URL
-  let { protocol, hostname, href, default: urlObj } = new URL(url);
+  let { protocol, hostname } = new URL(url);
 
   // Convert protocol to lowercase and trim
   protocol = protocol.toLowerCase().trim();
-
   // Validate the protocol
   ThrowFalsy(
     protocolPattern.test(protocol),
     `Only ${expectedProtocol} URLs are allowed.`
   );
-  // Check URL format against the expected pattern
-  const hasCorrectFormat = urlPattern.test(url);
-
   // Validate special characters in the hostname
-  const hostnameParts = urlObj.hostname.split(".");
+  const hostnameParts = hostname.split(".");
   if (hostnameParts.length < 2) {
     throw new Error("Invalid hostname in the URL.");
   }
@@ -127,3 +122,19 @@ function isHttp(url) {
   }
 }
 module.exports = { isHttp, isHttps, validateUrl };
+const validUrl = "https://example.com";
+const invalidUrl = "ftp://example.com";
+
+try {
+  validateUrl(validUrl, "https");
+  console.log("Validation");
+} catch (error) {
+  console.error("Validation failed for valid URL:", validUrl, error.message);
+}
+
+try {
+  validateUrl(invalidUrl, "https");
+  console.log("Validation passed for invalid URL:", invalidUrl);
+} catch (error) {
+  console.error("Validation failed for invalid URL:", invalidUrl, error.message);
+}

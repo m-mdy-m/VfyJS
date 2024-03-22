@@ -1,5 +1,10 @@
 const inputValidation = require("../../utils/inputValidator");
-const { isEmpty, ThrowFalsy, NotType, ThrowTruthy } = require("../../errors/Error");
+const {
+  isEmpty,
+  ThrowFalsy,
+  NotType,
+  ThrowTruthy,
+} = require("../../errors/Error");
 /**
  * Validates a URL against a specified pattern.
  * @param {string} url - The URL to validate.
@@ -32,15 +37,15 @@ function validateUrl(url, expectedProtocol) {
   );
 
   // Perform type and numeric checks
-  NotType( url,"string", "URL must be a string.");
+  NotType(url, "string", "URL must be a string.");
   // Parse the URL
-  let { protocol, hostname, href } = new URL(url);
+  let { protocol, hostname, href, default: urlObj } = new URL(url);
 
   // Convert protocol to lowercase and trim
   protocol = protocol.toLowerCase().trim();
 
   // Validate the protocol
-  ThrowTruthy(
+  ThrowFalsy(
     protocolPattern.test(protocol),
     `Only ${expectedProtocol} URLs are allowed.`
   );
@@ -48,16 +53,19 @@ function validateUrl(url, expectedProtocol) {
   const hasCorrectFormat = urlPattern.test(url);
 
   // Validate special characters in the hostname
-  const host = hostname.split(".")[1];
-  const validator = inputValidation(host);
-  const hasSpecialChars = validator.hasSpecialCharacter();
-  ThrowTruthy(
-    hasSpecialChars,
-    `The hostname "${hostname}" in the URL "${href}" must contain at least one special character.`
+  const hostnameParts = urlObj.hostname.split(".");
+  if (hostnameParts.length < 2) {
+    throw new Error("Invalid hostname in the URL.");
+  }
+  const domain = hostnameParts.slice(-2).join(".");
+  const validator = inputValidation(domain);
+  ThrowFalsy(
+    validator.hasSpecialCharacter(),
+    `The domain "${domain}" must contain at least one special character.`
   );
 
   // Return true if the URL has the expected format
-  return hasCorrectFormat;
+  return true;
 }
 /**
  * Validates if the given URL is an HTTPS URL.

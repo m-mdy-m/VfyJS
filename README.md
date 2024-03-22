@@ -51,10 +51,7 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 ## Features
 
 - [Data Validation](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md)
-- [String Manipulation](https://github.com/m-mdy-m/VfyJS/blob/main/doc/StringManipulation.doc.md)
-- [Error Handling](https://github.com/m-mdy-m/VfyJS/blob/main/doc/ErrorHandling.doc.md)
-- [Math Operations](https://github.com/m-mdy-m/VfyJS/blob/main/doc/MathOperations.md.doc.md)
-
+- [Request Validation]()
 ### DataValidation
 
 - **Colors**: Validate various color formats, including hex, name, RGB, RGBA, and CssVarHwb. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configcolor)
@@ -64,17 +61,7 @@ Ensure to replace `"path/to/vfyjs.bundle.js"` with the correct path relative to 
 - **Passwords**: Strong password detection with customization options. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configpassword)
 - **Emails**: Recognize and validate email addresses. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configemail)
 - **Phone Numbers**: Validate phone numbers from 50 countries, providing detailed information about the country, code, and phone type (landline, mobile, etc.). [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configphone)
-- **BinaryTree**: Efficient searching and manipulation of data using a binary tree data structure [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configbinarytree)
 - **Custom Validation Functions**: Validate various aspects of a string input. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/DataValidation.doc.md#configvalue)
-
-### StringManipulation
-
-- **getSubstring**: Retrieve substrings from a given string based on specified indexes. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/StringManipulation.doc.md#getsubstring)
-- **trimValue**: Trim extra spaces from the beginning and end of a string. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/StringManipulation.doc.md#trimvalue)
-
-### ErrorHandling
-
-- **HandleError**: A utility for consistent error handling and type validation. [Configuration](https://github.com/m-mdy-m/VfyJS/blob/main/doc/ErrorHandling.doc.md#configerrors)
 
 ## Installation
 
@@ -82,40 +69,6 @@ Install vfyjs using npm:
 
 ```bash
 npm install vfyjs
-```
-
-## Usage
-
-Usage Example:
-
-```JavaScript
-const { validatePhoneNumber, getSubstring, trimValue, HandleError } = require('vfyjs');
-
-// Validate a phone number
-validatePhoneNumber('1', '1234567890').then(result => {
-   console.log(result);
-});
-
-// Get a substring
-const inputString = "Hello, World!";
-const result = getSubstring(inputString, [0, 5], [7, 12]);
-console.log(result); // Hello-World
-
-// Trim a value
-const inputString = ' H ell o, World! ';
-const result = trimValue(inputString);
-console.log(result); // Output: 'Hello, World!'
-
-// Handle an error
-const userAge = '25'; // Note: '25' is a string, not a number
-try {
-    HandleError.IfNotType('number', userAge, 'Age should be a number');
-    console.log('Age is valid.');
-} catch (error) {
-    console.error(error.name); // 'TypeError'
-    console.error(error.message); // 'Age should be a number'
-}
-
 ```
 
 ## License

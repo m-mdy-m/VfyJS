@@ -5,9 +5,7 @@ const { optionEmail } = require("./helper/config.js");
 const {
   NotType,
   ThrowFalsy,
-  ThrowTruthy,
-  isEmpty,
-  validationsLength,
+  ThrowTruthy,validationsLength,
 } = require("../../errors/Error.js");
 const { validateCommon } = require("./validation.js");
 

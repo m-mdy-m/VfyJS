@@ -1,9 +1,8 @@
 "use strict";
-const { MAX_LENGTH, MIN_LENGTH } = require("../../utils/utils.js");
 const inputValidator = require("../../utils/inputValidator.js");
-const { optionsPassword } = require("./helper/config.js");
+const { optionPassword } = require("./helper/config.js");
 const { validateCommon } = require("./validation.js");
-const { validateLengthRange, ThrowFalsy } = require("../../errors/Error.js");
+const { ThrowFalsy } = require("../../errors/Error.js");
 
 /**
  * Validates a password input based on specified criteria for enhanced security.
@@ -47,14 +46,7 @@ const { validateLengthRange, ThrowFalsy } = require("../../errors/Error.js");
  */
 function validateFormPassword(input, options = {}) {
   const {
-    lowercase,
-    uppercase,
-    number,
-    specialCharacter,
-    whitespace,
-    minLength,
-    maxLength,
-  } = optionsPassword(options);
+    lowercase, maxLength, minLength, number, specialCharacter, uppercase, whitespace } = optionPassword(options);
   // Common validation for password
   const value = validateCommon(
     input,

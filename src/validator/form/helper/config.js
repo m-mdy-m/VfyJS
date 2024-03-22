@@ -11,7 +11,7 @@ function optionUsername(options) {
     const { alphanumeric, maxLength, minLength, whitespace } = defaultOptions.Username;
 
     // Define names of validation options
-    const names = ['alphanumeric', 'maxLength', 'minLength', 'whitespace'];
+    const names = ['minLength', 'maxLength', 'alphanumeric', 'whitespace'];
 
     // Determine required values based on provided options or defaults
     const requiredOption = [

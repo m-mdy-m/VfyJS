@@ -28,7 +28,7 @@
 
 // Import necessary modules and constants
 const inputValidator = require("../../utils/inputValidator");
-const { option } = require("./helper/config");
+const { optionUsername } = require("./helper/config");
 const validateCommon = require("./validation");
 const { ThrowFalsy } = require("../../errors/Error");
 
@@ -46,15 +46,8 @@ const { ThrowFalsy } = require("../../errors/Error");
  */
 function validateUsername(input, options = {}) {
   const {
-    minLength,
-    maxLength,
-    uppercase,
-    number,
-    lowercase,
-    specialCharacter,
-    whitespace,
-    repeat,
-  } = option(options);
+    alphanumeric, maxLength, minLength, whitespace 
+  } = optionUsername(options);
   const value = validateCommon(
     input,
     "username",
@@ -62,25 +55,12 @@ function validateUsername(input, options = {}) {
     maxLength?.value
   );
   const validator = inputValidator(value);
-  if (uppercase?.required) {
-    ThrowFalsy(validator.hasUppercase(), uppercase.message);
-  }
-  if (lowercase?.required) {
-    ThrowFalsy(validator.hasLowerCase(), lowercase.message);
-  }
   if (whitespace?.required) {
     ThrowFalsy(validator.hasWhitespace(), whitespace.message);
   }
-  if (repeat?.required) {
-    ThrowFalsy(validator.hasRepeat(), repeat.message);
+  if (alphanumeric?.required) {
+    ThrowFalsy(validator.hasAlphanumeric(), alphanumeric.message);
   }
-  if (number?.required) {
-    ThrowFalsy(validator.hasNumber(), number.message);
-  }
-  if (specialCharacter?.required) {
-    ThrowFalsy(validator.hasSpecialCharacter(), specialCharacter.message);
-  }
-  // Check if the username is valid
   return true;
 }
 

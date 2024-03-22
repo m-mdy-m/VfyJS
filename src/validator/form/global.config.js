@@ -42,7 +42,7 @@ let defaultOptions = {
       message: "cannot exceed 32 characters.",
     },
     alphanumeric: {
-      required: true,
+      required: false,
       message: "must contain only alphanumeric characters.",
     },
     whitespace: {
@@ -119,7 +119,6 @@ function setUsernameConfig(option) {
 
 // Export default options and configuration function
 module.exports = {
-  defaultUsernameOptions,
   defaultOptions,
   setPasswordConfig,
   setUsernameConfig,

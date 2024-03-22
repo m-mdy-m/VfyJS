@@ -1,12 +1,6 @@
 const inputValidation = require("../../utils/inputValidator");
 const { trimmedValue } = require("../../common/validationConstants");
-const {
-  ifFalsyValue,
-  IfNotType,
-  IfIsNumber,
-  ifTruthyValue,
-  isEmpty,
-} = require("../../errors/HandleError");
+const { isEmpty, ThrowFalsy, NotType } = require("../../errors/Error");
 /**
  * Validates a URL against a specified pattern.
  * @param {string} url - The URL to validate.
@@ -33,17 +27,13 @@ function validateUrl(url, expectedProtocol) {
     );
   }
   // Check if the URL matches the expected pattern
-  ifFalsyValue(
+  ThrowFalsy(
     urlPattern.test(url),
     `Only ${expectedProtocol} URLs are allowed.`
   );
 
   // Perform type and numeric checks
-  IfNotType("string", url, "URL must be a string.");
-  IfIsNumber(url, "URL must not be a number.");
-  // Trim the URL
-  url = trimmedValue(url);
-
+  NotType( url,"string", "URL must be a string.");
   // Parse the URL
   let { protocol, hostname, href } = new URL(url);
 

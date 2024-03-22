@@ -42,7 +42,6 @@ function ValidationEmail(input, options = {}) {
     minLenDomain,
     minLenLocal,
     minLenSubdomain,
-    msgError,
   } = optionEmail(options);
 
   // Basic email format validation

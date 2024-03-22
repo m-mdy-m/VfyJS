@@ -56,16 +56,8 @@ function validateFormPassword(input, options = {}) {
     maxLength,
   } = optionsPassword(options);
   // Common validation for password
-  const value = validateCommon(input, "password");
+  const value = validateCommon(input, "password",minLength?.value,maxLength?.value);
   // Password length requirements
-  let min = minLength?.value ?? MIN_LENGTH;
-  let max = maxLength?.value ?? MAX_LENGTH;
-  validateLengthRange(
-    value,
-    min,
-    max,
-    `length must be between ${min} and ${max} characters.`
-  );
   // Criteria for enhanced password security
   const validator = inputValidator(value);
   if (uppercase?.required) {

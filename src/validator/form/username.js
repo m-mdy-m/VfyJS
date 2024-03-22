@@ -33,6 +33,7 @@ const {isTypeMismatch, isEmpty} = require("../../errors/HandleError");
 const {optionUsername} = require("./helper/genOption");
 const { throwIfFalsy, ifTruthyValue, IfBothTruthy, validationsLength, validateType} = require("../../errors/FormError");
 const {getErrorMessage} = require("./helper/getValues");
+const validateCommon = require("./validation");
 
 /**
  * Validates a username based on the provided options.
@@ -47,9 +48,7 @@ const {getErrorMessage} = require("./helper/getValues");
  * console.log(isValid); // true
  */
 function validateUsername(input, options = {}) {
-    let username = input.value ? input.value : input; // Get the username value
-    isEmpty(username,'Username is required.')
-    const validator = inputValidator(username); // Create a validator instance
+    const value = validateCommon(input,'username',2,64)
     // Extract options
     const {minLength, maxLength, uppercase, number, trim, repeat, messageError} = optionUsername(username, options);
     // Validate number requirement
@@ -61,9 +60,6 @@ function validateUsername(input, options = {}) {
     if (checkWhiteSpace) {
         throwIfFalsy(checkWhiteSpace, !validator.hasWhitespace(), messageError, 'hasWhitespace', 'cannot contain leading or trailing whitespaces.');
     }
-    
-    // Trim username value
-    username = trimmedValue(username);
 
     // Validate number requirement
     const isNumber = getRequired(number, !validator.hasNumber());

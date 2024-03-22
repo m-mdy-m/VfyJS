@@ -46,7 +46,7 @@ function optionPassword(options) {
     const { lowercase, maxLength, minLength, number, specialCharacter, uppercase, whitespace } = defaultOptions.Password;
 
     // Define names of validation options
-    const optionName = ['lowercase', 'maxLength', 'minLength', 'number', 'specialCharacter', 'uppercase', 'whitespace'];
+    const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'whitespace'];
 
     // Determine required values based on provided options or defaults
     const optionValidations = [

@@ -65,9 +65,3 @@ function validateUsername(input, options = {}) {
 }
 
 module.exports = validateUsername;
-try {
-  const isValid = validateUsername("m__mdy__m");
-  console.log("isValid :", isValid);
-} catch (error) {
-  console.log("error =>", error);
-}

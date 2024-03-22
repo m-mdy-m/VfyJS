@@ -1,6 +1,5 @@
 const inputValidation = require("../../utils/inputValidator");
-const { trimmedValue } = require("../../common/validationConstants");
-const { isEmpty, ThrowFalsy, NotType } = require("../../errors/Error");
+const { isEmpty, ThrowFalsy, NotType, ThrowTruthy } = require("../../errors/Error");
 /**
  * Validates a URL against a specified pattern.
  * @param {string} url - The URL to validate.
@@ -41,7 +40,7 @@ function validateUrl(url, expectedProtocol) {
   protocol = protocol.toLowerCase().trim();
 
   // Validate the protocol
-  ifTruthyValue(
+  ThrowTruthy(
     protocolPattern.test(protocol),
     `Only ${expectedProtocol} URLs are allowed.`
   );
@@ -52,7 +51,7 @@ function validateUrl(url, expectedProtocol) {
   const host = hostname.split(".")[1];
   const validator = inputValidation(host);
   const hasSpecialChars = validator.hasSpecialCharacter();
-  ifTruthyValue(
+  ThrowTruthy(
     hasSpecialChars,
     `The hostname "${hostname}" in the URL "${href}" must contain at least one special character.`
   );

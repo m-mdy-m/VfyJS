@@ -2,55 +2,55 @@
  * Default options for password and username validation.
  */
 let defaultOptions = {
+  Password: {
     minLength: {
       value: 8,
-      message: "Must be at least 8 characters long.",
+      message: "Password must be at least 8 characters long.",
     },
     maxLength: {
       value: 64,
-      message: "cannot exceed 64 characters.",
+      message: "Password cannot exceed 64 characters.",
     },
     uppercase: {
       required: true,
-      message: "Must contain at least one uppercase letter.",
+      message: "Password must contain at least one uppercase letter.",
     },
     lowercase: {
       required: true,
-      message: "Must contain at least one lowercase letter.",
+      message: "Password must contain at least one lowercase letter.",
     },
     number: {
       required: true,
-      message: "Must contain at least one numeric digit.",
+      message: "Password must contain at least one numeric digit.",
     },
     specialCharacter: {
       required: true,
-      message: "Must contain at least one special character.",
+      message: "Password must contain at least one special character.",
     },
     whitespace: {
-      required: true,
-      message: "Whitespace is not allowed in the password.",
+      required: false,
+      message: "Password cannot contain whitespace characters.",
     },
-};
-/**
- * Default options for username validation.
- */
-let defaultUsernameOptions = {
-  minLength: {
-    value: 2,
-    message: "Username must be at least 5 characters long.",
   },
-  maxLength: {
-    value: 32,
-    message: "Username cannot exceed 32 characters.",
-  },
-  alphanumeric: {
-    required: true,
-    message: "Username must contain only alphanumeric characters.",
-  },
-  whitespace: {
-    required: false,
-    message: "Username cannot contain whitespace characters.",
-  },
+  Username:{
+    minLength: {
+      value: 2,
+      message: "must be at least 5 characters long.",
+    },
+    maxLength: {
+      value: 32,
+      message: "cannot exceed 32 characters.",
+    },
+    alphanumeric: {
+      required: true,
+      message: "must contain only alphanumeric characters.",
+    },
+    whitespace: {
+      required: false,
+      message: "cannot contain whitespace characters.",
+    },
+  }
+
 };
 /**
  * Sets the configuration options for password validation.

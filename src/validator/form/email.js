@@ -1,7 +1,7 @@
 "use strict";
 
 const inputValidator = require("../../utils/inputValidator.js");
-const { optionEmail } = require("./helper/genOption.js");
+const { optionEmail } = require("./helper/config.js");
 const {
   NotType,
   ThrowFalsy,
@@ -32,8 +32,7 @@ const { validateCommon } = require("./validation.js");
  * console.log(isValid); // true
  */
 function ValidationEmail(input, options = {}) {
-  
-  const value = validateCommon(input, "email",  5, 320);
+  const value = validateCommon(input, "email", 5, 320);
   // Extracting options and error messages
   const {
     maxLenDomain,

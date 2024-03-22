@@ -28,7 +28,7 @@
 
 // Import necessary modules and constants
 const inputValidator = require("../../utils/inputValidator");
-const {option} = require("./helper/genOption");
+const { option } = require("./helper/config");
 const validateCommon = require("./validation");
 const { ThrowFalsy } = require("../../errors/Error");
 
@@ -45,35 +45,49 @@ const { ThrowFalsy } = require("../../errors/Error");
  * console.log(isValid); // true
  */
 function validateUsername(input, options = {}) {
-    const {minLength, maxLength, uppercase, number,lowercase,specialCharacter, whitespace, repeat} = option(options);
-    const value = validateCommon(input,'username',minLength?.value,maxLength?.value)
-    const validator = inputValidator(value);
-    if (uppercase?.required) {
-      ThrowFalsy(validator.hasUppercase(), uppercase.message);
-    }
-    if (lowercase?.required) {
-      ThrowFalsy(validator.hasLowerCase(), lowercase.message);
-    }
-    if (whitespace?.required) {
-      ThrowFalsy(validator.hasWhitespace(), whitespace.message);
-    }
-    if (repeat?.required) {
-      ThrowFalsy(validator.hasRepeat(), repeat.message);
-    }
-    if (number?.required) {
-      ThrowFalsy(validator.hasNumber(), number.message);
-    }
-    if (specialCharacter?.required) {
-      ThrowFalsy(validator.hasSpecialCharacter(), specialCharacter.message);
-    }
-    // Check if the username is valid
-    return true;
+  const {
+    minLength,
+    maxLength,
+    uppercase,
+    number,
+    lowercase,
+    specialCharacter,
+    whitespace,
+    repeat,
+  } = option(options);
+  const value = validateCommon(
+    input,
+    "username",
+    minLength?.value,
+    maxLength?.value
+  );
+  const validator = inputValidator(value);
+  if (uppercase?.required) {
+    ThrowFalsy(validator.hasUppercase(), uppercase.message);
+  }
+  if (lowercase?.required) {
+    ThrowFalsy(validator.hasLowerCase(), lowercase.message);
+  }
+  if (whitespace?.required) {
+    ThrowFalsy(validator.hasWhitespace(), whitespace.message);
+  }
+  if (repeat?.required) {
+    ThrowFalsy(validator.hasRepeat(), repeat.message);
+  }
+  if (number?.required) {
+    ThrowFalsy(validator.hasNumber(), number.message);
+  }
+  if (specialCharacter?.required) {
+    ThrowFalsy(validator.hasSpecialCharacter(), specialCharacter.message);
+  }
+  // Check if the username is valid
+  return true;
 }
 
 module.exports = validateUsername;
 try {
-    const isValid = validateUsername('m__mdy__m')
-    console.log('isValid :',isValid);
+  const isValid = validateUsername("m__mdy__m");
+  console.log("isValid :", isValid);
 } catch (error) {
-    console.log('error =>',error.message);    
+  console.log("error =>", error);
 }

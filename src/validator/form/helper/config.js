@@ -1,13 +1,35 @@
-const  { MIN_LENGTH, MAX_LENGTH }  = require ( "../../../utils/utils")
 const  { defaultOptions }  = require ( "../global.config")
-const  createValidationOptions  = require ( "../../../utils/handleOption")
-const  inputValidator  = require ( "../../../utils/inputValidator")
+const  createValidationOptions  = require ( "./genOptions")
 
 
+function optionUsername(options){
+    const { alphanumeric,maxLength,minLength,whitespace } = defaultOptions.Username
+    const names = [
+        'alphanumeric',
+        'maxLength',
+        'minLength',
+        'whitespace',
+    ]
+    const requiredOption = [
+        options.minLength?.value || minLength.value,
+        options.maxLength?.value || maxLength.value,
+        options.alphanumeric?.required ?? alphanumeric.required,
+        options.whitespace?.required ?? whitespace.required
+    ]
+    const message = [
+         options.minLength?.message || minLength.message,
+        options.maxLength?.message ||maxLength.message,
+        options.alphanumeric?.message || alphanumeric.message,
+        options.whitespace?.message || whitespace.message,
+    ]
+    const object = createValidationOptions(names,requiredOption,message)
+    return { ...object, ...options };
 
-function genOption(options){
-    const {  lowercase,maxLength,minLength,number,repeat,specialCharacter,uppercase,whitespace } = defaultOptions
-    const optionName = ['lowercase', 'maxLength', 'minLength', 'number', 'repeat', 'specialCharacter', 'uppercase', 'whitespace'];
+}
+
+function optionPassword(options){
+    const {lowercase,maxLength,minLength,number,specialCharacter,uppercase,whitespace } = defaultOptions.Password
+    const optionName = ['lowercase', 'maxLength', 'minLength', 'number', 'specialCharacter', 'uppercase', 'whitespace'];
     const optionValidations = [
         options.minLength?.value || minLength.value,
         options.maxLength?.value || maxLength.value,
@@ -15,7 +37,6 @@ function genOption(options){
         options.lowercase?.required ?? lowercase.required,
         options.number?.required ?? number.required,
         options.specialCharacter?.required ?? specialCharacter.required,
-        options.repeat?.required ?? repeat.required,
         options.whitespace?.required ?? whitespace.required
     ]
     const msgError = [
@@ -25,11 +46,9 @@ function genOption(options){
         options.lowercase?.message || lowercase.message,
         options.number?.message || number.message,
         options.specialCharacter?.message || specialCharacter.message,
-        options.repeat?.message || repeat.message,
         options.whitespace?.message || whitespace.message
     ];
     const objectOption = createValidationOptions(optionName,optionValidations,msgError)
-    console.log('objec =>',objectOption);
     return { ...objectOption, ...options };
 }
 
@@ -49,13 +68,14 @@ function optionEmail (options){
       `Subdomain must be at most ${standardMaxLength} characters.`,
   ]
   var objectOption = createValidationOptions(optionName,optionValidations,msgError);
-  
+
   objectOption = {  ...objectOption,...options, };
 
   const { minLenLocal, minLenDomain, minLenSubdomain, maxLenLocal, maxLenDomain, maxLenSubdomain } = objectOption;
-  return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
+  return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain}
 }
 module.exports = {
-    option: genOption,
-    optionEmail: optionEmail,
+    optionUsername,
+    optionPassword,
+    optionEmail,
 };

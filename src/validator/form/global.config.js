@@ -28,10 +28,6 @@ let defaultOptions = {
       required: true,
       errorMessage: "Must contain at least one special character.",
     },
-    alphabetic: {
-      required: false,
-      errorMessage: "may not contain alphabetic characters.",
-    },
     whitespace: {
       required: true,
       errorMessage: "Whitespace is not allowed in the password.",

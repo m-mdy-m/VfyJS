@@ -1,4 +1,10 @@
 "use strict";
+const { MAX_LENGTH, MIN_LENGTH } = require("../../utils/utils.js");
+const inputValidator = require("../../utils/inputValidator.js");
+const { optionsPassword } = require("./helper/genOption.js");
+const { validateCommon } = require("./validation.js");
+const { validateLengthRange, ThrowFalsy } = require("../../errors/Error.js");
+
 /**
  * Validates a password input based on specified criteria for enhanced security.
  * @param {string} input - The password input to be validated.
@@ -26,12 +32,6 @@
  * @param {string} options.maxLength.message - Error message for maximum length requirement.
  * @returns {boolean} True if the password input meets all criteria for enhanced security, otherwise false.
  */
-
-const { MAX_LENGTH, MIN_LENGTH } = require("../../utils/utils.js");
-const inputValidator = require("../../utils/inputValidator.js");
-const { optionsPassword } = require("./helper/genOption.js");
-const { validateCommon } = require("./validation.js");
-const { validateLengthRange, ThrowFalsy } = require("../../errors/Error.js");
 
 /**
  * Validates a password based on the provided options.

@@ -2,7 +2,6 @@
  * Default options for password and username validation.
  */
 let defaultOptions = {
-  // Default options for password validation
     minLength: {
       value: 8,
       message: "Must be at least 8 characters long.",
@@ -31,10 +30,27 @@ let defaultOptions = {
       required: true,
       message: "Whitespace is not allowed in the password.",
     },
-    repeat: {
-      required: true,
-      message: "Consecutive characters are not allowed in the username.",
-    },
+};
+/**
+ * Default options for username validation.
+ */
+let defaultUsernameOptions = {
+  minLength: {
+    value: 2,
+    message: "Username must be at least 5 characters long.",
+  },
+  maxLength: {
+    value: 32,
+    message: "Username cannot exceed 32 characters.",
+  },
+  alphanumeric: {
+    required: true,
+    message: "Username must contain only alphanumeric characters.",
+  },
+  whitespace: {
+    required: false,
+    message: "Username cannot contain whitespace characters.",
+  },
 };
 /**
  * Sets the configuration options for password validation.
@@ -103,6 +119,7 @@ function setUsernameConfig(option) {
 
 // Export default options and configuration function
 module.exports = {
+  defaultUsernameOptions,
   defaultOptions,
   setPasswordConfig,
   setUsernameConfig,

@@ -5,46 +5,32 @@ const  inputValidator  = require ( "../../../utils/inputValidator")
 
 
 
-function genOption(){
-
-}
-
-
-function optionsPassword(options) {
-    const { password } = defaultOptions;
-    const { minLength, maxLength, uppercase, lowercase, number, specialCharacter, alphabetic, whitespace } = password;
-
-    const defaultMinLength = minLength.value || MIN_LENGTH;
-    const defaultMaxLength = maxLength.value || MAX_LENGTH;
-
-    const optionName = ['minLength', 'maxLength', 'uppercase', 'lowercase', 'number', 'specialCharacter', 'alphabetic', 'whitespace'];
-
+function genOption(options){
+    const {  lowercase,maxLength,minLength,number,repeat,specialCharacter,uppercase,whitespace } = defaultOptions
+    const optionName = ['lowercase', 'maxLength', 'minLength', 'number', 'repeat', 'specialCharacter', 'uppercase', 'whitespace'];
     const optionValidations = [
-        options.minLength?.value || defaultMinLength,
-        options.maxLength?.value || defaultMaxLength,
+        options.minLength?.value || minLength.value,
+        options.maxLength?.value || maxLength.value,
         options.uppercase?.required ?? uppercase.required,
         options.lowercase?.required ?? lowercase.required,
         options.number?.required ?? number.required,
         options.specialCharacter?.required ?? specialCharacter.required,
-        options.alphabetic?.required ?? alphabetic.required,
+        options.repeat?.required ?? repeat.required,
         options.whitespace?.required ?? whitespace.required
-    ];
-
+    ]
     const msgError = [
-        options.minLength?.errorMessage || `Must be ${defaultMinLength}-${defaultMaxLength} characters long.`,
-        options.maxLength?.errorMessage || `Cannot exceed ${defaultMaxLength} characters.`,
-        options.uppercase?.errorMessage || uppercase.errorMessage,
-        options.lowercase?.errorMessage || lowercase.errorMessage,
-        options.number?.errorMessage || number.errorMessage,
-        options.specialCharacter?.errorMessage || specialCharacter.errorMessage,
-        options.alphabetic?.errorMessage || alphabetic.errorMessage,
-        options.whitespace?.errorMessage || whitespace.errorMessage
+        options.minLength?.message || minLength.message,
+        options.maxLength?.message ||maxLength.message,
+        options.uppercase?.message || uppercase.message,
+        options.lowercase?.message || lowercase.message,
+        options.number?.message || number.message,
+        options.specialCharacter?.message || specialCharacter.message,
+        options.repeat?.message || repeat.message,
+        options.whitespace?.message || whitespace.message
     ];
-
-    const objectOption = createValidationOptions(optionName, optionValidations, msgError);
+    const objectOption = createValidationOptions(optionName,optionValidations,msgError)
     return { ...objectOption, ...options };
 }
-
 
 function optionEmail (options){
     // Set standard length
@@ -68,36 +54,7 @@ function optionEmail (options){
   const { minLenLocal, minLenDomain, minLenSubdomain, maxLenLocal, maxLenDomain, maxLenSubdomain } = objectOption;
   return {minLenLocal,minLenDomain,minLenSubdomain,maxLenLocal,maxLenDomain,maxLenSubdomain,msgError}
 }
-
-function optionUsername(options) {
-    const { username: usernameConfig } = defaultOptions;
-    const { minLength, maxLength, uppercase, number, nonAlphanumeric, trim, repeat } = usernameConfig;
-    const validator = inputValidator(username);
-    const optionName = ['minLength', 'maxLength', 'uppercase', 'number', 'nonAlphanumeric', 'trim', 'repeat'];
-    const validation = [
-        (options.minLength?.value || minLength.value || MIN_LENGTH),
-        (options.maxLength?.value || maxLength.value || MAX_LENGTH),
-        options.uppercase?.required ? validator.hasUppercase() : uppercase.required,
-        options.number?.required ? validator.hasNumber() : number.required,
-        options.nonAlphanumeric?.required ? validator.hasNonAlphanumeric() : nonAlphanumeric.required,
-        options.trim?.required ? validator.hasWhitespace() : trim.required,
-        options.repeat?.required ? validator.hasRepeat() : repeat.required
-    ];
-    const messageError = [
-        options.minLength?.errorMessage || `Must be ${options.minLength?.value || minLength.value || MIN_LENGTH}-${options.maxLength?.value || maxLength.value || MAX_LENGTH} characters long.`,
-        options.maxLength?.errorMessage || `Cannot exceed ${options.maxLength?.value || maxLength.value || MAX_LENGTH} characters.`,
-        options.uppercase?.errorMessage || uppercase.errorMessage,
-        options.number?.errorMessage || number.errorMessage,
-        options.nonAlphanumeric?.errorMessage || nonAlphanumeric.errorMessage,
-        options.trim?.errorMessage || trim.errorMessage,
-        options.repeat?.errorMessage || repeat.errorMessage
-    ];
-
-    const objectOption = createValidationOptions(optionName, validation, messageError);
-    return { ...objectOption, ...options }
-}
 module.exports = {
-    optionsPassword: optionsPassword,
+    option: genOption,
     optionEmail: optionEmail,
-    optionUsername: optionUsername
 };

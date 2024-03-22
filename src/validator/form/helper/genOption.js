@@ -29,6 +29,7 @@ function genOption(options){
         options.whitespace?.message || whitespace.message
     ];
     const objectOption = createValidationOptions(optionName,optionValidations,msgError)
+    console.log('objec =>',objectOption);
     return { ...objectOption, ...options };
 }
 

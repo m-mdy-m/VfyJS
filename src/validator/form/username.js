@@ -27,12 +27,8 @@
  */
 
 // Import necessary modules and constants
-const {MAX_LENGTH, MIN_LENGTH, getFalseRequired, trimmedValue, getValidValue, isValue, getRequired} = require("../../common/validationConstants");
 const inputValidator = require("../../utils/inputValidator");
-const {isTypeMismatch} = require("../../errors/HandleError");
-const {optionUsername} = require("./helper/genOption");
-const { throwIfFalsy, IfBothTruthy, validationsLength, validateType} = require("../../errors/FormError");
-const {getErrorMessage} = require("./helper/getValues");
+const {option} = require("./helper/genOption");
 const validateCommon = require("./validation");
 const { ThrowFalsy } = require("../../errors/Error");
 
@@ -49,7 +45,7 @@ const { ThrowFalsy } = require("../../errors/Error");
  * console.log(isValid); // true
  */
 function validateUsername(input, options = {}) {
-    const {minLength, maxLength, uppercase, number,lowercase,specialCharacter, whitespace, repeat} = optionUsername(options);
+    const {minLength, maxLength, uppercase, number,lowercase,specialCharacter, whitespace, repeat} = option(options);
     const value = validateCommon(input,'username',minLength?.value,maxLength?.value)
     const validator = inputValidator(value);
     if (uppercase?.required) {
@@ -75,3 +71,9 @@ function validateUsername(input, options = {}) {
 }
 
 module.exports = validateUsername;
+try {
+    const isValid = validateUsername('m__mdy__m')
+    console.log('isValid :',isValid);
+} catch (error) {
+    console.log('error =>',error.message);    
+}

@@ -6,31 +6,31 @@ let defaultOptions = {
   password: {
     minLength: {
       value: 8,
-      errorMessage: "Must be at least 8 characters long.",
+      message: "Must be at least 8 characters long.",
     },
     maxLength: {
       value: 64,
-      errorMessage: "cannot exceed 64 characters.",
+      message: "cannot exceed 64 characters.",
     },
     uppercase: {
       required: true,
-      errorMessage: "Must contain at least one uppercase letter.",
+      message: "Must contain at least one uppercase letter.",
     },
     lowercase: {
       required: true,
-      errorMessage: "Must contain at least one lowercase letter.",
+      message: "Must contain at least one lowercase letter.",
     },
     number: {
       required: true,
-      errorMessage: "Must contain at least one numeric digit.",
+      message: "Must contain at least one numeric digit.",
     },
     specialCharacter: {
       required: true,
-      errorMessage: "Must contain at least one special character.",
+      message: "Must contain at least one special character.",
     },
     whitespace: {
       required: true,
-      errorMessage: "Whitespace is not allowed in the password.",
+      message: "Whitespace is not allowed in the password.",
     },
   },
 
@@ -38,33 +38,33 @@ let defaultOptions = {
   username: {
     minLength: {
       value: 4,
-      errorMessage: "must be at least 4 characters long.",
+      message: "must be at least 4 characters long.",
     },
     maxLength: {
       value: 20,
-      errorMessage: "cannot exceed 20 characters.",
+      message: "cannot exceed 20 characters.",
     },
     uppercase: {
       required: false,
-      errorMessage: "letters are not allowed in the username.",
+      message: "letters are not allowed in the username.",
     },
     number: {
       required: false,
-      errorMessage: "digits are not allowed in the username.",
+      message: "digits are not allowed in the username.",
     },
     nonAlphanumeric: {
       required: false,
-      errorMessage:
+      message:
         "characters are not allowed in the username.",
     },
     trim: {
       required: true,
-      errorMessage:
+      message:
         "Leading or trailing whitespace is not allowed in the username.",
     },
     repeat: {
       required: true,
-      errorMessage: "Consecutive characters are not allowed in the username.",
+      message: "Consecutive characters are not allowed in the username.",
     },
   },
 };
@@ -75,28 +75,28 @@ let defaultOptions = {
  * @param {Object} option - Options object for customizing password validation criteria.
  * @param {Object} option.minLength - Minimum length requirements for the password.
  * @param {(number|string)} option.minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
- * @param {string} option.minLength.errorMessage - Error message for minimum length validation failure.
+ * @param {string} option.minLength.message - Error message for minimum length validation failure.
  * @param {Object} option.maxLength - Maximum length requirements for the password.
  * @param {(number|string)} option.maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
- * @param {string} option.maxLength.errorMessage - Error message for maximum length validation failure.
+ * @param {string} option.maxLength.message - Error message for maximum length validation failure.
  * @param {Object} option.uppercase - Uppercase letter requirements for the password.
  * @param {boolean} option.uppercase.required - Whether uppercase letters are required.
- * @param {string} option.uppercase.errorMessage - Error message for uppercase letter validation failure.
+ * @param {string} option.uppercase.message - Error message for uppercase letter validation failure.
  * @param {Object} option.lowercase - Lowercase letter requirements for the password.
  * @param {boolean} option.lowercase.required - Whether lowercase letters are required.
- * @param {string} option.lowercase.errorMessage - Error message for lowercase letter validation failure.
+ * @param {string} option.lowercase.message - Error message for lowercase letter validation failure.
  * @param {Object} option.number - Numeric digit requirements for the password.
  * @param {boolean} option.number.required - Whether numeric digits are required.
- * @param {string} option.number.errorMessage - Error message for numeric digit validation failure.
+ * @param {string} option.number.message - Error message for numeric digit validation failure.
  * @param {Object} option.specialCharacter - Special character requirements for the password.
  * @param {boolean} option.specialCharacter.required - Whether special characters are required.
- * @param {string} option.specialCharacter.errorMessage - Error message for special character validation failure.
+ * @param {string} option.specialCharacter.message - Error message for special character validation failure.
  * @param {Object} option.alphabetic - Alphabetic character requirements for the password.
  * @param {boolean} option.alphabetic.required - Whether alphabetic characters are required.
- * @param {string} option.alphabetic.errorMessage - Error message for alphabetic character validation failure.
+ * @param {string} option.alphabetic.message - Error message for alphabetic character validation failure.
  * @param {Object} option.whitespace - Whitespace requirements for the password.
  * @param {boolean} option.whitespace.required - Whether whitespace is not allowed.
- * @param {string} option.whitespace.errorMessage - Error message for whitespace validation failure.
+ * @param {string} option.whitespace.message - Error message for whitespace validation failure.
  */
 function setPasswordConfig(option) {
   defaultOptions = { ...defaultOptions, ...option };
@@ -109,25 +109,25 @@ function setPasswordConfig(option) {
  * @param {Object} option - Options object for customizing username validation criteria.
  * @param {Object} option.minLength - Minimum length requirements for the username.
  * @param {(number|string)} option.minLength.value - The minimum length value. If not provided, it defaults to the value from the validation constants.
- * @param {string} option.minLength.errorMessage - Error message for minimum length validation failure.
+ * @param {string} option.minLength.message - Error message for minimum length validation failure.
  * @param {Object} option.maxLength - Maximum length requirements for the username.
  * @param {(number|string)} option.maxLength.value - The maximum length value. If not provided, it defaults to the value from the validation constants.
- * @param {string} option.maxLength.errorMessage - Error message for maximum length validation failure.
+ * @param {string} option.maxLength.message - Error message for maximum length validation failure.
  * @param {Object} option.uppercase - Uppercase letter requirements for the username.
  * @param {boolean} option.uppercase.required - Whether uppercase letters are required.
- * @param {string} option.uppercase.errorMessage - Error message for uppercase letter validation failure.
+ * @param {string} option.uppercase.message - Error message for uppercase letter validation failure.
  * @param {Object} option.number - Numeric digit requirements for the username.
  * @param {boolean} option.number.required - Whether numeric digits are required.
- * @param {string} option.number.errorMessage - Error message for numeric digit validation failure.
+ * @param {string} option.number.message - Error message for numeric digit validation failure.
  * @param {Object} option.nonAlphanumeric - Non-alphanumeric character requirements for the username.
  * @param {boolean} option.nonAlphanumeric.required - Whether non-alphanumeric characters are required.
- * @param {string} option.nonAlphanumeric.errorMessage - Error message for non-alphanumeric character validation failure.
+ * @param {string} option.nonAlphanumeric.message - Error message for non-alphanumeric character validation failure.
  * @param {Object} option.trim - Whitespace requirements for the username.
  * @param {boolean} option.trim.required - Whether leading or trailing whitespaces are disallowed.
- * @param {string} option.trim.errorMessage - Error message for whitespace validation failure.
+ * @param {string} option.trim.message - Error message for whitespace validation failure.
  * @param {Object} option.repeat - Consecutive character requirements for the username.
  * @param {boolean} option.repeat.required - Whether consecutive characters are disallowed.
- * @param {string} option.repeat.errorMessage - Error message for consecutive character validation failure.
+ * @param {string} option.repeat.message - Error message for consecutive character validation failure.
  */
 function setUsernameConfig(option) {
   defaultOptions = { ...defaultOptions, ...option };

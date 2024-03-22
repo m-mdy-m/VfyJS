@@ -50,7 +50,7 @@ const validateCommon = require("./validation");
 function validateUsername(input, options = {}) {
     const value = validateCommon(input,'username',2,64)
     // Extract options
-    const {minLength, maxLength, uppercase, number, trim, repeat, messageError} = optionUsername(username, options);
+    const {minLength, maxLength, uppercase, number, trim, repeat, messageError} = optionUsername(value, options);
     // Validate number requirement
     throwIfFalsy(!number.required, input, messageError, 'Required Number', getErrorMessage(number));
         

@@ -1,11 +1,12 @@
-const  { NotType, isEmpty, validationsLength, validateLengthRange } =require( "../../errors/Error.js")
+const  { NotType, isEmpty, validationsLength } =require( "../../errors/Error.js")
 
 /**
- * Common validation for fields like password, email, and username.
- * @param {*} value - The value to validate.
+ * Common validation function for fields like password, email, and username.
+ * @param {*} input - The value to validate.
  * @param {string} format - The format being validated (e.g., "password", "email", "username").
  * @param {number} [min=8] - The minimum length allowed for the value.
- * @param {number} [max=8] - The maximum length allowed for the value.
+ * @param {number} [max=64] - The maximum length allowed for the value.
+ * @returns {*} The validated value.
  * @throws {ValidationError} Throws a validation error if the value does not meet the criteria.
  */
 function validateCommon(input, format, min = 8, max = 64) {
@@ -21,7 +22,12 @@ function validateCommon(input, format, min = 8, max = 64) {
     value.trim();
 
     // Common validation: Validate length of the value
-    validateLengthRange(value,min,max,`Value must be between ${min} and ${max} long.e`)
+    validationsLength(value, {
+      min,
+      max,
+      minError: `${format} must be at least ${min} characters long.`,
+      maxError: `${format} cannot exceed ${max} characters.`,
+    });
     return value;
   } catch (error) {
     // Append the field name to the error message

@@ -1,13 +1,14 @@
 "use strict";
 
-const inputValidator = require("../../utils/inputValidator.js");
-const { optionEmail } = require("./helper/config.js");
+const inputValidator = require("../../utils/inputValidator.js"); // Importing inputValidator module for input validation.
+const { optionEmail } = require("./helper/config.js"); // Importing optionEmail function from config file.
 const {
   NotType,
   ThrowFalsy,
-  ThrowTruthy,validationsLength,
-} = require("../../errors/Error.js");
-const validateCommon = require("./validation.js");
+  ThrowTruthy,
+  validationsLength,
+} = require("../../errors/Error.js"); // Importing necessary error handling functions.
+const validateCommon = require("./validation.js"); // Importing common validation function.
 
 /**
  * Validates whether the provided value is a valid email.
@@ -20,17 +21,16 @@ const validateCommon = require("./validation.js");
  * @param {number} [options.maxLenDomain=255] - The maximum length allowed for the domain part of the email.
  * @param {number} [options.minLenSubdomain=2] - The minimum length allowed for the subdomain part of the email.
  * @param {number} [options.maxLenSubdomain=255] - The maximum length allowed for the subdomain part of the email.
- * @param {Object} [options.msgError={}] - Custom error messages for validation failures.
  * @returns {boolean} - True if the input is a valid email, otherwise false.
  * @throws {TypeError} - Throws a TypeError if the input is not a string.
  * @throws {ValidationError} - Throws a ValidationError if the email format is invalid.
  * @example
  * const { validateEmail } = require('vfyjs');
- * const isValid = ValidationEmail('mahdimamashli1383@gmail.com', { minLenLocal: 3, maxLenLocal: 255 });
+ * const isValid = validateEmail('mahdimamashli1383@gmail.com', { minLenLocal: 3, maxLenLocal: 255 });
  * console.log(isValid); // true
  */
-function ValidationEmail(input, options = {}) {
-  const value = validateCommon(input, "Email", 5, 320);
+function validateEmail(input, options = {}) {
+  const value = validateCommon(input, "Email", 5, 320); // Validating common criteria for email.
   // Extracting options and error messages
   const {
     maxLenDomain,
@@ -39,7 +39,8 @@ function ValidationEmail(input, options = {}) {
     minLenDomain,
     minLenLocal,
     minLenSubdomain,
-  } = optionEmail(options);
+  } = optionEmail(options); // Destructuring options object for email validation.
+
   // Basic email format validation
   const hasSymbol = /^(?!.*@.*@)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   ThrowFalsy(hasSymbol, "Email must contain @");
@@ -61,8 +62,13 @@ function ValidationEmail(input, options = {}) {
   const domain = value.split("@")[1].trim();
   const domainPart = ArrayDomain[ArrayDomain.length - 1];
   const subdomain = domain.split(domainPart)[0];
-  const hasSpecialCharSubdomain = inputValidator(subdomain.split('.')[0]).hasSpecialCharacter();
-  ThrowTruthy(hasSpecialCharSubdomain, "Subdomains cannot contain special characters.");
+  const hasSpecialCharSubdomain = inputValidator(
+    subdomain.split(".")[0]
+  ).hasSpecialCharacter();
+  ThrowTruthy(
+    hasSpecialCharSubdomain,
+    "Subdomains cannot contain special characters."
+  );
   validationsLength(subdomain, {
     min: minLenSubdomain.value,
     max: maxLenSubdomain.value,
@@ -93,4 +99,5 @@ function ValidationEmail(input, options = {}) {
   // If the input is a string and has a valid email format, return true
   return isValid;
 }
-module.exports =ValidationEmail
+
+module.exports = validateEmail; 

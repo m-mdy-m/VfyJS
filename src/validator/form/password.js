@@ -1,11 +1,13 @@
 "use strict";
-const inputValidator = require("../../utils/inputValidator.js");
-const { optionPassword } = require("./helper/config.js");
-const validateCommon = require("./validation.js");
-const { ThrowFalsy } = require("../../errors/Error.js");
+
+const inputValidator = require("../../utils/inputValidator.js"); // Importing inputValidator module for input validation.
+const { optionPassword } = require("./helper/config.js"); // Importing optionPassword function from config file.
+const validateCommon = require("./validation.js"); // Importing common validation function.
+const { ThrowFalsy } = require("../../errors/Error.js"); // Importing ThrowFalsy function from Error module.
 
 /**
  * Validates a password input based on specified criteria for enhanced security.
+ *
  * @param {string} input - The password input to be validated.
  * @param {Object} options - Options for password validation criteria.
  * @param {Object} options.lowercase - Criteria for lowercase letters.
@@ -30,6 +32,11 @@ const { ThrowFalsy } = require("../../errors/Error.js");
  * @param {number} options.maxLength.value - Maximum length value.
  * @param {string} options.maxLength.message - Error message for maximum length requirement.
  * @returns {boolean} True if the password input meets all criteria for enhanced security, otherwise false.
+ * @throws {Error} Throws an error if validation fails.
+ * @example
+ * const { isPassword } = require("vfyjs");
+ * const isValid = isPassword("StrongPwd@123", { minLength: { value: 8, message: "Password must be at least 8 characters long." }, uppercase: { required: true, message: "Password must contain at least one uppercase letter." }, number: { required: true, message: "Password must contain at least one number." }, specialCharacter: { required: true, message: "Password must contain at least one special character." } });
+ * console.log(isValid); // true
  */
 
 /**
@@ -41,7 +48,7 @@ const { ThrowFalsy } = require("../../errors/Error.js");
  * @throws {Error} - Throws an error if validation fails.
  * @example
  * const { isPassword } = require("vfyjs");
- * const isValid = isPassword("StrongPwd@123", { minLength: 8, uppercase: true, number: true });
+ * const isValid = isPassword("StrongPwd@123", { minLength: { value: 8, message: "Password must be at least 8 characters long." }, uppercase: { required: true, message: "Password must contain at least one uppercase letter." }, number: { required: true, message: "Password must contain at least one number." }, specialCharacter: { required: true, message: "Password must contain at least one special character." } });
  * console.log(isValid); // true
  */
 function validateFormPassword(input, options = {}) {

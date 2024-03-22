@@ -13,44 +13,43 @@ let defaultOptions = {
     },
     uppercase: {
       required: true,
-      message: "Password must contain at least one uppercase letter.",
+      message: "Password must contain an uppercase letter.",
     },
     lowercase: {
       required: true,
-      message: "Password must contain at least one lowercase letter.",
+      message: "Password must contain a lowercase letter.",
     },
     number: {
       required: true,
-      message: "Password must contain at least one numeric digit.",
+      message: "Password must contain a number.",
     },
     specialCharacter: {
       required: true,
-      message: "Password must contain at least one special character.",
+      message: "Password must contain a special character.",
     },
     whitespace: {
       required: false,
-      message: "Password cannot contain whitespace characters.",
+      message: "Password cannot contain whitespace.",
     },
   },
-  Username:{
+  Username: {
     minLength: {
       value: 2,
-      message: "must be at least 5 characters long.",
+      message: "Username must be at least 2 characters long.",
     },
     maxLength: {
       value: 32,
-      message: "cannot exceed 32 characters.",
+      message: "Username cannot exceed 32 characters.",
     },
     alphanumeric: {
       required: false,
-      message: "must contain only alphanumeric characters.",
+      message: "Username can only contain letters and numbers.",
     },
     whitespace: {
       required: false,
-      message: "cannot contain whitespace characters.",
+      message: "Username cannot contain whitespace.",
     },
   }
-
 };
 /**
  * Sets the configuration options for password validation.

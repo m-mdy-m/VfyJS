@@ -1,5 +1,4 @@
-const { trimmedValue } = require('../../common/validationConstants');
-const { NotType, validateLengthRange } = require("../../errors/Error");
+const { NotType, validateLengthRange, isEmpty } = require("../../errors/Error");
 
 /**
  * Validates if a given input represents a color in various formats.
@@ -95,8 +94,8 @@ const isColor = (color) => {
  * @throws {Error} Throws an error if the length of the input is less than 3 or greater than 255.
  */
 function checkValueColor(color) {
-  NotType( color,'string', "The variable is not a string");
-    color = trimmedValue(color);
+    isEmpty(color,'color cannot Empty')
+    NotType( color,'string', "The variable is not a string");
     validateLengthRange(color, 3, 255, 'The color value must be between 3 and 255 characters.');
     return isColor(color);
 }

@@ -32,8 +32,8 @@ const { ThrowFalsy } = require("../../errors/Error"); // Importing ThrowFalsy fu
  * @returns {boolean} - True if the username is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  * @example
- * const { isUsername } = require("vfyjs");
- * const isValid = isUsername("StringUsername123");
+ * const { validateUsername } = require("vfyjs");
+ * const isValid = validateUsername("StringUsername123");
  * console.log(isValid); // true
  */
 function validateUsername(input, options = {}) {

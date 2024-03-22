@@ -34,8 +34,8 @@ const { ThrowFalsy } = require("../../errors/Error.js"); // Importing ThrowFalsy
  * @returns {boolean} True if the password input meets all criteria for enhanced security, otherwise false.
  * @throws {Error} Throws an error if validation fails.
  * @example
- * const { isPassword } = require("vfyjs");
- * const isValid = isPassword("StrongPwd@123", { minLength: { value: 8, message: "Password must be at least 8 characters long." }, uppercase: { required: true, message: "Password must contain at least one uppercase letter." }, number: { required: true, message: "Password must contain at least one number." }, specialCharacter: { required: true, message: "Password must contain at least one special character." } });
+ * const { validatePassword } = require("vfyjs");
+ * const isValid = validatePassword("StrongPwd@123", { minLength: { value: 8, message: "Password must be at least 8 characters long." }, uppercase: { required: true, message: "Password must contain at least one uppercase letter." }, number: { required: true, message: "Password must contain at least one number." }, specialCharacter: { required: true, message: "Password must contain at least one special character." } });
  * console.log(isValid); // true
  */
 
@@ -47,11 +47,11 @@ const { ThrowFalsy } = require("../../errors/Error.js"); // Importing ThrowFalsy
  * @returns {boolean} - True if the password is valid, otherwise false.
  * @throws {Error} - Throws an error if validation fails.
  * @example
- * const { isPassword } = require("vfyjs");
- * const isValid = isPassword("StrongPwd@123", { minLength: { value: 8, message: "Password must be at least 8 characters long." }, uppercase: { required: true, message: "Password must contain at least one uppercase letter." }, number: { required: true, message: "Password must contain at least one number." }, specialCharacter: { required: true, message: "Password must contain at least one special character." } });
+ * const { validatePassword } = require("vfyjs");
+ * const isValid = validatePassword("StrongPwd@123", { minLength: { value: 8, message: "Password must be at least 8 characters long." }, uppercase: { required: true, message: "Password must contain at least one uppercase letter." }, number: { required: true, message: "Password must contain at least one number." }, specialCharacter: { required: true, message: "Password must contain at least one special character." } });
  * console.log(isValid); // true
  */
-function validateFormPassword(input, options = {}) {
+function validatePassword(input, options = {}) {
   const {
     lowercase, maxLength, minLength, number, specialCharacter, uppercase, whitespace } = optionPassword(options);
   // Common validation for password
@@ -81,4 +81,4 @@ function validateFormPassword(input, options = {}) {
   }
   return true;
 }
-module.exports = validateFormPassword;
+module.exports = validatePassword;

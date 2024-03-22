@@ -147,11 +147,13 @@ setUsernameConfig({
   whitespace: { required: false, message: "Leading or trailing whitespaces are allowed in the username." },
 });
 ```
-# ConfigUsername
+# Username Validation
+
+This module provides functionality to validate usernames based on customizable criteria.
 
 ## Overview
 
-The `isUsername` function is designed to validate usernames based on customizable criteria. It offers a range of validation options to ensure that usernames meet specific requirements, including length constraints, character composition, and format restrictions.
+The `isUsername` function validates usernames according to specified criteria, including length constraints, character composition, and format restrictions.
 
 ## Function Signature
 
@@ -161,19 +163,7 @@ isUsername(input, options = {})
 
 - **Parameters:**
   - `input`: The username string to be validated.
-  - `options`: Options object for customizing validation criteria (optional).
-
-- **Returns:** 
-  - `boolean`: True if the username is valid according to the specified criteria, otherwise false.
-
-- **Throws:** 
-  - `Error`: Throws an error if validation fails.
-
-## Validation Options
-
-- **Parameters:**
-  - `input`: The username string to be validated.
-  - `options`: An optional object for customizing validation criteria.
+  - `options`: An optional object containing customization options for validation criteria.
 
 - **Returns:** 
   - `boolean`: Indicates whether the username is valid according to the specified criteria.
@@ -181,9 +171,7 @@ isUsername(input, options = {})
 - **Throws:** 
   - `Error`: Throws an error if validation fails.
 
-## Validation Options
-
-The function provides various options to configure the validation process according to specific requirements.
+## Username Options
 
 ### `minLength`
 
@@ -193,29 +181,17 @@ Specifies the minimum length requirements for the username.
 
 Specifies the maximum length requirements for the username.
 
-### `uppercase`
+### `alphanumeric`
 
-Defines whether uppercase letters are required in the username.
+Defines whether the username must consist of alphanumeric characters.
 
-### `number`
+### `whitespace`
 
-Specifies whether numeric digits are required in the username.
+Specifies whether whitespace characters are disallowed in the username.
 
-### `trim`
-
-Specifies whether leading or trailing whitespaces are disallowed in the username.
-
-### `repeat`
-
-Defines whether consecutive character sequences are disallowed in the username.
-
-Each option includes a `required` property to specify whether the corresponding criteria are mandatory, along with an `errorMessage` property to define the error message for validation failures.
+Each option includes a `required` property to specify whether the corresponding criteria are mandatory, along with a `message` property to define the error message for validation failures.
 
 ## Example Usage
-
-Let's explore some examples to demonstrate how to use the `isUsername` function with different configurations.
-
-### Example 1: Basic Username Validation
 
 ```javascript
 const { isUsername } = require("vfyjs");
@@ -228,70 +204,99 @@ console.log(isValid); // true
 
 In this example, the function validates the username `"JohnDoe123"` without any specific customization.
 
-### Example 2: Customized Username Validation
-
 ```javascript
 const { isUsername } = require("vfyjs");
 
 const username = "Admin123";
 const options = {
-  minLength: { value: 6, errorMessage: "Username must be at least 6 characters long." },
-  maxLength: { value: 20, errorMessage: "Username cannot exceed 20 characters." },
-  uppercase: { required: true, errorMessage: "Username must contain at least one uppercase letter." },
-  number: { required: true, errorMessage: "Username must contain at least one number." },
-  trim: { required: true, errorMessage: "Username cannot contain leading or trailing whitespaces." },
-  repeat: { required: true, errorMessage: "Username cannot have consecutive repeated characters." }
+  minLength: { value: 6, message: "Username must be at least 6 characters long." },
+  maxLength: { value: 20, message: "Username cannot exceed 20 characters." },
+  alphanumeric: { required: true, message: "Username must consist of alphanumeric characters only." },
+  whitespace: { required: false, message: "Username cannot contain whitespace characters." }
 };
 
 const isValid = isUsername(username, options);
 
 console.log(isValid); // true
 ```
+# Password Validation
 
-# ConfigPassword
+This module provides functionality to validate passwords based on customizable criteria for enhanced security.
 
-### validateFormPassword
+## Overview
 
-The `validateFormPassword` function in vfyjs allows you to validate passwords based on customizable criteria.
+The `isPassword` function validates passwords according to specified criteria, including length constraints, character composition, and format restrictions.
 
-#### Configuration Options
-
-- `minLength`: Specifies the minimum length for the password.
-- `maxLength`: Specifies the maximum length for the password.
-- `alphabetic`: Requires the password to contain alphabetic characters.
-- `lowercase`: Requires the password to contain lowercase characters.
-- `number`: Requires the password to contain numeric characters.
-- `specialCharacter`: Requires the password to contain special characters.
-- `uppercase`: Requires the password to contain uppercase characters.
-- `whitespace`: Allows or disallows whitespace characters in the password.
-
-#### Example Usage
-
-Now, let's delve into detailed explanations and examples for each configuration.
-
-### Example 1: Basic Password Validation
+## Function Signature
 
 ```javascript
-const { validateFormPassword } = require("vfyjs");
-
-const password = "StrongPwd@123";
-const isValid = validateFormPassword(password);
-console.log(isValid); // Output: true
+isPassword(input, options = {})
 ```
 
-This example showcases the basic usage of the `validateFormPassword` function without additional configuration, returning `true` for a password that meets default requirements.
+- **Parameters:**
+  - `input`: The password string to be validated.
+  - `options`: An optional object containing customization options for validation criteria.
 
-### Example 2: Custom Minimum Length
+- **Returns:** 
+  - `boolean`: Indicates whether the password is valid according to the specified criteria.
+
+- **Throws:** 
+  - `Error`: Throws an error if validation fails.
+
+## Password Options
+
+### `minLength`
+
+Specifies the minimum length requirements for the password.
+
+### `maxLength`
+
+Specifies the maximum length requirements for the password.
+
+### `lowercase`
+
+Specifies whether lowercase letters are required in the password.
+
+### `uppercase`
+
+Specifies whether uppercase letters are required in the password.
+
+### `number`
+
+Specifies whether numeric digits are required in the password.
+
+### `specialCharacter`
+
+Specifies whether special characters are required in the password.
+
+### `whitespace`
+
+Specifies whether whitespace characters are allowed in the password.
+
+Each option includes a `required` property to specify whether the corresponding criteria are mandatory, along with a `message` property to define the error message for validation failures.
+
+## Example Usage
 
 ```javascript
-const { validateFormPassword } = require("vfyjs");
+const { isPassword } = require("vfyjs");
+
+const password = "StrongPwd@123";
+const isValid = isPassword(password);
+
+console.log(isValid); // true
+```
+
+In this example, the function validates the password `"StrongPwd@123"` without any specific customization.
+
+```javascript
+const { isPassword } = require("vfyjs");
 
 const password = "!@3DS!@#ASdasc";
 try {
-  const isValid = validateFormPassword(password, {
+  const isValid = isPassword(password, {
     minLength: {
       value: 20,
-      errorMessage: "Password must be at least 20 characters long.",
+      message: "Password must be at least 20 characters long.",
     },
   });
 } catch (error) {
@@ -299,33 +304,19 @@ try {
 }
 ```
 
-In this case, the `validateFormPassword` function is configured with a custom minimum length of 20 characters, resulting in an error since the input password is shorter than the specified minimum length.
-
-### Example 3: Advanced Password Configuration
+In this case, the function is configured with a custom minimum length of 20 characters, resulting in an error since the input password is shorter than the specified minimum length.
 
 ```javascript
-const { validateFormPassword } = require("vfyjs");
+const { isPassword } = require("vfyjs");
 
 const password = "!@3DS!@#ASdasc";
 try {
-  const isValid = validateFormPassword(password, {
-    minLength: {
-      value: 2,
-      errorMessage: "Password must be at least 2 characters long.",
-    },
-    maxLength: {
-      value: 10,
-      errorMessage: "Password must not exceed 10 characters.",
-    },
-    alphabetic: {
-      required: true,
-      errorMessage: "The password must contain alphabetic characters.",
-    },
+  const isValid = isPassword(password, {
+    minLength: { value: 2, message: "Password must be at least 2 characters long." },
+    maxLength: { value: 10, message: "Password must not exceed 10 characters." },
+    alphabetic: { required: true, message: "The password must contain alphabetic characters." },
     lowercase: false,
-    number: {
-      required: false,
-      errorMessage: "The password must not contain numeric characters.",
-    },
+    number: { required: false, message: "The password must not contain numeric characters." },
     specialCharacter: false,
     uppercase: true,
     whitespace: false,
@@ -335,66 +326,99 @@ try {
 }
 ```
 
----
+# Email Validation
 
-# ConfigEmail
+This module provides functionality to validate email addresses based on customizable criteria, ensuring their format and length meet specified requirements.
 
-### validateEmail
+## Overview
 
-The `validateEmail` function in vfyjs allows you to validate email addresses based on customizable criteria.
+The `isEmail` function allows you to validate email addresses with precision, checking various aspects such as the length of different parts (local, subdomain, domain), ensuring proper format, and detecting potential errors.
 
-#### Configuration Options
-
-- `minLenLocal`: Specifies the minimum length for the local part of the email address.
-- `maxLenLocal`: Specifies the maximum length for the local part of the email address.
-- `minLenSubdomain`: Specifies the minimum length for the subdomain part of the email address.
-- `maxLenSubdomain`: Specifies the maximum length for the subdomain part of the email address.
-- `minLenDomain`: Specifies the minimum length for the domain part of the email address.
-- `maxLenDomain`: Specifies the maximum length for the domain part of the email address.
-
-#### Explanation
-
-An email address typically consists of three parts: `local@subdomain.domainPart`. Let's break down each part:
-
-- **Local Part**: The local part is the portion of the email address before the '@' symbol. It often represents the user's username or mailbox name.
-
-- **Subdomain Part**: The subdomain part is the section between the '@' symbol and the first dot ('.'). It may represent a subdomain of the email provider.
-
-- **Domain Part**: The domain part is the portion after the first dot ('.'). It signifies the domain name of the email provider.
-
-#### Examples
-
-### Example 1: Minimum Length for Local Part
+## Function Signature
 
 ```javascript
-const { validateEmail } = require("vfyjs");
-let email = "je@sub.example.com";
+isEmail(input, options = {})
+```
 
+- **Parameters:**
+  - `input`: The email address to be validated.
+  - `options`: An optional object containing customization options for email validation.
+
+- **Returns:** 
+  - `boolean`: Indicates whether the email address is valid according to the specified criteria.
+
+- **Throws:** 
+  - `TypeError`: Throws a TypeError if the input is not a string.
+  - `ValidationError`: Throws a ValidationError if the email format is invalid.
+
+## Email Validation Options
+
+### `minLenLocal`
+
+Specifies the minimum length allowed for the local part of the email address.
+
+### `maxLenLocal`
+
+Specifies the maximum length allowed for the local part of the email address.
+
+### `minLenSubdomain`
+
+Specifies the minimum length allowed for the subdomain part of the email address.
+
+### `maxLenSubdomain`
+
+Specifies the maximum length allowed for the subdomain part of the email address.
+
+### `minLenDomain`
+
+Specifies the minimum length allowed for the domain part of the email address.
+
+### `maxLenDomain`
+
+Specifies the maximum length allowed for the domain part of the email address.
+
+Each option includes a value to set the length requirement and a corresponding error message for validation failures.
+
+## Example Usage
+
+```javascript
+const { isEmail } = require("vfyjs");
+
+const email = "example@example.com";
+const isValid = isEmail(email);
+
+console.log(isValid); // true
+```
+
+In this example, the function validates the email address `"example@example.com"` without any specific customization.
+
+```javascript
+const { isEmail } = require("vfyjs");
+
+const email = "example@example.com";
 try {
-  validateEmail(email, { minLenLocal: 5 });
+  const isValid = isEmail(email, { minLenLocal: 5 });
 } catch (error) {
-  console.log(error.message); // Output: "Length must be at least 5 characters for the local part."
+  console.error(error.message); // Output: "Length must be at least 5 characters for the local part."
 }
 ```
 
-In this example, the `validateEmail` function checks if the local part of the email address has a minimum length of 5 characters and throws an error if it doesn't meet this requirement.
+Here, the function checks if the local part of the email address has a minimum length of 5 characters and throws an error if it doesn't meet this requirement.
 
-### Example 2: Maximum Length for Subdomain Part
+```javascript
+const { isEmail } = require("vfyjs");
 
-```javaScript
-const { validateEmail } = require("vfyjs");
-let email = 'john.doe@sub.example.com';
-let result = validateEmail(email, { maxLenSubdomain: 2 });
-console.log('Result =>', result); // Output: true
+const email = "example@example.com";
+try {
+  const isValid = isEmail(email, { maxLenSubdomain: 2 });
+} catch (error) {
+  console.error(error.message); // Output: "Length cannot exceed 2 characters for the subdomain part."
+}
 ```
 
-In this example, the `validateEmail` function validates that the subdomain part of the email address has a maximum length of 2 characters. The email address is considered valid, and the result is true.
-
-**Feel free to customize these configurations based on your specific requirements. Adjust the values as needed for your use case.**
+This example validates that the subdomain part of the email address has a maximum length of 2 characters, triggering an error if this requirement is not met.
 
 ---
-
-With these updates, the documentation provides clear explanations and examples for configuring and using the `validateEmail` function to validate email addresses in different scenarios.
 
 # ConfigValue
 

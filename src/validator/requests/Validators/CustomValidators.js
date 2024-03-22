@@ -1,7 +1,6 @@
 const checkValueColor = require("../../colors/isColor");
 const validateFormPassword = require("../../form/password");
 const validateUsername = require("../../form/username");
-const { isName } = require("../../form/utils");
 const Validator = require("../Validator");
 /**
  * Validator for validating password fields.
@@ -127,27 +126,6 @@ class JSONValidator extends Validator {
     } catch (error) {
       return `${field} must be a valid JSON object.`;
     }
-  }
-}
-/**
- * Validator for validating names.
- * @extends Validator
- */
-class NameValidator extends Validator {
-  /**
-   * Validates a name field.
-   * @param {string} field - The name of the field to validate.
-   * @param {string} ruleValue - The rule value associated with the name validation.
-   * @param {Object} body - The request body object containing the name field.
-   * @returns {string|null} - A validation error message if validation fails, otherwise null.
-   */
-  validate(field, ruleValue, body) {
-    const value = body[field];
-    const validationResults = isName(value);
-    if (!validationResults.isValid) {
-      return `${field} must be a valid name.`;
-    }
-    return null;
   }
 }
 /**
@@ -302,7 +280,6 @@ module.exports = {
   HexColorValidator,
   IPLocationValidator,
   JSONValidator,
-  NameValidator,
   AlphanumericValidator,
   LanguageValidator,
   GenderValidator,

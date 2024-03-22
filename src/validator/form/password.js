@@ -1,7 +1,7 @@
 "use strict";
 const inputValidator = require("../../utils/inputValidator.js");
 const { optionPassword } = require("./helper/config.js");
-const { validateCommon } = require("./validation.js");
+const validateCommon = require("./validation.js");
 const { ThrowFalsy } = require("../../errors/Error.js");
 
 /**
@@ -50,7 +50,7 @@ function validateFormPassword(input, options = {}) {
   // Common validation for password
   const value = validateCommon(
     input,
-    "password",
+    "Password",
     minLength?.value,
     maxLength?.value
   );

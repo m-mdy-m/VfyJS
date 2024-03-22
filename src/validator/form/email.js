@@ -7,7 +7,7 @@ const {
   ThrowFalsy,
   ThrowTruthy,validationsLength,
 } = require("../../errors/Error.js");
-const { validateCommon } = require("./validation.js");
+const validateCommon = require("./validation.js");
 
 /**
  * Validates whether the provided value is a valid email.
@@ -30,7 +30,7 @@ const { validateCommon } = require("./validation.js");
  * console.log(isValid); // true
  */
 function ValidationEmail(input, options = {}) {
-  const value = validateCommon(input, "email", 5, 320);
+  const value = validateCommon(input, "Email", 5, 320);
   // Extracting options and error messages
   const {
     maxLenDomain,
@@ -60,9 +60,9 @@ function ValidationEmail(input, options = {}) {
   const ArrayDomain = value.split("@")[1].split(".");
   const domain = value.split("@")[1].trim();
   const domainPart = ArrayDomain[ArrayDomain.length - 1];
-  const subdomain = domain.split(domainPart)[0].trim();
-  const hasSpecialChar = inputValidator(domainPart).hasSpecialCharacter();
-  ThrowTruthy(hasSpecialChar, "Subdomains cannot contain special characters.");
+  const subdomain = domain.split(domainPart)[0];
+  const hasSpecialCharSubdomain = inputValidator(subdomain.split('.')[0]).hasSpecialCharacter();
+  ThrowTruthy(hasSpecialCharSubdomain, "Subdomains cannot contain special characters.");
   validationsLength(subdomain, {
     min: minLenSubdomain.value,
     max: maxLenSubdomain.value,

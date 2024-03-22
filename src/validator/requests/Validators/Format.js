@@ -1,6 +1,5 @@
 const validateEmail = require("../../form/email");
 const { validateUrl, isHttp, isHttps } = require("../../links/validate.url");
-const { hasPhone } = require("../../phone/utils/GlobalValidation");
 const Validator = require("../Validator");
 /**
  * Validator class for validating email fields in the body object.

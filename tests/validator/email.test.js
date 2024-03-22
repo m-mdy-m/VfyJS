@@ -11,7 +11,7 @@ describe('isEmail function', () => {
     const email = 'invalid.email';
     expect(() => {
       isEmail(email);
-    }).toThrowError('Email is not valid. Please enter a valid email.');
+    }).toThrowError('Email must contain @');
   });
 
   test('throws error for email without "@" symbol', () => {

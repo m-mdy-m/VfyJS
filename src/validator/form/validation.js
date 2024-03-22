@@ -30,9 +30,7 @@ function validateCommon(input, format, min = 8, max = 64) {
     });
     return value;
   } catch (error) {
-    // Append the field name to the error message
-    error.message = `${format}: ${error.message}`;
-    throw error;
+    throw error.message;
   }
 }
 module.exports= validateCommon

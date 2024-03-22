@@ -23,29 +23,13 @@ const { isHttp, isHttps } = require("./src/validator/links/validate.url");
 const colorValidate = require("./src/validator/colors/isColor");
 
 // Importing phone number validation function
-const validatePhoneNumber = require("./src/validator/phone/phoneValidator");
 
 // Importing utility functions for input validation
 const inputValidations = require("./src/utils/inputValidator");
 
-// Importing utility function for extracting substrings
-const {
-  getSubstring,
-} = require("./src/validator/phone/utils/FormatValidation");
-
-// Importing utility function for trimming values
-const { trimmedValue } = require("./src/common/validationConstants");
-
 // Importing error handling module
-const HandleError = require("./src/errors/HandleError");
-// Importing math operations module
-const MathOperations = require("./src/utils/operations/mathUtils");
+const HandleError = require("./src/errors/Error");
 
-// Importing utility functions for validating names and confirmation fields
-const { ConfirmationFields, isName } = require("./src/validator/form/utils");
-
-// Importing BinarySearch module
-const BinarySearch = require("./src/validator/BinaryTree/search");
 // import global config password and username
 const {
   setUsernameConfig,
@@ -112,81 +96,12 @@ module.exports = {
    */
   isHttps: isHttps,
   /**
-   * Validates a phone number.
-   *
-   * @function
-   * @param {string} phoneNumber - The phone number to be validated.
-   * @returns {boolean} - True if the phone number is valid, otherwise false.
-   * @throws {Error} - Throws an error if validation fails.
-   */
-  hasPhone: validatePhoneNumber,
-  /**
    * Provides utility functions for input validation.
    *
    * @namespace
    * @property {function}
    */
   inputValidations: inputValidations,
-  /**
-   * Extracts a substring from a phone number.
-   *
-   * @function
-   * @param {string} phoneNumber - The phone number from which to extract a substring.
-   * @returns {string} - The extracted substring.
-   */
-  getSubstring: getSubstring,
-
-  /**
-   * Trims a value.
-   *
-   * @function
-   * @param {any} value - The value to be trimmed.
-   * @returns {any} - The trimmed value.
-   */
-  trimValue: trimmedValue,
-  /**
-   * Provides functions for handling errors, including numeric type checks.
-   *
-   * @namespace
-   * @property {function}
-   */
-  HandleError: HandleError,
-  /**
-   * Provides utility functions for mathematical operations.
-   *
-   * @namespace
-   * @property {MathOperations}
-   */
-  mathOperations: MathOperations,
-
-  /**
-   * Validates a name based on specified criteria.
-   *
-   * @function
-   * @param {string} name - The name string to be validated.
-   * @returns {boolean} - True if the name is valid, otherwise false.
-   * @throws {Error} - Throws an error if validation fails.
-   */
-  isName: isName,
-  /**
-   * Handles confirmation fields to ensure they match.
-   *
-   * @function
-   * @param {string} field1 - The first field for confirmation.
-   * @param {string} field2 - The second field for confirmation.
-   * @returns {boolean} - True if the fields match, otherwise false.
-   * @throws {Error} - Throws an error if confirmation fails.
-   */
-  confirmationFields: ConfirmationFields,
-
-  /**
-   * Namespace for binary search functionality.
-   * @namespace
-   * @property {BinarySearch} Search - Module for performing binary search operations.
-   */
-  Binary: {
-    Search: BinarySearch,
-  },
   /**
    * Sets the configuration options for username validation.
    *
